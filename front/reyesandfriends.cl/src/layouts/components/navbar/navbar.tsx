@@ -14,6 +14,11 @@ const Navbar: React.FC = () => {
         setIsMenuOpen(!isMenuOpen)
     }
 
+    const handleDropdownToggle = () => {
+        if (isDropdownOpen) closeDropdown()
+        else toggleDropdown()
+    }
+
     useEffect(() => {
         closeDropdown()
     }, [location.pathname, closeDropdown])
@@ -32,25 +37,35 @@ const Navbar: React.FC = () => {
     }, [closeDropdown])
 
     return (
-        <nav className="bg-black text-white py-4">
+        <nav className="bg-black text-white py-4 z-50 relative">
             <div className="container mx-auto flex justify-between items-center px-4">
-               <img src="/img/reyesandfriends.svg" className="h-16"/>
-                <ul className="hidden md:flex space-x-6 text-lg">
+                <img src="/img/reyesandfriends.svg" className="h-16" />
+                <ul className={`md:flex space-x-0 md:space-x-6 text-lg ${isMenuOpen ? "flex flex-col space-y-4 absolute top-full left-0 w-full bg-black p-4 z-50" : "hidden"} md:static md:flex-row md:space-y-0`}>
                     <li>
-                        <Link to="/" className="hover:underline">Inicio</Link>
+                        <Link to="/" className="hover:underline block" onClick={() => setIsMenuOpen(false)}>Inicio</Link>
                     </li>
                     <li>
-                        <Link to="/about" className="hover:underline">Sobre nosotros</Link>
+                        <Link to="/about" className="hover:underline block" onClick={() => setIsMenuOpen(false)}>Sobre nosotros</Link>
                     </li>
                     <li className="relative" ref={dropdownRef}>
-                        <button onClick={toggleDropdown} className="hover:underline focus:outline-none flex items-center">
-                           Nuestros servicios <ChevronDown className="ml-1" size={16} />
+                        <button
+                            onClick={handleDropdownToggle}
+                            className="hover:underline focus:outline-none flex items-center"
+                        >
+                            Nuestros servicios <ChevronDown className="ml-1" size={16} />
                         </button>
                         {isDropdownOpen && (
-                            <ul className="absolute bg-white text-black mt-2 py-2 w-40 shadow-lg">
+                            <ul className={`bg-white text-black mt-2 shadow-lg rounded md:absolute md:mt-2 md:py-2 md:w-40 ${isMenuOpen ? "w-full mt-2" : ""}`}>
                                 {dropdownOptions.map(option => (
                                     <li key={option.path}>
-                                        <Link to={option.path} className="block px-4 py-2 hover:bg-gray-200">
+                                        <Link
+                                            to={option.path}
+                                            className="block px-4 py-2 hover:bg-gray-200"
+                                            onClick={() => {
+                                                closeDropdown()
+                                                setIsMenuOpen(false)
+                                            }}
+                                        >
                                             {option.label}
                                         </Link>
                                     </li>
@@ -59,10 +74,10 @@ const Navbar: React.FC = () => {
                         )}
                     </li>
                     <li>
-                        <Link to="/portfolio" className="hover:underline">Portafolio</Link>
+                        <Link to="/portfolio" className="hover:underline block" onClick={() => setIsMenuOpen(false)}>Portafolio</Link>
                     </li>
                     <li>
-                        <Link to="/contact" className="hover:underline">Contacto</Link>
+                        <Link to="/contact" className="hover:underline block" onClick={() => setIsMenuOpen(false)}>Contacto</Link>
                     </li>
                 </ul>
 
@@ -72,41 +87,6 @@ const Navbar: React.FC = () => {
                     </button>
                 </div>
             </div>
-
-            {isMenuOpen && (
-                <div className="md:hidden">
-                    <ul className="flex flex-col space-y-4 px-4 pt-4 pb-8 text-lg">
-                        <li>
-                            <Link to="/" className="block hover:underline" onClick={toggleMenu}>Inicio</Link>
-                        </li>
-                        <li>
-                            <Link to="/about" className="block hover:underline" onClick={toggleMenu}>Sobre nosotros</Link>
-                        </li>
-                        <li>
-                            <button onClick={toggleDropdown} className="block hover:underline focus:outline-none flex items-center">
-                                Nuestros servicios <ChevronDown className="ml-1" size={16} />
-                            </button>
-                            {isDropdownOpen && (
-                                <ul className="mt-2 space-y-2">
-                                    {dropdownOptions.map(option => (
-                                        <li key={option.path}>
-                                            <Link to={option.path} className="block hover:underline" onClick={toggleMenu}>
-                                                {option.label}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
-                        </li>
-                        <li>
-                            <Link to="/portfolio" className="block hover:underline" onClick={toggleMenu}>Portafolio</Link>
-                        </li>
-                        <li>
-                            <Link to="/contact" className="block hover:underline" onClick={toggleMenu}>Contacto</Link>
-                        </li>
-                    </ul>
-                </div>
-            )}
         </nav>
     )
 }
