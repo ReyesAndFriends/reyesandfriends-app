@@ -12,8 +12,11 @@ const useNavOptions = () => {
     }, [])
 
     const dropdownOptions = [
-        { label: "Desarrollo de software", path: "/services/software-development" },
-        { label: "Desarrollo web", path: "/services/web-development" },
+        { label: "Programación web", path: "/services/web-development" },
+        { label: "Software empresarial", path: "/services/bussiness-software" },
+        { label: "Páginas web promocionales", path: "/services/promotional-web" },
+        { label: "Páginas E-Commerce", path: "/services/ecommerce-web" },
+        { label: "Lista completa", path: "/services"},
     ]
 
     return {
