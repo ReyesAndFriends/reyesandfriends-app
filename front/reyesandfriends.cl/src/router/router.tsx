@@ -25,6 +25,8 @@ const AppRouter: React.FC = () => {
                     <Route path="/services/promotional-web" element={<motion.div {...pageTransition}><div>Páginas web promocionales</div></motion.div>} />
                     <Route path="/services/ecommerce-web" element={<motion.div {...pageTransition}><div>Páginas E-Commerce</div></motion.div>} />
                     <Route path="/services" element={<motion.div {...pageTransition}><div>Lista completa</div></motion.div>} />
+                    <Route path="/about" element={<motion.div {...pageTransition}><div>Sobre nosotros</div></motion.div>} />
+                    <Route path="/portfolio" element={<motion.div {...pageTransition}><div>Portafolio</div></motion.div>} />
                     <Route path="/contact" element={<motion.div {...pageTransition}><div>Contacto</div></motion.div>} />
                 </Routes>
             </AnimatePresence>
