@@ -12,7 +12,9 @@ def create_app():
     mail.init_app(app)
 
     from .routes.example import example_bp
+    from .routes.contact_form import contact_form_bp
     
-    app.register_blueprint(example_bp, url_prefix='/api/example')
+    app.register_blueprint(example_bp, url_prefix='/example')
+    app.register_blueprint(contact_form_bp, url_prefix='/contact')
 
     return app
