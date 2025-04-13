@@ -11,6 +11,7 @@ const Footer: React.FC = () => {
                         <p className="text-sm">
                            Realizando soluciones personalizadas y únicas para tu emprendimiento desde 2024.
                         </p>
+                        <p className="text-xs mt-4 text-gray-500">&copy; {new Date().getFullYear()} Reyes&Friends. Todos los derechos reservados.</p>
                     </div>
                     <div className="w-full md:w-1/3 mb-6 md:mb-0">
                         <h3 className="text-md font-semibold text-white mb-4">Enlaces rápidos</h3>
@@ -23,8 +24,12 @@ const Footer: React.FC = () => {
                         </ul>
                     </div>
                 </div>
-                <div className="border-t border-gray-700 mt-8 pt-4 text-center text-sm">
-                    <p>&copy; {new Date().getFullYear()} Reyes&Friends. Todos los derechos reservados.</p>
+                <div className="mt-8 text-center">
+                    <img 
+                        src="/img/reyesandfriends.svg" 
+                        alt="Reyes&Friends Logo" 
+                        className="mx-auto w-1/2 md:w-1/3"
+                    />
                 </div>
             </div>
         </footer>
