@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
     }, [closeDropdown])
 
     return (
-        <nav className="bg-black text-white py-2 z-50 relative">
+        <nav className="bg-black text-white py-2 z-50 fixed top-0 left-0 w-full">
             <div className="container mx-auto flex justify-between items-center px-4">
             <Link to="/">
                 <img src="/img/reyesandfriends.svg" className="h-12" alt="Reyes and Friends Logo" />
