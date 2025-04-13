@@ -1,5 +1,5 @@
 import React from "react";
-import { Globe, ChevronRight, Building, Gem, Store } from "lucide-react";
+import { Globe, ChevronRight, Building, Gem, Store, Speech, HandHeart, MonitorSmartphone } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Home: React.FC = () => {
@@ -99,6 +99,90 @@ const Home: React.FC = () => {
                     </div>
                 </div>
             </section>
+
+            <section className="py-16 bg-black text-white">
+                <div className="container mx-auto px-4 max-w-5xl grid grid-cols-1 md:grid-cols-2 items-center gap-8">
+                    <div className="text-center md:text-left">
+                        <h2 className="text-3xl font-bold mb-6 text-red-600">
+                            Comparte lo último de tu negocio
+                        </h2>
+                        <p className="mb-6">
+                            Muestra tus productos, servicios o novedades de una manera atractiva y profesional. Creamos soluciones visuales que capturan la atención de tus clientes y destacan lo mejor de tu negocio.
+                        </p>
+                        <Link to="/quote-project" className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors">
+                            Cotizar Proyecto
+                        </Link>
+                    </div>
+                    <div className="flex justify-center">
+                        <img
+                            src="/img/index/business1.jpg"
+                            alt="Business showcase"
+                            className="rounded shadow-md max-w-full h-auto"
+                        />
+                    </div>
+                </div>
+            </section>
+
+            <section className="py-16 bg-zinc-900 text-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                    <h2 className="text-3xl font-bold mb-12 text-center text-red-600">
+                        Lleva tu negocio más allá
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="text-center">
+                            <div className="w-16 h-16 bg-red-900/30 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                <Speech className="h-8 w-8 text-red-500" />
+                            </div>
+                            <h3 className="text-xl font-bold mb-2 text-red-500">Comunícate con tus clientes</h3>
+                            <p className="text-gray-300">
+                                Utiliza formularios personalizados para recibir consultas y mejorar la interacción con tus clientes.
+                            </p>
+                        </div>
+                        <div className="text-center">
+                            <div className="w-16 h-16 bg-red-900/30 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                <MonitorSmartphone className="h-8 w-8 text-red-500" />
+                            </div>
+                            <h3 className="text-xl font-bold mb-2 text-red-500">Conecta con redes sociales</h3>
+                            <p className="text-gray-300">
+                                Integra tus publicaciones con redes sociales para aumentar tu alcance y visibilidad.
+                            </p>
+                        </div>
+                        <div className="text-center">
+                            <div className="w-16 h-16 bg-red-900/30 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                <HandHeart className="h-8 w-8 text-red-500" />
+                            </div>
+                            <h3 className="text-xl font-bold mb-2 text-red-500">Mejora tu imagen</h3>
+                            <p className="text-gray-300">
+                                Una web atractiva y profesional es clave para captar la atención de tus clientes. Creamos diseños únicos y personalizados.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="py-16 text-white">
+                <div className="container mx-auto px-4 max-w-5xl grid grid-cols-1 md:grid-cols-2 items-center gap-8">
+                    <div className="text-center md:text-left">
+                        <h2 className="text-3xl font-bold mb-6 text-red-600">
+                            ¿Listo para llevar tu negocio al siguiente nivel?
+                        </h2>
+                        <p className="mb-8">
+                            Contáctanos hoy mismo y descubre cómo podemos ayudarte a alcanzar tus objetivos digitales.
+                        </p>
+                        <Link to="/contact" className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors">
+                            Contáctanos
+                        </Link>
+                    </div>
+                    <div className="flex justify-center">
+                        <img 
+                            src="/img/reyesandfriends.svg" 
+                            alt="Company Logo" 
+                            className="max-w-full h-auto w-32 md:w-48"
+                        />
+                    </div>
+                </div>
+            </section>
+
         </>
     );
 };

@@ -28,6 +28,7 @@ const AppRouter: React.FC = () => {
                     <Route path="/about" element={<motion.div {...pageTransition}><div>Sobre nosotros</div></motion.div>} />
                     <Route path="/portfolio" element={<motion.div {...pageTransition}><div>Portafolio</div></motion.div>} />
                     <Route path="/contact" element={<motion.div {...pageTransition}><div>Contacto</div></motion.div>} />
+                    <Route path="/quote-project" element={<motion.div {...pageTransition}><div>Cotizar proyecto</div></motion.div>} />
                 </Routes>
             </AnimatePresence>
         );
