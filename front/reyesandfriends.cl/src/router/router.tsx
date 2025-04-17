@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import { AnimatePresence, motion } from "framer-motion";
 import Layout from "../layouts/layout";
 import Home from "../pages/home";
+import Portfolio from "../pages/portfolio";
 
 const AppRouter: React.FC = () => {
     
@@ -26,7 +27,7 @@ const AppRouter: React.FC = () => {
                     <Route path="/services/ecommerce-web" element={<motion.div {...pageTransition}><div>Páginas E-Commerce</div></motion.div>} />
                     <Route path="/services" element={<motion.div {...pageTransition}><div>Lista completa</div></motion.div>} />
                     <Route path="/about" element={<motion.div {...pageTransition}><div>Sobre nosotros</div></motion.div>} />
-                    <Route path="/portfolio" element={<motion.div {...pageTransition}><div>Portafolio</div></motion.div>} />
+                    <Route path="/portfolio" element={<motion.div {...pageTransition}><Portfolio /></motion.div>} />
                     <Route path="/contact" element={<motion.div {...pageTransition}><div>Contacto</div></motion.div>} />
                     <Route path="/quote-project" element={<motion.div {...pageTransition}><div>Cotizar proyecto</div></motion.div>} />
                 </Routes>
