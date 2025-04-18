@@ -9,6 +9,7 @@ def create_app():
     app.config.from_object('config.Config')
 
     CORS(app)
+    
     mail.init_app(app)
 
     from .routes.contact import contact as contact_bp

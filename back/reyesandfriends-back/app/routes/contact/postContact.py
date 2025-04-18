@@ -11,7 +11,7 @@ if not MONGO_URI:
     raise ValueError("MONGO_URI is not defined on .env file")
 
 
-@contact.route('/', methods=['POST'])
+@contact.route('', methods=['POST'])
 def postContact():
     client = MongoClient(MONGO_URI)
     db = client.get_default_database()
