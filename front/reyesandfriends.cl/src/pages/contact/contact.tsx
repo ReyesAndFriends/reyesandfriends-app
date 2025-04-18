@@ -1,9 +1,11 @@
 import { useGetContactCategories } from "../../hooks/contact/useGetContactCategories";
 import { useContactFormValidator } from "../../hooks/contact/useContactFormValidator";
+import { useState, useEffect } from "react";
 
 const Contact = () => {
     const categories = useGetContactCategories();
     const { errors, handleSubmit } = useContactFormValidator();
+    const [isFormValid, setIsFormValid] = useState(false);
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -17,6 +19,14 @@ const Contact = () => {
             message: formData.get("message"),
         };
         handleSubmit(data);
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLFormElement>) => {
+        const formData = new FormData(e.currentTarget);
+        const isValid = ["nombre", "apellido", "codigo", "telefono", "email", "category", "message"].every(
+            (field) => formData.get(field)?.toString().trim() !== ""
+        );
+        setIsFormValid(isValid);
     };
 
     return (
@@ -43,7 +53,11 @@ const Contact = () => {
                         <span className="bg-black px-4 relative z-10">Envíanos un mensaje</span>
                         <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
                     </h2>
-                    <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleFormSubmit}>
+                    <form 
+                        className="grid grid-cols-1 md:grid-cols-2 gap-4" 
+                        onSubmit={handleFormSubmit} 
+                        onChange={handleInputChange}
+                    >
                         <div className="col-span-1">
                             <label htmlFor="nombre" className="block text-gray-300 font-bold mb-2">Nombre</label>
                             <input 
@@ -129,7 +143,8 @@ const Contact = () => {
                         <div className="col-span-2">
                             <button 
                                 type="submit" 
-                                className="w-full bg-red-600 text-white font-bold py-3 rounded-sm hover:bg-red-700 transition-colors"
+                                className="w-full bg-red-600 text-white font-bold py-3 rounded-sm hover:bg-red-700 transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed"
+                                disabled={!isFormValid}
                             >
                                 Enviar
                             </button>
