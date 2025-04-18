@@ -4,16 +4,16 @@ import { useState, useEffect } from "react";
 
 const Contact = () => {
     const categories = useGetContactCategories();
-    const { errors, handleSubmit } = useContactFormValidator();
+    const { errors, handleSubmit, isSubmitting } = useContactFormValidator();
     const [isFormValid, setIsFormValid] = useState(false);
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const data = {
-            nombre: formData.get("nombre"),
-            apellido: formData.get("apellido"),
-            telefono: `${formData.get("codigo")}${formData.get("telefono")}`,
+            name: formData.get("nombre"),
+            last_name: formData.get("apellido"),
+            cellphone: `${formData.get("codigo")}${formData.get("telefono")}`,
             email: formData.get("email"),
             category: formData.get("category"),
             message: formData.get("message"),
@@ -144,9 +144,9 @@ const Contact = () => {
                             <button 
                                 type="submit" 
                                 className="w-full bg-red-600 text-white font-bold py-3 rounded-sm hover:bg-red-700 transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed"
-                                disabled={!isFormValid}
+                                disabled={!isFormValid || isSubmitting}
                             >
-                                Enviar
+                                {isSubmitting ? "Enviando..." : "Enviar"}
                             </button>
                         </div>
                     </form>
