@@ -15,7 +15,7 @@ db = client[db_name]
 
 collections = [
     "contact_categories",
-    "contacts_forms",
+    "contact_forms",
 ]
 
 for collection_name in collections:
