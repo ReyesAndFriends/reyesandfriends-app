@@ -14,6 +14,9 @@ def postContact():
 
         inserted_id = insert_to_mongo("contact_forms", data)
 
-        return jsonify({"message": "Contact form submitted successfully", "id": inserted_id}), 201
+        return jsonify({
+            "message": "¡Gracias por contactarnos! Hemos recibido su mensaje exitosamente. Nuestro equipo se pondrá en contacto con usted a la brevedad vía correo electrónico.",
+            "id": inserted_id
+        }), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 500
