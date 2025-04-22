@@ -7,10 +7,10 @@ def postContact():
         data = request.get_json()
 
         required_fields = ["name", "last_name", "cellphone", "email", "category", "message"]
-        errors = [f"'{field}' is required" for field in required_fields if field not in data or not data[field]]
+        errors = {field: "es requerido." for field in required_fields if field not in data or not data[field]}
 
         if errors:
-            return jsonify({"errors": errors}), 422
+            return jsonify(errors), 422
 
         inserted_id = insert_to_mongo("contact_forms", data)
 
