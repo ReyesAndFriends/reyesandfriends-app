@@ -1,19 +1,21 @@
 import { useGetContactCategories } from "../../hooks/contact/useGetContactCategories";
 import { useContactFormValidator } from "../../hooks/contact/useContactFormValidator";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import ContactModal from "./modal/contactModal";
 
 const Contact = () => {
     const categories = useGetContactCategories();
-    const { errors, handleSubmit, isSubmitting } = useContactFormValidator();
+    const { errors, handleSubmit, isSubmitting, finalMessage, setFinalMessage } = useContactFormValidator();
     const [isFormValid, setIsFormValid] = useState(false);
+    const formRef = useRef<HTMLFormElement>(null);
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const data = {
-            name: formData.get("nombre"),
-            last_name: formData.get("apellido"),
-            cellphone: `${formData.get("codigo")}${formData.get("telefono")}`,
+            name: formData.get("name"),
+            last_name: formData.get("last_name"),
+            cellphone: `${formData.get("code")}${formData.get("cellphone")}`,
             email: formData.get("email"),
             category: formData.get("category"),
             message: formData.get("message"),
@@ -23,14 +25,24 @@ const Contact = () => {
 
     const handleInputChange = (e: React.ChangeEvent<HTMLFormElement>) => {
         const formData = new FormData(e.currentTarget);
-        const isValid = ["nombre", "apellido", "codigo", "telefono", "email", "category", "message"].every(
+        const isValid = ["name", "last_name", "code", "cellphone", "email", "category", "message"].every(
             (field) => formData.get(field)?.toString().trim() !== ""
         );
         setIsFormValid(isValid);
     };
 
+    const handleModalClose = () => {
+        setFinalMessage(null);
+        formRef.current?.reset();
+        setIsFormValid(false);
+    };
+
     return (
         <>
+            <ContactModal 
+                message={finalMessage} 
+                onClose={handleModalClose} 
+            />
             <section className="relative py-48 bg-cover bg-center relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#891818] to-[#5A1410]"></div>
                 <div className="container mx-auto px-4 relative z-10">
@@ -54,38 +66,39 @@ const Contact = () => {
                         <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
                     </h2>
                     <form 
+                        ref={formRef}
                         className="grid grid-cols-1 md:grid-cols-2 gap-4" 
                         onSubmit={handleFormSubmit} 
                         onChange={handleInputChange}
                     >
                         <div className="col-span-1">
-                            <label htmlFor="nombre" className="block text-gray-300 font-bold mb-2">Nombre</label>
+                            <label htmlFor="name" className="block text-gray-300 font-bold mb-2">Nombre</label>
                             <input 
                                 type="text" 
-                                id="nombre" 
-                                name="nombre" 
+                                id="name" 
+                                name="name" 
                                 className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
                                 placeholder="Ingresa tu nombre"
                             />
-                            {errors.nombre && <p className="text-red-500 text-sm">{errors.nombre}</p>}
+                            {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
                         </div>
                         <div className="col-span-1">
-                            <label htmlFor="apellido" className="block text-gray-300 font-bold mb-2">Apellido</label>
+                            <label htmlFor="last_name" className="block text-gray-300 font-bold mb-2">Apellido</label>
                             <input 
                                 type="text" 
-                                id="apellido" 
-                                name="apellido" 
+                                id="last_name" 
+                                name="last_name" 
                                 className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
                                 placeholder="Ingresa tu apellido"
                             />
-                            {errors.apellido && <p className="text-red-500 text-sm">{errors.apellido}</p>}
+                            {errors.last_name && <p className="text-red-500 text-sm">{errors.last_name}</p>}
                         </div>
                         <div className="col-span-1">
-                            <label htmlFor="telefono" className="block text-gray-300 font-bold mb-2">Número de Teléfono</label>
+                            <label htmlFor="cellphone" className="block text-gray-300 font-bold mb-2">Número de Teléfono</label>
                             <div className="flex">
                                 <select 
-                                    id="codigo" 
-                                    name="codigo" 
+                                    id="code" 
+                                    name="code" 
                                     className="w-20 p-3 rounded-l-sm bg-zinc-700 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
                                 >
                                     <option value="+569">+569</option>
@@ -93,14 +106,14 @@ const Contact = () => {
                                 </select>
                                 <input 
                                     type="tel" 
-                                    id="telefono" 
-                                    name="telefono" 
+                                    id="cellphone" 
+                                    name="cellphone" 
                                     maxLength={8}
                                     className="w-full p-3 rounded-r-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
                                     placeholder="Ingresa tu número de teléfono"
                                 />
                             </div>
-                            {errors.telefono && <p className="text-red-500 text-sm">{errors.telefono}</p>}
+                            {errors.cellphone && <p className="text-red-500 text-sm">{errors.cellphone}</p>}
                         </div>
                         <div className="col-span-1">
                             <label htmlFor="email" className="block text-gray-300 font-bold mb-2">Email</label>
