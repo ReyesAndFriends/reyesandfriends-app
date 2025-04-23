@@ -13,6 +13,15 @@ const serviceList: ServiceOption[] = [
     { name: "Lista completa", path: "/services", image: "/img/services/image.png", description: "Descubre todo lo que podemos hacer por ti. Explora nuestra lista completa de servicios y encuentra la solución perfecta." },
 ];
 
+const contactList: ServiceOption[] = [
+    { name: "Contáctanos", path: "/contact"},
+    { name: "Cotiza un proyect", path: "/quote-project"},
+]
+
 export const useServiceList = () => {
     return serviceList;
+};
+
+export const useContactList = () => {
+    return contactList;
 };

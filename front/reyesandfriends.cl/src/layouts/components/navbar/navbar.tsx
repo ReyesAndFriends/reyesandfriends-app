@@ -3,12 +3,16 @@ import { useState, useEffect, useRef } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { Menu, X, ChevronDown } from "lucide-react"
 import useNavOptions from "./useNavOptions"
+import { useContactList } from "../../../hooks/services/useServiceList"
 
 const Navbar: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const { isDropdownOpen, toggleDropdown, closeDropdown, dropdownOptions } = useNavOptions()
     const dropdownRef = useRef<HTMLLIElement>(null)
     const location = useLocation()
+    const contactList = useContactList()
+    const [isContactDropdownOpen, setIsContactDropdownOpen] = useState(false)
+    const contactDropdownRef = useRef<HTMLLIElement>(null)
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
@@ -17,6 +21,10 @@ const Navbar: React.FC = () => {
     const handleDropdownToggle = () => {
         if (isDropdownOpen) closeDropdown()
         else toggleDropdown()
+    }
+
+    const toggleContactDropdown = () => {
+        setIsContactDropdownOpen(!isContactDropdownOpen)
     }
 
     useEffect(() => {
@@ -36,13 +44,26 @@ const Navbar: React.FC = () => {
         }
     }, [closeDropdown])
 
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (contactDropdownRef.current && !contactDropdownRef.current.contains(event.target as Node)) {
+                setIsContactDropdownOpen(false)
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+        }
+    }, [])
+
     return (
         <nav className="bg-black text-white py-2 z-50 fixed top-0 left-0 w-full">
             <div className="container mx-auto flex justify-between items-center px-4">
             <Link to="/">
                 <img src="/img/reyesandfriends.svg" className="h-12" alt="Reyes and Friends Logo" />
             </Link>
-            <ul className={`md:flex space-x-0 md:space-x-6 text-lg ${isMenuOpen ? "flex flex-col space-y-4 absolute top-full left-0 w-full bg-black p-4 z-50" : "hidden"} md:static md:flex-row md:space-y-0`}>
+            <ul className={`md:flex space-x-0 md:space-x-6 text-lg md:ml-auto md:justify-end ${isMenuOpen ? "flex flex-col space-y-4 absolute top-full left-0 w-full bg-black p-4 z-50" : "hidden"} md:static md:flex-row md:space-y-0`}>
                 <li>
                 <Link to="/" className="hover:underline block" onClick={() => setIsMenuOpen(false)}>Inicio</Link>
                 </li>
@@ -75,11 +96,34 @@ const Navbar: React.FC = () => {
                     </ul>
                 )}
                 </li>
-                <li>
-                <Link to="/portfolio" className="hover:underline block" onClick={() => setIsMenuOpen(false)}>Portafolio</Link>
+                <li className="relative" ref={contactDropdownRef}>
+                <button
+                    onClick={toggleContactDropdown}
+                    className="hover:underline focus:outline-none flex items-center"
+                >
+                    Contacto <ChevronDown className="ml-1" size={16} />
+                </button>
+                {isContactDropdownOpen && (
+                    <ul className={`bg-white text-black mt-2 shadow-lg rounded md:absolute md:mt-2 md:py-2 md:w-40 ${isMenuOpen ? "w-full mt-2" : ""}`}>
+                    {contactList.map(option => (
+                        <li key={option.path}>
+                        <Link
+                            to={option.path}
+                            className="block px-4 py-2 hover:bg-gray-200"
+                            onClick={() => {
+                            setIsContactDropdownOpen(false)
+                            setIsMenuOpen(false)
+                            }}
+                        >
+                            {option.name}
+                        </Link>
+                        </li>
+                    ))}
+                    </ul>
+                )}
                 </li>
                 <li>
-                <Link to="/contact" className="hover:underline block" onClick={() => setIsMenuOpen(false)}>Contacto</Link>
+                <Link to="/portfolio" className="hover:underline block" onClick={() => setIsMenuOpen(false)}>Portafolio</Link>
                 </li>
             </ul>
 
