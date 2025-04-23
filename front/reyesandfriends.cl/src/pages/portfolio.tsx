@@ -24,11 +24,11 @@ const Portfolio: React.FC = () => {
                 </div>
             </section>
 
-            <section className="py-16 bg-black">
+            <section className="py-16">
                 <div className="container mx-auto px-4">
 
-                    <h2 className="text-3xl font-bold mb-12 text-center text-red-500 relative">
-                        <span className="bg-black px-4 relative z-10">Proyecto Destacado</span>
+                    <h2 className="text-3xl font-bold mb-12 text-center text-white relative">
+                        <span className="bg-zinc-900 px-4 relative z-10">Proyecto Destacado</span>
                         <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
                     </h2>
 
@@ -87,7 +87,7 @@ const Portfolio: React.FC = () => {
                 </div>
             </section>
 
-            <section className="bg-zinc-900 py-8 border-y border-zinc-800">
+            <section className="bg-black py-8 border-y border-zinc-800">
                 <div className="container mx-auto px-4">
                     <div className="flex flex-wrap justify-center gap-4">
                         {["Todos", "Empresas e IoT", "Entretenimiento", "Desarrollo web"].map((category) => (
@@ -107,11 +107,9 @@ const Portfolio: React.FC = () => {
                 </div>
             </section>
 
-
-
             <section className="py-16 bg-zinc-900">
                 <div className="container mx-auto px-4">
-                    <h2 className="text-3xl font-bold mb-12 text-center text-red-500 relative">
+                    <h2 className="text-3xl font-bold mb-12 text-center text-white relative">
                         <span className="bg-zinc-900 px-4 relative z-10">Nuestros Proyectos</span>
                         <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
                     </h2>
@@ -146,29 +144,6 @@ const Portfolio: React.FC = () => {
                                 </div>
                             </div>
                         ))}
-                    </div>
-                </div>
-            </section>
-
-            <section className="py-16 bg-zinc-900 text-white">
-                <div className="container mx-auto px-4">
-                    <div className="grid md:grid-cols-4 gap-8 text-center">
-                        <div>
-                            <div className="text-4xl font-bold text-red-500 mb-2">150+</div>
-                            <p className="text-gray-300">Proyectos Completados</p>
-                        </div>
-                        <div>
-                            <div className="text-4xl font-bold text-red-500 mb-2">98%</div>
-                            <p className="text-gray-300">Clientes Satisfechos</p>
-                        </div>
-                        <div>
-                            <div className="text-4xl font-bold text-red-500 mb-2">12+</div>
-                            <p className="text-gray-300">Años de Experiencia</p>
-                        </div>
-                        <div>
-                            <div className="text-4xl font-bold text-red-500 mb-2">25+</div>
-                            <p className="text-gray-300">Premios Recibidos</p>
-                        </div>
                     </div>
                 </div>
             </section>
