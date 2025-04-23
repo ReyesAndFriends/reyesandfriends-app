@@ -15,7 +15,7 @@ const serviceList: ServiceOption[] = [
 
 const contactList: ServiceOption[] = [
     { name: "Contáctanos", path: "/contact"},
-    { name: "Cotiza un proyect", path: "/quote-project"},
+    { name: "Cotiza tu proyecto", path: "/quote-project"},
 ]
 
 export const useServiceList = () => {
