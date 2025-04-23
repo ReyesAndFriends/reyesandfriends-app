@@ -30,7 +30,10 @@ const Services = () => {
 
             <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4">
-                    <h2 className="text-3xl font-bold mb-8 text-center">Explora Nuestros Servicios</h2>
+                    <h2 className="text-3xl font-bold mb-12 text-center text-red-600 relative">
+                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Que podemos ofrecerte</span>
+                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
+                    </h2>
                     <div className="flex flex-wrap justify-center gap-8">
                         {services
                             .filter((service) => service.name !== "Lista completa")
