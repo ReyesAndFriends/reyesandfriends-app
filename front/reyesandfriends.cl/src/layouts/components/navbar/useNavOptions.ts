@@ -1,30 +1,29 @@
-import { useState, useCallback } from "react"
+import { useState, useCallback } from "react";
+import { useServiceList } from "../../../hooks/services/useServiceList";
 
 const useNavOptions = () => {
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const serviceList = useServiceList();
 
     const toggleDropdown = () => {
-        setIsDropdownOpen(!isDropdownOpen)
-    }
+        setIsDropdownOpen(!isDropdownOpen);
+    };
 
     const closeDropdown = useCallback(() => {
-        setIsDropdownOpen(false)
-    }, [])
+        setIsDropdownOpen(false);
+    }, []);
 
-    const dropdownOptions = [
-        { label: "Programación web", path: "/services/web-development" },
-        { label: "Software empresarial", path: "/services/bussiness-software" },
-        { label: "Páginas web promocionales", path: "/services/promotional-web" },
-        { label: "Páginas E-Commerce", path: "/services/ecommerce-web" },
-        { label: "Lista completa", path: "/services"},
-    ]
+    const dropdownOptions = serviceList.map(({ name, path }) => ({
+        label: name,
+        path,
+    }));
 
     return {
         isDropdownOpen,
         toggleDropdown,
         closeDropdown,
         dropdownOptions,
-    }
-}
+    };
+};
 
-export default useNavOptions
+export default useNavOptions;
