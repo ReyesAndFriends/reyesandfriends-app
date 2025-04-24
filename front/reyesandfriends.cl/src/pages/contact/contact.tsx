@@ -59,110 +59,112 @@ const Contact = () => {
                 </div>
             </section>
 
-            <section className="py-16 bg-black">
-                <div className="container mx-auto px-4 max-w-3xl">
+            <section className="py-16 bg-zinc-900">
                     <h2 className="text-3xl font-bold mb-12 text-center text-red-500 relative">
-                        <span className="bg-black px-4 relative z-10">Envíanos un mensaje</span>
+                        <span className="bg-black px-4 relative z-10 bg-zinc-900 text-white">Envíanos un mensaje</span>
                         <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
                     </h2>
-                    <form 
-                        ref={formRef}
-                        className="grid grid-cols-1 md:grid-cols-2 gap-4" 
-                        onSubmit={handleFormSubmit} 
-                        onChange={handleInputChange}
-                    >
-                        <div className="col-span-1">
-                            <label htmlFor="name" className="block text-gray-300 font-bold mb-2">Nombre</label>
-                            <input 
-                                type="text" 
-                                id="name" 
-                                name="name" 
-                                className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
-                                placeholder="Ingresa tu nombre"
-                            />
-                            {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
-                        </div>
-                        <div className="col-span-1">
-                            <label htmlFor="last_name" className="block text-gray-300 font-bold mb-2">Apellido</label>
-                            <input 
-                                type="text" 
-                                id="last_name" 
-                                name="last_name" 
-                                className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
-                                placeholder="Ingresa tu apellido"
-                            />
-                            {errors.last_name && <p className="text-red-500 text-sm">{errors.last_name}</p>}
-                        </div>
-                        <div className="col-span-1">
-                            <label htmlFor="cellphone" className="block text-gray-300 font-bold mb-2">Número de Teléfono</label>
-                            <div className="flex">
-                                <select 
-                                    id="code" 
-                                    name="code" 
-                                    className="w-20 p-3 rounded-l-sm bg-zinc-700 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
-                                >
-                                    <option value="+569">+569</option>
-                                    <option value="+562">+562</option>
-                                </select>
+                <div className="container mx-auto px-4 max-w-3xl">
+                    <div className="bg-black p-8 rounded-lg shadow-lg">
+                        <form 
+                            ref={formRef}
+                            className="grid grid-cols-1 md:grid-cols-2 gap-4" 
+                            onSubmit={handleFormSubmit} 
+                            onChange={handleInputChange}
+                        >
+                            <div className="col-span-1">
+                                <label htmlFor="name" className="block text-gray-300 font-bold mb-2">Nombre</label>
                                 <input 
-                                    type="tel" 
-                                    id="cellphone" 
-                                    name="cellphone" 
-                                    maxLength={8}
-                                    className="w-full p-3 rounded-r-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
-                                    placeholder="Ingresa tu número de teléfono"
+                                    type="text" 
+                                    id="name" 
+                                    name="name" 
+                                    className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                                    placeholder="Ingresa tu nombre"
                                 />
+                                {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
                             </div>
-                            {errors.cellphone && <p className="text-red-500 text-sm">{errors.cellphone}</p>}
-                        </div>
-                        <div className="col-span-1">
-                            <label htmlFor="email" className="block text-gray-300 font-bold mb-2">Email</label>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                name="email" 
-                                className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
-                                placeholder="Ingresa tu email"
-                            />
-                            {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
-                        </div>
-                        <div className="col-span-2">
-                            <label htmlFor="category" className="block text-gray-300 font-bold mb-2">Categoría</label>
-                            <select 
-                                id="category" 
-                                name="category" 
-                                className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
-                            >
-                                <option value="">Selecciona una categoría</option>
-                                {categories.map((category, index) => (
-                                    <option key={index} value={category.slug}>
-                                        {category.name}
-                                    </option>
-                                ))}
-                            </select>
-                            {errors.category && <p className="text-red-500 text-sm">{errors.category}</p>}
-                        </div>
-                        <div className="col-span-2">
-                            <label htmlFor="message" className="block text-gray-300 font-bold mb-2">Mensaje</label>
-                            <textarea 
-                                id="message" 
-                                name="message" 
-                                rows={5} 
-                                className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
-                                placeholder="Escribe tu mensaje aquí..."
-                            ></textarea>
-                            {errors.message && <p className="text-red-500 text-sm">{errors.message}</p>}
-                        </div>
-                        <div className="col-span-2">
-                            <button 
-                                type="submit" 
-                                className="w-full bg-red-600 text-white font-bold py-3 rounded-sm hover:bg-red-700 transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed"
-                                disabled={!isFormValid || isSubmitting}
-                            >
-                                {isSubmitting ? "Enviando..." : "Enviar"}
-                            </button>
-                        </div>
-                    </form>
+                            <div className="col-span-1">
+                                <label htmlFor="last_name" className="block text-gray-300 font-bold mb-2">Apellido</label>
+                                <input 
+                                    type="text" 
+                                    id="last_name" 
+                                    name="last_name" 
+                                    className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                                    placeholder="Ingresa tu apellido"
+                                />
+                                {errors.last_name && <p className="text-red-500 text-sm">{errors.last_name}</p>}
+                            </div>
+                            <div className="col-span-1">
+                                <label htmlFor="cellphone" className="block text-gray-300 font-bold mb-2">Número de Teléfono</label>
+                                <div className="flex">
+                                    <select 
+                                        id="code" 
+                                        name="code" 
+                                        className="w-20 p-3 rounded-l-sm bg-zinc-700 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                                    >
+                                        <option value="+569">+569</option>
+                                        <option value="+562">+562</option>
+                                    </select>
+                                    <input 
+                                        type="tel" 
+                                        id="cellphone" 
+                                        name="cellphone" 
+                                        maxLength={8}
+                                        className="w-full p-3 rounded-r-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                                        placeholder="Ingresa tu número de teléfono"
+                                    />
+                                </div>
+                                {errors.cellphone && <p className="text-red-500 text-sm">{errors.cellphone}</p>}
+                            </div>
+                            <div className="col-span-1">
+                                <label htmlFor="email" className="block text-gray-300 font-bold mb-2">Email</label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                                    placeholder="Ingresa tu email"
+                                />
+                                {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+                            </div>
+                            <div className="col-span-2">
+                                <label htmlFor="category" className="block text-gray-300 font-bold mb-2">Categoría</label>
+                                <select 
+                                    id="category" 
+                                    name="category" 
+                                    className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                                >
+                                    <option value="">Selecciona una categoría</option>
+                                    {categories.map((category, index) => (
+                                        <option key={index} value={category.slug}>
+                                            {category.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                {errors.category && <p className="text-red-500 text-sm">{errors.category}</p>}
+                            </div>
+                            <div className="col-span-2">
+                                <label htmlFor="message" className="block text-gray-300 font-bold mb-2">Mensaje</label>
+                                <textarea 
+                                    id="message" 
+                                    name="message" 
+                                    rows={5} 
+                                    className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                                    placeholder="Escribe tu mensaje aquí..."
+                                ></textarea>
+                                {errors.message && <p className="text-red-500 text-sm">{errors.message}</p>}
+                            </div>
+                            <div className="col-span-2">
+                                <button 
+                                    type="submit" 
+                                    className="w-full bg-red-600 text-white font-bold py-3 rounded-sm hover:bg-red-700 transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed"
+                                    disabled={!isFormValid || isSubmitting}
+                                >
+                                    {isSubmitting ? "Enviando..." : "Enviar"}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </section>
         </>
