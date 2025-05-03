@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reyes&Friends</title>
+    <style type="text/css">
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            line-height: 1.6;
+            color: #f0f0f0;
+            background-color: #1E1E1E;
+        }
+        
+
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #1E1E1E;
+            padding: 0;
+        }
+        
+
+        .header {
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+
+        .logo {
+            width: 180px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+            position: relative;
+            z-index: 2;
+        }
+        
+
+        .content {
+            padding: 30px;
+            background-color: #252525;
+            border-radius: 8px;
+            margin: 0 20px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+
+        .title {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #8B0000;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        .center {
+            text-align: center;
+        }
+        
+
+        .paragraph {
+            margin-bottom: 20px;
+            color: #e0e0e0;
+        }
+        
+
+        .button {
+            display: inline-block;
+            background-color: #8B0000;
+            color: #ffffff;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+
+        .footer {
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #a0a0a0;
+            border-top: 1px solid #333333;
+            margin-top: 30px;
+        }
+        
+
+        .social-links {
+            margin: 15px 0;
+        }
+        
+        .social-link {
+            display: inline-block;
+            margin: 0 10px;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .email-details{
+            list-style-type: none;
+            margin: 0;
+            background-color: #8b00002d;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        
+        @media screen and (max-width: 480px) {
+            .content {
+                padding: 20px;
+                margin: 0 10px;
+            }
+            
+            .title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+
+        <div class="header">
+        </div>
+        
+        <div class="content">
+            <h1 class="title">Solicitud de contacto recibida</h1>
+            
+            <p class="paragraph">
+                Estimado {{ user_name }},
+            </p>
+            
+            <p class="paragraph">
+                Gracias por ponerte en contacto con nosotros. Hemos recibido tu solicitud y nuestro equipo se encuentra revisándola.
+            </p>
+            
+            <p class="paragraph">
+                Hemos recibido tu solicitud con los siguientes detalles:
+            </p>
+            <ul class="paragraph email-details">
+                <li><strong>Nombre:</strong> {{ user_name }}</li>
+                <li><strong>Teléfono:</strong> {{ cellphone }}</li>
+                <li><strong>Correo Electrónico:</strong> {{ email }}</li>
+                <li><strong>Categoría:</strong> {{ category }}</li>
+                <li><strong>Mensaje:</strong> {{ message }}</li>
+            </ul>
+            
+            <p class="paragraph">
+                Dentro de poco recibirás una respuesta de nuestro equipo. Mientras tanto, te invitamos a visitar nuestro sitio web para conocer más sobre nuestros servicios y ofertas.
+            </p>
+            
+            <p class="paragraph center">
+                <a href="https://reyesandfriends.cl" class="button">Visitar nuestro sitio web</a>
+            </p>
+                        
+            <p class="paragraph">
+                Atentamente,<br>
+                El equipo de Reyes&Friends.
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p>© <script>document.write(new Date().getFullYear());</script> Reyes&Friends
+            <br>Todos los derechos reservados.</p>
+        </div> 
+    </div>
+</body>
+</html>
