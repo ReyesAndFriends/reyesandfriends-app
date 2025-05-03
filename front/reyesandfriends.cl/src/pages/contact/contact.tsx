@@ -15,7 +15,7 @@ const Contact = () => {
         const data = {
             name: formData.get("name"),
             last_name: formData.get("last_name"),
-            cellphone: `${formData.get("code")}${formData.get("cellphone")}`,
+            cellphone: formData.get("cellphone"),
             email: formData.get("email"),
             category: formData.get("category"),
             message: formData.get("message"),
@@ -25,7 +25,7 @@ const Contact = () => {
 
     const handleInputChange = (e: React.ChangeEvent<HTMLFormElement>) => {
         const formData = new FormData(e.currentTarget);
-        const isValid = ["name", "last_name", "code", "cellphone", "email", "category", "message"].every(
+        const isValid = ["name", "last_name", "cellphone", "email", "category", "message"].every(
             (field) => formData.get(field)?.toString().trim() !== ""
         );
         setIsFormValid(isValid);
@@ -96,24 +96,14 @@ const Contact = () => {
                             </div>
                             <div className="col-span-1">
                                 <label htmlFor="cellphone" className="block text-gray-300 font-bold mb-2">Número de Teléfono</label>
-                                <div className="flex">
-                                    <select 
-                                        id="code" 
-                                        name="code" 
-                                        className="w-20 p-3 rounded-l-sm bg-zinc-700 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
-                                    >
-                                        <option value="+569">+569</option>
-                                        <option value="+562">+562</option>
-                                    </select>
-                                    <input 
-                                        type="tel" 
-                                        id="cellphone" 
-                                        name="cellphone" 
-                                        maxLength={8}
-                                        className="w-full p-3 rounded-r-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
-                                        placeholder="Ingresa tu número de teléfono"
-                                    />
-                                </div>
+                                <input 
+                                    type="tel" 
+                                    id="cellphone" 
+                                    name="cellphone" 
+                                    maxLength={12}
+                                    className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                                    placeholder="Ejemplo: +56912345678"
+                                />
                                 {errors.cellphone && <p className="text-red-500 text-sm">{errors.cellphone}</p>}
                             </div>
                             <div className="col-span-1">

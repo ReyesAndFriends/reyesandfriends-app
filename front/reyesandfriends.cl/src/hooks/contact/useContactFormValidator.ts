@@ -23,8 +23,8 @@ export const useContactFormValidator = () => {
 
         if (!formData.name) newErrors.name = "Su nombre es requerido.";
         if (!formData.last_name) newErrors.last_name = "Su apellido es requerido.";
-        if (!formData.cellphone || !/^\+\d{2,3}\d{8}$/.test(formData.cellphone)) {
-            newErrors.cellphone = "Su número telefónico es requerido y debe ser válido.";
+        if (!formData.cellphone || !/^\+\d{11,12}$/.test(formData.cellphone)) {
+            newErrors.cellphone = "Su número telefónico es requerido y debe incluir el código de país (ejemplo: +56912345678).";
         }
         if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
             newErrors.email = "Su correo electrónico es requerido y debe ser válido.";
