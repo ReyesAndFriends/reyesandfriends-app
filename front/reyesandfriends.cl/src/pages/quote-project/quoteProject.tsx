@@ -1,6 +1,9 @@
 import React from 'react';
+import { useServiceList } from '../../hooks/services/useServiceList';
 
 const QuoteProject: React.FC = () => {
+  const serviceList = useServiceList();
+
   return (
       <div>
         <section className="relative py-48 bg-cover bg-center relative">
@@ -10,7 +13,7 @@ const QuoteProject: React.FC = () => {
                         <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
                             Cotiza tu proyecto
                         </h1>
-                      <div className="w-24 h-1 bg-red-600 mx-auto mb-6"></div>
+                        <div className="w-auto h-1 bg-red-600 mx-auto mb-6"></div>
                         <p className="text-xl mb-8 text-gray-300">
                             Has tomado una gran decisión al elegirnos para tu proyecto!
                             <br />
@@ -27,59 +30,93 @@ const QuoteProject: React.FC = () => {
               </h2>
 
             <form action="" method="POST" >
-              <div className="max-w-4xl mx-auto px-12 bg-black p-8 rounded-lg shadow-md">
-                  
-                     <h1 className='block text-white font-bold mb-4'>Fase 1. Datos personales</h1>
+              <div className="container mx-auto px-4 max-w-3xl">
+                    <div className="bg-black p-8 rounded-lg shadow-lg">
+                        
+                        <h1 className='block text-white font-bold mb-4'>Fase 1. Datos personales</h1>
 
-                      <div className="mb-4 flex gap-4">
-                          <div className="w-1/2">
-                              <label htmlFor="firstName" className="block text-gray-300 font-bold mb-2">Nombre (requerido)</label>
-                              <input type="text" id="firstName" name="firstName" required className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"/>
-                          </div>
-                          <div className="w-1/2">
-                              <label htmlFor="lastName" className="block text-gray-300 font-bold mb-2">Apellido (requerido)</label>
-                              <input type="text" id="lastName" name="lastName" required className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"/>
-                          </div>
+                        <div className="mb-4">
+                                <label htmlFor="firstName" className="block text-gray-300 font-bold mb-2">Nombre (requerido)</label>
+                                <input type="text" id="firstName" placeholder="Ingresa tu nombre" name="firstName" required className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"/>
+                        </div>
+
+                        <div className="mb-4">
+                          <label htmlFor="lastName" className="block text-gray-300 font-bold mb-2">Apellido (requerido)</label>
+                          <input type="text" id="lastName" placeholder="Ingresa tu apellido" name="lastName" required className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"/>
+                        </div>
+
+                      <div className="mb-4">
+                              <label htmlFor="email" className="block text-gray-300 font-bold mb-2">Email (requerido)</label>
+                              <input type="email" id="email" placeholder="Ingresa tu email" name="email" required className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"/>
                       </div>
 
-                    <div className="mb-4">
-                            <label htmlFor="email" className="block text-gray-300 font-bold mb-2">Email (requerido)</label>
-                            <input type="email" id="email" name="email" required className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"/>
-                    </div>
+                      <div className="mb-4">
+                              <label htmlFor="phone" className="block text-gray-300 font-bold mb-2">Teléfono (requerido)</label>
+                              <input type="tel" id="phone" placeholder="Ejemplo: +56912345678" name="phone" required className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"/>
+                      </div>
 
-                    <div className="mb-4">
-                            <label htmlFor="phone" className="block text-gray-300 font-bold mb-2">Teléfono (requerido)</label>
-                            <input type="tel" id="phone" name="phone" required className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"/>
+                      <div className="mb-4">
+                          <label htmlFor="contactMethod" className="block text-gray-300 font-bold mb-2">¿Cómo quieres que te contactemos? (requerido)</label>
+                          <select id="contactMethod" name="contactMethod" required className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600">
+                              <option value="" disabled selected>Selecciona una opción</option>
+                              <option value="email">Email</option>
+                              <option value="whatsapp">WhatsApp</option>
+                          </select>
+                      </div>
                     </div>
+              </div>
 
-                    <div className="mb-4">
-                        <label htmlFor="contactMethod" className="block text-gray-300 font-bold mb-2">¿Cómo quieres que te contactemos? (requerido)</label>
-                        <select id="contactMethod" name="contactMethod" required className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600">
+              <div className="container mx-auto px-4 max-w-3xl">
+                <div className="mt-4 bg-black p-8 rounded-lg shadow-lg">
+                  <h1 className='block text-white font-bold mb-4'>Fase 2. Empresa y propósito del proyecto</h1>
+                  
+                  <div className="mb-4">
+                      <label htmlFor="companyName" className="block text-gray-300 font-bold mb-2">Nombre de la empresa (si aplica)</label>
+                      <input type="text" id="companyName" placeholder="Ejemplo: Reyes&Friends SPA" name="companyName" className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"/>
+                  </div>
+
+                  <div className="mb-4">
+                    <label htmlFor="companyType" className="block text-gray-300 font-bold mb-2">El proyecto será personal o empresarial</label>
+                      <select id="companyType" name="companyType" required className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600">
                             <option value="" disabled selected>Selecciona una opción</option>
-                            <option value="email">Email</option>
-                            <option value="whatsapp">WhatsApp</option>
-                        </select>
-                    </div>
-              </div>
+                            <option value="personal">Personal</option>
+                            <option value="business">Empresarial</option>
+                      </select>
+                  </div>
 
-              <div className="mt-4 max-w-4xl mx-auto px-12 bg-black p-8 rounded-lg shadow-md">
-                <h1 className='block text-white font-bold mb-4'>Fase 2. Empresa y propósito del proyecto</h1>
-                
-                <div className="mb-4">
-                    <label htmlFor="companyName" className="block text-gray-300 font-bold mb-2">Nombre de la empresa (requerido)</label>
-                    <input type="text" id="companyName" name="companyName" required className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"/>
+                  <div className="mb-4">
+                      <label htmlFor="projectPurpose" className="block text-gray-300 font-bold mb-2">¿Cuál es el propósito del proyecto? (requerido)</label>
+                      <textarea id="projectPurpose" name="projectPurpose" placeholder="Describe lo que buscas obtener o lograr con este proyecto. Mínimo 50 caracteres, máximo 2000." required className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"></textarea>
+                  </div>
+
+                  <div className="mb-4">
+                    <label htmlFor="projectType" className="block text-gray-300 font-bold mb-2">¿Qué tipo de proyecto necesitas? (requerido)</label>
+                    <select name="projectType" id="projectType" required className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600">
+                      <option value="" disabled selected>Selecciona el tipo de proyecto</option>
+                      {serviceList.map((service) => (
+                        <option key={service.value || service.name} value={service.value || service.name}>
+                          {service.name}
+                        </option>
+                      ))}
+                      <option value="other">Otro</option>
+                      <option value="notSure">No estoy seguro</option>
+                    </select>
+                  </div>
                 </div>
-
               </div>
 
-              <div className="mt-4 max-w-4xl mx-auto px-12 bg-black p-8 rounded-lg shadow-md">
-                <h1 className='block text-white font-bold mb-4'>Fase 3. Alcance técnico y funcional</h1>
+              <div className="container mx-auto px-4 max-w-3xl">
+                <div className="mt-4 bg-black p-8 rounded-lg shadow-lg">
+                  <h1 className='block text-white font-bold mb-4'>Fase 3. Alcance técnico y funcional</h1>
 
+                </div>
               </div>
 
-              <div className="mt-4 max-w-4xl mx-auto px-12 bg-black p-8 rounded-lg shadow-md">
-                <h1 className='block text-white font-bold mb-4'>Fase 4. Extras e información final</h1>
+              <div className="container mx-auto px-4 max-w-3xl">
+                <div className="mt-4 bg-black p-8 rounded-lg shadow-lg">
+                  <h1 className='block text-white font-bold mb-4'>Fase 4. Extras e información final</h1>
 
+                </div>
               </div>
 
             </form>
