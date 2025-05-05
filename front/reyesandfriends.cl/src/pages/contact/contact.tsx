@@ -1,6 +1,6 @@
 import { useGetContactCategories } from "../../hooks/contact/useGetContactCategories";
 import { useContactFormValidator } from "../../hooks/contact/useContactFormValidator";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import ContactModal from "./modal/contactModal";
 
 const Contact = () => {
@@ -73,7 +73,7 @@ const Contact = () => {
                             onChange={handleInputChange}
                         >
                             <div className="col-span-1">
-                                <label htmlFor="name" className="block text-gray-300 font-bold mb-2">Nombre</label>
+                                <label htmlFor="name" className="block text-gray-300 font-bold mb-2">Nombre (requerido)</label>
                                 <input 
                                     type="text" 
                                     id="name" 
@@ -84,7 +84,7 @@ const Contact = () => {
                                 {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
                             </div>
                             <div className="col-span-1">
-                                <label htmlFor="last_name" className="block text-gray-300 font-bold mb-2">Apellido</label>
+                                <label htmlFor="last_name" className="block text-gray-300 font-bold mb-2">Apellido (requerido)</label>
                                 <input 
                                     type="text" 
                                     id="last_name" 
@@ -95,7 +95,7 @@ const Contact = () => {
                                 {errors.last_name && <p className="text-red-500 text-sm">{errors.last_name}</p>}
                             </div>
                             <div className="col-span-1">
-                                <label htmlFor="cellphone" className="block text-gray-300 font-bold mb-2">Número de Teléfono</label>
+                                <label htmlFor="cellphone" className="block text-gray-300 font-bold mb-2">Número de Teléfono (requerido)</label>
                                 <input 
                                     type="tel" 
                                     id="cellphone" 
@@ -107,7 +107,7 @@ const Contact = () => {
                                 {errors.cellphone && <p className="text-red-500 text-sm">{errors.cellphone}</p>}
                             </div>
                             <div className="col-span-1">
-                                <label htmlFor="email" className="block text-gray-300 font-bold mb-2">Email</label>
+                                <label htmlFor="email" className="block text-gray-300 font-bold mb-2">Email (requerido)</label>
                                 <input 
                                     type="email" 
                                     id="email" 
@@ -118,7 +118,7 @@ const Contact = () => {
                                 {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                             </div>
                             <div className="col-span-2">
-                                <label htmlFor="category" className="block text-gray-300 font-bold mb-2">Categoría</label>
+                                <label htmlFor="category" className="block text-gray-300 font-bold mb-2">Categoría (requerido)</label>
                                 <select 
                                     id="category" 
                                     name="category" 
@@ -134,7 +134,7 @@ const Contact = () => {
                                 {errors.category && <p className="text-red-500 text-sm">{errors.category}</p>}
                             </div>
                             <div className="col-span-2">
-                                <label htmlFor="message" className="block text-gray-300 font-bold mb-2">Mensaje</label>
+                                <label htmlFor="message" className="block text-gray-300 font-bold mb-2">Mensaje (requerido)</label>
                                 <textarea 
                                     id="message" 
                                     name="message" 
