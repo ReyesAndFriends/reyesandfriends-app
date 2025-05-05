@@ -89,19 +89,58 @@ const QuoteProject: React.FC = () => {
                       <textarea id="projectPurpose" name="projectPurpose" placeholder="Describe lo que buscas obtener o lograr con este proyecto. Mínimo 50 caracteres, máximo 2000." required className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"></textarea>
                   </div>
 
-                  <div className="mb-4">
+                    <div className="mb-4">
                     <label htmlFor="projectType" className="block text-gray-300 font-bold mb-2">¿Qué tipo de proyecto necesitas? (requerido)</label>
-                    <select name="projectType" id="projectType" required className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600">
+                    <select
+                      name="projectType"
+                      id="projectType"
+                      required
+                      className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                      onChange={(e) => {
+                      const otherField = document.getElementById("otherProjectTypeField");
+                      const notSureField = document.getElementById("notSureProjectTypeField");
+                      if (e.target.value === "other") {
+                        otherField?.classList.remove("hidden");
+                        notSureField?.classList.add("hidden");
+                      } else if (e.target.value === "notSure") {
+                        notSureField?.classList.remove("hidden");
+                        otherField?.classList.add("hidden");
+                      } else {
+                        otherField?.classList.add("hidden");
+                        notSureField?.classList.add("hidden");
+                      }
+                      }}
+                    >
                       <option value="" disabled selected>Selecciona el tipo de proyecto</option>
                       {serviceList.map((service) => (
-                        <option key={service.value || service.name} value={service.value || service.name}>
-                          {service.name}
-                        </option>
+                      <option key={service.value || service.name} value={service.value || service.name}>
+                        {service.name}
+                      </option>
                       ))}
                       <option value="other">Otro</option>
                       <option value="notSure">No estoy seguro</option>
                     </select>
-                  </div>
+                    </div>
+
+                    <div id="otherProjectTypeField" className="mb-4 hidden">
+                    <label htmlFor="otherProjectType" className="block text-gray-300 font-bold mb-2">Por favor, describe qué tipo de proyecto necesitas</label>
+                    <textarea
+                      id="otherProjectType"
+                      name="otherProjectType"
+                      placeholder="Describe el tipo de proyecto que necesitas"
+                      className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                    ></textarea>
+                    </div>
+
+                    <div id="notSureProjectTypeField" className="mb-4 hidden">
+                    <label htmlFor="notSureProjectType" className="block text-gray-300 font-bold mb-2">Describe en palabras qué tipo de página o servicio necesitas para poder ayudarte</label>
+                    <textarea
+                      id="notSureProjectType"
+                      name="notSureProjectType"
+                      placeholder="Describe lo que tienes en mente para que podamos ayudarte"
+                      className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                    ></textarea>
+                    </div>
                 </div>
               </div>
 
