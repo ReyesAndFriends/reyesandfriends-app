@@ -60,15 +60,15 @@ const Contact = () => {
             </section>
 
             <section className="py-16 bg-zinc-900">
-                    <h2 className="text-3xl font-bold mb-12 text-center text-red-500 relative">
-                        <span className="bg-black px-4 relative z-10 bg-zinc-900 text-white">Envíanos un mensaje</span>
-                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
-                    </h2>
+                <h2 className="text-3xl font-bold mb-12 text-center text-red-500 relative">
+                    <span className="bg-black px-4 relative z-10 bg-zinc-900 text-white">Envíanos un mensaje</span>
+                    <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
+                </h2>
                 <div className="container mx-auto px-4 max-w-3xl">
                     <div className="bg-black p-8 rounded-lg shadow-lg">
                         <form 
                             ref={formRef}
-                            className="grid grid-cols-1 md:grid-cols-2 gap-4" 
+                            className="grid grid-cols-1 gap-4" 
                             onSubmit={handleFormSubmit} 
                             onChange={handleInputChange}
                         >
@@ -117,7 +117,7 @@ const Contact = () => {
                                 />
                                 {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                             </div>
-                            <div className="col-span-2">
+                            <div className="col-span-1">
                                 <label htmlFor="category" className="block text-gray-300 font-bold mb-2">Categoría (requerido)</label>
                                 <select 
                                     id="category" 
@@ -133,7 +133,7 @@ const Contact = () => {
                                 </select>
                                 {errors.category && <p className="text-red-500 text-sm">{errors.category}</p>}
                             </div>
-                            <div className="col-span-2">
+                            <div className="col-span-1">
                                 <label htmlFor="message" className="block text-gray-300 font-bold mb-2">Mensaje (requerido)</label>
                                 <textarea 
                                     id="message" 
@@ -144,7 +144,7 @@ const Contact = () => {
                                 ></textarea>
                                 {errors.message && <p className="text-red-500 text-sm">{errors.message}</p>}
                             </div>
-                            <div className="col-span-2">
+                            <div className="col-span-1">
                                 <button 
                                     type="submit" 
                                     className="w-full bg-red-600 text-white font-bold py-3 rounded-sm hover:bg-red-700 transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed"
