@@ -86,7 +86,7 @@ const Navbar: React.FC = () => {
                                     {dropdownOptions.map(option => (
                                         <li key={option.path}>
                                             <button
-                                                className="block px-4 py-2 hover:bg-gray-200"
+                                                className="block w-full px-4 py-2 hover:bg-gray-200"
                                                 onClick={() => handleLinkClick(option.path)}
                                             >
                                                 {option.label}
@@ -108,7 +108,7 @@ const Navbar: React.FC = () => {
                                     {contactList.map(option => (
                                         <li key={option.path}>
                                             <button
-                                                className="block px-4 py-2 hover:bg-gray-200"
+                                                className="block w-full px-4 py-2 hover:bg-gray-200"
                                                 onClick={() => handleLinkClick(option.path)}
                                             >
                                                 {option.name}
