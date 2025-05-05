@@ -91,6 +91,10 @@ const QuoteProject: React.FC = () => {
           </div>
         </section>
 
+        <div className="text-center my-8">
+          <h2 className="text-3xl font-bold text-white">Resumen de la cotización</h2>
+        </div>
+
         <motion.div
           key="resume-project"
           initial={{ opacity: 0, x: 100 }}
@@ -101,6 +105,13 @@ const QuoteProject: React.FC = () => {
         >
           <ResumeProject formData={finalData} />
         </motion.div>
+
+        <div className="text-center my-8">
+          <h2 className="text-3xl font-bold text-white">Todo listo? Necesitas cambiar algo? Toma tu tiempo!</h2>
+          <p className="text-lg text-gray-300">
+            Recuerda: esta información no es literal, es para tener un concepto en mente. Si en un futuro necesitas cambiar algo, no te preocupes por eso.
+          </p>
+        </div>
 
         <div className="flex justify-center mt-8 mb-8 gap-4">
           <button
@@ -150,7 +161,7 @@ const QuoteProject: React.FC = () => {
                   key={i}
                   className={`w-full text-center ${i === currentStep ? 'text-white font-bold' : ''}`}
                 >
-                  Paso {i + 1}
+                  Fase {i + 1}
                 </div>
               ))}
             </div>
