@@ -61,7 +61,7 @@ const Navbar: React.FC = () => {
         <nav className="bg-black text-white py-2 z-50 fixed top-0 left-0 w-full">
             <div className="container mx-auto flex justify-between items-center px-4">
             <Link to="/">
-                <img src="/img/reyesandfriends.svg" className="h-12" alt="Reyes and Friends Logo" />
+                <img src="/img/logo/logo_white_2.svg" className="h-12 mb-2" alt="Reyes and Friends Logo" />
             </Link>
             <ul className={`md:flex space-x-0 md:space-x-6 text-lg md:ml-auto md:justify-end ${isMenuOpen ? "flex flex-col space-y-4 absolute top-full left-0 w-full bg-black p-4 z-50" : "hidden"} md:static md:flex-row md:space-y-0`}>
                 <li>
