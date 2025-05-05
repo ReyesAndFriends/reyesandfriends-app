@@ -18,7 +18,7 @@ const PhaseTwo: React.FC<PhaseTwoProps> = ({ values, errors, handleChange }) => 
                 <h1 className='block text-white font-bold mb-4'>Fase 2. Empresa y propósito del proyecto</h1>
                 
                 <div className="mb-4">
-                    <label htmlFor="companyName" className="block text-gray-300 font-bold mb-2">Nombre de la empresa (si aplica)</label>
+                    <label htmlFor="companyName" className="block text-gray-300 font-bold mb-2">Nombre de la empresa (Si aplica)</label>
                     <input 
                         type="text" 
                         id="companyName" 
@@ -32,7 +32,7 @@ const PhaseTwo: React.FC<PhaseTwoProps> = ({ values, errors, handleChange }) => 
                 </div>
 
                 <div className="mb-4">
-                    <label htmlFor="companyType" className="block text-gray-300 font-bold mb-2">El proyecto será personal o empresarial</label>
+                    <label htmlFor="companyType" className="block text-gray-300 font-bold mb-2">El proyecto será personal o empresarial (Requerido)</label>
                     <select 
                         id="companyType" 
                         name="companyType" 
@@ -48,7 +48,7 @@ const PhaseTwo: React.FC<PhaseTwoProps> = ({ values, errors, handleChange }) => 
                 </div>
 
                 <div className="mb-4">
-                    <label htmlFor="projectPurpose" className="block text-gray-300 font-bold mb-2">¿Cuál es el propósito del proyecto? (requerido)</label>
+                    <label htmlFor="projectPurpose" className="block text-gray-300 font-bold mb-2">¿Cuál es el propósito del proyecto? (Requerido)</label>
                     <textarea 
                         id="projectPurpose" 
                         name="projectPurpose" 
