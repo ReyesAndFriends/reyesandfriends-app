@@ -60,7 +60,15 @@ const QuoteProject: React.FC = () => {
 
     if (!isValid) return;
 
-    alert('Formulario enviado con éxito 🎉');
+    const finalData = {
+      phaseOne: phaseOne.values,
+      phaseTwo: phaseTwo.values,
+      phaseThree: phaseThree.values,
+      phaseFour: phaseFour.values,
+      phaseFive: phaseFive.values,
+    };
+
+    console.log("Form Data:", finalData);
   };
 
   return (
