@@ -20,7 +20,7 @@ const PhaseFour: React.FC<PhaseFourProps> = ({ values, errors, handleChange, val
                 
                 <div className="mb-4">
                     <label htmlFor="hostingService" className="block text-gray-300 font-bold mb-2">
-                        ¿Necesitas un servicio de hosting? (Opcional)
+                        ¿Necesitas un servicio de hosting? (Requerido)
                     </label>
                     <select
                         id="hostingService"
@@ -48,7 +48,7 @@ const PhaseFour: React.FC<PhaseFourProps> = ({ values, errors, handleChange, val
 
                 <div className="mb-4">
                     <label htmlFor="hasDomain" className="block text-gray-300 font-bold mb-2">
-                        ¿Tienes un dominio para tu proyecto? (Opcional)
+                        ¿Tienes un dominio para tu proyecto? (Requerido)
                     </label>
                     <select
                         id="hasDomain"
