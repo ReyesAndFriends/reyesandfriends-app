@@ -102,8 +102,12 @@ const ResumeProject: React.FC<ResumeProjectProps> = ({ formData }) => {
         <div className="border border-zinc-700 rounded-lg p-6 bg-zinc-900 text-gray-300 col-span-1 md:col-span-2">
           <h2 className="text-lg font-bold text-white mb-3">Fase 5: Preferencias Técnicas</h2>
           <p><strong>¿Preferencias?:</strong> {booleanMap[formData.phaseFive.technologyPreference] || getValue(formData.phaseFive.technologyPreference)}</p>
-          <p><strong>Tecnologías Preferidas:</strong> {getValue(formData.phaseFive.technologyList)}</p>
-          <p><strong>A evitar:</strong> {getValue(formData.phaseFive.avoidTechnologyList)}</p>
+          {formData.phaseFive.technologyPreference === "yes" && (
+            <>
+              <p><strong>Tecnologías Preferidas:</strong> {getValue(formData.phaseFive.technologyList)}</p>
+              <p><strong>A evitar:</strong> {getValue(formData.phaseFive.avoidTechnologyList)}</p>
+            </>
+          )}
           <p><strong>Funcionalidades clave:</strong> {getValue(formData.phaseFive.keyFunctionalities)}</p>
           <p><strong>Comentarios:</strong> {getValue(formData.phaseFive.additionalComments)}</p>
         </div>
