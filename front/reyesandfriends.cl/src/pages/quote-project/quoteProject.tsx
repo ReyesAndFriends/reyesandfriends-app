@@ -2,26 +2,28 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import PhaseOne from './phases/phaseOne/phaseOne';
-import PhaseTwo from './phases/phaseTwo';
+import PhaseTwo from './phases/phaseTwo/phaseTwo';
 import PhaseThree from './phases/phaseThree';
 import PhaseFour from './phases/phaseFour';
 import PhaseFive from './phases/phaseFive';
 
 
 import { usePhaseOneValidate } from './phases/phaseOne/usePhaseOneValidate';
+import { usePhaseTwoValidate } from './phases/phaseTwo/usePhaseTwoValidate';
 
 const QuoteProject: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const totalSteps = 5;
 
   const phaseOne = usePhaseOneValidate();
+  const phaseTwo = usePhaseTwoValidate();
 
 
   const progressPercent = Math.round(((currentStep + 1) / totalSteps) * 100);
 
   const steps = [
     <PhaseOne key="step-1" {...phaseOne} />,
-    <PhaseTwo key="step-2" />,
+    <PhaseTwo key="step-2" {...phaseTwo} />,
     <PhaseThree key="step-3" />,
     <PhaseFour key="step-4" />,
     <PhaseFive key="step-5" />,
@@ -29,8 +31,11 @@ const QuoteProject: React.FC = () => {
 
   const handleNext = () => {
     if (currentStep === 0 && !phaseOne.validate()) return;
+    if (currentStep === 1 && !phaseTwo.validate()) return;
+  
     setCurrentStep((prev) => Math.min(prev + 1, totalSteps - 1));
   };
+  
 
   const handlePrev = () => {
     setCurrentStep((prev) => Math.max(prev - 1, 0));
