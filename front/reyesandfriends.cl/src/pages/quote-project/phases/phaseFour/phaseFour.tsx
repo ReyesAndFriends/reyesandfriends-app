@@ -34,6 +34,16 @@ const PhaseFour: React.FC<PhaseFourProps> = ({ values, errors, handleChange, val
                         <option value="no">No</option>
                     </select>
                     {errors.hostingService && <p className="text-red-500 text-sm mt-1">{errors.hostingService}</p>}
+                    {values.hostingService === "yes" && (
+                        <p className="mt-2 text-sm text-green-400">
+                            ¡Excelente elección! Nuestro servicio de hosting se encargará de todo el mantenimiento y la seguridad de tu proyecto, tu solo recibirás los beneficios.
+                        </p>
+                    )}
+                    {values.hostingService === "no" && (
+                        <p className="mt-2 text-sm text-yellow-400">
+                            Te recomendamos considerar nuestro servicio de hosting. Con nuestro servicio puedes despreocuparte de la seguridad y el mantenimiento de tu proyecto, todo estará a cargo de nosotros.
+                        </p>
+                    )}
                 </div>
 
                 <div className="mb-4">
