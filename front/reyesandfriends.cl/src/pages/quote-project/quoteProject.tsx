@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import PhaseOne from './phases/phaseOne/phaseOne';
 import PhaseTwo from './phases/phaseTwo/phaseTwo';
 import PhaseThree from './phases/phaseThree/phaseThree';
-import PhaseFour from './phases/phaseFour';
+import PhaseFour from './phases/phaseFour/phaseFour';
 import PhaseFive from './phases/phaseFive';
 
 import { useServiceList } from '../../hooks/services/useServiceList';
@@ -12,6 +12,7 @@ import { useServiceList } from '../../hooks/services/useServiceList';
 import { usePhaseOneValidate } from './phases/phaseOne/usePhaseOneValidate';
 import { usePhaseTwoValidate } from './phases/phaseTwo/usePhaseTwoValidate';
 import { usePhaseThreeValidate } from './phases/phaseThree/usePhaseThreeValidate';
+import { usePhaseFourValidate } from './phases/phaseFour/usePhaseFourValidate';
 
 const QuoteProject: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -22,6 +23,7 @@ const QuoteProject: React.FC = () => {
   const phaseOne = usePhaseOneValidate();
   const phaseTwo = usePhaseTwoValidate();
   const phaseThree = usePhaseThreeValidate();
+  const phaseFour = usePhaseFourValidate();
 
 
   const progressPercent = Math.round(((currentStep + 1) / totalSteps) * 100);
@@ -30,7 +32,7 @@ const QuoteProject: React.FC = () => {
     <PhaseOne key="step-1" {...phaseOne} />,
     <PhaseTwo key="step-2" {...phaseTwo} />,
     <PhaseThree key="step-3" {...phaseThree} serviceList={serviceList} />,
-    <PhaseFour key="step-4" />,
+    <PhaseFour key="step-4" {...phaseFour}/>,
     <PhaseFive key="step-5" />,
   ];
 
@@ -38,6 +40,7 @@ const QuoteProject: React.FC = () => {
     if (currentStep === 0 && !phaseOne.validate()) return;
     if (currentStep === 1 && !phaseTwo.validate()) return;
     if (currentStep === 2 && !phaseThree.validate()) return;
+    if (currentStep === 3 && !phaseFour.validate()) return;
   
     setCurrentStep((prev) => Math.min(prev + 1, totalSteps - 1));
   };

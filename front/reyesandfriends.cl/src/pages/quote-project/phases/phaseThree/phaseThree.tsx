@@ -25,7 +25,7 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                 <h1 className='block text-white font-bold mb-4'>Fase 3. Alcance técnico y funcional</h1>
 
                 <div className="mb-4">
-                    <label htmlFor="projectType" className="block text-gray-300 font-bold mb-2">¿Qué tipo de proyecto necesitas?</label>
+                    <label htmlFor="projectType" className="block text-gray-300 font-bold mb-2">¿Qué tipo de proyecto necesitas? (Requerido)</label>
                     <select
                         name="projectType"
                         id="projectType"
@@ -47,7 +47,7 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
 
                 {values.projectType === "other" && (
                     <div className="mb-4">
-                        <label htmlFor="otherProjectType" className="block text-gray-300 font-bold mb-2">Describe el tipo de proyecto</label>
+                        <label htmlFor="otherProjectType" className="block text-gray-300 font-bold mb-2">Describe el tipo de proyecto (Requerido)</label>
                         <textarea
                             id="otherProjectType"
                             name="otherProjectType"
@@ -61,7 +61,7 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
 
                 {values.projectType === "notSure" && (
                     <div className="mb-4">
-                        <label htmlFor="notSureProjectType" className="block text-gray-300 font-bold mb-2">Describe en palabras lo que necesitas</label>
+                        <label htmlFor="notSureProjectType" className="block text-gray-300 font-bold mb-2">Describe en palabras lo que necesitas (Requerido)</label>
                         <textarea
                             id="notSureProjectType"
                             name="notSureProjectType"
@@ -74,7 +74,7 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                 )}
 
                 <div className="mb-4">
-                    <label htmlFor="hasStartDate" className="block text-gray-300 font-bold mb-2">¿Tienes una fecha de inicio?</label>
+                    <label htmlFor="hasStartDate" className="block text-gray-300 font-bold mb-2">¿Tienes una fecha de inicio? (Requerido)</label>
                     <select
                         id="hasStartDate"
                         name="hasStartDate"
@@ -91,7 +91,7 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
 
                 {values.hasStartDate === "yes" && (
                     <div className="mb-4">
-                        <label htmlFor="startDate" className="block text-gray-300 font-bold mb-2">Fecha de inicio</label>
+                        <label htmlFor="startDate" className="block text-gray-300 font-bold mb-2">Fecha de inicio (Requerido)</label>
                         <input
                             type="date"
                             id="startDate"
@@ -105,7 +105,7 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                 )}
 
                 <div className="mb-4">
-                    <label htmlFor="estimatedBudget" className="block text-gray-300 font-bold mb-2">Presupuesto estimado</label>
+                    <label htmlFor="estimatedBudget" className="block text-gray-300 font-bold mb-2">¿Tienes un presupuesto estimado? (Opcional)</label>
                     <div className="relative">
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">$</span>
                         <input
@@ -121,7 +121,7 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                 </div>
 
                 <div className="mb-4">
-                    <label htmlFor="deliveryTimeframe" className="block text-gray-300 font-bold mb-2">Plazo ideal de entrega</label>
+                    <label htmlFor="deliveryTimeframe" className="block text-gray-300 font-bold mb-2">Plazo ideal de entrega (Opcional)</label>
                     <select
                         id="deliveryTimeframe"
                         name="deliveryTimeframe"
@@ -140,7 +140,7 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                 </div>
 
                 <div className="mb-4">
-                    <label htmlFor="projectDetails" className="block text-gray-300 font-bold mb-2">Detalles adicionales</label>
+                    <label htmlFor="projectDetails" className="block text-gray-300 font-bold mb-2">Detalles adicionales (Opcional)</label>
                     <textarea
                         id="projectDetails"
                         name="projectDetails"
