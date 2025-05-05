@@ -42,6 +42,12 @@ const QuoteProject: React.FC = () => {
 
             </form>
 
+            <div className="flex justify-center mt-8">
+                <button type="submit" className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors">
+                    Siguiente
+                </button>
+            </div>
+
         </section>
       </div>
   );
