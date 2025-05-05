@@ -5,7 +5,7 @@ import PhaseOne from './phases/phaseOne/phaseOne';
 import PhaseTwo from './phases/phaseTwo/phaseTwo';
 import PhaseThree from './phases/phaseThree/phaseThree';
 import PhaseFour from './phases/phaseFour/phaseFour';
-import PhaseFive from './phases/phaseFive';
+import PhaseFive from './phases/phaseFive/phaseFive';
 
 import { useServiceList } from '../../hooks/services/useServiceList';
 
@@ -13,18 +13,19 @@ import { usePhaseOneValidate } from './phases/phaseOne/usePhaseOneValidate';
 import { usePhaseTwoValidate } from './phases/phaseTwo/usePhaseTwoValidate';
 import { usePhaseThreeValidate } from './phases/phaseThree/usePhaseThreeValidate';
 import { usePhaseFourValidate } from './phases/phaseFour/usePhaseFourValidate';
+import { usePhaseFiveValidate } from './phases/phaseFive/usePhaseFiveValidate';
 
 const QuoteProject: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const totalSteps = 5;
 
-  const serviceList  = useServiceList();
+  const serviceList = useServiceList();
 
   const phaseOne = usePhaseOneValidate();
   const phaseTwo = usePhaseTwoValidate();
   const phaseThree = usePhaseThreeValidate();
   const phaseFour = usePhaseFourValidate();
-
+  const phaseFive = usePhaseFiveValidate();
 
   const progressPercent = Math.round(((currentStep + 1) / totalSteps) * 100);
 
@@ -32,8 +33,8 @@ const QuoteProject: React.FC = () => {
     <PhaseOne key="step-1" {...phaseOne} />,
     <PhaseTwo key="step-2" {...phaseTwo} />,
     <PhaseThree key="step-3" {...phaseThree} serviceList={serviceList} />,
-    <PhaseFour key="step-4" {...phaseFour}/>,
-    <PhaseFive key="step-5" />,
+    <PhaseFour key="step-4" {...phaseFour} />,
+    <PhaseFive key="step-5" {...phaseFive} />,
   ];
 
   const handleNext = () => {
@@ -41,27 +42,29 @@ const QuoteProject: React.FC = () => {
     if (currentStep === 1 && !phaseTwo.validate()) return;
     if (currentStep === 2 && !phaseThree.validate()) return;
     if (currentStep === 3 && !phaseFour.validate()) return;
-  
+
     setCurrentStep((prev) => Math.min(prev + 1, totalSteps - 1));
   };
-  
 
   const handlePrev = () => {
     setCurrentStep((prev) => Math.max(prev - 1, 0));
   };
 
   const handleSubmit = () => {
-    if (!phaseOne.validate()) return;
-    alert('Formulario enviado con éxito 🎉');
-  };
+    const isValid =
+      phaseOne.validate() &&
+      phaseTwo.validate() &&
+      phaseThree.validate() &&
+      phaseFour.validate() &&
+      phaseFive.validate();
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (!isValid) return;
+
+    alert('Formulario enviado con éxito 🎉');
   };
 
   return (
     <div>
-
       <section className="relative py-48 bg-cover bg-center">
         <div className="absolute inset-0 bg-gradient-to-r from-[#891818] to-[#5A1410]"></div>
         <div className="container mx-auto px-4 relative z-10">
@@ -77,18 +80,14 @@ const QuoteProject: React.FC = () => {
         </div>
       </section>
 
-
       <section className="py-16 max-w-4xl mx-auto px-4">
-
         <div className="mb-12">
           <div className="relative mb-2">
             <div className="flex justify-between text-sm text-gray-400 mb-1">
               {[...Array(totalSteps)].map((_, i) => (
                 <div
                   key={i}
-                  className={`w-full text-center ${
-                    i === currentStep ? 'text-white font-bold' : ''
-                  }`}
+                  className={`w-full text-center ${i === currentStep ? 'text-white font-bold' : ''}`}
                 >
                   Paso {i + 1}
                 </div>
@@ -103,8 +102,8 @@ const QuoteProject: React.FC = () => {
           </div>
         </div>
 
-
-        <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
+        {/* No uses submit nativo */}
+        <div>
           <AnimatePresence mode="wait">
             <motion.div
               key={currentStep}
@@ -138,14 +137,15 @@ const QuoteProject: React.FC = () => {
               </button>
             ) : (
               <button
-                type="submit"
+                type="button"
+                onClick={handleSubmit}
                 className="bg-green-700 hover:bg-green-800 text-white px-6 py-3 rounded transition-colors"
               >
                 Enviar
               </button>
             )}
           </div>
-        </form>
+        </div>
       </section>
     </div>
   );
