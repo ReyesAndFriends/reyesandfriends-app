@@ -24,13 +24,6 @@ const Footer: React.FC = () => {
                         </ul>
                     </div>
                 </div>
-                <div className="mt-8 text-center">
-                    <img 
-                        src="/img/reyesandfriends.svg" 
-                        alt="Reyes&Friends Logo" 
-                        className="mx-auto w-1/2 md:w-1/3"
-                    />
-                </div>
             </div>
         </footer>
     );
