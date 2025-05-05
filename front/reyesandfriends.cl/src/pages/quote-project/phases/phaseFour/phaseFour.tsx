@@ -58,7 +58,7 @@ const PhaseFour: React.FC<PhaseFourProps> = ({ values, errors, handleChange, val
                 {values.hasDomain === "yes" && (
                     <div className="mb-4">
                         <label htmlFor="domainName" className="block text-gray-300 font-bold mb-2">
-                            Por favor, escribe el nombre de tu dominio (requerido)
+                            Por favor, escribe el nombre de tu dominio (Requerido)
                         </label>
                         <input
                             type="text"
@@ -76,7 +76,7 @@ const PhaseFour: React.FC<PhaseFourProps> = ({ values, errors, handleChange, val
                 {values.hasDomain === "no" && (
                     <div className="mb-4">
                         <label htmlFor="domainSuggestion" className="block text-gray-300 font-bold mb-2">
-                            ¿Tienes en mente algún nombre para tu dominio? (opcional)
+                            ¿Tienes en mente algún nombre para tu dominio? (Requerido)
                         </label>
                         <input
                             type="text"
