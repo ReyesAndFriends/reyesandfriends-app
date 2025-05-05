@@ -22,7 +22,7 @@ const PhaseOne: React.FC<PhaseOneProps> = ({ values, errors, handleChange }) => 
 
         <div className="mb-4">
           <label htmlFor="firstName" className="block text-gray-300 font-bold mb-2">
-            Nombre
+            Nombre (Requerido)
           </label>
           <input
             type="text"
@@ -39,7 +39,7 @@ const PhaseOne: React.FC<PhaseOneProps> = ({ values, errors, handleChange }) => 
 
         <div className="mb-4">
           <label htmlFor="lastName" className="block text-gray-300 font-bold mb-2">
-            Apellido
+            Apellido (Requerido)
           </label>
           <input
             type="text"
@@ -56,7 +56,7 @@ const PhaseOne: React.FC<PhaseOneProps> = ({ values, errors, handleChange }) => 
 
         <div className="mb-4">
           <label htmlFor="email" className="block text-gray-300 font-bold mb-2">
-            Email
+            Email (Requerido)
           </label>
           <input
             type="email"
@@ -73,7 +73,7 @@ const PhaseOne: React.FC<PhaseOneProps> = ({ values, errors, handleChange }) => 
 
         <div className="mb-4">
           <label htmlFor="phone" className="block text-gray-300 font-bold mb-2">
-            Teléfono
+            Teléfono (Requerido)
           </label>
           <input
             type="tel"
@@ -90,7 +90,7 @@ const PhaseOne: React.FC<PhaseOneProps> = ({ values, errors, handleChange }) => 
 
         <div className="mb-4">
           <label htmlFor="contactMethod" className="block text-gray-300 font-bold mb-2">
-            ¿Cómo quieres que te contactemos?
+            ¿Cómo quieres que te contactemos? (Requerido)
           </label>
           <select
             id="contactMethod"

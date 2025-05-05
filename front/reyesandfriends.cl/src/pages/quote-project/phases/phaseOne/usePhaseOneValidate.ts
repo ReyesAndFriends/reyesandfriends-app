@@ -21,27 +21,27 @@ export const usePhaseOneValidate = () => {
     const newErrors: Record<string, string> = {};
 
     if (!values.firstName.trim()) {
-      newErrors.firstName = "El nombre es obligatorio";
+      newErrors.firstName = "El nombre es obligatorio.";
     }
 
     if (!values.lastName.trim()) {
-      newErrors.lastName = "El apellido es obligatorio";
+      newErrors.lastName = "El apellido es obligatorio.";
     }
 
     if (!values.email.trim()) {
-      newErrors.email = "El correo es obligatorio";
+      newErrors.email = "El correo electrónico es obligatorio.";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
-      newErrors.email = "Formato de correo inválido";
+      newErrors.email = "Formato de correo inválido.";
     }
 
     if (!values.phone.trim()) {
-      newErrors.phone = "El teléfono es obligatorio";
+      newErrors.phone = "El teléfono es obligatorio.";
     } else if (!/^\+569\d{8}$/.test(values.phone)) {
-      newErrors.phone = "El teléfono debe tener el formato +56912345678";
+      newErrors.phone = "El teléfono debe tener el formato +56912345678.";
     }
 
     if (!values.contactMethod.trim()) {
-      newErrors.contactMethod = "Selecciona un método de contacto";
+      newErrors.contactMethod = "Selecciona un método de contacto.";
     }
 
     setErrors(newErrors);
