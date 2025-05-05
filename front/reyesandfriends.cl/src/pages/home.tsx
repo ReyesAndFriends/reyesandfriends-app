@@ -175,8 +175,8 @@ const Home: React.FC = () => {
                     </div>
                     <div className="flex justify-center">
                         <img 
-                            src="/img/reyesandfriends.svg" 
-                            alt="Company Logo" 
+                            src="/img/logo/logo_white_1.svg" 
+                            alt="Logo vertical" 
                             className="max-w-full h-auto w-32 md:w-48"
                         />
                     </div>
