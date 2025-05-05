@@ -102,7 +102,6 @@ const QuoteProject: React.FC = () => {
           </div>
         </div>
 
-        {/* No uses submit nativo */}
         <div>
           <AnimatePresence mode="wait">
             <motion.div
