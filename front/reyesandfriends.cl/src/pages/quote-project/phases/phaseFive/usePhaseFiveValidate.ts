@@ -29,12 +29,12 @@ export const usePhaseFiveValidate = () => {
             }
         }
 
-        if (values.keyFunctionalities.trim() && (values.keyFunctionalities.length < 50 || values.keyFunctionalities.length > 2000)) {
-            newErrors.keyFunctionalities = "Las funcionalidades clave deben tener entre 50 y 2000 caracteres.";
+        if (values.keyFunctionalities.trim() && (values.keyFunctionalities.length < 10 || values.keyFunctionalities.length > 1000)) {
+            newErrors.keyFunctionalities = "Las funcionalidades clave deben tener entre 10 y 1000 caracteres.";
         }
 
-        if (values.additionalComments.trim() && (values.additionalComments.length < 50 || values.additionalComments.length > 2000)) {
-            newErrors.additionalComments = "Los comentarios adicionales deben tener entre 50 y 2000 caracteres.";
+        if (values.additionalComments.trim() && (values.additionalComments.length < 20 || values.additionalComments.length > 2000)) {
+            newErrors.additionalComments = "Los comentarios adicionales deben tener entre 20 y 2000 caracteres.";
         }
 
         setErrors(newErrors);
