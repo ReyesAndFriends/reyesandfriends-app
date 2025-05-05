@@ -6,6 +6,7 @@ import PhaseTwo from './phases/phaseTwo/phaseTwo';
 import PhaseThree from './phases/phaseThree/phaseThree';
 import PhaseFour from './phases/phaseFour/phaseFour';
 import PhaseFive from './phases/phaseFive/phaseFive';
+import ResumeProject from './resume/resumeProject';
 
 import { useServiceList } from '../../hooks/services/useServiceList';
 
@@ -17,6 +18,7 @@ import { usePhaseFiveValidate } from './phases/phaseFive/usePhaseFiveValidate';
 
 const QuoteProject: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const [showSummary, setShowSummary] = useState(false);
   const totalSteps = 5;
 
   const serviceList = useServiceList();
@@ -50,7 +52,7 @@ const QuoteProject: React.FC = () => {
     setCurrentStep((prev) => Math.max(prev - 1, 0));
   };
 
-  const handleSubmit = () => {
+  const handleShowSummary = () => {
     const isValid =
       phaseOne.validate() &&
       phaseTwo.validate() &&
@@ -60,6 +62,10 @@ const QuoteProject: React.FC = () => {
 
     if (!isValid) return;
 
+    setShowSummary(true);
+  };
+
+  if (showSummary) {
     const finalData = {
       phaseOne: phaseOne.values,
       phaseTwo: phaseTwo.values,
@@ -68,8 +74,55 @@ const QuoteProject: React.FC = () => {
       phaseFive: phaseFive.values,
     };
 
-    console.log("Form Data:", finalData);
-  };
+    const userName = `${finalData.phaseOne.firstName} ${finalData.phaseOne.lastName}`;
+
+    return (
+      <div>
+        <section className="relative py-48 bg-cover bg-center">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#891818] to-[#5A1410]"></div>
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="max-w-3xl mx-auto text-center">
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">De acuerdo, {userName}</h1>
+              <div className="w-auto h-1 bg-red-600 mx-auto mb-6"></div>
+              <p className="text-xl mb-8 text-gray-300">
+                Aquí tienes un resumen de la información que nos has proporcionado. Por favor, revísala y si todo está bien, envíanos el formulario.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <motion.div
+          key="resume-project"
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -100 }}
+          transition={{ duration: 0.3 }}
+          className="mb-4"
+        >
+          <ResumeProject formData={finalData} />
+        </motion.div>
+
+        <div className="flex justify-center mt-8 mb-8 gap-4">
+          <button
+            type="button"
+            onClick={() => setShowSummary(false)}
+            className="bg-zinc-700 hover:bg-zinc-800 text-white px-6 py-3 rounded transition-colors"
+          >
+            Editar
+          </button>
+
+          <button
+            type="button"
+            onClick={() => alert('Formulario enviado!')}
+            className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors"
+          >
+            Enviar
+          </button>
+        </div>
+
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -145,10 +198,10 @@ const QuoteProject: React.FC = () => {
             ) : (
               <button
                 type="button"
-                onClick={handleSubmit}
+                onClick={handleShowSummary}
                 className="bg-green-700 hover:bg-green-800 text-white px-6 py-3 rounded transition-colors"
               >
-                Enviar
+                Resumen
               </button>
             )}
           </div>
