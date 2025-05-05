@@ -48,9 +48,9 @@ const Contact = () => {
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="max-w-3xl mx-auto text-center">
                         <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-                            Contacto
+                            Contáctanos
                         </h1>
-                        <div className="w-24 h-1 bg-red-600 mx-auto mb-6"></div>
+                        <div className="w-auto h-1 bg-red-600 mx-auto mb-6"></div>
                         <p className="text-xl mb-8 text-gray-300">
                             Si tienes alguna pregunta o inquietud, no dudes en ponerte en contacto con nosotros. 
                             Estamos aquí para ayudarte y responder a tus consultas.
