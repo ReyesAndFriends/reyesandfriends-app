@@ -17,7 +17,18 @@ const projectTypeMap: Record<string, string> = {
     ecommerceWeb: "Páginas E-Commerce",
     fullList: "Lista completa",
     other: "Otro",
-    notSure: "Usuario no está seguro",
+    notSure: "No está seguro",
+  };
+  
+  const hostingMap: Record<string, string> = {
+    yes: "Sí, necesita hosting",
+    no: "No necesita hosting",
+  };
+  
+  const domainMap: Record<string, string> = {
+    yes: "Sí, tiene dominio propio",
+    no: "No tiene dominio y necesita uno",
+    notSure: "No está seguro todavía",
   };
   
 
@@ -75,14 +86,16 @@ const ResumeProject: React.FC<ResumeProjectProps> = ({ formData }) => {
         </div>
 
         <div className="border border-zinc-700 rounded-lg p-6 bg-zinc-900 text-gray-300">
-          <h2 className="text-lg font-bold text-white mb-3">Fase 4: Despliegue y Servicios</h2>
-          <p><strong>¿Hosting?:</strong> {booleanMap[formData.phaseFour.hostingService] || getValue(formData.phaseFour.hostingService)}</p>
-          <p><strong>¿Dominio?:</strong> {booleanMap[formData.phaseFour.hasDomain] || getValue(formData.phaseFour.hasDomain)}</p>
+          <h2 className="font-bold text-lg text-white mb-2">Fase 4: Despliegue y Servicios</h2>
+          <p><strong>¿Hosting?:</strong> {hostingMap[formData.phaseFour.hostingService] || getValue(formData.phaseFour.hostingService)}</p>
+          <p><strong>¿Dominio?:</strong> {domainMap[formData.phaseFour.hasDomain] || getValue(formData.phaseFour.hasDomain)}</p>
+
           {formData.phaseFour.hasDomain === "yes" && (
             <p><strong>Dominio:</strong> {getValue(formData.phaseFour.domainName)}</p>
           )}
+
           {formData.phaseFour.hasDomain === "no" && (
-            <p><strong>Sugerencia:</strong> {getValue(formData.phaseFour.domainSuggestion)}</p>
+            <p><strong>Sugerencia de Dominio:</strong> {getValue(formData.phaseFour.domainSuggestion)}</p>
           )}
         </div>
 
