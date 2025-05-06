@@ -53,6 +53,7 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                             name="otherProjectType"
                             value={values.otherProjectType}
                             onChange={handleChange}
+                            placeholder='Ej: Aplicación web, App móvil, etc.'
                             className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
                         ></textarea>
                         {errors.otherProjectType && <p className="text-red-500 text-sm mt-1">{errors.otherProjectType}</p>}
@@ -66,6 +67,7 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                             id="notSureProjectType"
                             name="notSureProjectType"
                             value={values.notSureProjectType}
+                            placeholder='Ej: Necesito una aplicación que me ayude a gestionar mis tareas diarias.'
                             onChange={handleChange}
                             className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
                         ></textarea>
@@ -146,6 +148,7 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                         name="projectDetails"
                         value={values.projectDetails}
                         onChange={handleChange}
+                        placeholder='Información libre para el proyecto Ej: Quiero que mi proyecto haga esto y esto... min 50 max 2000 caracteres.'
                         className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
                     ></textarea>
                     {errors.projectDetails && <p className="text-red-500 text-sm mt-1">{errors.projectDetails}</p>}
