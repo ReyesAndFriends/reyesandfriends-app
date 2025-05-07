@@ -18,7 +18,7 @@ def postContact():
     try:
         data = request.get_json()
 
-        required_fields = ["name", "last_name", "cellphone", "email", "category", "message"]
+        required_fields = ["first_name", "last_name", "cellphone", "email", "category", "message"]
         errors = {field: "es requerido." for field in required_fields if field not in data or not data[field]}
 
         if errors:
@@ -26,7 +26,7 @@ def postContact():
 
         insert_to_mongo("contact_forms", data)
 
-        user_name = f"{data['name']} {data['last_name']}"
+        user_name = f"{data['first_name']} {data['last_name']}"
         email_html = render_template(
             'emails/contact-success.html',
             user_name=user_name,
@@ -48,5 +48,6 @@ def postContact():
         return jsonify({
             "message": "¡Gracias por contactarnos! Dentro de poco recibirás un correo de confirmación sobre tu solicitud.",
         }), 201
+    
     except Exception as e:
         return jsonify({"error": str(e)}), 500
