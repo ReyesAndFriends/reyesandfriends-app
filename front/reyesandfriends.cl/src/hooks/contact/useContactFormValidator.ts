@@ -21,7 +21,7 @@ export const useContactFormValidator = () => {
     const validate = (formData: any) => {
         const newErrors: FormErrors = {};
 
-        if (!formData.name) newErrors.name = "Su nombre es requerido.";
+        if (!formData.first_name) newErrors.first_name = "Su nombre es requerido.";
         if (!formData.last_name) newErrors.last_name = "Su apellido es requerido.";
         if (!formData.cellphone || !/^\+\d{11,12}$/.test(formData.cellphone)) {
             newErrors.cellphone = "Su número telefónico es requerido y debe incluir el código de país (ejemplo: +56912345678).";

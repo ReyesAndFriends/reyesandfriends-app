@@ -13,7 +13,7 @@ const Contact = () => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const data = {
-            name: formData.get("name"),
+            first_name: formData.get("first_name"),
             last_name: formData.get("last_name"),
             cellphone: formData.get("cellphone"),
             email: formData.get("email"),
@@ -25,7 +25,7 @@ const Contact = () => {
 
     const handleInputChange = (e: React.ChangeEvent<HTMLFormElement>) => {
         const formData = new FormData(e.currentTarget);
-        const isValid = ["name", "last_name", "cellphone", "email", "category", "message"].every(
+        const isValid = ["first_name", "last_name", "cellphone", "email", "category", "message"].every(
             (field) => formData.get(field)?.toString().trim() !== ""
         );
         setIsFormValid(isValid);
@@ -76,8 +76,8 @@ const Contact = () => {
                                 <label htmlFor="name" className="block text-gray-300 font-bold mb-2">Nombre (requerido)</label>
                                 <input 
                                     type="text" 
-                                    id="name" 
-                                    name="name" 
+                                    id="first_name" 
+                                    name="first_name" 
                                     className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
                                     placeholder="Ingresa tu nombre"
                                 />
