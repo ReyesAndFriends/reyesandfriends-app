@@ -30,7 +30,7 @@ def postContact():
 
         msg = Message(
             subject="Solicitud de contacto recibida",
-            sender="no-reply@reyesandfriends.cl",
+            sender="noreply@reyesandfriends.cl",
             recipients=[data['email']],
             html=email_html
         )
