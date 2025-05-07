@@ -1,8 +1,14 @@
 from flask import jsonify, request, render_template
+import os
+from dotenv import load_dotenv
 from flask_mail import Message
 from . import contact
 from app.utils.post_mongo_connection import insert_to_mongo
 from app import mail 
+
+load_dotenv()
+
+mail_username = os.getenv("MAIL_USERNAME")
 
 @contact.route('', methods=['POST'])
 def postContact():
@@ -15,8 +21,7 @@ def postContact():
         if errors:
             return jsonify(errors), 422
 
-        inserted_id = insert_to_mongo("contact_forms", data)
-
+        insert_to_mongo("contact_forms", data)
 
         user_name = f"{data['name']} {data['last_name']}"
         email_html = render_template(
@@ -30,10 +35,11 @@ def postContact():
 
         msg = Message(
             subject="Solicitud de contacto recibida",
-            sender="noreply@reyesandfriends.cl",
+            sender=mail_username,
             recipients=[data['email']],
             html=email_html
         )
+        
         mail.send(msg)
 
         return jsonify({
