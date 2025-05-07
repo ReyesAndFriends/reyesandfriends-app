@@ -9,10 +9,11 @@ def create_app():
     app.config.from_object('config.Config')
 
     CORS(app)
+    
     mail.init_app(app)
 
-    from .routes.example import example_bp
+    from .routes.contact import contact as contact_bp
     
-    app.register_blueprint(example_bp, url_prefix='/api/example')
+    app.register_blueprint(contact_bp, url_prefix='/contact')
 
     return app
