@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from datetime import datetime  # Added import
 import os
 from dotenv import load_dotenv
 
@@ -21,7 +22,13 @@ def insert_to_mongo(collection_name, data):
     try:
         db = client.get_default_database()
         collection = db[collection_name]
+        
+        # Add creation date and time to the data
+        data["created_date"] = datetime.now().strftime("%Y-%m-%d")
+        data["created_time"] = datetime.now().strftime("%H:%M:%S")
+        
         result = collection.insert_one(data)
+        
         return str(result.inserted_id)
     finally:
         client.close()
