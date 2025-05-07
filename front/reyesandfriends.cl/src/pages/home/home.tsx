@@ -1,8 +1,11 @@
 import React from "react";
 import { Globe, ChevronRight, Building, Gem, Store, Speech, HandHeart, MonitorSmartphone } from "lucide-react";
 import { Link } from "react-router-dom";
+import useHomeGetMethodologySteps from "./useHomeGetMethodologySteps";
 
 const Home: React.FC = () => {
+    const methodologySteps = useHomeGetMethodologySteps();
+
     return (
         <>
             <section className="bg-cover bg-center relative">
@@ -115,6 +118,27 @@ const Home: React.FC = () => {
                             alt="Business showcase"
                             className="rounded shadow-md max-w-full h-auto"
                         />
+                    </div>
+                </div>
+            </section>
+
+            <section className="py-16 bg-zinc-900 text-white">
+                <div className="container mx-auto px-4">
+                    <h2 className="text-3xl font-bold mb-12 text-center text-red-600 relative">
+                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Nuestra metodología de trabajo</span>
+                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
+                    </h2>
+                    <div className="flex justify-between items-center relative">
+                        <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-red-600/50 -z-0"></div>
+                        {methodologySteps.map(({ step, title, description, Icon }, index) => (
+                            <div key={index} className="bg-black p-4 shadow-md border-t-4 border-red-700 hover:shadow-lg transition-shadow flex flex-col items-center w-1/5 relative z-10">
+                                <div className="w-12 h-12 bg-red-900/30 rounded-full flex items-center justify-center mb-2">
+                                    <Icon className="h-6 w-6 text-red-500" />
+                                </div>
+                                <h3 className="text-lg font-bold mb-2 text-red-500 text-center">{step}. {title}</h3>
+                                <p className="text-gray-300 text-center text-sm">{description}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>

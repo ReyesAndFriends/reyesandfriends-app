@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import { AnimatePresence, motion } from "framer-motion";
 
 import Layout from "../layouts/layout";
-import Home from "../pages/home";
+import Home from "../pages/home/home";
 import Portfolio from "../pages/portfolio";
 import Contact from "../pages/contact/contact";
 import Services from "../pages/services/services";
