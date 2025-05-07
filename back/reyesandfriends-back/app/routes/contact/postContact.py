@@ -10,6 +10,9 @@ load_dotenv()
 
 mail_username = os.getenv("MAIL_USERNAME")
 
+if not mail_username:
+    raise RuntimeError("MAIL_USERNAME is not set in the environment variables.")
+
 @contact.route('', methods=['POST'])
 def postContact():
     try:
