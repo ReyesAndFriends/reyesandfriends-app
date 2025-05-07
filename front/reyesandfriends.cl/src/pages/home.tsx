@@ -7,31 +7,27 @@ const Home: React.FC = () => {
         <>
             <section className="bg-cover bg-center relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#891818] to-[#5A1410]"></div>
-                <div className="container mx-auto px-4 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-                    <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24">
-                        <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
-                            Impulsamos tu crecimiento digital
-                        </h1>
-                        <p className="text-xl mb-8 text-red-100">
-                            Desarrollamos software y soluciones tecnológicas a medida para empresas y emprendedores. 
-                            Desde sitios web hasta plataformas avanzadas, hacemos realidad tus ideas.
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4">
-                            <Link to="/services" className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors">
-                                Nuestros Servicios
-                            </Link>
-                            <Link to="/contact" className="bg-transparent hover:bg-red-800/30 text-white px-6 py-3 rounded border-2 border-white transition-colors">
-                                Contáctanos
-                            </Link>
+                    <div className="container mx-auto px-4 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
+                        <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24">
+                            <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
+                                Impulsamos tu crecimiento digital
+                            </h1>
+                            <p className="text-xl mb-8 text-red-100">
+                                Desarrollamos software y soluciones tecnológicas a medida para empresas y emprendedores. 
+                                Desde sitios web hasta plataformas avanzadas, hacemos realidad tus ideas.
+                            </p>
+                            <div className="flex flex-col sm:flex-row gap-4">
+                                <Link to="/services" className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors">
+                                    Nuestros Servicios
+                                </Link>
+                                <Link to="/contact" className="bg-transparent hover:bg-red-800/30 text-white px-6 py-3 rounded border-2 border-white transition-colors">
+                                    Contáctanos
+                                </Link>
+                            </div>
                         </div>
-                    </div>
-                    <div className="flex justify-center">
-                        <img 
-                            src="/img/index/computer.png" 
-                            alt="Computer illustration" 
-                            className="max-w-full h-auto"
-                        />
-                    </div>
+                        <div className="flex justify-center">
+                            <img src="/img/index/computer.png" alt="Computer illustration" className="w-[500px] h-[500px] object-contain"/>
+                        </div>
                 </div>
             </section>
 

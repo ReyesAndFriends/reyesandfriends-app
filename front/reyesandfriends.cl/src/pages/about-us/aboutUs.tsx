@@ -9,6 +9,7 @@ const AboutUs: React.FC = () => {
                     <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24">
                         <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
                             Sobre Nosotros
+                            Reyes&Friends
                         </h1>
                         <p className="text-xl mb-8 text-red-100">
                             En Reyes&Friends, nos dedicamos a crear soluciones digitales innovadoras que transforman la forma en que las empresas operan y se conectan con sus clientes.
@@ -17,12 +18,10 @@ const AboutUs: React.FC = () => {
                     <div className="flex flex-col items-center">
                         <img 
                             src="/img/logo/crown_white.svg" 
-                            className="max-w-[350px] h-auto"
+                            className="w-[500px] h-[500px] object-contain"
                             alt="reyes&friends_crown"
                         />
-                        <p className="text-white text-l text-center mt-4">
-                            Innovación y excelencia en cada proyecto.
-                        </p>
+
                     </div>
                 </div>
             </section>
