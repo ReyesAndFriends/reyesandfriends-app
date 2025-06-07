@@ -28,9 +28,16 @@ const Home: React.FC = () => {
                                 </Link>
                             </div>
                         </div>
-                        <div className="flex justify-center">
+                        <div className="flex flex-col items-center justify-center">
                             <img src="/img/index/computer.png" alt="Computer illustration" className="w-[500px] h-[500px] object-contain"/>
+                            <div className="mt-4 text-center">
+                                <p className="text-white text-lg font-semibold">Échale un vistaso a nuestro software <span className="text-red-500">TurnoMaster</span></p>
+                                <Link to="/projects/turnomaster" className="text-red-500 hover:underline mt-2 inline-block">
+                                    Ver TurnoMaster
+                                </Link>
+                            </div>
                         </div>
+
                 </div>
             </section>
 
