@@ -1,6 +1,6 @@
 import type React from "react"
 import { useState, useEffect, useRef } from "react"
-import { Menu, X, ChevronDown } from "lucide-react"
+import { Menu, X, ChevronDown, Home, Info, Briefcase, Mail, Folder } from "lucide-react"
 import useNavOptions from "./useNavOptions"
 import { useContactList } from "../../../hooks/services/useServiceList"
 import RouterContactModal from "../../../helpers/routerContactModal/routerContactModal"
@@ -86,24 +86,28 @@ const Navbar: React.FC = () => {
                     </button>
                     <ul className={`md:flex space-x-0 md:space-x-6 text-lg md:ml-auto md:justify-end ${isMenuOpen ? "flex flex-col space-y-4 absolute top-full left-0 w-full bg-black p-4 z-50" : "hidden"} md:static md:flex-row md:space-y-0`}>
                         <li>
-                            <button className="hover:underline block" onClick={() => handleLinkClick("/")}>Inicio</button>
+                            <button className="hover:underline block flex items-center gap-2" onClick={() => handleLinkClick("/")}>
+                                <Home size={18} /> Inicio
+                            </button>
                         </li>
                         <li>
-                            <button className="hover:underline block" onClick={() => handleLinkClick("/about")}>Sobre nosotros</button>
+                            <button className="hover:underline block flex items-center gap-2" onClick={() => handleLinkClick("/about")}>
+                                <Info size={18} /> Sobre nosotros
+                            </button>
                         </li>
                         <li className="relative" ref={dropdownRef}>
                             <button
                                 onClick={handleDropdownToggle}
-                                className="hover:underline focus:outline-none flex items-center"
+                                className="hover:underline focus:outline-none flex items-center gap-2"
                             >
-                                Nuestros servicios <ChevronDown className="ml-1" size={16} />
+                                <Briefcase size={18} /> Nuestros servicios <ChevronDown className="ml-1" size={16} />
                             </button>
                             {isDropdownOpen && (
                                 <ul className={`bg-white text-black mt-2 shadow-lg rounded md:absolute md:mt-2 md:py-2 md:w-40 ${isMenuOpen ? "w-full mt-2" : ""}`}>
                                     {dropdownOptions.map(option => (
                                         <li key={option.path}>
                                             <button
-                                                className="block w-full px-4 py-2 hover:bg-gray-200"
+                                                className="block w-full px-4 py-2 hover:bg-gray-200 flex items-center gap-2"
                                                 onClick={() => handleLinkClick(option.path)}
                                             >
                                                 {option.label}
@@ -116,16 +120,16 @@ const Navbar: React.FC = () => {
                         <li className="relative" ref={contactDropdownRef}>
                             <button
                                 onClick={toggleContactDropdown}
-                                className="hover:underline focus:outline-none flex items-center"
+                                className="hover:underline focus:outline-none flex items-center gap-2"
                             >
-                                Contacto <ChevronDown className="ml-1" size={16} />
+                                <Mail size={18} /> Contacto <ChevronDown className="ml-1" size={16} />
                             </button>
                             {isContactDropdownOpen && (
                                 <ul className={`bg-white text-black mt-2 shadow-lg rounded md:absolute md:mt-2 md:py-2 md:w-40 ${isMenuOpen ? "w-full mt-2" : ""}`}>
                                     {contactList.map(option => (
                                         <li key={option.path}>
                                             <button
-                                                className="block w-full px-4 py-2 hover:bg-gray-200"
+                                                className="block w-full px-4 py-2 hover:bg-gray-200 flex items-center gap-2"
                                                 onClick={() => handleLinkClick(option.path)}
                                             >
                                                 {option.name}
@@ -136,7 +140,9 @@ const Navbar: React.FC = () => {
                             )}
                         </li>
                         <li>
-                            <button className="hover:underline block" onClick={() => handleLinkClick("/portfolio")}>Portafolio</button>
+                            <button className="hover:underline block flex items-center gap-2" onClick={() => handleLinkClick("/portfolio")}>
+                                <Folder size={18} /> Portafolio
+                            </button>
                         </li>
                     </ul>
 
