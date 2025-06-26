@@ -9,6 +9,8 @@ import PhaseFive from './phases/phaseFive/phaseFive';
 import ResumeProject from './resume/resumeProject';
 
 import { useServiceList } from '../../hooks/services/useServiceList';
+import { useSubmitQuote } from '../../hooks/quote/useSubmitQuote';
+import { buildQuoteRequestData, validateQuoteData, formatQuoteResponse } from '../../helpers/quoteHelpers';
 
 import { usePhaseOneValidate } from './phases/phaseOne/usePhaseOneValidate';
 import { usePhaseTwoValidate } from './phases/phaseTwo/usePhaseTwoValidate';
@@ -19,9 +21,11 @@ import { usePhaseFiveValidate } from './phases/phaseFive/usePhaseFiveValidate';
 const QuoteProject: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const totalSteps = 5;
 
   const serviceList = useServiceList();
+  const { submitQuote, isLoading, error, success, quoteResponse, resetState } = useSubmitQuote();
 
   const phaseOne = usePhaseOneValidate();
   const phaseTwo = usePhaseTwoValidate();
@@ -64,6 +68,121 @@ const QuoteProject: React.FC = () => {
 
     setShowSummary(true);
   };
+
+  const handleSubmitQuote = async () => {
+    try {
+      // Build quotep  request data from all phases
+      const quoteData = buildQuoteRequestData(
+        phaseOne.values,
+        phaseTwo.values,
+        phaseThree.values,
+        phaseFour.values,
+        phaseFive.values
+      );
+
+      // Validate all before submission
+      const validationErrors = validateQuoteData(quoteData);
+      if (validationErrors.length > 0) {
+        alert('Por favor completa todos los campos requeridos:\n' + validationErrors.join('\n'));
+        return;
+      }
+
+      // Send quote request
+      await submitQuote(quoteData);
+      setIsSubmitted(true);
+      
+    } catch (err) {
+      console.error('Error al enviar la cotización:', err);
+    }
+  };
+
+  // Reset all and redirect home
+  const handleStartOver = () => {
+    setCurrentStep(0);
+    setShowSummary(false);
+    setIsSubmitted(false);
+    resetState();
+  };
+
+  // Success screen if submitted
+  if (isSubmitted && success && quoteResponse) {
+    const formattedResponse = formatQuoteResponse(quoteResponse);
+    
+    return (
+      <div>
+        <section className="relative py-48 bg-cover bg-center">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#891818] to-[#5A1410]"></div>
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="max-w-3xl mx-auto text-center">
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+                ¡Cotización Enviada Exitosamente!
+              </h1>
+              <div className="w-auto h-1 bg-red-500 mx-auto mb-6"></div>
+              <p className="text-xl mb-8 text-gray-300">
+                Gracias por confiar en nosotros. Hemos recibido tu solicitud y nos pondremos en contacto contigo muy pronto.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <div className="container mx-auto px-4 max-w-3xl py-12">
+          <div className="bg-black p-8 rounded-lg shadow-lg text-center">
+            <h2 className="text-2xl font-bold text-white mb-6">Detalles de tu Cotización</h2>
+            
+            {formattedResponse && (
+              <div className="text-left bg-zinc-900 p-6 rounded-lg mb-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-white">
+                  <div>
+                    <strong className="text-green-400">Número de Cotización:</strong>
+                    <p>{formattedResponse.quoteNumber}</p>
+                  </div>
+                  <div>
+                    <strong className="text-green-400">Cliente:</strong>
+                    <p>{formattedResponse.customerName}</p>
+                  </div>
+                  <div>
+                    <strong className="text-green-400">Tipo de Proyecto:</strong>
+                    <p>{formattedResponse.projectType}</p>
+                  </div>
+                  <div>
+                    <strong className="text-green-400">Fecha de Envío:</strong>
+                    <p>{formattedResponse.submittedAt}</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className="bg-zinc-900 p-6 rounded-lg mb-6">
+              <h3 className="text-lg font-bold text-white mb-4">¿Qué sigue?</h3>
+              <ul className="text-gray-300 text-left space-y-2">
+                <li>• Revisaremos tu solicitud en detalle</li>
+                <li>• Nos pondremos en contacto contigo en un plazo de 24-48 horas</li>
+                <li>• Te enviaremos una propuesta personalizada</li>
+                <li>• Podremos agendar una reunión para discutir los detalles</li>
+              </ul>
+            </div>
+
+            <div className="flex justify-center gap-4">
+              <button
+                type="button"
+                onClick={handleStartOver}
+                className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors"
+              >
+                Crear Nueva Cotización
+              </button>
+              <button
+                type="button"
+                onClick={() => window.location.href = '/'}
+                className="bg-zinc-700 hover:bg-zinc-800 text-white px-6 py-3 rounded transition-colors"
+              >
+                Volver al Inicio
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (showSummary) {
     const finalData = {
@@ -117,19 +236,35 @@ const QuoteProject: React.FC = () => {
           <button
             type="button"
             onClick={() => setShowSummary(false)}
-            className="bg-zinc-700 hover:bg-zinc-800 text-white px-6 py-3 rounded transition-colors"
+            disabled={isLoading}
+            className="bg-zinc-700 hover:bg-zinc-800 disabled:bg-zinc-600 text-white px-6 py-3 rounded transition-colors"
           >
             Editar
           </button>
 
           <button
             type="button"
-            onClick={() => alert('Formulario enviado!')}
-            className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors"
+            onClick={handleSubmitQuote}
+            disabled={isLoading}
+            className="bg-red-700 hover:bg-red-800 disabled:bg-red-600 text-white px-6 py-3 rounded transition-colors flex items-center gap-2"
           >
-            Enviar
+            {isLoading ? (
+              <>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                Enviando...
+              </>
+            ) : (
+              'Enviar Cotización'
+            )}
           </button>
         </div>
+
+        {error && (
+          <div className="bg-red-600 text-white p-4 rounded mb-4 mx-auto max-w-3xl">
+            <p className="font-bold">Error al enviar la cotización:</p>
+            <p>{error}</p>
+          </div>
+        )}
 
       </div>
     );
