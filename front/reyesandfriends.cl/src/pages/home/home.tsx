@@ -16,6 +16,7 @@ const Home: React.FC = () => {
                         alt=""
                         className="w-full h-full object-cover opacity-5 filter grayscale"
                         draggable={false}
+                        onContextMenu={e => e.preventDefault()}
                     />
                 </div>
                 <div className="container mx-auto px-4 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
