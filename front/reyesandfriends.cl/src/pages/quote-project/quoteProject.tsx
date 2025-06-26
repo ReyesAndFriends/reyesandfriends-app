@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowLeft, ArrowRight, FileText } from 'lucide-react';
 
 import PhaseOne from './phases/phaseOne/phaseOne';
 import PhaseTwo from './phases/phaseTwo/phaseTwo';
@@ -107,18 +108,31 @@ const QuoteProject: React.FC = () => {
   // Success screen if submitted
   if (isSubmitted && success && quoteResponse) {
     const formattedResponse = formatQuoteResponse(quoteResponse);
-    
+
     return (
       <div>
-        <section className="relative py-48 bg-cover bg-center">
+        <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
           <div className="absolute inset-0 bg-hero-section"></div>
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+          <div className="absolute inset-0">
+            <img
+              src="/img/background/background-web.jpg"
+              alt="fondo de la sección"
+              className="w-full h-full object-cover opacity-5 filter grayscale"
+              draggable={false}
+              onContextMenu={e => e.preventDefault()}
+            />
+          </div>
+          <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col items-center justify-center text-center flex-1">
+            <div className="max-w-3xl text-white mx-auto">
+              <img
+                src="/img/logo/crown_white.svg"
+                className="w-32 h-32 object-contain mx-auto mb-6"
+                alt="reyes&friends_crown"
+              />
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
                 ¡Cotización Enviada Exitosamente!
               </h1>
-              <div className="w-auto h-1 bg-red-500 mx-auto mb-6"></div>
-              <p className="text-xl mb-8 text-gray-300">
+              <p className="text-xl mb-8 text-red-100">
                 Gracias por confiar en nosotros. Hemos recibido tu solicitud y nos pondremos en contacto contigo muy pronto.
               </p>
             </div>
@@ -197,22 +211,33 @@ const QuoteProject: React.FC = () => {
 
     return (
       <div>
-        <section className="relative py-48 bg-cover bg-center">
+        <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
           <div className="absolute inset-0 bg-hero-section"></div>
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">De acuerdo, {userName}</h1>
-              <div className="w-auto h-1 bg-red-600 mx-auto mb-6"></div>
-              <p className="text-xl mb-8 text-gray-300">
+          <div className="absolute inset-0">
+            <img
+              src="/img/background/background-web.jpg"
+              alt="fondo de la sección"
+              className="w-full h-full object-cover opacity-5 filter grayscale"
+              draggable={false}
+              onContextMenu={e => e.preventDefault()}
+            />
+          </div>
+          <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col items-center justify-center text-center flex-1">
+            <div className="max-w-3xl text-white mx-auto">
+              <img
+                src="/img/logo/crown_white.svg"
+                className="w-32 h-32 object-contain mx-auto mb-6"
+                alt="reyes&friends_crown"
+              />
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
+                De acuerdo, {userName}
+              </h1>
+              <p className="text-xl mb-8 text-red-100">
                 Aquí tienes un resumen de la información que nos has proporcionado. Por favor, revísala y si todo está bien, envíanos el formulario.
               </p>
             </div>
           </div>
         </section>
-
-        <div className="text-center my-8">
-          <h2 className="text-3xl font-bold text-white">Resumen de la cotización</h2>
-        </div>
 
         <motion.div
           key="resume-project"
@@ -226,37 +251,40 @@ const QuoteProject: React.FC = () => {
         </motion.div>
 
         <div className="text-center my-8">
-          <h2 className="text-3xl font-bold text-white">Todo listo? Necesitas cambiar algo? Toma tu tiempo!</h2>
+          <h2 className="text-3xl font-bold text-white">¿Listo para enviar? ¡No te preocupes por los detalles!</h2>
           <p className="text-lg text-gray-300">
-            Recuerda: esta información no es literal, es para tener un concepto en mente. Si en un futuro necesitas cambiar algo, no te preocupes por eso.
+            Esta información es solo una referencia inicial. Si más adelante quieres ajustar algo, ¡siempre podremos conversarlo y adaptarlo juntos!
           </p>
         </div>
 
         <div className="flex justify-center mt-8 mb-8 gap-4">
-          <button
+            <button
             type="button"
             onClick={() => setShowSummary(false)}
             disabled={isLoading}
-            className="bg-zinc-700 hover:bg-zinc-800 disabled:bg-zinc-600 text-white px-6 py-3 rounded transition-colors"
-          >
+            className="bg-zinc-700 hover:bg-zinc-800 disabled:bg-zinc-600 text-white px-6 py-3 rounded transition-colors flex items-center gap-2"
+            >
+            <ArrowLeft size={18} />
             Editar
-          </button>
+            </button>
 
-          <button
+            <button
             type="button"
             onClick={handleSubmitQuote}
             disabled={isLoading}
             className="bg-red-700 hover:bg-red-800 disabled:bg-red-600 text-white px-6 py-3 rounded transition-colors flex items-center gap-2"
-          >
+            >
             {isLoading ? (
               <>
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                Enviando...
+              Enviando...
               </>
             ) : (
-              'Enviar Cotización'
+              <>
+              <FileText size={18} />
+              Enviar Cotización
+              </>
             )}
-          </button>
+            </button>
         </div>
 
         {error && (
@@ -272,13 +300,28 @@ const QuoteProject: React.FC = () => {
 
   return (
     <div>
-      <section className="relative py-48 bg-cover bg-center">
+      <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
         <div className="absolute inset-0 bg-hero-section"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">Cotiza tu proyecto</h1>
-            <div className="w-auto h-1 bg-red-600 mx-auto mb-6"></div>
-            <p className="text-xl mb-8 text-gray-300">
+        <div className="absolute inset-0">
+          <img
+            src="/img/background/background-web.jpg"
+            alt="fondo de la sección"
+            className="w-full h-full object-cover opacity-5 filter grayscale"
+            draggable={false}
+            onContextMenu={e => e.preventDefault()}
+          />
+        </div>
+        <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col items-center justify-center text-center flex-1">
+          <div className="max-w-3xl text-white mx-auto">
+            <img
+              src="/img/logo/crown_white.svg"
+              className="w-32 h-32 object-contain mx-auto mb-6"
+              alt="reyes&friends_crown"
+            />
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
+              Cotiza tu proyecto
+            </h1>
+            <p className="text-xl mb-8 text-red-100">
               Has tomado una gran decisión al elegirnos para tu proyecto!
               <br />
               Ahora cuéntanos más sobre lo que tienes en mente.
@@ -327,8 +370,9 @@ const QuoteProject: React.FC = () => {
               <button
                 type="button"
                 onClick={handlePrev}
-                className="bg-zinc-700 hover:bg-zinc-800 text-white px-6 py-3 rounded transition-colors"
+                className="bg-zinc-700 hover:bg-zinc-800 text-white px-6 py-3 rounded transition-colors flex items-center gap-2"
               >
+                <ArrowLeft size={18} />
                 Anterior
               </button>
             )}
@@ -337,16 +381,18 @@ const QuoteProject: React.FC = () => {
               <button
                 type="button"
                 onClick={handleNext}
-                className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors"
+                className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors flex items-center gap-2"
               >
                 Siguiente
+                <ArrowRight size={18} />
               </button>
             ) : (
               <button
                 type="button"
                 onClick={handleShowSummary}
-                className="bg-green-700 hover:bg-green-800 text-white px-6 py-3 rounded transition-colors"
+                className="bg-green-700 hover:bg-green-800 text-white px-6 py-3 rounded transition-colors flex items-center gap-2"
               >
+                <FileText size={18} />
                 Resumen
               </button>
             )}
