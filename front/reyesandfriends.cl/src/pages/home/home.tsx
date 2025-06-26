@@ -37,8 +37,17 @@ const Home: React.FC = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className="flex flex-col items-center justify-center">
-                        <img src="/img/index/computer.png" alt="Computer illustration" className="w-[500px] h-[500px] object-contain"/>
+                        <div className="flex flex-col items-center justify-center">
+                        <img
+                            src="/img/index/computer.png"
+                            alt="Computer illustration"
+                            style={{
+                            width: "500px",
+                            height: "500px",
+                            objectFit: "contain",
+                            filter: "drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5))"
+                            }}
+                        />
                     </div>
                 </div>
             </section>
