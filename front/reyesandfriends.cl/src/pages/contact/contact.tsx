@@ -43,15 +43,28 @@ const Contact = () => {
                 message={finalMessage} 
                 onClose={handleModalClose} 
             />
-            <section className="relative py-48 bg-cover bg-center relative">
+            <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
                 <div className="absolute inset-0 bg-hero-section"></div>
-                <div className="container mx-auto px-4 relative z-10">
-                    <div className="max-w-3xl mx-auto text-center">
-                        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+                <div className="absolute inset-0">
+                    <img
+                        src="/img/background/background-web.jpg"
+                        alt="fondo de la sección"
+                        className="w-full h-full object-cover opacity-5 filter grayscale"
+                        draggable={false}
+                        onContextMenu={e => e.preventDefault()}
+                    />
+                </div>
+                <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col items-center justify-center text-center flex-1">
+                    <div className="max-w-2xl text-white mx-auto">
+                        <img
+                            src="/img/logo/crown_white.svg"
+                            className="w-32 h-32 object-contain mx-auto mb-6"
+                            alt="reyes&friends_crown"
+                        />
+                        <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
                             Contáctanos
                         </h1>
-                        <div className="w-auto h-1 bg-red-600 mx-auto mb-6"></div>
-                        <p className="text-xl mb-8 text-gray-300">
+                        <p className="text-xl mb-8 text-red-100">
                             Si tienes alguna pregunta o inquietud, no dudes en ponerte en contacto con nosotros. 
                             Estamos aquí para ayudarte y responder a tus consultas.
                         </p>
