@@ -21,6 +21,8 @@ const Navbar: React.FC = () => {
         cancelNavigation
     } = useContactLinkValidator()
 
+    const [atTop, setAtTop] = useState(true)
+
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
     }
@@ -33,6 +35,15 @@ const Navbar: React.FC = () => {
     const toggleContactDropdown = () => {
         setIsContactDropdownOpen(!isContactDropdownOpen)
     }
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setAtTop(window.scrollY === 0)
+        }
+        window.addEventListener("scroll", handleScroll)
+        handleScroll()
+        return () => window.removeEventListener("scroll", handleScroll)
+    }, [])
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -62,7 +73,13 @@ const Navbar: React.FC = () => {
 
     return (
         <>
-            <nav className="bg-black text-white py-2 z-50 fixed top-0 left-0 w-full">
+            <nav
+                className="text-white py-2 z-50 fixed top-0 left-0 w-full"
+                style={{
+                    background: atTop ? "rgba(0,0,0,0)" : "rgba(0,0,0,1)",
+                    transition: "background 0.4s ease"
+                }}
+            >
                 <div className="container mx-auto flex justify-between items-center px-4">
                     <button onClick={() => handleLinkClick("/")}>
                         <img src="/img/logo/logo_white_2.svg" className="h-12 mb-2" alt="Reyes and Friends Logo" />
