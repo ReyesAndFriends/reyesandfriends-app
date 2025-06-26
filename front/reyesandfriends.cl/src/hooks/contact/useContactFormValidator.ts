@@ -23,8 +23,8 @@ export const useContactFormValidator = () => {
 
         if (!formData.first_name) newErrors.first_name = "Su nombre es requerido.";
         if (!formData.last_name) newErrors.last_name = "Su apellido es requerido.";
-        if (!formData.cellphone || !/^\+\d{11,12}$/.test(formData.cellphone)) {
-            newErrors.cellphone = "Su número telefónico es requerido y debe incluir el código de país (ejemplo: +56912345678).";
+        if (!formData.cellphone || !/^\d{9}$/.test(formData.cellphone)) {
+            newErrors.cellphone = "Su número telefónico es requerido y debe tener 9 dígitos (ejemplo: 912345678).";
         }
         if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
             newErrors.email = "Su correo electrónico es requerido y debe ser válido.";
@@ -43,11 +43,16 @@ export const useContactFormValidator = () => {
     };
 
     const handleSubmit = async (formData: any) => {
+        // Prepara el número con +56 antes de enviar
+        const dataToSend = {
+            ...formData,
+            cellphone: formData.cellphone ? `+56${formData.cellphone}` : "",
+        };
         if (!validate(formData)) return;
 
         setIsSubmitting(true);
         try {
-            const response = await axios.post(API_URL, formData, {
+            const response = await axios.post(API_URL, dataToSend, {
                 headers: {
                     "Content-Type": "application/json",
                 },

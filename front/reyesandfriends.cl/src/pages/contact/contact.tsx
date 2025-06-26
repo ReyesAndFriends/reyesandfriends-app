@@ -109,14 +109,21 @@ const Contact = () => {
                             </div>
                             <div className="col-span-1">
                                 <label htmlFor="cellphone" className="block text-gray-300 font-bold mb-2">Número de Teléfono (requerido)</label>
-                                <input 
-                                    type="tel" 
-                                    id="cellphone" 
-                                    name="cellphone" 
-                                    maxLength={12}
-                                    className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
-                                    placeholder="Ejemplo: +56912345678"
-                                />
+                                <div className="flex">
+                                    <span className="inline-flex items-center px-3 rounded-l-sm bg-zinc-800 text-white border border-r-0 border-zinc-700 select-none">
+                                        +56
+                                    </span>
+                                    <input 
+                                        type="tel" 
+                                        id="cellphone" 
+                                        name="cellphone" 
+                                        maxLength={9}
+                                        className="w-full p-3 rounded-r-sm bg-zinc-800 text-white border border-zinc-700 border-l-0 focus:outline-none focus:ring-2 focus:ring-red-600"
+                                        placeholder="912345678"
+                                        pattern="[0-9]{9}"
+                                        inputMode="numeric"
+                                    />
+                                </div>
                                 {errors.cellphone && <p className="text-red-500 text-sm">{errors.cellphone}</p>}
                             </div>
                             <div className="col-span-1">
