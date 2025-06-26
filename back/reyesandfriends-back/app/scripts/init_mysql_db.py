@@ -6,13 +6,14 @@ This script creates the necessary tables and loads initial data for contact cate
 import os
 import sys
 from datetime import datetime
+import json
 
 # Add the project root directory to the path to allow module imports
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, project_root)
 
 from app import create_app
-from app.models import db, ContactCategory, ContactForm
+from app.models import db, ContactCategory, ContactForm, ProjectQuote
 
 def init_database():
     """Initialize the database by creating tables and initial data."""
@@ -50,7 +51,9 @@ def init_database():
         
         # Save changes
         db.session.commit()
-        print("✅ Database initialized correctly")
+        print("✅ Contact categories initialized correctly")
+        
+        print("✅ Database initialized completely")
 
 def reset_database():
     """Delete all tables and recreate them."""
