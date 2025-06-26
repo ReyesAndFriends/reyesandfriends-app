@@ -4,5 +4,14 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        '.bg-hero-section': {
+          'background-image': 'linear-gradient(to right, #4b0d0d, #2d0a09)',
+          'opacity': '0.95',
+        },
+      });
+    },
+  ],
 };
