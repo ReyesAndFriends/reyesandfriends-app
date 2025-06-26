@@ -21,6 +21,11 @@ const Home: React.FC = () => {
                 </div>
                 <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col items-center justify-center text-center flex-1">
                     <div className="max-w-2xl text-white mx-auto">
+                        <img
+                        src="/img/logo/crown_white.svg"
+                        className="w-36 h-36 object-contain mx-auto"
+                        alt="reyes&friends_crown"
+                        />
                         <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
                             Impulsamos tu crecimiento digital
                         </h1>
