@@ -1,6 +1,17 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, render_template
+from flask_mail import Message
 from app.models import db, ProjectQuote
+from app import mail
 from datetime import datetime
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+mail_username = os.getenv("MAIL_USERNAME")
+
+if not mail_username:
+    raise RuntimeError("MAIL_USERNAME is not set in the environment variables.")
 
 quote_bp = Blueprint('quote', __name__)
 
@@ -40,6 +51,13 @@ def submit_quote():
         # Save to database
         db.session.add(quote)
         db.session.commit()
+        
+        # Send confirmation email
+        try:
+            send_quote_confirmation_email(quote)
+        except Exception as email_error:
+            print(f"Error sending email: {str(email_error)}")
+            # Don't fail the entire request if email fails
         
         return jsonify({
             'success': True,
@@ -299,3 +317,30 @@ def is_valid_phone(phone):
     import re
     pattern = r'^\+569\d{8}$'
     return re.match(pattern, phone) is not None
+
+def send_quote_confirmation_email(quote):
+    """Send confirmation email to the client"""
+    try:
+        user_name = f"{quote.first_name} {quote.last_name}"
+        email_html = render_template(
+            'emails/quote-success.html',
+            user_name=user_name,
+            quote_number=quote.quote_number,
+            project_type=quote.project_type,
+            company_name=quote.company_name,
+            email=quote.email,
+            phone=quote.phone,
+            submitted_date=quote.submitted_at.strftime('%d/%m/%Y %H:%M')
+        )
+        
+        msg = Message(
+            subject='Cotización Recibida - Reyes&Friends',
+            sender=mail_username,
+            recipients=[quote.email],
+            html=email_html
+        )
+        
+        mail.send(msg)
+        
+    except Exception as e:
+        raise Exception(f"Failed to send confirmation email: {str(e)}")
