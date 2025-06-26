@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, FileText } from 'lucide-react';
 
@@ -104,6 +104,12 @@ const QuoteProject: React.FC = () => {
     setIsSubmitted(false);
     resetState();
   };
+
+  useEffect(() => {
+    if (isSubmitted && success && quoteResponse) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [isSubmitted, success, quoteResponse]);
 
   // Success screen if submitted
   if (isSubmitted && success && quoteResponse) {
