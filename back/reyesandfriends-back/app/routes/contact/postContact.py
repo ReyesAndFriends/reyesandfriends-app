@@ -1,9 +1,11 @@
 from flask import jsonify, request, render_template
 import os
+from datetime import datetime
 from dotenv import load_dotenv
 from flask_mail import Message
 from . import contact
-from app.utils.post_mongo_connection import insert_to_mongo
+from app.models import db, ContactForm
+from app.utils.db_utils import get_contact_category_by_slug
 from app import mail 
 
 load_dotenv()
@@ -24,7 +26,25 @@ def postContact():
         if errors:
             return jsonify(errors), 422
 
-        insert_to_mongo("contact_forms", data)
+        # Get the category to validate and obtain the ID
+        category = get_contact_category_by_slug(data['category'])
+        category_id = category.id if category else None
+
+        now = datetime.now()
+        contact_form = ContactForm(
+            first_name=data['first_name'],
+            last_name=data['last_name'],
+            cellphone=data['cellphone'],
+            email=data['email'],
+            category=data['category'],
+            message=data['message'],
+            created_date=now.strftime("%Y-%m-%d"),
+            created_time=now.strftime("%H:%M:%S"),
+            category_id=category_id
+        )
+
+        db.session.add(contact_form)
+        db.session.commit()
 
         user_name = f"{data['first_name']} {data['last_name']}"
         email_html = render_template(
@@ -50,4 +70,5 @@ def postContact():
         }), 201
     
     except Exception as e:
+        db.session.rollback()
         return jsonify({"error": str(e)}), 500
