@@ -7,7 +7,7 @@ const Services = () => {
     return (
         <>
             <section className="bg-cover bg-center relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#891818] to-[#5A1410]"></div>
+                <div className="absolute inset-0 bg-hero-section"></div>
                 <div className="container mx-auto px-4 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
                     <div className="flex justify-center">
                         <img
