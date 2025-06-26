@@ -1,5 +1,5 @@
 import React from "react";
-import { Globe, ChevronRight, Building, Gem, Store, Speech, HandHeart, MonitorSmartphone } from "lucide-react";
+import { Globe, ChevronRight, Building, Gem, Store, Speech, HandHeart, MonitorSmartphone, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import useHomeGetMethodologySteps from "./useHomeGetMethodologySteps";
 
@@ -8,19 +8,19 @@ const Home: React.FC = () => {
 
     return (
         <>
-            <section className="bg-cover bg-center relative">
+            <section className="bg-cover bg-center relative min-h-[800px] md:min-h-[800px] flex items-center">
                 <div className="absolute inset-0 bg-hero-section"></div>
                 <div className="absolute inset-0">
                     <img
                         src="/img/background/background-web.jpg"
-                        alt=""
+                        alt="fondo de la sección"  
                         className="w-full h-full object-cover opacity-5 filter grayscale"
                         draggable={false}
                         onContextMenu={e => e.preventDefault()}
                     />
                 </div>
-                <div className="container mx-auto px-4 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-                    <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24">
+                <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col items-center justify-center text-center flex-1">
+                    <div className="max-w-2xl text-white mx-auto">
                         <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
                             Impulsamos tu crecimiento digital
                         </h1>
@@ -28,26 +28,16 @@ const Home: React.FC = () => {
                             Desarrollamos software y soluciones tecnológicas a medida para empresas y emprendedores. 
                             Desde sitios web hasta plataformas avanzadas, hacemos realidad tus ideas.
                         </p>
-                        <div className="flex flex-col sm:flex-row gap-4">
-                            <Link to="/services" className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors">
-                                Nuestros Servicios
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <Link to="/quote-project" className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors flex items-center gap-2 font-semibold">
+                                <Gem className="h-5 w-5" />
+                                Cotiza tu proyecto
                             </Link>
-                            <Link to="/contact" className="bg-transparent hover:bg-red-800/30 text-white px-6 py-3 rounded border-2 border-white transition-colors">
+                            <Link to="/contact" className="bg-transparent hover:bg-red-800/30 text-white px-6 py-3 rounded border-2 border-white transition-colors flex items-center gap-2 font-semibold">
+                                <Mail className="h-5 w-5" />
                                 Contáctanos
                             </Link>
                         </div>
-                    </div>
-                        <div className="flex flex-col items-center justify-center">
-                        <img
-                            src="/img/index/computer.png"
-                            alt="Computer illustration"
-                            style={{
-                            width: "500px",
-                            height: "500px",
-                            objectFit: "contain",
-                            filter: "drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5))"
-                            }}
-                        />
                     </div>
                 </div>
             </section>
@@ -126,8 +116,12 @@ const Home: React.FC = () => {
                         <p className="mb-6">
                             Muestra tus productos, servicios o novedades de una manera atractiva y profesional. Creamos soluciones visuales que capturan la atención de tus clientes y destacan lo mejor de tu negocio.
                         </p>
-                        <Link to="/quote-project" className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors">
-                            Cotizar Proyecto
+                        <Link
+                            to="/quote-project"
+                            className="inline-flex items-center gap-2 bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors font-semibold shadow-md"
+                        >
+                            <Gem className="h-5 w-5" />
+                            Cotiza tu proyecto
                         </Link>
                     </div>
                     <div className="flex justify-center">
@@ -157,6 +151,11 @@ const Home: React.FC = () => {
                                 <p className="text-gray-300 text-center text-sm">{description}</p>
                             </div>
                         ))}
+                    </div>
+                    <div className="text-center mt-8">
+                        <p>
+                            "De esta manera, garantizamos un proceso claro y efectivo que nos permite entregar resultados de alta calidad, adaptados a las necesidades de cada cliente.""
+                        </p>
                     </div>
                 </div>
             </section>
