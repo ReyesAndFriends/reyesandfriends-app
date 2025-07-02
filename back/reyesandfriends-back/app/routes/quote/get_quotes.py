@@ -1,8 +1,10 @@
 from flask import request, jsonify
 from app.models import ProjectQuote
 from . import quote
+from app.utils.middleware.check_ip_allowed import check_ip_allowed
 
-@quote.route('/quotes', methods=['GET'])
+@quote.route('/', methods=['GET'])
+@check_ip_allowed
 def get_quotes():
     try:
         status = request.args.get('status')

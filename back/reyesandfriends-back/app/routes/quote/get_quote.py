@@ -5,7 +5,7 @@ from . import quote
 
 get_quote_bp = Blueprint('get_quote', __name__)
 
-@quote.route('/quote/<int:quote_id>', methods=['GET'])
+@quote.route('/<int:quote_id>', methods=['GET'])
 @check_ip_allowed
 def get_quote(quote_id):
     try:
