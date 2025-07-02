@@ -82,7 +82,7 @@ export const useSubmitQuote = () => {
       console.log('Enviando cotización:', quoteData);
       
       const response = await axios.post<QuoteResponse>(
-        `${API_URL}/api/quote-project`,
+        `${API_URL}/quotes/quote-project`,
         quoteData,
         {
           headers: {
