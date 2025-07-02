@@ -5,6 +5,7 @@ from app import mail
 from datetime import datetime
 import os
 from dotenv import load_dotenv
+from app.utils.middleware.check_ip_allowed import check_ip_allowed
 
 load_dotenv()
 
@@ -81,6 +82,7 @@ def submit_quote():
         }), 500
 
 @quote_bp.route('/quote/<int:quote_id>', methods=['GET'])
+@check_ip_allowed
 def get_quote(quote_id):
     """Get a specific quote by ID"""
     try:
