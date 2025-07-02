@@ -1,22 +1,18 @@
-from flask import Blueprint, request, jsonify, render_template
+from flask import request, jsonify, render_template
 from flask_mail import Message
 from app.models import db, ProjectQuote
 from app import mail
 from datetime import datetime
 import os
 from dotenv import load_dotenv
-from app.utils.middleware.check_ip_allowed import check_ip_allowed
+from . import quote
 
 load_dotenv()
-
 mail_username = os.getenv("MAIL_USERNAME")
-
 if not mail_username:
     raise RuntimeError("MAIL_USERNAME is not set in the environment variables.")
 
-quote_bp = Blueprint('quote', __name__)
-
-@quote_bp.route('/quote-project', methods=['POST'])
+@quote.route('/quote-project', methods=['POST'])
 def submit_quote():
     """
     Main endpoint to send a complete quote
@@ -79,145 +75,6 @@ def submit_quote():
         return jsonify({
             'success': False,
             'error': f'Internal server error: {str(e)}'
-        }), 500
-
-@quote_bp.route('/quote/<int:quote_id>', methods=['GET'])
-@check_ip_allowed
-def get_quote(quote_id):
-    """Get a specific quote by ID"""
-    try:
-        quote = ProjectQuote.query.get(quote_id)
-        
-        if not quote:
-            return jsonify({
-                'success': False,
-                'error': 'Quote not found'
-            }), 404
-        
-        return jsonify({
-            'success': True,
-            'quote': quote.to_dict(),
-            'phases': quote.to_phases_dict()
-        }), 200
-        
-    except Exception as e:
-        return jsonify({
-            'success': False,
-            'error': str(e)
-        }), 500
-
-@quote_bp.route('/quotes', methods=['GET'])
-def get_quotes():
-    """Get list of quotes with optional filters"""
-    try:
-        # Query parameters
-        status = request.args.get('status')
-        email = request.args.get('email')
-        page = int(request.args.get('page', 1))
-        per_page = int(request.args.get('per_page', 10))
-        
-        # Build query
-        query = ProjectQuote.query
-        
-        if status:
-            query = query.filter(ProjectQuote.status == status)
-        
-        if email:
-            query = query.filter(ProjectQuote.email == email)
-        
-        # Order by creation date (most recent first)
-        query = query.order_by(ProjectQuote.created_at.desc())
-        
-        # Pagination
-        paginated = query.paginate(
-            page=page,
-            per_page=per_page,
-            error_out=False
-        )
-        
-        quotes = []
-        for quote in paginated.items:
-            quotes.append({
-                'id': quote.id,
-                'quote_number': quote.quote_number,
-                'status': quote.status,
-                'customer_name': f"{quote.first_name} {quote.last_name}",
-                'email': quote.email,
-                'project_type': quote.project_type,
-                'company_name': quote.company_name,
-                'created_at': quote.created_at.isoformat(),
-                'submitted_at': quote.submitted_at.isoformat() if quote.submitted_at else None
-            })
-        
-        return jsonify({
-            'success': True,
-            'quotes': quotes,
-            'pagination': {
-                'page': page,
-                'per_page': per_page,
-                'total': paginated.total,
-                'pages': paginated.pages,
-                'has_next': paginated.has_next,
-                'has_prev': paginated.has_prev
-            }
-        }), 200
-        
-    except Exception as e:
-        return jsonify({
-            'success': False,
-            'error': str(e)
-        }), 500
-
-@quote_bp.route('/quote/<int:quote_id>/status', methods=['PUT'])
-def update_quote_status(quote_id):
-    """Update quote status (for admin)"""
-    try:
-        data = request.get_json()
-        
-        if not data or 'status' not in data:
-            return jsonify({
-                'success': False,
-                'error': 'Status is required'
-            }), 400
-        
-        valid_statuses = ['submitted', 'reviewed', 'approved', 'rejected']
-        if data['status'] not in valid_statuses:
-            return jsonify({
-                'success': False,
-                'error': 'Invalid status'
-            }), 400
-        
-        quote = ProjectQuote.query.get(quote_id)
-        if not quote:
-            return jsonify({
-                'success': False,
-                'error': 'Quote not found'
-            }), 404
-        
-        quote.status = data['status']
-        
-        # Add admin notes if provided
-        if 'admin_notes' in data:
-            quote.admin_notes = data['admin_notes']
-        
-        db.session.commit()
-        
-        return jsonify({
-            'success': True,
-            'message': 'Quote status updated successfully',
-            'quote': {
-                'id': quote.id,
-                'quote_number': quote.quote_number,
-                'status': quote.status,
-                'admin_notes': quote.admin_notes
-            }
-        }), 200
-        
-    except Exception as e:
-        db.session.rollback()
-        return jsonify({
-            'success': False,
-            'error': str(e)
         }), 500
 
 def update_quote_from_data(quote, data):

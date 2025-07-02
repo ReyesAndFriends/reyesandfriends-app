@@ -24,7 +24,7 @@ def create_app():
     from .routes.contact import contact as contact_bp
     app.register_blueprint(contact_bp, url_prefix='/contact')
     
-    from .routes.quote.simpleQuoteRoutes import quote_bp
+    from .routes.quote import quote as quote_bp
     app.register_blueprint(quote_bp, url_prefix='/api')
 
     return app
