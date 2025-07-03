@@ -19,26 +19,30 @@ const Home: React.FC = () => {
                         onContextMenu={e => e.preventDefault()}
                     />
                 </div>
-                <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col items-center justify-center text-center flex-1">
-                    <div className="max-w-2xl text-white mx-auto">
-                        <img
-                        src="/img/logo/crown_white.svg"
-                        className="w-36 h-36 object-contain mx-auto"
-                        alt="reyes&friends_crown"
-                        />
-                        <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
-                            Impulsamos tu crecimiento digital
+                <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col md:flex-row items-center justify-center text-center md:text-left flex-1">
+                    <div className="flex-1 flex flex-col items-center md:items-start justify-center max-w-2xl mx-auto">
+                        <h1 className="text-5xl md:text-6xl font-extrabold mb-2 text-white drop-shadow-lg tracking-tight">
+                            Impulsamos
                         </h1>
-                        <p className="text-xl mb-8 text-red-100">
-                            Desarrollamos software y soluciones tecnológicas a medida para empresas y emprendedores. 
-                            Desde sitios web hasta plataformas avanzadas, hacemos realidad tus ideas.
+                        <h1 className="text-4xl md:text-5xl font-extrabold mb-6 border-b-4 border-red-500 pb-4 inline-block text-white drop-shadow">
+                            tu crecimiento digital
+                        </h1>
+                        <p className="text-2xl mb-8 text-white font-semibold drop-shadow-sm">
+                            ¡Transforma tu negocio con tecnología a tu medida!<br />
+                            Creamos sitios web, plataformas y soluciones digitales innovadoras para que tu empresa crezca y destaque en el mundo digital.
                         </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Link to="/quote-project" className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors flex items-center gap-2 font-semibold">
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                            <Link
+                                to="/quote-project"
+                                className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-all duration-300 flex items-center gap-2 font-semibold transform hover:scale-105"
+                            >
                                 <Gem className="h-5 w-5" />
                                 Cotiza tu proyecto
                             </Link>
-                            <Link to="/contact" className="bg-transparent hover:bg-red-800/30 text-white px-6 py-3 rounded border-2 border-white transition-colors flex items-center gap-2 font-semibold">
+                            <Link
+                                to="/contact"
+                                className="bg-transparent hover:bg-red-800/30 text-white px-6 py-3 rounded border-2 border-white transition-all duration-300 flex items-center gap-2 font-semibold transform hover:scale-105"
+                            >
                                 <Mail className="h-5 w-5" />
                                 Contáctanos
                             </Link>
