@@ -13,7 +13,7 @@ project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 sys.path.insert(0, project_root)
 
 from app import create_app
-from app.models import db, ContactCategory, ContactForm, ProjectQuote
+from app.models import db, ContactCategory, ContactForm, ProjectQuote, ContactStatus
 
 def init_database():
     """Initialize the database by creating tables and initial data."""
@@ -25,6 +25,21 @@ def init_database():
         db.create_all()
         print("✅ Tables created successfully")
         
+        # Insert contact statuses if they don't exist
+        statuses_data = [
+            {"name": "sent"},
+            {"name": "answered"}
+        ]
+        print("Inserting contact statuses...")
+        for status_data in statuses_data:
+            existing_status = ContactStatus.query.filter_by(name=status_data["name"]).first()
+            if not existing_status:
+                status = ContactStatus(name=status_data["name"])
+                db.session.add(status)
+                print(f"✅ Status inserted: {status_data['name']}")
+            else:
+                print(f"⚠️  Status already exists: {status_data['name']}")
+
         # Insert contact categories if they don't exist
         categories_data = [
             {"name": "Soporte técnico", "slug": "soporte"},
@@ -51,7 +66,7 @@ def init_database():
         
         # Save changes
         db.session.commit()
-        print("✅ Contact categories initialized correctly")
+        print("✅ Contact categories and statuses initialized correctly")
         
         print("✅ Database initialized completely")
 

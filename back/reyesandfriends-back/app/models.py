@@ -24,6 +24,19 @@ class ContactCategory(db.Model):
             'created_at': self.created_at.isoformat() if self.created_at else None
         }
 
+class ContactStatus(db.Model):
+    __tablename__ = 'contact_statuses'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20), unique=True, nullable=False)  # sent, answered
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
+
 class ContactForm(db.Model):
     __tablename__ = 'contact_forms'
     
@@ -40,7 +53,9 @@ class ContactForm(db.Model):
     
     # Foreign key to ContactCategory
     category_id = db.Column(db.Integer, db.ForeignKey('contact_categories.id'), nullable=True)
-    
+    # Status relationship
+    status_id = db.Column(db.Integer, db.ForeignKey('contact_statuses.id'), nullable=False, default=1)
+    status = db.relationship('ContactStatus', backref='contact_forms', lazy=True)
     # Relationship to replies
     replies = db.relationship('ContactFormReply', backref='contact_form', lazy=True)
     
@@ -57,6 +72,7 @@ class ContactForm(db.Model):
             'created_time': self.created_time,
             'created_at': self.created_at.isoformat() if self.created_at else None,
             'category_id': self.category_id,
+            'status': self.status.name if self.status else None,
             'replies': [reply.to_dict() for reply in self.replies] if hasattr(self, 'replies') else []
         }
 
@@ -64,7 +80,7 @@ class ContactFormReply(db.Model):
     __tablename__ = 'contact_form_replies'
 
     id = db.Column(db.Integer, primary_key=True)
-    contact_form_id = db.Column(db.Integer, db.ForeignKey('contact_forms.id'), nullable=False)
+    contact_form_id = db.Column(db.Integer, db.ForeignKey('contact_forms.id'), nullable=False, unique=True)
     sender = db.Column(db.String(100), nullable=False)
     message = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -229,5 +245,3 @@ class ProjectQuote(db.Model):
                 'additionalComments': self.additional_comments or ''
             }
         }
-
-
