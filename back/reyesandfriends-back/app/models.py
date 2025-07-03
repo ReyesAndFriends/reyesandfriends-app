@@ -41,6 +41,9 @@ class ContactForm(db.Model):
     # Foreign key to ContactCategory
     category_id = db.Column(db.Integer, db.ForeignKey('contact_categories.id'), nullable=True)
     
+    # Relationship to replies
+    replies = db.relationship('ContactFormReply', backref='contact_form', lazy=True)
+    
     def to_dict(self):
         return {
             'id': self.id,
@@ -53,7 +56,26 @@ class ContactForm(db.Model):
             'created_date': self.created_date,
             'created_time': self.created_time,
             'created_at': self.created_at.isoformat() if self.created_at else None,
-            'category_id': self.category_id
+            'category_id': self.category_id,
+            'replies': [reply.to_dict() for reply in self.replies] if hasattr(self, 'replies') else []
+        }
+
+class ContactFormReply(db.Model):
+    __tablename__ = 'contact_form_replies'
+
+    id = db.Column(db.Integer, primary_key=True)
+    contact_form_id = db.Column(db.Integer, db.ForeignKey('contact_forms.id'), nullable=False)
+    sender = db.Column(db.String(100), nullable=False)
+    message = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'contact_form_id': self.contact_form_id,
+            'sender': self.sender,
+            'message': self.message,
+            'created_at': self.created_at.isoformat() if self.created_at else None
         }
 
 class ProjectQuote(db.Model):
