@@ -8,6 +8,14 @@ const Contact = () => {
     const { errors, handleSubmit, isSubmitting, finalMessage, setFinalMessage } = useContactFormValidator();
     const [isFormValid, setIsFormValid] = useState(false);
     const formRef = useRef<HTMLFormElement>(null);
+    const [cellphone, setCellphone] = useState("");
+
+    const handleCellphoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        if (/^\d*$/.test(value)) {
+            setCellphone(value);
+        }
+    };
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -15,7 +23,7 @@ const Contact = () => {
         const data = {
             first_name: formData.get("first_name"),
             last_name: formData.get("last_name"),
-            cellphone: formData.get("cellphone"),
+            cellphone: cellphone,
             email: formData.get("email"),
             category: formData.get("category"),
             message: formData.get("message"),
@@ -26,7 +34,12 @@ const Contact = () => {
     const handleInputChange = (e: React.ChangeEvent<HTMLFormElement>) => {
         const formData = new FormData(e.currentTarget);
         const isValid = ["first_name", "last_name", "cellphone", "email", "category", "message"].every(
-            (field) => formData.get(field)?.toString().trim() !== ""
+            (field) => {
+                if (field === "cellphone") {
+                    return cellphone.trim() !== "";
+                }
+                return formData.get(field)?.toString().trim() !== "";
+            }
         );
         setIsFormValid(isValid);
     };
@@ -34,6 +47,7 @@ const Contact = () => {
     const handleModalClose = () => {
         setFinalMessage(null);
         formRef.current?.reset();
+        setCellphone("");
         setIsFormValid(false);
     };
 
@@ -122,6 +136,8 @@ const Contact = () => {
                                         placeholder="912345678"
                                         pattern="[0-9]{9}"
                                         inputMode="numeric"
+                                        value={cellphone}
+                                        onChange={handleCellphoneChange}
                                     />
                                 </div>
                                 {errors.cellphone && <p className="text-red-500 text-sm">{errors.cellphone}</p>}
