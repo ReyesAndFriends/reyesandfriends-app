@@ -70,14 +70,17 @@ def init_database():
         
         print("✅ Database initialized completely")
 
-def reset_database():
+def reset_database(auto_confirm=False):
     """Delete all tables and recreate them."""
     
     app = create_app()
     
     with app.app_context():
         print("⚠️  WARNING: This will delete all existing tables and data.")
-        confirm = input("Are you sure? (yes/no): ")
+        if auto_confirm:
+            confirm = "yes"
+        else:
+            confirm = input("Are you sure? (yes/no): ")
         
         if confirm.lower() in ['yes', 'y', 'sí', 'si']:
             print("Deleting tables...")
@@ -89,7 +92,12 @@ def reset_database():
             print("❌ Operation cancelled")
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1 and sys.argv[1] == "--reset":
-        reset_database()
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "--reset":
+            reset_database()
+        elif sys.argv[1] == "--fresh":
+            reset_database(auto_confirm=True)
+        else:
+            init_database()
     else:
         init_database()
