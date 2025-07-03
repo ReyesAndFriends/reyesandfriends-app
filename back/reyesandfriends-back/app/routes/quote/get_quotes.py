@@ -11,12 +11,31 @@ def get_quotes():
         email = request.args.get('email')
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
+        order_by = request.args.get('order_by', 'created_at')
+        order_dir = request.args.get('order_dir', 'desc').lower()
+        allowed_order_fields = {
+            'id': ProjectQuote.id,
+            'quote_number': ProjectQuote.quote_number,
+            'status': ProjectQuote.status,
+            'first_name': ProjectQuote.first_name,
+            'last_name': ProjectQuote.last_name,
+            'email': ProjectQuote.email,
+            'project_type': ProjectQuote.project_type,
+            'company_name': ProjectQuote.company_name,
+            'created_at': ProjectQuote.created_at,
+            'submitted_at': ProjectQuote.submitted_at
+        }
+        order_column = allowed_order_fields.get(order_by, ProjectQuote.created_at)
+        if order_dir == 'asc':
+            order_clause = order_column.asc()
+        else:
+            order_clause = order_column.desc()
         query = ProjectQuote.query
         if status:
             query = query.filter(ProjectQuote.status == status)
         if email:
             query = query.filter(ProjectQuote.email == email)
-        query = query.order_by(ProjectQuote.created_at.desc())
+        query = query.order_by(order_clause)
         paginated = query.paginate(
             page=page,
             per_page=per_page,
