@@ -1,6 +1,6 @@
 import type React from "react"
 import { useState, useEffect, useRef } from "react"
-import { Menu, X, ChevronDown, Home, Info, Briefcase, Mail, Folder } from "lucide-react"
+import { Menu, X, ChevronDown, Home, Info, Briefcase, Mail, Folder, LogIn } from "lucide-react"
 import useNavOptions from "./useNavOptions"
 import { useContactList } from "../../../hooks/services/useServiceList"
 import RouterContactModal from "../../../helpers/routerContactModal/routerContactModal"
@@ -70,6 +70,9 @@ const Navbar: React.FC = () => {
             document.removeEventListener("mousedown", handleClickOutside)
         }
     }, [])
+
+    const productionMode = import.meta.env.VITE_PRODUCTION_MODE === "true"
+    const clientsPortalUrl = import.meta.env.VITE_CLIENTS_PORTAL_URL
 
     return (
         <>
@@ -144,8 +147,22 @@ const Navbar: React.FC = () => {
                                 <Folder size={18} /> Portafolio
                             </button>
                         </li>
+                        {productionMode && clientsPortalUrl && (
+                        <li>
+                            <a
+                                href={clientsPortalUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 px-3 py-1.5 bg-red-700 hover:bg-red-800 text-black font-bold rounded shadow-lg transition-colors duration-200 text-white"
+                                style={{ textDecoration: "none" }}
+                            >
+                                <LogIn size={22} />
+                                Acceso clientes
+                            </a>
+                        </li>
+                        )}
                     </ul>
-
+                    
                     <div className="md:hidden">
                         <button onClick={toggleMenu} className="focus:outline-none" aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}>
                             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
