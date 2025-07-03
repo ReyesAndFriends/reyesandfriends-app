@@ -92,12 +92,18 @@ def reset_database(auto_confirm=False):
             print("❌ Operation cancelled")
 
 if __name__ == "__main__":
+    valid_flags = ["--reset", "--fresh"]
     if len(sys.argv) > 1:
-        if sys.argv[1] == "--reset":
+        flag = sys.argv[1]
+        if flag == "--reset":
             reset_database()
-        elif sys.argv[1] == "--fresh":
+        elif flag == "--fresh":
             reset_database(auto_confirm=True)
         else:
-            init_database()
+            print(f"❌ Invalid flag: {flag}")
+            print("Valid flags are:")
+            for f in valid_flags:
+                print(f"  {f}")
+            print("No action was performed.")
     else:
         init_database()
