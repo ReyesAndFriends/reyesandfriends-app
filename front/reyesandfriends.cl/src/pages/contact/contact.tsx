@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import ContactModal from "./modal/contactModal";
 
 const Contact = () => {
-    const categories = useGetContactCategories();
+    const { categories, error: categoriesError, loading, refetch } = useGetContactCategories();
     const { errors, handleSubmit, isSubmitting, finalMessage, setFinalMessage } = useContactFormValidator();
     const [isFormValid, setIsFormValid] = useState(false);
     const formRef = useRef<HTMLFormElement>(null);
@@ -93,6 +93,20 @@ const Contact = () => {
                 </h2>
                 <div className="container mx-auto px-4 max-w-3xl">
                     <div className="bg-black p-8 rounded-lg shadow-lg">
+                        {(categoriesError || loading) ? (
+                            <div className="flex flex-col items-center justify-center py-12">
+                                <p className="text-red-500 text-lg mb-4">
+                                    {loading ? "Recargando..." : categoriesError}
+                                </p>
+                                <button
+                                    className="bg-red-600 text-white font-bold py-2 px-6 rounded-sm hover:bg-red-700 transition-colors"
+                                    onClick={refetch}
+                                    disabled={loading}
+                                >
+                                    {loading ? "Recargando..." : "Reintentar"}
+                                </button>
+                            </div>
+                        ) : (
                         <form 
                             ref={formRef}
                             className="grid grid-cols-1 gap-4" 
@@ -190,6 +204,7 @@ const Contact = () => {
                                 </button>
                             </div>
                         </form>
+                        )}
                     </div>
                 </div>
             </section>
