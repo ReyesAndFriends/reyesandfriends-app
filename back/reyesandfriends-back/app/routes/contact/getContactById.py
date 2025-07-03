@@ -1,8 +1,10 @@
 from flask import jsonify
 from . import contact
 from app.models import ContactForm
+from app.utils.middleware.check_ip_allowed import check_ip_allowed
 
 @contact.route('/<int:contact_id>', methods=['GET'])
+@check_ip_allowed
 def get_contact_by_id(contact_id):
     contact = ContactForm.query.get(contact_id)
     if not contact:

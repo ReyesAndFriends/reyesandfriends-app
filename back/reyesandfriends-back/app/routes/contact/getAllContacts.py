@@ -1,8 +1,10 @@
 from flask import jsonify, request
 from . import contact
 from app.models import ContactForm
+from app.utils.middleware.check_ip_allowed import check_ip_allowed
 
 @contact.route('/', methods=['GET'])
+@check_ip_allowed
 def get_all_contacts():
     try:
         page = int(request.args.get('page', 1))
