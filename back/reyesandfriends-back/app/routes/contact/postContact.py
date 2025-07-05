@@ -29,7 +29,10 @@ def postContact():
 
         # Get the category to validate and obtain the ID
         category = get_contact_category_by_slug(data['category'])
-        category_id = category.id if category else None
+        if not category:
+            return jsonify({"category": "Categoría inválida."}), 422
+        
+        category_id = category.id
 
         now = datetime.now()
         contact_form = ContactForm(
@@ -37,7 +40,6 @@ def postContact():
             last_name=data['last_name'],
             cellphone=data['cellphone'],
             email=data['email'],
-            category=data['category'],
             message=data['message'],
             created_date=now.strftime("%Y-%m-%d"),
             created_time=now.strftime("%H:%M:%S"),
@@ -53,7 +55,7 @@ def postContact():
             user_name=user_name,
             cellphone=data['cellphone'],
             email=data['email'],
-            category=data['category'],
+            category=category.name,
             message=data['message']
         )
 

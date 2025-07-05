@@ -15,7 +15,7 @@ def get_contact_by_id(contact_id):
         "last_name": contact.last_name,
         "cellphone": contact.cellphone,
         "email": contact.email,
-        "category": contact.category,
+        "category": contact.category_ref.name if contact.category_ref else None,
         "message": contact.message,
         "created_date": contact.created_date,
         "created_time": contact.created_time,

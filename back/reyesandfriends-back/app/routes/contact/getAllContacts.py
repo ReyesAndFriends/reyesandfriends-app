@@ -1,6 +1,6 @@
 from flask import jsonify, request
 from . import contact
-from app.models import ContactForm
+from app.models import ContactForm, ContactCategory
 from app.utils.middleware.check_ip_allowed import check_ip_allowed
 
 @contact.route('/', methods=['GET'])
@@ -17,7 +17,7 @@ def get_all_contacts():
             'last_name': ContactForm.last_name,
             'cellphone': ContactForm.cellphone,
             'email': ContactForm.email,
-            'category': ContactForm.category,
+            'category': ContactCategory.name,
             'created_date': ContactForm.created_date,
             'created_time': ContactForm.created_time,
             'category_id': ContactForm.category_id
@@ -27,7 +27,8 @@ def get_all_contacts():
             order_clause = order_column.asc()
         else:
             order_clause = order_column.desc()
-        query = ContactForm.query.order_by(order_clause)
+        
+        query = ContactForm.query.join(ContactCategory).order_by(order_clause)
         paginated = query.paginate(
             page=page,
             per_page=per_page,
@@ -41,7 +42,7 @@ def get_all_contacts():
                 "last_name": c.last_name,
                 "cellphone": c.cellphone,
                 "email": c.email,
-                "category": c.category,
+                "category": c.category_ref.name if c.category_ref else None,
                 "message": c.message,
                 "created_date": c.created_date,
                 "created_time": c.created_time,

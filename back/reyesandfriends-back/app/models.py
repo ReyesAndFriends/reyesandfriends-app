@@ -45,14 +45,13 @@ class ContactForm(db.Model):
     last_name = db.Column(db.String(50), nullable=False)
     cellphone = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(120), nullable=False)
-    category = db.Column(db.String(50), nullable=False)  # Category slug
     message = db.Column(db.Text, nullable=False)
     created_date = db.Column(db.String(10), nullable=False)  # YYYY-MM-DD Format
     created_time = db.Column(db.String(8), nullable=False)   # HH:MM:SS Format
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
     # Foreign key to ContactCategory
-    category_id = db.Column(db.Integer, db.ForeignKey('contact_categories.id'), nullable=True)
+    category_id = db.Column(db.Integer, db.ForeignKey('contact_categories.id'), nullable=False)
     # Status relationship
     status_id = db.Column(db.Integer, db.ForeignKey('contact_statuses.id'), nullable=False, default=1)
     status = db.relationship('ContactStatus', backref='contact_forms', lazy=True)
@@ -66,7 +65,7 @@ class ContactForm(db.Model):
             'last_name': self.last_name,
             'cellphone': self.cellphone,
             'email': self.email,
-            'category': self.category,
+            'category': self.category_ref.name if self.category_ref else None,
             'message': self.message,
             'created_date': self.created_date,
             'created_time': self.created_time,
@@ -141,7 +140,7 @@ class ProjectQuote(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     submitted_at = db.Column(db.DateTime, nullable=True)
     
-    # Admin fields (opcional - para uso futuro)
+    # Admin fields (opcional)
     admin_notes = db.Column(db.Text, nullable=True)
     
     def generate_quote_number(self):
