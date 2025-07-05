@@ -1,6 +1,6 @@
 from flask import jsonify
 from . import contact
-from app.models import ContactForm
+from app.models import ContactForm, ContactStatus
 from app.utils.middleware.check_ip_allowed import check_ip_allowed
 
 @contact.route('/<int:contact_id>', methods=['GET'])
@@ -16,6 +16,7 @@ def get_contact_by_id(contact_id):
         "cellphone": contact.cellphone,
         "email": contact.email,
         "category": contact.category_ref.name if contact.category_ref else None,
+        "status": contact.status.name if contact.status else None,
         "message": contact.message,
         "created_date": contact.created_date,
         "created_time": contact.created_time,
