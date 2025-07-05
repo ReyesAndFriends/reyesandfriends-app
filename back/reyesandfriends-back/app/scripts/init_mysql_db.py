@@ -27,9 +27,11 @@ def init_database():
         
         # Insert contact statuses if they don't exist
         statuses_data = [
-            {"name": "sent"},
-            {"name": "answered"}
+            {"name": "Nuevo"},
+            {"name": "Leído (Sin responder)"},
+            {"name": "Respondido"}
         ]
+
         print("Inserting contact statuses...")
         for status_data in statuses_data:
             existing_status = ContactStatus.query.filter_by(name=status_data["name"]).first()

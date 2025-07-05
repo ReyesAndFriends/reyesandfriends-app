@@ -27,7 +27,7 @@ class ContactCategory(db.Model):
 class ContactStatus(db.Model):
     __tablename__ = 'contact_statuses'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20), unique=True, nullable=False)  # sent, answered
+    name = db.Column(db.String(100), unique=True, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def to_dict(self):
