@@ -53,10 +53,6 @@ def postContact():
         email_html = render_template(
             'emails/contact-success.html',
             user_name=user_name,
-            cellphone=data['cellphone'],
-            email=data['email'],
-            category=category.name,
-            message=data['message']
         )
 
         msg = Message(
