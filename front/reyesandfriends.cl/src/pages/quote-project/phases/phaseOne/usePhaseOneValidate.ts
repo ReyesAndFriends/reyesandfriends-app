@@ -37,6 +37,7 @@ export const usePhaseOneValidate = () => {
     if (!values.phone.trim()) {
       newErrors.phone = "El teléfono es obligatorio.";
     } else if (!/^\+569\d{8}$/.test(values.phone)) {
+      // Allow Chilean phone format +56912345678
       newErrors.phone = "El teléfono debe tener el formato +56912345678.";
     }
 
