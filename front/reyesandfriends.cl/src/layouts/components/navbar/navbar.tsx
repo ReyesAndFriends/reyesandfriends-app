@@ -22,6 +22,7 @@ const Navbar: React.FC = () => {
     } = useContactLinkValidator()
 
     const [atTop, setAtTop] = useState(true)
+    const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768)
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
@@ -40,9 +41,19 @@ const Navbar: React.FC = () => {
         const handleScroll = () => {
             setAtTop(window.scrollY === 0)
         }
+        
+        const handleResize = () => {
+            setIsDesktop(window.innerWidth >= 768)
+        }
+        
         window.addEventListener("scroll", handleScroll)
+        window.addEventListener("resize", handleResize)
         handleScroll()
-        return () => window.removeEventListener("scroll", handleScroll)
+        
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+            window.removeEventListener("resize", handleResize)
+        }
     }, [])
 
     useEffect(() => {
@@ -79,7 +90,7 @@ const Navbar: React.FC = () => {
             <nav
                 className="text-white py-2 z-50 fixed top-0 left-0 w-full"
                 style={{
-                    background: atTop ? "rgba(0,0,0,0)" : "rgba(0,0,0,1)",
+                    background: (atTop && isDesktop) ? "rgba(0,0,0,0)" : "rgba(0,0,0,1)",
                     transition: "background 0.4s ease"
                 }}
             >
