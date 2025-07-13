@@ -171,7 +171,7 @@ const Home: React.FC = () => {
 
             <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4 max-w-5xl">
-                    <h2 className="text-3xl font-bold mb-12 text-center text-red-600">
+                    <h2 className="text-3xl font-bold mb-12 text-center">
                         Lleva tu negocio más allá
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -215,7 +215,11 @@ const Home: React.FC = () => {
                         <p className="mb-8">
                             Contáctanos hoy mismo y descubre cómo podemos ayudarte a alcanzar tus objetivos digitales.
                         </p>
-                        <Link to="/contact" className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors">
+                        <Link
+                            to="/contact"
+                            className="inline-flex items-center gap-2 bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors font-semibold shadow-md"
+                        >
+                            <Mail className="h-5 w-5" />
                             Contáctanos
                         </Link>
                     </div>
