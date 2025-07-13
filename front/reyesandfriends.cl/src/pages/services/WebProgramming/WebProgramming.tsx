@@ -21,6 +21,7 @@ const WebProgramming = () => {
                             src="/img/services/WebProgramming/logo.png"
                             alt="Programación Web"
                             className="max-w-full h-auto"
+                            style={{ filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.5))" }}
                         />
                     </div>
                     <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
