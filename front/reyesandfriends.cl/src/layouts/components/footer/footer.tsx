@@ -16,9 +16,16 @@ const Footer: React.FC = () => {
                 <div className="container mx-auto px-4">
                     <div className="flex flex-wrap justify-between">
                         <div className="w-full md:w-1/3 mb-6 md:mb-0">
-                            <h2 className="text-lg font-bold text-white mb-4">Reyes&Friends.cl</h2>
+                            <div className="flex items-center mb-4">
+                                <img
+                                    src="/img/logo/crown_red.svg"
+                                    className="w-10 h-10 object-contain mr-3"
+                                    alt="reyes&friends_crown"
+                                />
+                                <h2 className="text-lg font-bold text-white">Reyes&Friends</h2>
+                            </div>
                             <p className="text-sm">
-                                Realizando soluciones personalizadas y únicas para tu emprendimiento desde 2024.
+                                Realizando soluciones personalizadas y únicas para tu emprendimiento desde 2025.
                             </p>
                             <p className="text-xs mt-4 text-gray-500">&copy; {new Date().getFullYear()} Reyes&Friends. Todos los derechos reservados.</p>
                         </div>
