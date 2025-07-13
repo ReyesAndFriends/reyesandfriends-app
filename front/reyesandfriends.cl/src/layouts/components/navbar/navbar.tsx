@@ -117,11 +117,11 @@ const Navbar: React.FC = () => {
                                 <Briefcase size={18} /> Nuestros servicios <ChevronDown className="ml-1" size={16} />
                             </button>
                             {isDropdownOpen && (
-                                <ul className={`bg-white text-black mt-2 shadow-lg rounded md:absolute md:mt-2 md:py-2 md:w-40 ${isMenuOpen ? "w-full mt-2" : ""}`}>
+                                <ul className={`bg-white text-black mt-2 shadow-xl rounded-lg border ${isMenuOpen ? "w-full mt-2 py-3" : "md:absolute md:mt-2 md:py-4 md:w-56"}`}>
                                     {dropdownOptions.map(option => (
                                         <li key={option.path}>
                                             <button
-                                                className="block w-full px-4 py-2 hover:bg-gray-200 flex items-center gap-2"
+                                                className="block w-full px-4 py-3 hover:bg-gray-100 text-left text-base font-medium transition-colors duration-200"
                                                 onClick={() => handleLinkClick(option.path)}
                                             >
                                                 {option.label}
@@ -139,11 +139,11 @@ const Navbar: React.FC = () => {
                                 <Mail size={18} /> Contacto <ChevronDown className="ml-1" size={16} />
                             </button>
                             {isContactDropdownOpen && (
-                                <ul className={`bg-white text-black mt-2 shadow-lg rounded md:absolute md:mt-2 md:py-2 md:w-40 ${isMenuOpen ? "w-full mt-2" : ""}`}>
+                                <ul className={`bg-white text-black mt-2 shadow-xl rounded-lg border ${isMenuOpen ? "w-full mt-2 py-3" : "md:absolute md:mt-2 md:py-4 md:w-56"}`}>
                                     {contactList.map(option => (
                                         <li key={option.path}>
                                             <button
-                                                className="block w-full px-4 py-2 hover:bg-gray-200 flex items-center gap-2"
+                                                className="block w-full px-4 py-3 hover:bg-gray-100 text-left text-base font-medium transition-colors duration-200"
                                                 onClick={() => handleLinkClick(option.path)}
                                             >
                                                 {option.name}
