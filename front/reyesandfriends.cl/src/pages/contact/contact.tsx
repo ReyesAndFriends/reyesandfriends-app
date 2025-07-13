@@ -4,10 +4,18 @@ import { useState, useRef } from "react";
 import ContactModal from "./modal/contactModal";
 
 const Contact = () => {
-    const categories = useGetContactCategories();
+    const { categories, error: categoriesError, loading, refetch } = useGetContactCategories();
     const { errors, handleSubmit, isSubmitting, finalMessage, setFinalMessage } = useContactFormValidator();
     const [isFormValid, setIsFormValid] = useState(false);
     const formRef = useRef<HTMLFormElement>(null);
+    const [cellphone, setCellphone] = useState("");
+
+    const handleCellphoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        if (/^\d*$/.test(value)) {
+            setCellphone(value);
+        }
+    };
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -15,7 +23,7 @@ const Contact = () => {
         const data = {
             first_name: formData.get("first_name"),
             last_name: formData.get("last_name"),
-            cellphone: formData.get("cellphone"),
+            cellphone: cellphone,
             email: formData.get("email"),
             category: formData.get("category"),
             message: formData.get("message"),
@@ -26,7 +34,12 @@ const Contact = () => {
     const handleInputChange = (e: React.ChangeEvent<HTMLFormElement>) => {
         const formData = new FormData(e.currentTarget);
         const isValid = ["first_name", "last_name", "cellphone", "email", "category", "message"].every(
-            (field) => formData.get(field)?.toString().trim() !== ""
+            (field) => {
+                if (field === "cellphone") {
+                    return cellphone.trim() !== "";
+                }
+                return formData.get(field)?.toString().trim() !== "";
+            }
         );
         setIsFormValid(isValid);
     };
@@ -34,6 +47,7 @@ const Contact = () => {
     const handleModalClose = () => {
         setFinalMessage(null);
         formRef.current?.reset();
+        setCellphone("");
         setIsFormValid(false);
     };
 
@@ -43,15 +57,28 @@ const Contact = () => {
                 message={finalMessage} 
                 onClose={handleModalClose} 
             />
-            <section className="relative py-48 bg-cover bg-center relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#891818] to-[#5A1410]"></div>
-                <div className="container mx-auto px-4 relative z-10">
-                    <div className="max-w-3xl mx-auto text-center">
-                        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+            <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
+                <div className="absolute inset-0 bg-hero-section"></div>
+                <div className="absolute inset-0">
+                    <img
+                        src="/img/background/background-web.jpg"
+                        alt="fondo de la sección"
+                        className="w-full h-full object-cover opacity-5 filter grayscale"
+                        draggable={false}
+                        onContextMenu={e => e.preventDefault()}
+                    />
+                </div>
+                <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col items-center justify-center text-center flex-1">
+                    <div className="max-w-2xl text-white mx-auto">
+                        <img
+                            src="/img/logo/crown_white.svg"
+                            className="w-32 h-32 object-contain mx-auto mb-6"
+                            alt="reyes&friends_crown"
+                        />
+                        <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
                             Contáctanos
                         </h1>
-                        <div className="w-auto h-1 bg-red-600 mx-auto mb-6"></div>
-                        <p className="text-xl mb-8 text-gray-300">
+                        <p className="text-xl mb-8 text-red-100">
                             Si tienes alguna pregunta o inquietud, no dudes en ponerte en contacto con nosotros. 
                             Estamos aquí para ayudarte y responder a tus consultas.
                         </p>
@@ -66,6 +93,20 @@ const Contact = () => {
                 </h2>
                 <div className="container mx-auto px-4 max-w-3xl">
                     <div className="bg-black p-8 rounded-lg shadow-lg">
+                        {(categoriesError || loading) ? (
+                            <div className="flex flex-col items-center justify-center py-12">
+                                <p className="text-red-500 text-lg mb-4">
+                                    {loading ? "Recargando..." : categoriesError}
+                                </p>
+                                <button
+                                    className="bg-red-600 text-white font-bold py-2 px-6 rounded-sm hover:bg-red-700 transition-colors"
+                                    onClick={refetch}
+                                    disabled={loading}
+                                >
+                                    {loading ? "Recargando..." : "Reintentar"}
+                                </button>
+                            </div>
+                        ) : (
                         <form 
                             ref={formRef}
                             className="grid grid-cols-1 gap-4" 
@@ -96,14 +137,23 @@ const Contact = () => {
                             </div>
                             <div className="col-span-1">
                                 <label htmlFor="cellphone" className="block text-gray-300 font-bold mb-2">Número de Teléfono (requerido)</label>
-                                <input 
-                                    type="tel" 
-                                    id="cellphone" 
-                                    name="cellphone" 
-                                    maxLength={12}
-                                    className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
-                                    placeholder="Ejemplo: +56912345678"
-                                />
+                                <div className="flex">
+                                    <span className="inline-flex items-center px-3 rounded-l-sm bg-zinc-800 text-white border border-r-0 border-zinc-700 select-none">
+                                        +56
+                                    </span>
+                                    <input 
+                                        type="tel" 
+                                        id="cellphone" 
+                                        name="cellphone" 
+                                        maxLength={9}
+                                        className="w-full p-3 rounded-r-sm bg-zinc-800 text-white border border-zinc-700 border-l-0 focus:outline-none focus:ring-2 focus:ring-red-600"
+                                        placeholder="912345678"
+                                        pattern="[0-9]{9}"
+                                        inputMode="numeric"
+                                        value={cellphone}
+                                        onChange={handleCellphoneChange}
+                                    />
+                                </div>
                                 {errors.cellphone && <p className="text-red-500 text-sm">{errors.cellphone}</p>}
                             </div>
                             <div className="col-span-1">
@@ -154,6 +204,7 @@ const Contact = () => {
                                 </button>
                             </div>
                         </form>
+                        )}
                     </div>
                 </div>
             </section>

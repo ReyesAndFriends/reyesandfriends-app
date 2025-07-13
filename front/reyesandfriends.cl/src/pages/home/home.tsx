@@ -1,5 +1,5 @@
 import React from "react";
-import { Globe, ChevronRight, Building, Gem, Store, Speech, HandHeart, MonitorSmartphone } from "lucide-react";
+import { Globe, ChevronRight, Building, Gem, Store, Speech, HandHeart, MonitorSmartphone, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import useHomeGetMethodologySteps from "./useHomeGetMethodologySteps";
 
@@ -8,29 +8,46 @@ const Home: React.FC = () => {
 
     return (
         <>
-            <section className="bg-cover bg-center relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#891818] to-[#5A1410]"></div>
-                    <div className="container mx-auto px-4 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-                        <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24">
-                            <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
-                                Impulsamos tu crecimiento digital
-                            </h1>
-                            <p className="text-xl mb-8 text-red-100">
-                                Desarrollamos software y soluciones tecnológicas a medida para empresas y emprendedores. 
-                                Desde sitios web hasta plataformas avanzadas, hacemos realidad tus ideas.
-                            </p>
-                            <div className="flex flex-col sm:flex-row gap-4">
-                                <Link to="/services" className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors">
-                                    Nuestros Servicios
-                                </Link>
-                                <Link to="/contact" className="bg-transparent hover:bg-red-800/30 text-white px-6 py-3 rounded border-2 border-white transition-colors">
-                                    Contáctanos
-                                </Link>
-                            </div>
+            <section className="bg-cover bg-center relative min-h-[800px] md:min-h-[800px] flex items-center">
+                <div className="absolute inset-0 bg-hero-section"></div>
+                <div className="absolute inset-0">
+                    <img
+                        src="/img/background/background-web.jpg"
+                        alt="fondo de la sección"  
+                        className="w-full h-full object-cover opacity-5 filter grayscale"
+                        draggable={false}
+                        onContextMenu={e => e.preventDefault()}
+                    />
+                </div>
+                <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col md:flex-row items-center justify-center text-center md:text-left flex-1">
+                    <div className="flex-1 flex flex-col items-center md:items-start justify-center max-w-2xl mx-auto">
+                        <h1 className="text-5xl md:text-6xl font-extrabold mb-2 text-white drop-shadow-lg tracking-tight">
+                            Impulsamos
+                        </h1>
+                        <h1 className="text-4xl md:text-5xl font-extrabold mb-6 border-b-4 border-red-500 pb-4 inline-block text-white drop-shadow">
+                            tu crecimiento digital
+                        </h1>
+                        <p className="text-2xl mb-8 text-white font-semibold drop-shadow-sm">
+                            ¡Transforma tu negocio con tecnología a tu medida!<br />
+                            Creamos sitios web, plataformas y soluciones digitales innovadoras para que tu empresa crezca y destaque en el mundo digital.
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                            <Link
+                                to="/quote-project"
+                                className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-all duration-300 flex items-center gap-2 font-semibold transform hover:scale-105"
+                            >
+                                <Gem className="h-5 w-5" />
+                                Cotiza tu proyecto
+                            </Link>
+                            <Link
+                                to="/contact"
+                                className="bg-transparent hover:bg-red-800/30 text-white px-6 py-3 rounded border-2 border-white transition-all duration-300 flex items-center gap-2 font-semibold transform hover:scale-105"
+                            >
+                                <Mail className="h-5 w-5" />
+                                Contáctanos
+                            </Link>
                         </div>
-                        <div className="flex justify-center">
-                            <img src="/img/index/computer.png" alt="Computer illustration" className="w-[500px] h-[500px] object-contain"/>
-                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -108,8 +125,12 @@ const Home: React.FC = () => {
                         <p className="mb-6">
                             Muestra tus productos, servicios o novedades de una manera atractiva y profesional. Creamos soluciones visuales que capturan la atención de tus clientes y destacan lo mejor de tu negocio.
                         </p>
-                        <Link to="/quote-project" className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors">
-                            Cotizar Proyecto
+                        <Link
+                            to="/quote-project"
+                            className="inline-flex items-center gap-2 bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors font-semibold shadow-md"
+                        >
+                            <Gem className="h-5 w-5" />
+                            Cotiza tu proyecto
                         </Link>
                     </div>
                     <div className="flex justify-center">
@@ -140,12 +161,17 @@ const Home: React.FC = () => {
                             </div>
                         ))}
                     </div>
+                    <div className="text-center mt-8">
+                        <p>
+                            "De esta manera, garantizamos un proceso claro y efectivo que nos permite entregar resultados de alta calidad, adaptados a las necesidades de cada cliente.""
+                        </p>
+                    </div>
                 </div>
             </section>
 
             <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4 max-w-5xl">
-                    <h2 className="text-3xl font-bold mb-12 text-center text-red-600">
+                    <h2 className="text-3xl font-bold mb-12 text-center">
                         Lleva tu negocio más allá
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -189,7 +215,11 @@ const Home: React.FC = () => {
                         <p className="mb-8">
                             Contáctanos hoy mismo y descubre cómo podemos ayudarte a alcanzar tus objetivos digitales.
                         </p>
-                        <Link to="/contact" className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors">
+                        <Link
+                            to="/contact"
+                            className="inline-flex items-center gap-2 bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors font-semibold shadow-md"
+                        >
+                            <Mail className="h-5 w-5" />
                             Contáctanos
                         </Link>
                     </div>

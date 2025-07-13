@@ -1,22 +1,37 @@
 import { useServiceList } from "../../hooks/services/useServiceList";
 import { Link } from "react-router";
+import { ArrowRight } from "lucide-react";
 
 const Services = () => {
     const services = useServiceList();
 
     return (
         <>
-            <section className="bg-cover bg-center relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#891818] to-[#5A1410]"></div>
+            <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
+                <div className="absolute inset-0 bg-hero-section"></div>
+                <div className="absolute inset-0">
+                    <img
+                        src="/img/background/background-web.jpg"
+                        alt="fondo de la sección"
+                        className="w-full h-full object-cover opacity-5 filter grayscale"
+                        draggable={false}
+                        onContextMenu={e => e.preventDefault()}
+                    />
+                </div>
                 <div className="container mx-auto px-4 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
                     <div className="flex justify-center">
                         <img
-                            src="/img/services/servers.png"
-                            alt="Computer illustration"
+                            src="/img/services/FullList/logo.png"
+                            alt="Ilustración de servicios"
                             className="max-w-full h-auto"
                         />
                     </div>
-                    <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24">
+                    <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
+                        <img
+                            src="/img/logo/crown_white.svg"
+                            className="w-20 h-20 object-contain mx-auto mb-4"
+                            alt="reyes&friends_crown"
+                        />
                         <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
                             Nuestros servicios
                         </h1>
@@ -58,15 +73,30 @@ const Services = () => {
                                     </div>
                                     <div className="flex justify-center mt-3">
                                         <Link
-                                            className="bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded transition-colors text-sm"
+                                            className="bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded transition-colors text-sm flex items-center gap-2"
                                             to={service.path}
                                         >
                                             Ver detalles
+                                            <ArrowRight size={16} />
                                         </Link>
                                     </div>
                                 </div>
                             ))}
                     </div>
+                </div>
+            </section>
+
+            <section className="py-12 text-white">
+                <div className="container mx-auto px-4 text-center max-w-2xl">
+                    <h2 className="text-3xl font-bold mb-12 text-center text-red-600 relative">
+                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Y por supuesto... algo más</span>
+                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
+                    </h2>
+                    <p className="text-lg text-zinc-200">
+                        En Reyes&Friends nos adaptamos a tus requerimientos y creamos soluciones personalizadas para tu empresa o proyecto.
+                        <br />
+                        <span className="font-semibold text-red-400">"Cuéntanos tu idea y la hacemos realidad."</span>
+                    </p>
                 </div>
             </section>
         </>

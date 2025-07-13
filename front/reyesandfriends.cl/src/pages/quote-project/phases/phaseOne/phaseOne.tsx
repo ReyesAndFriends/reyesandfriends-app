@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 type PhaseOneProps = {
   values: {
@@ -14,6 +14,34 @@ type PhaseOneProps = {
 };
 
 const PhaseOne: React.FC<PhaseOneProps> = ({ values, errors, handleChange }) => {
+  // Local state for the number without prefix
+  const [localPhone, setLocalPhone] = useState('');
+
+  // Syncs localPhone with values.phone on mount or when values.phone changes
+  useEffect(() => {
+    if (values.phone.startsWith('+56')) {
+      setLocalPhone(values.phone.slice(3));
+    } else {
+      setLocalPhone('');
+    }
+  }, [values.phone]);
+
+  // Handles numeric-only changes and a maximum of 9 digits
+  const handleLocalPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, ''); // Solo números
+    if (value.length > 9) value = value.slice(0, 9);
+    setLocalPhone(value);
+    // Update phone in values
+    handleChange({
+      ...e,
+      target: {
+        ...e.target,
+        name: 'phone',
+        value: value ? `+56${value}` : '',
+      },
+    } as React.ChangeEvent<HTMLInputElement>);
+  };
+
   return (
     <div className="container mx-auto px-4 max-w-3xl">
       <div className="bg-black p-8 rounded-lg shadow-lg">
@@ -75,15 +103,27 @@ const PhaseOne: React.FC<PhaseOneProps> = ({ values, errors, handleChange }) => 
           <label htmlFor="phone" className="block text-gray-300 font-bold mb-2">
             Teléfono (Requerido)
           </label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            placeholder="Ejemplo: +56912345678"
-            value={values.phone}
-            onChange={handleChange}
-            className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
-          />
+          <div className="flex">
+            <input
+              type="text"
+              value="+56"
+              disabled
+              className="w-16 p-3 rounded-l-sm bg-zinc-700 text-white border border-zinc-700"
+              tabIndex={-1}
+            />
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              placeholder="912345678"
+              value={localPhone}
+              onChange={handleLocalPhoneChange}
+              className="w-full p-3 rounded-r-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+              maxLength={9}
+              inputMode="numeric"
+              pattern="[0-9]*"
+            />
+          </div>
           {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
         </div>
 

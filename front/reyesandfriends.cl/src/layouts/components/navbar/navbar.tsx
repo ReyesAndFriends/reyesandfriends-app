@@ -1,6 +1,6 @@
 import type React from "react"
 import { useState, useEffect, useRef } from "react"
-import { Menu, X, ChevronDown } from "lucide-react"
+import { Menu, X, ChevronDown, Home, Info, Briefcase, Mail, Folder, LogIn } from "lucide-react"
 import useNavOptions from "./useNavOptions"
 import { useContactList } from "../../../hooks/services/useServiceList"
 import RouterContactModal from "../../../helpers/routerContactModal/routerContactModal"
@@ -21,6 +21,9 @@ const Navbar: React.FC = () => {
         cancelNavigation
     } = useContactLinkValidator()
 
+    const [atTop, setAtTop] = useState(true)
+    const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768)
+
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
     }
@@ -33,6 +36,25 @@ const Navbar: React.FC = () => {
     const toggleContactDropdown = () => {
         setIsContactDropdownOpen(!isContactDropdownOpen)
     }
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setAtTop(window.scrollY === 0)
+        }
+        
+        const handleResize = () => {
+            setIsDesktop(window.innerWidth >= 768)
+        }
+        
+        window.addEventListener("scroll", handleScroll)
+        window.addEventListener("resize", handleResize)
+        handleScroll()
+        
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+            window.removeEventListener("resize", handleResize)
+        }
+    }, [])
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -60,33 +82,46 @@ const Navbar: React.FC = () => {
         }
     }, [])
 
+    const productionMode = import.meta.env.VITE_PRODUCTION_MODE === "true"
+    const clientsPortalUrl = import.meta.env.VITE_CLIENTS_PORTAL_URL
+
     return (
         <>
-            <nav className="bg-black text-white py-2 z-50 fixed top-0 left-0 w-full">
+            <nav
+                className="text-white py-2 z-50 fixed top-0 left-0 w-full"
+                style={{
+                    background: (atTop && isDesktop) ? "rgba(0,0,0,0)" : "rgba(0,0,0,1)",
+                    transition: "background 0.4s ease"
+                }}
+            >
                 <div className="container mx-auto flex justify-between items-center px-4">
                     <button onClick={() => handleLinkClick("/")}>
                         <img src="/img/logo/logo_white_2.svg" className="h-12 mb-2" alt="Reyes and Friends Logo" />
                     </button>
                     <ul className={`md:flex space-x-0 md:space-x-6 text-lg md:ml-auto md:justify-end ${isMenuOpen ? "flex flex-col space-y-4 absolute top-full left-0 w-full bg-black p-4 z-50" : "hidden"} md:static md:flex-row md:space-y-0`}>
                         <li>
-                            <button className="hover:underline block" onClick={() => handleLinkClick("/")}>Inicio</button>
+                            <button className="hover:underline block flex items-center gap-2" onClick={() => handleLinkClick("/")}>
+                                <Home size={18} /> Inicio
+                            </button>
                         </li>
                         <li>
-                            <button className="hover:underline block" onClick={() => handleLinkClick("/about")}>Sobre nosotros</button>
+                            <button className="hover:underline block flex items-center gap-2" onClick={() => handleLinkClick("/about")}>
+                                <Info size={18} /> Sobre nosotros
+                            </button>
                         </li>
                         <li className="relative" ref={dropdownRef}>
                             <button
                                 onClick={handleDropdownToggle}
-                                className="hover:underline focus:outline-none flex items-center"
+                                className="hover:underline focus:outline-none flex items-center gap-2"
                             >
-                                Nuestros servicios <ChevronDown className="ml-1" size={16} />
+                                <Briefcase size={18} /> Nuestros servicios <ChevronDown className="ml-1" size={16} />
                             </button>
                             {isDropdownOpen && (
-                                <ul className={`bg-white text-black mt-2 shadow-lg rounded md:absolute md:mt-2 md:py-2 md:w-40 ${isMenuOpen ? "w-full mt-2" : ""}`}>
+                                <ul className={`bg-white text-black mt-2 shadow-xl rounded-lg border ${isMenuOpen ? "w-full mt-2 py-3" : "md:absolute md:mt-2 md:py-4 md:w-56"}`}>
                                     {dropdownOptions.map(option => (
                                         <li key={option.path}>
                                             <button
-                                                className="block w-full px-4 py-2 hover:bg-gray-200"
+                                                className="block w-full px-4 py-3 hover:bg-gray-100 text-left text-base font-medium transition-colors duration-200"
                                                 onClick={() => handleLinkClick(option.path)}
                                             >
                                                 {option.label}
@@ -99,16 +134,16 @@ const Navbar: React.FC = () => {
                         <li className="relative" ref={contactDropdownRef}>
                             <button
                                 onClick={toggleContactDropdown}
-                                className="hover:underline focus:outline-none flex items-center"
+                                className="hover:underline focus:outline-none flex items-center gap-2"
                             >
-                                Contacto <ChevronDown className="ml-1" size={16} />
+                                <Mail size={18} /> Contacto <ChevronDown className="ml-1" size={16} />
                             </button>
                             {isContactDropdownOpen && (
-                                <ul className={`bg-white text-black mt-2 shadow-lg rounded md:absolute md:mt-2 md:py-2 md:w-40 ${isMenuOpen ? "w-full mt-2" : ""}`}>
+                                <ul className={`bg-white text-black mt-2 shadow-xl rounded-lg border ${isMenuOpen ? "w-full mt-2 py-3" : "md:absolute md:mt-2 md:py-4 md:w-56"}`}>
                                     {contactList.map(option => (
                                         <li key={option.path}>
                                             <button
-                                                className="block w-full px-4 py-2 hover:bg-gray-200"
+                                                className="block w-full px-4 py-3 hover:bg-gray-100 text-left text-base font-medium transition-colors duration-200"
                                                 onClick={() => handleLinkClick(option.path)}
                                             >
                                                 {option.name}
@@ -119,10 +154,26 @@ const Navbar: React.FC = () => {
                             )}
                         </li>
                         <li>
-                            <button className="hover:underline block" onClick={() => handleLinkClick("/portfolio")}>Portafolio</button>
+                            <button className="hover:underline block flex items-center gap-2" onClick={() => handleLinkClick("/portfolio")}>
+                                <Folder size={18} /> Portafolio
+                            </button>
                         </li>
+                        {productionMode && clientsPortalUrl && (
+                        <li>
+                            <a
+                                href={clientsPortalUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 px-3 py-1.5 bg-red-700 hover:bg-red-800 text-black font-bold rounded shadow-lg transition-colors duration-200 text-white"
+                                style={{ textDecoration: "none" }}
+                            >
+                                <LogIn size={22} />
+                                Acceso clientes
+                            </a>
+                        </li>
+                        )}
                     </ul>
-
+                    
                     <div className="md:hidden">
                         <button onClick={toggleMenu} className="focus:outline-none" aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}>
                             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}

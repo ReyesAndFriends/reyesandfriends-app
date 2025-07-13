@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ServiceOption } from '../../../../hooks/services/useServiceList';
 
 type PhaseThreeProps = {
@@ -19,6 +19,30 @@ type PhaseThreeProps = {
 };
 
 const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, serviceList }) => {
+    const filteredServiceList = serviceList.filter(service => service.value !== "fullList");
+    const selectedService = filteredServiceList.find(service => (service.value || service.name) === values.projectType);
+
+    // Detect query param and select projectType if valid
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const serviceParam = params.get('service');
+        if (
+            serviceParam &&
+            filteredServiceList.some(service => (service.value || service.name) === serviceParam) &&
+            !values.projectType // Only set if not already selected
+        ) {
+            // Simulate change event for select
+            handleChange({
+                target: {
+                    name: 'projectType',
+                    value: serviceParam,
+                }
+            } as React.ChangeEvent<HTMLInputElement | HTMLSelectElement>);
+        }
+    // Only run on mount and if projectType changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [serviceList]);
+
     return (
         <div className="container mx-auto px-4 max-w-3xl">
             <div className="mt-4 bg-black p-8 rounded-lg shadow-lg">
@@ -34,7 +58,7 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                         className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
                     >
                         <option value="" disabled>Selecciona el tipo de proyecto</option>
-                        {serviceList.map((service) => (
+                        {filteredServiceList.map((service) => (
                             <option key={service.value || service.name} value={service.value || service.name}>
                                 {service.name}
                             </option>
@@ -43,6 +67,18 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                         <option value="notSure">No estoy seguro</option>
                     </select>
                     {errors.projectType && <p className="text-red-500 text-sm mt-1">{errors.projectType}</p>}
+                    {selectedService && (
+                        <p className="mt-2">
+                            <a 
+                                href={selectedService.path} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="text-red-500 hover:text-red-400 underline text-sm"
+                            >
+                                Ver detalles sobre {selectedService.name}
+                            </a>
+                        </p>
+                    )}
                 </div>
 
                 {values.projectType === "other" && (

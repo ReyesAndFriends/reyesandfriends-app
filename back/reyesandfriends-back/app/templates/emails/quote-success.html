@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reyes&Friends</title>
+    <title>Reyes&Friends - Cotización Recibida</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style type="text/css">
 
@@ -64,6 +64,14 @@
             text-align: center;
         }
 
+        .subtitle {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
         .center {
             text-align: center;
         }
@@ -113,11 +121,12 @@
         }
 
         .email-details{
+            background-color: #333333;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 3px solid #8B0000;
             list-style-type: none;
             margin: 0;
-            background-color: #8b00004d;
-            padding: 10px;
-            border-radius: 4px;
         }
 
         .auto-generated-text {
@@ -155,28 +164,43 @@
         }
     </style>
 </head>
-
 <body>
     <div class="email-container">
-
+        
         <div class="header">
             <img src="https://cdn.reyesandfriends.cl/assets/logo/reyesandfriends-white.svg" alt="Reyes&Friends logo" width="200" height="auto">
         </div>
         
         <div class="content">
-
-            <h1 class="title">¡Gracias por contactar a Reyes&Friends!</h1>
+            <h1 class="title">Cotización Recibida</h1>
             
             <p class="paragraph">
                 Estimado/a <strong>{{ user_name }}</strong>,
             </p>
             
             <p class="paragraph">
-                Gracias por ponerte en contacto con nosotros. Hemos recibido tu solicitud y nuestro equipo se encuentra revisándola.
+                Gracias por solicitar una cotización con Reyes&Friends. Hemos recibido tu solicitud exitosamente y nuestro equipo se encuentra revisándola.
             </p>
-                        
+
+            <p class="subtitle">Detalles de tu cotización:</p>
+            
+            <div class="paragraph email-details">
+                <strong>Número de Cotización:</strong> {{ quote_number }}<br>
+                <strong>Nombre:</strong> {{ user_name }}<br>
+                <strong>Email:</strong> {{ email }}<br>
+                <strong>Teléfono:</strong> {{ phone }}<br>
+                {% if company_name %}
+                <strong>Empresa:</strong> {{ company_name }}<br>
+                {% endif %}
+                <strong>Tipo de Proyecto:</strong> {{ project_type }}<br>
+                <strong>Fecha de Solicitud:</strong> {{ submitted_date }}
+            </div>
+            
             <p class="paragraph">
-                Nuestro equipo se pondrá en contacto contigo cuando hayamos revisado tu mensaje, por este mismo medio. agradecemos tu paciencia mientras trabajamos para responder a tu consulta.
+                Nuestro equipo técnico revisará tu solicitud y te contactaremos dentro de las próximas 24-48 horas para coordinar los siguientes pasos del proceso de cotización.
+
+                Recuerda que esta cotización es flexible y puede ajustarse según tus necesidades. Si deseas modificar algún detalle o agregar información, no dudes en comunicarlo. Nuestro objetivo es que la cotización se adapte perfectamente a tus expectativas.
+
             </p>
             
             <p class="paragraph contact-info-box">
@@ -191,9 +215,8 @@
                         
             <p class="paragraph">
                 Atentamente,<br>
-                El equipo de Reyes&Friends.
+                El equipo de Reyes&Friends
             </p>
-            
         </div>
         
         <div class="footer">
@@ -203,4 +226,5 @@
         </div> 
     </div>
 </body>
+</html>
 </html>

@@ -1,8 +1,8 @@
 from flask import jsonify
 from . import contact
-from app.utils.get_mongo_connection import get_data_from_collection
+from app.utils.db_utils import get_contact_categories
 
 @contact.route('/categories')
 def getCategories():
-    categories = get_data_from_collection("contact_categories", {}, {"_id": 0})
+    categories = get_contact_categories()
     return jsonify(categories)

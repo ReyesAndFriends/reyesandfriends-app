@@ -1,27 +1,37 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { Gem, Mail } from "lucide-react";
 
 const AboutUs: React.FC = () => {
     return (
         <>
-            <section className="bg-cover bg-center relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#891818] to-[#5A1410]"></div>
-                <div className="container mx-auto px-4 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-                    <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24">
+            <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
+                <div className="absolute inset-0 bg-hero-section"></div>
+                <div className="absolute inset-0">
+                    <img
+                        src="/img/background/background-web.jpg"
+                        alt="fondo de la sección"
+                        className="w-full h-full object-cover opacity-5 filter grayscale"
+                        draggable={false}
+                        onContextMenu={e => e.preventDefault()}
+                    />
+                </div>
+                <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col items-center justify-center text-center flex-1">
+                    <div className="max-w-2xl text-white mx-auto">
+                        <img
+                            src="/img/logo/crown_white.svg"
+                            className="w-32 h-32 object-contain mx-auto mb-6"
+                            alt="reyes&friends_crown"
+                        />
                         <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
                             Sobre Nosotros
-                            Reyes&Friends
                         </h1>
+                        <h2 className="text-3xl md:text-3xl font-semibold mb-4">
+                            Reyes&Friends
+                        </h2>
                         <p className="text-xl mb-8 text-red-100">
                             En Reyes&Friends, nos dedicamos a crear soluciones digitales innovadoras que transforman la forma en que las empresas operan y se conectan con sus clientes.
                         </p>
-                    </div>
-                    <div className="flex flex-col items-center">
-                        <img 
-                            src="/img/logo/crown_white.svg" 
-                            className="w-[500px] h-[500px] object-contain"
-                            alt="reyes&friends_crown"
-                        />
-
                     </div>
                 </div>
             </section>
