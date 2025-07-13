@@ -10,6 +10,8 @@ import Services from "../pages/services/services";
 import AboutUs from "../pages/about-us/aboutUs";
 import QuotePage from "../pages/quote-project/quoteProject";
 
+import WebProgramming from "../pages/services/WebProgramming/WebProgramming";
+
 const pageTransition = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
@@ -28,7 +30,7 @@ const AnimatedRoutes: React.FC = () => {
         <AnimatePresence mode="wait" onExitComplete={handleExitComplete}>
             <Routes location={location} key={location.pathname}>
                 <Route path="/" element={<motion.div {...pageTransition}><Home /></motion.div>} />
-                <Route path="/services/web-development" element={<motion.div {...pageTransition}><div>Programación web</div></motion.div>} />
+                <Route path="/services/web-development" element={<motion.div {...pageTransition}><WebProgramming/></motion.div>} />
                 <Route path="/services/bussiness-software" element={<motion.div {...pageTransition}><div>Software empresarial</div></motion.div>} />
                 <Route path="/services/promotional-web" element={<motion.div {...pageTransition}><div>Páginas web promocionales</div></motion.div>} />
                 <Route path="/services/ecommerce-web" element={<motion.div {...pageTransition}><div>Páginas E-Commerce</div></motion.div>} />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ServiceOption } from '../../../../hooks/services/useServiceList';
 
 type PhaseThreeProps = {
@@ -21,6 +21,27 @@ type PhaseThreeProps = {
 const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, serviceList }) => {
     const filteredServiceList = serviceList.filter(service => service.value !== "fullList");
     const selectedService = filteredServiceList.find(service => (service.value || service.name) === values.projectType);
+
+    // Detect query param and select projectType if valid
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const serviceParam = params.get('service');
+        if (
+            serviceParam &&
+            filteredServiceList.some(service => (service.value || service.name) === serviceParam) &&
+            !values.projectType // Only set if not already selected
+        ) {
+            // Simulate change event for select
+            handleChange({
+                target: {
+                    name: 'projectType',
+                    value: serviceParam,
+                }
+            } as React.ChangeEvent<HTMLInputElement | HTMLSelectElement>);
+        }
+    // Only run on mount and if projectType changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [serviceList]);
 
     return (
         <div className="container mx-auto px-4 max-w-3xl">
