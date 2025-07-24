@@ -16,7 +16,7 @@ export const useGetContactCategories = () => {
             setCategories(response.data);
         } catch (error: any) {
             if (error.response && error.response.status === 404) {
-                setError("No se encontraron categorías de contacto.");
+                setError("En estos momentos no podemos conectar con el servicio de contacto. Por favor, inténtalo más tarde.");
             } else {
                 setError("El servicio de contacto no está disponible en este momento.");
             }

@@ -95,7 +95,8 @@ const Contact = () => {
                     <div className="bg-black p-8 rounded-lg shadow-lg">
                         {(categoriesError || loading) ? (
                             <div className="flex flex-col items-center justify-center py-12">
-                                <p className="text-red-500 text-lg mb-4">
+                                <h2 className="text-red-500 text-2xl font-bold mb-2">Error al cargar</h2>
+                                <p className="text-white text-lg mb-4 text-center">
                                     {loading ? "Recargando..." : categoriesError}
                                 </p>
                                 <button
