@@ -13,10 +13,6 @@ type ResumeProjectProps = {
 
 const projectTypeMap: Record<string, string> = {
   webProgramming: "Programación web",
-  enterpriseSoftware: "Software empresarial",
-  promotionalWeb: "Páginas web promocionales",
-  ecommerceWeb: "Páginas E-Commerce",
-  fullList: "Lista completa",
   other: "Otro",
   notSure: "No está seguro",
 };

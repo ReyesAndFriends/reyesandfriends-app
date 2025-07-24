@@ -177,6 +177,41 @@ def is_valid_phone(phone):
     pattern = r'^\+569\d{8}$'
     return re.match(pattern, phone) is not None
 
+# Mapping dictionaries for various fields
+
+PROJECT_TYPE_MAP = {
+    "webProgramming": "Programación web",
+    "other": "Otro",
+    "notSure": "No está seguro",
+}
+
+HOSTING_MAP = {
+    "yes": "Sí, necesita hosting",
+    "no": "No necesita hosting",
+}
+
+DOMAIN_MAP = {
+    "yes": "Sí, tiene dominio propio",
+    "no": "No tiene dominio y necesita uno",
+    "notSure": "No está seguro todavía",
+}
+
+DELIVERY_MAP = {
+    "no": "No",
+    "lessThan1Month": "Menos de 1 mes",
+    "1To3Months": "1 a 3 meses",
+    "3To6Months": "3 a 6 meses",
+    "flexible": "Flexible",
+}
+
+BOOLEAN_MAP = {
+    "yes": "Sí",
+    "no": "No",
+}
+
+def get_mapped_value(map_dict, key):
+    return map_dict.get(key, key)  # Return original value if map not exists.
+
 def send_quote_confirmation_email(quote):
     """Send confirmation email to the client"""
     try:
@@ -185,11 +220,14 @@ def send_quote_confirmation_email(quote):
             'emails/quote-success.html',
             user_name=user_name,
             quote_number=quote.quote_number,
-            project_type=quote.project_type,
+            project_type=get_mapped_value(PROJECT_TYPE_MAP, quote.project_type),
             company_name=quote.company_name,
             email=quote.email,
             phone=quote.phone,
-            submitted_date=quote.submitted_at.strftime('%d/%m/%Y %H:%M')
+            submitted_date=quote.submitted_at.strftime('%d/%m/%Y %H:%M'),
+            hosting_service=get_mapped_value(HOSTING_MAP, quote.hosting_service),
+            has_domain=get_mapped_value(DOMAIN_MAP, quote.has_domain),
+            delivery_timeframe=get_mapped_value(DELIVERY_MAP, quote.delivery_timeframe),
         )
         
         msg = Message(
