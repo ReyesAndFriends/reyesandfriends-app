@@ -135,7 +135,7 @@ const QuoteProject: React.FC = () => {
                 className="w-32 h-32 object-contain mx-auto mb-6"
                 alt="reyes&friends_crown"
               />
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
+              <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block">
                 ¡Cotización Enviada Exitosamente!
               </h1>
               <p className="text-xl mb-8 text-red-100">
@@ -235,7 +235,7 @@ const QuoteProject: React.FC = () => {
                 className="w-32 h-32 object-contain mx-auto mb-6"
                 alt="reyes&friends_crown"
               />
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
+              <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block">
                 De acuerdo, {userName}
               </h1>
               <p className="text-xl mb-8 text-red-100">
@@ -324,7 +324,7 @@ const QuoteProject: React.FC = () => {
               className="w-32 h-32 object-contain mx-auto mb-6"
               alt="reyes&friends_crown"
             />
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
+            <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block">
               Cotiza tu proyecto
             </h1>
             <p className="text-xl mb-8 text-red-100">

@@ -25,7 +25,7 @@ const WebProgramming = () => {
                         />
                     </div>
                     <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
-                        <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-flex items-center gap-4">
+                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-flex items-center gap-4">
                             <Globe size={40} /> Programación Web
                         </h1>
                         <p className="text-xl mb-8">

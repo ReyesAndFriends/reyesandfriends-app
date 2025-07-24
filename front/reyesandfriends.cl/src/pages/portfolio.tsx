@@ -21,7 +21,7 @@ const Portfolio: React.FC = () => {
                         className="w-24 h-24 object-contain mx-auto mb-6"
                         alt="reyes&friends_crown"
                     />
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-lg flex items-center justify-center gap-2 border-b-4 border-red-500 pb-4 inline-block">
+                    <h1 className="text-4xl md:text-5xl mb-4 text-white drop-shadow-lg flex items-center justify-center gap-2 border-b-4 border-red-500 pb-4 inline-block">
                         <Flower className="w-8 h-8" />
                         Algún día habrá rosas aquí...
                     </h1>
