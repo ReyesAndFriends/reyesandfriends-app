@@ -3,8 +3,7 @@ import { useState, useEffect, useRef } from "react"
 import { Menu, X, ChevronDown, Home, Info, Briefcase, Mail, Folder, LogIn } from "lucide-react"
 import useNavOptions from "./useNavOptions"
 import { useContactList } from "../../../hooks/services/useServiceList"
-import RouterContactModal from "../../../helpers/routerContactModal/routerContactModal"
-import { useContactLinkValidator } from "../../../helpers/ContactLinkValidator/useContactLinkValidator"
+import { Link } from "react-router-dom"
 
 const Navbar: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -14,12 +13,7 @@ const Navbar: React.FC = () => {
     const [isContactDropdownOpen, setIsContactDropdownOpen] = useState(false)
     const contactDropdownRef = useRef<HTMLLIElement>(null)
 
-    const {
-        isModalOpen,
-        handleLinkClick,
-        confirmNavigation,
-        cancelNavigation
-    } = useContactLinkValidator()
+
 
     const [atTop, setAtTop] = useState(true)
     const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768)
@@ -95,19 +89,19 @@ const Navbar: React.FC = () => {
                 }}
             >
                 <div className="container mx-auto flex justify-between items-center px-4">
-                    <button onClick={() => handleLinkClick("/")}>
+                    <Link to="/">
                         <img src="/img/logo/logo_white_2.svg" className="h-12 mb-2" alt="Reyes and Friends Logo" />
-                    </button>
+                    </Link>
                     <ul className={`md:flex space-x-0 md:space-x-6 text-lg md:ml-auto md:justify-end ${isMenuOpen ? "flex flex-col space-y-4 absolute top-full left-0 w-full bg-black p-4 z-50" : "hidden"} md:static md:flex-row md:space-y-0`}>
                         <li>
-                            <button className="hover:underline block flex items-center gap-2" onClick={() => handleLinkClick("/")}>
+                            <Link className="hover:underline block flex items-center gap-2" to="/">
                                 <Home size={18} /> Inicio
-                            </button>
+                            </Link>
                         </li>
                         <li>
-                            <button className="hover:underline block flex items-center gap-2" onClick={() => handleLinkClick("/about")}>
+                            <Link className="hover:underline block flex items-center gap-2" to="/about">
                                 <Info size={18} /> Sobre nosotros
-                            </button>
+                            </Link>
                         </li>
                         <li className="relative" ref={dropdownRef}>
                             <button
@@ -120,12 +114,13 @@ const Navbar: React.FC = () => {
                                 <ul className={`bg-white text-black mt-2 shadow-xl rounded-lg border ${isMenuOpen ? "w-full mt-2 py-3" : "md:absolute md:mt-2 md:py-4 md:w-56"}`}>
                                     {dropdownOptions.map(option => (
                                         <li key={option.path}>
-                                            <button
+                                            <Link
                                                 className="block w-full px-4 py-3 hover:bg-gray-100 text-left text-base font-medium transition-colors duration-200"
-                                                onClick={() => handleLinkClick(option.path)}
+                                                to={option.path}
+                                                onClick={closeDropdown}
                                             >
                                                 {option.label}
-                                            </button>
+                                            </Link>
                                         </li>
                                     ))}
                                 </ul>
@@ -142,21 +137,22 @@ const Navbar: React.FC = () => {
                                 <ul className={`bg-white text-black mt-2 shadow-xl rounded-lg border ${isMenuOpen ? "w-full mt-2 py-3" : "md:absolute md:mt-2 md:py-4 md:w-56"}`}>
                                     {contactList.map(option => (
                                         <li key={option.path}>
-                                            <button
+                                            <Link
                                                 className="block w-full px-4 py-3 hover:bg-gray-100 text-left text-base font-medium transition-colors duration-200"
-                                                onClick={() => handleLinkClick(option.path)}
+                                                to={option.path}
+                                                onClick={() => setIsContactDropdownOpen(false)}
                                             >
                                                 {option.name}
-                                            </button>
+                                            </Link>
                                         </li>
                                     ))}
                                 </ul>
                             )}
                         </li>
                         <li>
-                            <button className="hover:underline block flex items-center gap-2" onClick={() => handleLinkClick("/portfolio")}>
+                            <Link className="hover:underline block flex items-center gap-2" to="/portfolio">
                                 <Folder size={18} /> Portafolio
-                            </button>
+                            </Link>
                         </li>
                         {productionMode && clientsPortalUrl && (
                         <li>
@@ -181,12 +177,6 @@ const Navbar: React.FC = () => {
                     </div>
                 </div>
             </nav>
-            {isModalOpen && (
-                <RouterContactModal
-                    onConfirm={confirmNavigation}
-                    onCancel={cancelNavigation}
-                />
-            )}
         </>
     )
 }

@@ -1,14 +1,7 @@
 import React from 'react';
-import { useContactLinkValidator } from '../../../helpers/ContactLinkValidator/useContactLinkValidator';
-import RouterContactModal from '../../../helpers/routerContactModal/routerContactModal';
+import { Link } from 'react-router';
 
 const Footer: React.FC = () => {
-    const {
-        isModalOpen,
-        handleLinkClick,
-        confirmNavigation,
-        cancelNavigation
-    } = useContactLinkValidator();
 
     return (
         <>
@@ -32,22 +25,16 @@ const Footer: React.FC = () => {
                         <div className="w-full md:w-1/3 mb-6 md:mb-0">
                             <h3 className="text-md font-semibold text-white mb-4">Enlaces rápidos</h3>
                             <ul className="text-sm space-y-2">
-                                <li><button onClick={() => handleLinkClick("/")} className="hover:underline">Inicio</button></li>
-                                <li><button onClick={() => handleLinkClick("/about")} className="hover:underline">Sobre nosotros</button></li>
-                                <li><button onClick={() => handleLinkClick("/services")} className="hover:underline">Servicios</button></li>
-                                <li><button onClick={() => handleLinkClick("/portfolio")} className="hover:underline">Portafolio</button></li>
-                                <li><button onClick={() => handleLinkClick("/contact")} className="hover:underline">Contacto</button></li>
+                                <li><Link to="/" className="hover:underline">Inicio</Link></li>
+                                <li><Link to="/about" className="hover:underline">Sobre nosotros</Link></li>
+                                <li><Link to="/services" className="hover:underline">Servicios</Link></li>
+                                <li><Link to="/portfolio" className="hover:underline">Portafolio</Link></li>
+                                <li><Link to="/contact" className="hover:underline">Contacto</Link></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </footer>
-            {isModalOpen && (
-                <RouterContactModal
-                    onConfirm={confirmNavigation}
-                    onCancel={cancelNavigation}
-                />
-            )}
         </>
     );
 };
