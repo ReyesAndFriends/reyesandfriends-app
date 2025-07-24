@@ -52,7 +52,7 @@ const WebProgramming = () => {
                     </h2>
                     <div className="flex flex-col gap-16">
 
-                        <div className="flex flex-col md:flex-row items-stretch gap-0 rounded-lg overflow-hidden shadow-lg bg-zinc-800">
+                        <div className="flex flex-col md:flex-row items-stretch gap-0 rounded-lg overflow-hidden shadow-lg bg-black">
                             <div className="md:w-1/2 w-full flex items-center justify-center">
                                 <img
                                     src="/img/services/WebProgramming/responsive.png"
@@ -70,7 +70,7 @@ const WebProgramming = () => {
                             </div>
                         </div>
 
-                        <div className="flex flex-col md:flex-row items-stretch gap-0 rounded-lg overflow-hidden shadow-lg bg-zinc-800">
+                        <div className="flex flex-col md:flex-row items-stretch gap-0 rounded-lg overflow-hidden shadow-lg bg-black">
 
                             <div className="md:w-1/2 w-full flex flex-col justify-center p-8">
                                 <h3 className="text-2xl font-semibold mb-2 text-red-500">No necesitas descargar nada</h3>
@@ -89,7 +89,7 @@ const WebProgramming = () => {
                             </div>
                         </div>
 
-                        <div className="flex flex-col md:flex-row items-stretch gap-0 rounded-lg overflow-hidden shadow-lg bg-zinc-800">
+                        <div className="flex flex-col md:flex-row items-stretch gap-0 rounded-lg overflow-hidden shadow-lg bg-black">
 
                             <div className="md:w-1/2 w-full flex items-center justify-center">
                                 <img
@@ -109,7 +109,7 @@ const WebProgramming = () => {
 
                         </div>
 
-                        <div className="flex flex-col md:flex-row items-stretch gap-0 rounded-lg overflow-hidden shadow-lg bg-zinc-800">
+                        <div className="flex flex-col md:flex-row items-stretch gap-0 rounded-lg overflow-hidden shadow-lg bg-black">
 
                             <div className="md:w-1/2 w-full flex flex-col justify-center p-8">
                                 <h3 className="text-2xl font-semibold mb-2 text-red-500">Personalizable como tu empresa</h3>
