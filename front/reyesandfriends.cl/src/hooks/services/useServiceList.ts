@@ -7,8 +7,13 @@ export interface ServiceOption {
 }
 
 const serviceList: ServiceOption[] = [
-    { name: "Programación web", path: "/services/web-development", value: "webProgramming", image: "/img/services/FullList/web_programming.jpg", description: "Transforma tus ideas en realidad con software web innovador. Desde páginas impactantes hasta paneles híbridos para cualquier dispositivo, ¡lo hacemos posible!" },
-    { name: "Lista completa", path: "/services", value: "fullList", image: "/img/services/FullList/image.png", description: "Descubre todo lo que podemos hacer por ti. Explora nuestra lista completa de servicios y encuentra la solución perfecta." },
+    { 
+        name: "Programación web", 
+        path: "/services/web-development", 
+        value: "webProgramming", 
+        image: "/img/services/FullList/web_programming.jpg", 
+        description: "Desarrollamos software web innovador y adaptable para cualquier dispositivo." 
+    },
 ];
 
 const contactList: ServiceOption[] = [

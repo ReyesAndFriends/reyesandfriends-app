@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react"
 import { Menu, X, ChevronDown, Home, Info, Briefcase, Mail, Folder, LogIn } from "lucide-react"
 import useNavOptions from "./useNavOptions"
 import { useContactList } from "../../../hooks/services/useServiceList"
+import { useServiceList } from "../../../hooks/services/useServiceList"
 import { Link } from "react-router-dom"
 
 const Navbar: React.FC = () => {
@@ -10,6 +11,7 @@ const Navbar: React.FC = () => {
     const { isDropdownOpen, toggleDropdown, closeDropdown, dropdownOptions } = useNavOptions()
     const dropdownRef = useRef<HTMLLIElement>(null)
     const contactList = useContactList()
+    const serviceList = useServiceList()
     const [isContactDropdownOpen, setIsContactDropdownOpen] = useState(false)
     const contactDropdownRef = useRef<HTMLLIElement>(null)
 
@@ -112,17 +114,26 @@ const Navbar: React.FC = () => {
                             </button>
                             {isDropdownOpen && (
                                 <ul className={`bg-white text-black mt-2 shadow-xl rounded-lg border ${isMenuOpen ? "w-full mt-2 py-3" : "md:absolute md:mt-2 md:py-4 md:w-56"}`}>
-                                    {dropdownOptions.map(option => (
+                                    {serviceList.map(option => (
                                         <li key={option.path}>
                                             <Link
                                                 className="block w-full px-4 py-3 hover:bg-gray-100 text-left text-base font-medium transition-colors duration-200"
                                                 to={option.path}
                                                 onClick={closeDropdown}
                                             >
-                                                {option.label}
+                                                {option.name}
                                             </Link>
                                         </li>
                                     ))}
+                                    <li>
+                                        <Link
+                                            className="block w-full px-4 py-3 hover:bg-gray-100 text-left text-base font-medium transition-colors duration-200"
+                                            to="/services"
+                                            onClick={closeDropdown}
+                                        >
+                                            Lista completa
+                                        </Link>
+                                    </li>
                                 </ul>
                             )}
                         </li>
