@@ -11,7 +11,7 @@ const serviceList: ServiceOption[] = [
         name: "Programación web", 
         path: "/services/web-development", 
         value: "webProgramming", 
-        image: "/img/services/FullList/web_programming.jpg", 
+        image: "/img/services/FullList/web_programming.jpeg", 
         description: "Desarrollamos software web innovador y adaptable para cualquier dispositivo." 
     },
 ];
