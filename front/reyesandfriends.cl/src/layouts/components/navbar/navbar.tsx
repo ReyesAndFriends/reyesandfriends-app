@@ -15,11 +15,6 @@ const Navbar: React.FC = () => {
     const [isContactDropdownOpen, setIsContactDropdownOpen] = useState(false)
     const contactDropdownRef = useRef<HTMLLIElement>(null)
 
-
-
-    const [atTop, setAtTop] = useState(true)
-    const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768)
-
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
     }
@@ -32,25 +27,6 @@ const Navbar: React.FC = () => {
     const toggleContactDropdown = () => {
         setIsContactDropdownOpen(!isContactDropdownOpen)
     }
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setAtTop(window.scrollY === 0)
-        }
-        
-        const handleResize = () => {
-            setIsDesktop(window.innerWidth >= 768)
-        }
-        
-        window.addEventListener("scroll", handleScroll)
-        window.addEventListener("resize", handleResize)
-        handleScroll()
-        
-        return () => {
-            window.removeEventListener("scroll", handleScroll)
-            window.removeEventListener("resize", handleResize)
-        }
-    }, [])
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -86,7 +62,7 @@ const Navbar: React.FC = () => {
             <nav
                 className="text-white py-2 z-50 fixed top-0 left-0 w-full"
                 style={{
-                    background: (atTop && isDesktop) ? "rgba(0,0,0,0)" : "rgba(0,0,0,1)",
+                    background: "black",
                     transition: "background 0.4s ease"
                 }}
             >
@@ -171,11 +147,10 @@ const Navbar: React.FC = () => {
                                 href={clientsPortalUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-2 px-3 py-1.5 bg-red-700 hover:bg-red-800 text-black font-bold rounded shadow-lg transition-colors duration-200 text-white"
-                                style={{ textDecoration: "none" }}
+                                className="flex items-center gap-2 font-semibold rounded shadow-lg transition-colors duration-200 text-red-500 hover:underline"
                             >
                                 <LogIn size={22} />
-                                Acceso clientes
+                                Área clientes
                             </a>
                         </li>
                         )}
