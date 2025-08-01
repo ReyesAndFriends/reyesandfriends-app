@@ -1,4 +1,4 @@
-import { Globe, Gem } from "lucide-react";
+import { Globe, Gem, Ban, Download } from "lucide-react";
 import { Link } from "react-router";
 
 const WebProgramming = () => {
@@ -21,7 +21,6 @@ const WebProgramming = () => {
                             src="/img/services/WebProgramming/logo.png"
                             alt="Programación Web"
                             className="max-w-full h-auto"
-                            style={{ filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.5))" }}
                         />
                     </div>
                     <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
@@ -56,7 +55,7 @@ const WebProgramming = () => {
                             <div className="md:w-1/2 w-full flex items-center justify-center">
                                 <img
                                     src="/img/services/WebProgramming/responsive.png"
-                                    alt="Desarrollo Responsive"
+                                    alt="Ilustración de diseño responsivo"
                                     className="max-h-[350px] w-auto object-contain"
                                 />
                             </div>
@@ -80,21 +79,21 @@ const WebProgramming = () => {
                                 </p>
                             </div>
 
-                            <div className="md:w-1/2 w-full flex">
-                                <img
-                                    src="/img/services/WebProgramming/responsive-demo.jpg"
-                                    alt="Desarrollo Responsive"
-                                    className="object-cover w-full h-full min-h-[260px] max-h-[340px]"
-                                />
+                            <div className="md:w-1/2 w-full flex items-center justify-center">
+                                <div className="relative w-32 h-32 flex items-center justify-center">
+                                    <Download className="w-20 h-20 text-white" />
+                                    <Ban className="w-32 h-32 text-red-500 absolute top-0 left-0" />
+                                </div>
                             </div>
+                            
                         </div>
 
                         <div className="flex flex-col md:flex-row items-stretch gap-0 rounded-lg overflow-hidden shadow-lg bg-black">
 
                             <div className="md:w-1/2 w-full flex items-center justify-center">
                                 <img
-                                    src="/img/services/WebProgramming/seo.png"
-                                    alt="Optimización SEO"
+                                    src="/img/services/WebProgramming/SEO.png"
+                                    alt="Un gráfico de SEO en 3D"
                                     className="max-h-[350px] w-auto object-contain"
                                 />
                             </div>
@@ -119,11 +118,11 @@ const WebProgramming = () => {
                                 </p>
                             </div>
 
-                            <div className="md:w-1/2 w-full flex">
+                            <div className="md:w-1/2 w-full flex items-center justify-center">
                                 <img
-                                    src="/img/services/WebProgramming/responsive-demo.jpg"
-                                    alt="Desarrollo Responsive"
-                                    className="object-cover w-full h-full min-h-[260px] max-h-[340px]"
+                                    src="/img/services/WebProgramming/suit-image.png"
+                                    alt="Un traje elegante como tu empresa"
+                                    className="object-contain max-h-[150px] w-auto"
                                 />
                             </div>
                         </div>
