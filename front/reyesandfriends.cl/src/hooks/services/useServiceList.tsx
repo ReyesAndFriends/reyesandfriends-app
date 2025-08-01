@@ -1,4 +1,4 @@
-import { Globe, Mail, FileText } from "lucide-react";
+import { Globe, Mail, Gem } from "lucide-react";
 
 export interface ServiceOption {
     name: string;
@@ -23,7 +23,7 @@ const serviceList: ServiceOption[] = [
 
 const contactList: ServiceOption[] = [
     { name: "Contáctanos", path: "/contact", icon: (() => <Mail size={18} className="inline mr-2" />)() },
-    { name: "Cotiza tu proyecto", path: "/quote-project", icon: (() => <FileText size={18} className="inline mr-2" />)() },
+    { name: "Cotiza tu proyecto", path: "/quote-project", icon: (() => <Gem size={18} className="inline mr-2" />)() },
 ]
 
 export const useServiceList = () => {
