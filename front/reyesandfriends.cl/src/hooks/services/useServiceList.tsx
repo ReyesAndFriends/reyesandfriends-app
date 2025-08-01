@@ -1,9 +1,12 @@
+import { Globe, Mail, FileText } from "lucide-react";
+
 export interface ServiceOption {
     name: string;
     path: string;
     value?: string;
     image?: string;
     description?: string;
+    icon?: React.ReactNode;
 }
 
 const serviceList: ServiceOption[] = [
@@ -12,13 +15,15 @@ const serviceList: ServiceOption[] = [
         path: "/services/web-development", 
         value: "webProgramming", 
         image: "/img/services/FullList/web_programming.jpeg", 
-        description: "Desarrollamos software web innovador y adaptable para cualquier dispositivo." 
+        description: "Desarrollamos software web innovador y adaptable para cualquier dispositivo.",
+        icon: (() => <Globe size={18} className="inline mr-2" />)()
     },
+
 ];
 
 const contactList: ServiceOption[] = [
-    { name: "Contáctanos", path: "/contact"},
-    { name: "Cotiza tu proyecto", path: "/quote-project"},
+    { name: "Contáctanos", path: "/contact", icon: (() => <Mail size={18} className="inline mr-2" />)() },
+    { name: "Cotiza tu proyecto", path: "/quote-project", icon: (() => <FileText size={18} className="inline mr-2" />)() },
 ]
 
 export const useServiceList = () => {
