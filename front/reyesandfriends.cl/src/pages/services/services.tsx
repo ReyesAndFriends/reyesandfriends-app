@@ -1,6 +1,6 @@
 import { useServiceList } from "../../hooks/services/useServiceList";
 import { Link } from "react-router";
-import { ArrowRight } from "lucide-react";
+import { List } from "lucide-react";
 
 const Services = () => {
     const services = useServiceList();
@@ -21,24 +21,19 @@ const Services = () => {
                 <div className="container mx-auto px-4 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
                     <div className="flex justify-center">
                         <img
-                            src="/img/services/FullList/logo.png"
+                            src="/img/services/FullList/services-list.png"
                             alt="Ilustración de servicios"
-                            className="max-w-full h-auto"
+                            className="h-96 w-auto object-contain"
                         />
                     </div>
                     <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
-                        <img
-                            src="/img/logo/crown_white.svg"
-                            className="w-20 h-20 object-contain mx-auto mb-4"
-                            alt="reyes&friends_crown"
-                        />
-                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block">
-                            Nuestros servicios
+                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-flex items-center gap-4">
+                            <List size={40} /> Nuestros Servicios
                         </h1>
                         <p className="text-xl mb-8">
-                            En Reyes&Friends buscamos adaptarnos a cada necesidad de nuestros clientes, por lo que ofrecemos distintas soluciones
-                            informáticas que puedan beneficiar a tu empresa. Revisa la lista completa de nuestros servicios a continuación.
+                            Ofrecemos una amplia gama de servicios digitales para ayudarte a destacar en el mundo online. Desde desarrollo web hasta un panel empresarial personalizado, tenemos la solución perfecta para ti.
                         </p>
+
                     </div>
                 </div>
             </section>
@@ -73,16 +68,16 @@ const Services = () => {
                                     </div>
                                     <div className="flex justify-center mt-3">
                                         <Link
-                                            className="bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded transition-colors text-sm flex items-center gap-2"
+                                            className="bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded transition-colors text-sm flex items-center gap-2 font-semibold"
                                             to={service.path}
                                         >
                                             Ver detalles
-                                            <ArrowRight size={16} />
                                         </Link>
                                     </div>
                                 </div>
                             ))}
                     </div>
+
                 </div>
             </section>
         </>
