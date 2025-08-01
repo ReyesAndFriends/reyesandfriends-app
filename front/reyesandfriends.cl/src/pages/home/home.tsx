@@ -3,6 +3,7 @@ import { ChevronRight, Gem, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import TerminalMessage from "./components/TerminalMessage";
 import MethodologySteps from "./components/MethodologySteps";
+import WhyChooseReyesAndFriends from "./components/WhyChooseReyesAndFriends";
 
 const Home: React.FC = () => {
     
@@ -103,7 +104,7 @@ const Home: React.FC = () => {
                 </div>
             </section>
 
-            
+            <WhyChooseReyesAndFriends />
 
         </>
     );

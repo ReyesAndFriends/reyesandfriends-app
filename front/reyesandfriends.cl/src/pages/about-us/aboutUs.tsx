@@ -1,6 +1,6 @@
-import React from "react";
+import { Info } from "lucide-react";
 
-const AboutUs: React.FC = () => {
+const AboutUs = () => {
     return (
         <>
             <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
@@ -16,13 +16,11 @@ const AboutUs: React.FC = () => {
                 </div>
                 <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col items-center justify-center text-center flex-1">
                     <div className="max-w-2xl text-white mx-auto">
-                        <img
-                            src="/img/logo/crown_white.svg"
-                            className="w-32 h-32 object-contain mx-auto mb-6"
-                            alt="reyes&friends_crown"
-                        />
-                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block">
-                            Sobre Nosotros
+                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-flex items-center gap-4">
+                            <span className="flex items-center gap-4">
+                                <Info size={40} />
+                                Sobre Nosotros
+                            </span>
                         </h1>
                         <p className="text-xl mb-8">
                             En Reyes&Friends, nos dedicamos a crear soluciones digitales innovadoras que transforman la forma en que las empresas operan y se conectan con sus clientes.
@@ -31,7 +29,7 @@ const AboutUs: React.FC = () => {
                 </div>
             </section>
 
-            <section className="py-16 bg-zinc-900 text-white">
+            <section className="py-16 text-white">
                 <div className="container mx-auto px-4 max-w-7xl">
                     <h2 className="text-3xl mb-12 text-center text-red-600 relative">
                         <span className="bg-zinc-900 px-4 relative z-10 text-white">Nuestra Misión</span>
@@ -48,35 +46,6 @@ const AboutUs: React.FC = () => {
                 </div>
             </section>
 
-            <section className="py-16 text-white bg-zinc-900">
-                <div className="container mx-auto px-4 max-w-7xl">
-                    <h2 className="text-3xl mb-12 text-center text-red-600 relative">
-                        <span className="bg-zinc-900 px-4 relative z-10 text-white">¿Por qué elegirnos?</span>
-                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
-                    </h2>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-8">
-                        <div className="md:col-span-2">
-                            <h4 className="text-lg text-red-500 mb-2">Cada proyecto es único</h4>
-                            <h2 className="text-4xl mb-4 text-white">Desarrollamos soluciones digitales personalizadas</h2>
-                            <p className="text-gray-300 text-lg">
-                                Cada proyecto que realizamos es una pieza única de un rompecabezas. Nos especializamos en entender las necesidades específicas de cada cliente, creando soluciones digitales personalizadas que se adaptan perfectamente a sus objetivos y desafíos.
-                            </p>
-                            <p className="text-gray-300 text-lg mt-4">
-                                Nuestro equipo de expertos trabaja en estrecha colaboración con nuestros clientes para garantizar que cada detalle se ajuste a sus expectativas, desde el diseño hasta la funcionalidad. Creemos que la personalización es clave para el éxito de cualquier proyecto digital.
-                            </p>
-                        </div>
-                        <div className="flex justify-center md:col-span-1">
-                            <img
-                                src="/img/logo/logo_white_2.svg"
-                                alt="reyes&friends"
-                                className="max-w-[250px] h-auto"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             <section className="py-16 bg-zinc-800 text-white">
                 <div className="container mx-auto px-4 max-w-7xl">
                     <h2 className="text-3xl mb-12 text-center text-red-600 relative">
@@ -86,8 +55,8 @@ const AboutUs: React.FC = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
                         <div className="flex justify-center mb-8 md:mb-0">
                             <img
-                                src="/img/aboutUs/team.png"
-                                alt="Equipo"
+                                src="/img/about-us/team.png"
+                                alt="Imagen ilustrativa del equipo de Reyes&Friends"
                                 className="rounded-lg shadow-lg w-full max-w-md aspect-[16/9] object-cover"
                             />
                         </div>
@@ -105,7 +74,7 @@ const AboutUs: React.FC = () => {
                 </div>
             </section>
 
-            <section className="py-16 bg-zinc-900 text-white">
+            <section className="py-16 text-white">
                 <div className="container mx-auto px-4 max-w-7xl">
                     <h2 className="text-3xl mb-12 text-center text-red-600 relative">
                         <span className="bg-zinc-900 px-4 relative z-10 text-white">Nuestra Historia</span>
@@ -121,8 +90,8 @@ const AboutUs: React.FC = () => {
                         </div>
                         <div className="flex justify-center order-1 md:order-2 mb-8 md:mb-0">
                             <img
-                                src="https://picsum.photos/400/300?random=2"
-                                alt="Historia de la empresa"
+                                src="/img/about-us/reyesandfriends-theme.png"
+                                alt="El logo de Reyes&Friends como si fuera un tema de Spotify"
                                 className="rounded-lg shadow-lg w-full max-w-xs"
                             />
                         </div>
@@ -139,13 +108,13 @@ const AboutUs: React.FC = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
                         <div className="flex justify-center mb-8 md:mb-0">
                             <img
-                                src="https://picsum.photos/400/300?random=3"
-                                alt="Innovación tecnológica"
-                                className="rounded-lg shadow-lg w-full max-w-xs"
+                                src="/img/about-us/frameworks.png"
+                                alt="Ilustración de tecnologías modernas"
+                                className="rounded-lg"
                             />
                         </div>
                         <div className="order-2 md:order-1">
-                            <h4 className="text-lg text-red-500 mb-2">"Tecnologías robustas, soluciones modernas"</h4>
+                            <h4 className="text-lg text-red-500 mb-2">Tecnologías robustas, soluciones modernas</h4>
                             <h2 className="text-4xl mb-4 text-white">Combinando calidad y modernidad</h2>
                             <p className="text-lg text-gray-200">
                                 ¿A quién no le gusta contar con un software que funcione bien, sea rápido, eficiente y, además, atractivo? ¿Por qué conformarse con menos si se puede tener todo?
