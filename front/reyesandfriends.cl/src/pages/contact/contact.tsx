@@ -2,6 +2,7 @@ import { useGetContactCategories } from "../../hooks/contact/useGetContactCatego
 import { useContactFormValidator } from "../../hooks/contact/useContactFormValidator";
 import { useState, useRef } from "react";
 import ContactModal from "./modal/contactModal";
+import { Helmet } from "react-helmet-async";
 
 function capitalizeWords(str: string) {
     return str.replace(/\b\w/g, char => char.toUpperCase()).replace(/\B\w/g, char => char.toLowerCase());
@@ -74,6 +75,21 @@ const Contact = () => {
 
     return (
         <>
+            <Helmet>
+                <title>Contacto | Reyes&Friends</title>
+                <meta
+                    name="description"
+                    content="Ponte en contacto con Reyes&Friends para consultas, soporte y más información sobre nuestros servicios."
+                />
+                <meta property="og:title" content="Contacto | Reyes&Friends" />
+                <meta property="og:description" content="Ponte en contacto con Reyes&Friends para consultas, soporte y más información sobre nuestros servicios." />
+                <meta property="og:image" content="/img/open-graph-images/contact-us.png" />
+                <meta property="og:type" content="website" />
+
+                <meta name="twitter:title" content="Contacto | Reyes&Friends" />
+                <meta name="twitter:description" content="Ponte en contacto con Reyes&Friends para consultas, soporte y más información sobre nuestros servicios." />
+                <meta name="twitter:image" content="/img/open-graph-images/contact-us.png" />
+            </Helmet>
             <ContactModal 
                 message={finalMessage} 
                 onClose={handleModalClose} 
