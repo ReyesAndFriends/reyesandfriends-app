@@ -14,12 +14,12 @@ const Portfolio: React.FC = () => {
                 />
                 <meta property="og:title" content="Portafolio | Reyes&Friends" />
                 <meta property="og:description" content="Esta sección está en construcción. Muy pronto mostraremos nuestros proyectos de desarrollo y soluciones TI." />
-                <meta property="og:image" content="/img/reyesandfriends_social.png" />
+                <meta property="og:image" content="/img/open-graph-images/portfolio.png" />
                 <meta property="og:type" content="website" />
 
                 <meta name="twitter:title" content="Portafolio | Reyes&Friends" />
                 <meta name="twitter:description" content="Proyectos y soluciones desarrolladas por Reyes&Friends. Próximamente disponible." />
-                <meta name="twitter:image" content="/img/reyesandfriends_social.png" />
+                <meta name="twitter:image" content="/img/open-graph-images/portfolio.png" />
             </Helmet>
             <section className="bg-cover bg-center relative min-h-screen flex items-center justify-center">
                 <div className="absolute inset-0 bg-hero-section"></div>
