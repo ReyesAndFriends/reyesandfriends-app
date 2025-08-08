@@ -19,6 +19,8 @@ import { usePhaseThreeValidate } from './phases/phaseThree/usePhaseThreeValidate
 import { usePhaseFourValidate } from './phases/phaseFour/usePhaseFourValidate';
 import { usePhaseFiveValidate } from './phases/phaseFive/usePhaseFiveValidate';
 
+import { Helmet } from 'react-helmet-async';
+
 const QuoteProject: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
@@ -135,7 +137,7 @@ const QuoteProject: React.FC = () => {
                 className="w-32 h-32 object-contain mx-auto mb-6"
                 alt="reyes&friends_crown"
               />
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
+              <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block">
                 ¡Cotización Enviada Exitosamente!
               </h1>
               <p className="text-xl mb-8 text-red-100">
@@ -235,7 +237,7 @@ const QuoteProject: React.FC = () => {
                 className="w-32 h-32 object-contain mx-auto mb-6"
                 alt="reyes&friends_crown"
               />
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
+              <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block">
                 De acuerdo, {userName}
               </h1>
               <p className="text-xl mb-8 text-red-100">
@@ -305,6 +307,21 @@ const QuoteProject: React.FC = () => {
   }
 
   return (
+    <>
+    <Helmet>
+      <title>Cotiza tu proyecto | Reyes&Friends</title>
+      <meta
+      name="description"
+      content="Cotiza tu proyecto dinámicamente con Reyes&Friends"
+      />
+      <meta property="og:title" content="Cotiza tu proyecto | Reyes&Friends" />
+      <meta property="og:description" content="Cotiza tu proyecto dinámicamente con Reyes&Friends" />
+      <meta property="og:image" content="/img/open-graph-images/quote-project.png" />
+      <meta property="og:type" content="website" />
+      <meta name="twitter:title" content="Cotiza tu proyecto | Reyes&Friends" />
+      <meta name="twitter:description" content="Cotiza tu proyecto dinámicamente con Reyes&Friends" />
+      <meta name="twitter:image" content="/img/open-graph-images/quote-project.png" />
+    </Helmet>
     <div>
       <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
         <div className="absolute inset-0 bg-hero-section"></div>
@@ -324,7 +341,7 @@ const QuoteProject: React.FC = () => {
               className="w-32 h-32 object-contain mx-auto mb-6"
               alt="reyes&friends_crown"
             />
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
+            <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block">
               Cotiza tu proyecto
             </h1>
             <p className="text-xl mb-8 text-red-100">
@@ -406,6 +423,7 @@ const QuoteProject: React.FC = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

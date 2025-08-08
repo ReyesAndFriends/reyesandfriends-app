@@ -2,6 +2,11 @@ import { useGetContactCategories } from "../../hooks/contact/useGetContactCatego
 import { useContactFormValidator } from "../../hooks/contact/useContactFormValidator";
 import { useState, useRef } from "react";
 import ContactModal from "./modal/contactModal";
+import { Helmet } from "react-helmet-async";
+
+function capitalizeWords(str: string) {
+    return str.replace(/\b\w/g, char => char.toUpperCase()).replace(/\B\w/g, char => char.toLowerCase());
+}
 
 const Contact = () => {
     const { categories, error: categoriesError, loading, refetch } = useGetContactCategories();
@@ -9,6 +14,8 @@ const Contact = () => {
     const [isFormValid, setIsFormValid] = useState(false);
     const formRef = useRef<HTMLFormElement>(null);
     const [cellphone, setCellphone] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
 
     const handleCellphoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -17,12 +24,22 @@ const Contact = () => {
         }
     };
 
+    const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = capitalizeWords(e.target.value);
+        setFirstName(value);
+    };
+
+    const handleLastNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = capitalizeWords(e.target.value);
+        setLastName(value);
+    };
+
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const data = {
-            first_name: formData.get("first_name"),
-            last_name: formData.get("last_name"),
+            first_name: firstName,
+            last_name: lastName,
             cellphone: cellphone,
             email: formData.get("email"),
             category: formData.get("category"),
@@ -33,14 +50,17 @@ const Contact = () => {
 
     const handleInputChange = (e: React.ChangeEvent<HTMLFormElement>) => {
         const formData = new FormData(e.currentTarget);
-        const isValid = ["first_name", "last_name", "cellphone", "email", "category", "message"].every(
-            (field) => {
-                if (field === "cellphone") {
-                    return cellphone.trim() !== "";
-                }
-                return formData.get(field)?.toString().trim() !== "";
-            }
-        );
+        const isValid = [
+            firstName.trim(),
+            lastName.trim(),
+            cellphone.trim(),
+            formData.get("email"),
+            formData.get("category"),
+            formData.get("message")
+        ].every((value) => {
+            if (typeof value === "string") return value.trim() !== "";
+            return value !== null && value !== undefined;
+        });
         setIsFormValid(isValid);
     };
 
@@ -48,11 +68,28 @@ const Contact = () => {
         setFinalMessage(null);
         formRef.current?.reset();
         setCellphone("");
+        setFirstName("");
+        setLastName("");
         setIsFormValid(false);
     };
 
     return (
         <>
+            <Helmet>
+                <title>Contacto | Reyes&Friends</title>
+                <meta
+                    name="description"
+                    content="Ponte en contacto con Reyes&Friends para consultas, soporte y más información sobre nuestros servicios."
+                />
+                <meta property="og:title" content="Contacto | Reyes&Friends" />
+                <meta property="og:description" content="Ponte en contacto con Reyes&Friends para consultas, soporte y más información sobre nuestros servicios." />
+                <meta property="og:image" content="/img/open-graph-images/contact-us.png" />
+                <meta property="og:type" content="website" />
+
+                <meta name="twitter:title" content="Contacto | Reyes&Friends" />
+                <meta name="twitter:description" content="Ponte en contacto con Reyes&Friends para consultas, soporte y más información sobre nuestros servicios." />
+                <meta name="twitter:image" content="/img/open-graph-images/contact-us.png" />
+            </Helmet>
             <ContactModal 
                 message={finalMessage} 
                 onClose={handleModalClose} 
@@ -75,7 +112,7 @@ const Contact = () => {
                             className="w-32 h-32 object-contain mx-auto mb-6"
                             alt="reyes&friends_crown"
                         />
-                        <h1 className="text-4xl md:text-5xl font-bold mb-6 border-b-4 border-red-500 pb-4 inline-block">
+                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block">
                             Contáctanos
                         </h1>
                         <p className="text-xl mb-8 text-red-100">
@@ -87,15 +124,18 @@ const Contact = () => {
             </section>
 
             <section className="py-16 bg-zinc-900">
-                <h2 className="text-3xl font-bold mb-12 text-center text-red-500 relative">
-                    <span className="bg-black px-4 relative z-10 bg-zinc-900 text-white">Envíanos un mensaje</span>
-                    <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
-                </h2>
-                <div className="container mx-auto px-4 max-w-3xl">
+                <div className="container mx-auto px-4">
+                    <div className="relative mb-12">
+                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
+                        <h2 className="text-3xl text-center text-red-500 relative z-10">
+                            <span className="bg-zinc-900 px-4 relative z-10 text-white">Envíanos un mensaje</span>
+                        </h2>
+                    </div>
                     <div className="bg-black p-8 rounded-lg shadow-lg">
                         {(categoriesError || loading) ? (
                             <div className="flex flex-col items-center justify-center py-12">
-                                <p className="text-red-500 text-lg mb-4">
+                                <h2 className="text-red-500 text-2xl font-bold mb-2">Error al cargar</h2>
+                                <p className="text-white text-lg mb-4 text-center">
                                     {loading ? "Recargando..." : categoriesError}
                                 </p>
                                 <button
@@ -109,7 +149,7 @@ const Contact = () => {
                         ) : (
                         <form 
                             ref={formRef}
-                            className="grid grid-cols-1 gap-4" 
+                            className="grid grid-cols-1 md:grid-cols-2 gap-4" 
                             onSubmit={handleFormSubmit} 
                             onChange={handleInputChange}
                         >
@@ -121,6 +161,8 @@ const Contact = () => {
                                     name="first_name" 
                                     className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
                                     placeholder="Ingresa tu nombre"
+                                    value={firstName}
+                                    onChange={handleFirstNameChange}
                                 />
                                 {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
                             </div>
@@ -132,6 +174,8 @@ const Contact = () => {
                                     name="last_name" 
                                     className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
                                     placeholder="Ingresa tu apellido"
+                                    value={lastName}
+                                    onChange={handleLastNameChange}
                                 />
                                 {errors.last_name && <p className="text-red-500 text-sm">{errors.last_name}</p>}
                             </div>
@@ -184,7 +228,10 @@ const Contact = () => {
                                 {errors.category && <p className="text-red-500 text-sm">{errors.category}</p>}
                             </div>
                             <div className="col-span-1">
-                                <label htmlFor="message" className="block text-gray-300 font-bold mb-2">Mensaje (requerido)</label>
+                                <label htmlFor="message" className="block text-gray-300 font-bold mb-2 md:hidden">Mensaje (requerido)</label>
+                            </div>
+                            <div className="md:col-span-2">
+                                <label htmlFor="message" className="block text-gray-300 font-bold mb-2 hidden md:block">Mensaje (requerido)</label>
                                 <textarea 
                                     id="message" 
                                     name="message" 
@@ -194,7 +241,7 @@ const Contact = () => {
                                 ></textarea>
                                 {errors.message && <p className="text-red-500 text-sm">{errors.message}</p>}
                             </div>
-                            <div className="col-span-1">
+                            <div className="md:col-span-2 col-span-1">
                                 <button 
                                     type="submit" 
                                     className="w-full bg-red-600 text-white font-bold py-3 rounded-sm hover:bg-red-700 transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed"

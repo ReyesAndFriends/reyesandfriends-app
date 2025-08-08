@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-
 import Layout from "../layouts/layout";
+
+// Pages
+
 import Home from "../pages/home/home";
 import Portfolio from "../pages/portfolio";
 import Contact from "../pages/contact/contact";
@@ -10,7 +12,11 @@ import Services from "../pages/services/services";
 import AboutUs from "../pages/about-us/aboutUs";
 import QuotePage from "../pages/quote-project/quoteProject";
 
+// Services pages
 import WebProgramming from "../pages/services/WebProgramming/WebProgramming";
+
+// Error handler
+import Error from "../pages/error/Error";
 
 const pageTransition = {
     initial: { opacity: 0 },
@@ -31,19 +37,16 @@ const AnimatedRoutes: React.FC = () => {
             <Routes location={location} key={location.pathname}>
                 <Route path="/" element={<motion.div {...pageTransition}><Home /></motion.div>} />
                 <Route path="/services/web-development" element={<motion.div {...pageTransition}><WebProgramming/></motion.div>} />
-                <Route path="/services/bussiness-software" element={<motion.div {...pageTransition}><div>Software empresarial</div></motion.div>} />
-                <Route path="/services/promotional-web" element={<motion.div {...pageTransition}><div>Páginas web promocionales</div></motion.div>} />
-                <Route path="/services/ecommerce-web" element={<motion.div {...pageTransition}><div>Páginas E-Commerce</div></motion.div>} />
                 <Route path="/services" element={<motion.div {...pageTransition}><Services /></motion.div>} />
                 <Route path="/about" element={<motion.div {...pageTransition}><AboutUs /></motion.div>} />
                 <Route path="/portfolio" element={<motion.div {...pageTransition}><Portfolio /></motion.div>} />
                 <Route path="/contact" element={<motion.div {...pageTransition}><Contact /></motion.div>} />
                 <Route path="/quote-project" element={<motion.div {...pageTransition}><QuotePage /></motion.div>} />
+                <Route path="*" element={<motion.div {...pageTransition}><Error /></motion.div>} />
             </Routes>
         </AnimatePresence>
     );
 };
-
 
 const AppRouter: React.FC = () => {
     return (

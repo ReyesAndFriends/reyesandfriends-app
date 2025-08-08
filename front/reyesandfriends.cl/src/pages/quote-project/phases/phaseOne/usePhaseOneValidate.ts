@@ -1,5 +1,9 @@
 import { useState } from "react";
 
+
+const capitalize = (str: string) =>
+  str.replace(/\b\w/g, (char) => char.toUpperCase()).trim();
+
 export const usePhaseOneValidate = () => {
   const [values, setValues] = useState({
     firstName: "",
@@ -50,7 +54,11 @@ export const usePhaseOneValidate = () => {
   };
 
   return {
-    values,
+    values: {
+      ...values,
+      firstName: capitalize(values.firstName),
+      lastName: capitalize(values.lastName),
+    },
     errors,
     handleChange,
     validate,

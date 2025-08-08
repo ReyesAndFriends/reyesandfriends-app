@@ -1,13 +1,31 @@
 import React from "react";
-import { Globe, ChevronRight, Building, Gem, Store, Speech, HandHeart, MonitorSmartphone, Mail } from "lucide-react";
+import { ChevronRight, Gem, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
-import useHomeGetMethodologySteps from "./useHomeGetMethodologySteps";
+import TerminalMessage from "./components/TerminalMessage";
+import MethodologySteps from "./components/MethodologySteps";
+import WhyChooseReyesAndFriends from "./components/WhyChooseReyesAndFriends";
+import { Helmet } from "react-helmet-async";
 
 const Home: React.FC = () => {
-    const methodologySteps = useHomeGetMethodologySteps();
-
+    
     return (
         <>
+            <Helmet>
+                <title>Inicio | Reyes&Friends</title>
+                <meta
+                    name="description"
+                    content="Bienvenido a Reyes&Friends, tu aliado en soluciones digitales personalizadas."
+                />
+                <meta property="og:title" content="Inicio | Reyes&Friends" />
+                <meta property="og:description" content="Bienvenido a Reyes&Friends, tu aliado en soluciones digitales personalizadas." />
+                <meta property="og:image" content="/img/open-graph-images/default-style.png" />
+                <meta property="og:type" content="website" />
+
+                <meta name="twitter:title" content="Inicio | Reyes&Friends" />
+                <meta name="twitter:description" content="Bienvenido a Reyes&Friends, tu aliado en soluciones digitales personalizadas." />
+                <meta name="twitter:image" content="/img/open-graph-images/default-style.png" />
+            </Helmet>
+            
             <section className="bg-cover bg-center relative min-h-[800px] md:min-h-[800px] flex items-center">
                 <div className="absolute inset-0 bg-hero-section"></div>
                 <div className="absolute inset-0">
@@ -21,13 +39,13 @@ const Home: React.FC = () => {
                 </div>
                 <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col md:flex-row items-center justify-center text-center md:text-left flex-1">
                     <div className="flex-1 flex flex-col items-center md:items-start justify-center max-w-2xl mx-auto">
-                        <h1 className="text-5xl md:text-6xl font-extrabold mb-2 text-white drop-shadow-lg tracking-tight">
+                        <h1 className="text-5xl md:text-6xl mb-2 text-white drop-shadow-lg tracking-tight">
                             Impulsamos
                         </h1>
-                        <h1 className="text-4xl md:text-5xl font-extrabold mb-6 border-b-4 border-red-500 pb-4 inline-block text-white drop-shadow">
+                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block text-white drop-shadow">
                             tu crecimiento digital
                         </h1>
-                        <p className="text-2xl mb-8 text-white font-semibold drop-shadow-sm">
+                        <p className="text-2xl mb-8 text-white drop-shadow-sm">
                             ¡Transforma tu negocio con tecnología a tu medida!<br />
                             Creamos sitios web, plataformas y soluciones digitales innovadoras para que tu empresa crezca y destaque en el mundo digital.
                         </p>
@@ -53,185 +71,57 @@ const Home: React.FC = () => {
 
             <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4">
-                    <h2 className="text-3xl font-bold mb-12 text-center text-red-600 relative">
-                        <span className="bg-zinc-900 px-4 relative z-10 text-white">¿Que hacemos?</span>
+                    <h2 className="text-3xl mb-12 text-center text-red-600 relative">
+                        <span className="bg-zinc-900 px-4 relative z-10 text-white">¿Qué hacemos?</span>
                         <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
                     </h2>
-
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-
-                        <div className="bg-black p-6 rounded-sm shadow-md border-t-4 border-red-700 hover:shadow-lg transition-shadow flex flex-col items-center">
-                            <div className="w-16 h-16 bg-red-900/30 rounded-full flex items-center justify-center mb-4">
-                                <Globe className="h-8 w-8 text-red-500" />
-                            </div>
-                            <h3 className="text-xl font-bold mb-3 text-red-500 text-center">Programación web</h3>
-                            <p className="text-gray-300 mb-4 text-center">
-                                Necesitas un sitio web atractivo y funcional? Creamos páginas web personalizadas, optimizadas para SEO y adaptadas a tus necesidades.
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h4 className="text-lg text-red-500 mb-2">Un negocio informático a tu medida</h4>
+                            <h2 className="text-4xl mb-4 text-white">Soluciones digitales personalizadas</h2>
+                            <p className="text-gray-300 text-lg">
+                                Somos un negocio informático con múltiples aptitudes. Nos especializamos en el desarrollo de soluciones digitales personalizadas, abarcando desde sitios web hasta software empresarial y servicios tecnológicos adaptados a las necesidades de cada cliente.
                             </p>
-                            <Link to="/services/web-development" className="text-red-500 hover:text-red-400 flex items-center gap-1">
-                                Más información <ChevronRight className="h-4 w-4" />
-                            </Link>
-                        </div>
-
-                        <div className="bg-black p-6 rounded-sm shadow-md border-t-4 border-red-700 hover:shadow-lg transition-shadow flex flex-col items-center">
-                            <div className="w-16 h-16 bg-red-900/30 rounded-full flex items-center justify-center mb-4">
-                                <Building className="h-8 w-8 text-red-500" />
-                            </div>
-                            <h3 className="text-xl font-bold mb-3 text-red-500 text-center">Software empresarial</h3>
-                            <p className="text-gray-300 mb-4 text-center">
-                                Necesitas algún software específico para tu empresa? Desarrollamos aplicaciones a medida que optimizan tus procesos y mejoran la productividad.
+                            <p className="text-gray-300 text-lg mt-4">
+                                Haz frente a tu negocio con nuestra experiencia y dedicación. Nos enfocamos en ofrecer soluciones innovadoras que impulsen tu crecimiento digital y mejoren la eficiencia de tus operaciones.
                             </p>
-                            <Link to="/services/bussiness-software" className="text-red-500 hover:text-red-400 flex items-center gap-1">
-                                Más información <ChevronRight className="h-4 w-4" />
-                            </Link>
                         </div>
-
-                        <div className="bg-black p-6 rounded-sm shadow-md border-t-4 border-red-700 hover:shadow-lg transition-shadow flex flex-col items-center">
-                            <div className="w-16 h-16 bg-red-900/30 rounded-full flex items-center justify-center mb-4">
-                                <Gem className="h-8 w-8 text-red-500" />
-                            </div>
-                            <h3 className="text-xl font-bold mb-3 text-red-500 text-center">Páginas web promocionales</h3>
-                            <p className="text-gray-300 mb-4 text-center">
-                                Quieres promocionar tu negocio | emprendimiento? Creamos páginas web promocionales que destacan tus productos y servicios, ayudando a atraer más clientes. Podemos integrar formularios de contacto, conectar redes sociales y más.
-                            </p>
-                            <Link to="/services/promotional-web" className="text-red-500 hover:text-red-400 flex items-center gap-1">
-                                Más información <ChevronRight className="h-4 w-4" />
-                            </Link>
+                        <div className="flex justify-center items-center min-h-[200px]">
+                            <TerminalMessage />
                         </div>
-
-                        <div className="bg-black p-6 rounded-sm shadow-md border-t-4 border-red-700 hover:shadow-lg transition-shadow flex flex-col items-center">
-                            <div className="w-16 h-16 bg-red-900/30 rounded-full flex items-center justify-center mb-4">
-                                <Store className="h-8 w-8 text-red-500" />
-                            </div>
-                            <h3 className="text-xl font-bold mb-3 text-red-500 text-center">Páginas E-Commerce</h3>
-                            <p className="text-gray-300 mb-4 text-center">
-                                Vende tus productos en línea con nuestras soluciones de comercio electrónico. Creamos tiendas virtuales seguras con implementación de pasarelas de pago.
-                            </p>
-                            <Link to="/services/ecommerce-web" className="text-red-500 hover:text-red-400 flex items-center gap-1">
-                                Más información <ChevronRight className="h-4 w-4" />
-                            </Link>
-                        </div>
-
                     </div>
-                </div>
-            </section>
-
-            <section className="py-16 bg-black text-white">
-                <div className="container mx-auto px-4 max-w-5xl grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-                    <div className="text-center md:text-left">
-                        <h2 className="text-3xl font-bold mb-6 text-red-600">
-                            Comparte lo último de tu negocio
-                        </h2>
-                        <p className="mb-6">
-                            Muestra tus productos, servicios o novedades de una manera atractiva y profesional. Creamos soluciones visuales que capturan la atención de tus clientes y destacan lo mejor de tu negocio.
-                        </p>
+                    <div className="text-left mt-8">
                         <Link
-                            to="/quote-project"
-                            className="inline-flex items-center gap-2 bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors font-semibold shadow-md"
+                            to="/services"
+                            className="text-red-500 hover:underline font-semibold inline-flex items-center gap-1 transition-colors"
                         >
-                            <Gem className="h-5 w-5" />
-                            Cotiza tu proyecto
+                            Conoce todos nuestros servicios
+                            <ChevronRight className="h-4 w-4" />
                         </Link>
-                    </div>
-                    <div className="flex justify-center">
-                        <img
-                            src="/img/index/business1.jpg"
-                            alt="Business showcase"
-                            className="rounded shadow-md max-w-full h-auto"
-                        />
                     </div>
                 </div>
             </section>
 
             <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4">
-                    <h2 className="text-3xl font-bold mb-12 text-center text-red-600 relative">
-                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Nuestra metodología de trabajo</span>
+                    
+                    <h2 className="text-3xl mb-12 text-center text-red-600 relative">
+                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Nuestra metodología</span>
                         <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
                     </h2>
-                    <div className="flex justify-between items-center relative">
-                        <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-red-600/50 -z-0"></div>
-                        {methodologySteps.map(({ step, title, description, Icon }, index) => (
-                            <div key={index} className="bg-black p-4 shadow-md border-t-4 border-red-700 hover:shadow-lg transition-shadow flex flex-col items-center w-1/5 relative z-10">
-                                <div className="w-12 h-12 bg-red-900/30 rounded-full flex items-center justify-center mb-2">
-                                    <Icon className="h-6 w-6 text-red-500" />
-                                </div>
-                                <h3 className="text-lg font-bold mb-2 text-red-500 text-center">{step}. {title}</h3>
-                                <p className="text-gray-300 text-center text-sm">{description}</p>
-                            </div>
-                        ))}
-                    </div>
-                    <div className="text-center mt-8">
-                        <p>
-                            "De esta manera, garantizamos un proceso claro y efectivo que nos permite entregar resultados de alta calidad, adaptados a las necesidades de cada cliente.""
+
+                    <div className="text-center mt-8 mb-12">
+                        <p className="text-lg text-gray-300 mb-4">
+                            Para garantizar una experiencia de trabajo fluida y satisfactoria, seguimos una metodología ágil que nos permite adaptarnos a tus necesidades y ofrecer resultados de alta calidad. Nuestro proceso se basa en los siguientes pasos:
                         </p>
                     </div>
+
+                    <MethodologySteps />
+
                 </div>
             </section>
 
-            <section className="py-16 bg-zinc-900 text-white">
-                <div className="container mx-auto px-4 max-w-5xl">
-                    <h2 className="text-3xl font-bold mb-12 text-center">
-                        Lleva tu negocio más allá
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div className="text-center">
-                            <div className="w-16 h-16 bg-red-900/30 rounded-full flex items-center justify-center mb-4 mx-auto">
-                                <Speech className="h-8 w-8 text-red-500" />
-                            </div>
-                            <h3 className="text-xl font-bold mb-2 text-red-500">Comunícate con tus clientes</h3>
-                            <p className="text-gray-300">
-                                Utiliza formularios personalizados para recibir consultas y mejorar la interacción con tus clientes.
-                            </p>
-                        </div>
-                        <div className="text-center">
-                            <div className="w-16 h-16 bg-red-900/30 rounded-full flex items-center justify-center mb-4 mx-auto">
-                                <MonitorSmartphone className="h-8 w-8 text-red-500" />
-                            </div>
-                            <h3 className="text-xl font-bold mb-2 text-red-500">Conecta con redes sociales</h3>
-                            <p className="text-gray-300">
-                                Integra tus publicaciones con redes sociales para aumentar tu alcance y visibilidad.
-                            </p>
-                        </div>
-                        <div className="text-center">
-                            <div className="w-16 h-16 bg-red-900/30 rounded-full flex items-center justify-center mb-4 mx-auto">
-                                <HandHeart className="h-8 w-8 text-red-500" />
-                            </div>
-                            <h3 className="text-xl font-bold mb-2 text-red-500">Mejora tu imagen</h3>
-                            <p className="text-gray-300">
-                                Una web atractiva y profesional es clave para captar la atención de tus clientes. Creamos diseños únicos y personalizados.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section className="py-16 text-white">
-                <div className="container mx-auto px-4 max-w-5xl grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-                    <div className="text-center md:text-left">
-                        <h2 className="text-3xl font-bold mb-6 text-red-600">
-                            ¿Listo para llevar tu negocio al siguiente nivel?
-                        </h2>
-                        <p className="mb-8">
-                            Contáctanos hoy mismo y descubre cómo podemos ayudarte a alcanzar tus objetivos digitales.
-                        </p>
-                        <Link
-                            to="/contact"
-                            className="inline-flex items-center gap-2 bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors font-semibold shadow-md"
-                        >
-                            <Mail className="h-5 w-5" />
-                            Contáctanos
-                        </Link>
-                    </div>
-                    <div className="flex justify-center">
-                        <img 
-                            src="/img/logo/logo_white_1.svg" 
-                            alt="Logo vertical" 
-                            className="max-w-full h-auto w-32 md:w-48"
-                        />
-                    </div>
-                </div>
-            </section>
+            <WhyChooseReyesAndFriends />
 
         </>
     );

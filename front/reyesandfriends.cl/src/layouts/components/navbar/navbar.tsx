@@ -1,28 +1,19 @@
 import type React from "react"
 import { useState, useEffect, useRef } from "react"
-import { Menu, X, ChevronDown, Home, Info, Briefcase, Mail, Folder, LogIn } from "lucide-react"
+import { Menu, X, ChevronDown, Home, Info, Briefcase, Mail, Code, LogIn, List } from "lucide-react"
 import useNavOptions from "./useNavOptions"
 import { useContactList } from "../../../hooks/services/useServiceList"
-import RouterContactModal from "../../../helpers/routerContactModal/routerContactModal"
-import { useContactLinkValidator } from "../../../helpers/ContactLinkValidator/useContactLinkValidator"
+import { useServiceList } from "../../../hooks/services/useServiceList"
+import { Link } from "react-router-dom"
 
 const Navbar: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const { isDropdownOpen, toggleDropdown, closeDropdown, dropdownOptions } = useNavOptions()
     const dropdownRef = useRef<HTMLLIElement>(null)
     const contactList = useContactList()
+    const serviceList = useServiceList()
     const [isContactDropdownOpen, setIsContactDropdownOpen] = useState(false)
     const contactDropdownRef = useRef<HTMLLIElement>(null)
-
-    const {
-        isModalOpen,
-        handleLinkClick,
-        confirmNavigation,
-        cancelNavigation
-    } = useContactLinkValidator()
-
-    const [atTop, setAtTop] = useState(true)
-    const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768)
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
@@ -36,25 +27,6 @@ const Navbar: React.FC = () => {
     const toggleContactDropdown = () => {
         setIsContactDropdownOpen(!isContactDropdownOpen)
     }
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setAtTop(window.scrollY === 0)
-        }
-        
-        const handleResize = () => {
-            setIsDesktop(window.innerWidth >= 768)
-        }
-        
-        window.addEventListener("scroll", handleScroll)
-        window.addEventListener("resize", handleResize)
-        handleScroll()
-        
-        return () => {
-            window.removeEventListener("scroll", handleScroll)
-            window.removeEventListener("resize", handleResize)
-        }
-    }, [])
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -85,49 +57,62 @@ const Navbar: React.FC = () => {
     const productionMode = import.meta.env.VITE_PRODUCTION_MODE === "true"
     const clientsPortalUrl = import.meta.env.VITE_CLIENTS_PORTAL_URL
 
+
     return (
         <>
             <nav
                 className="text-white py-2 z-50 fixed top-0 left-0 w-full"
                 style={{
-                    background: (atTop && isDesktop) ? "rgba(0,0,0,0)" : "rgba(0,0,0,1)",
+                    background: "black",
                     transition: "background 0.4s ease"
                 }}
             >
                 <div className="container mx-auto flex justify-between items-center px-4">
-                    <button onClick={() => handleLinkClick("/")}>
+                    <Link to="/">
                         <img src="/img/logo/logo_white_2.svg" className="h-12 mb-2" alt="Reyes and Friends Logo" />
-                    </button>
+                    </Link>
                     <ul className={`md:flex space-x-0 md:space-x-6 text-lg md:ml-auto md:justify-end ${isMenuOpen ? "flex flex-col space-y-4 absolute top-full left-0 w-full bg-black p-4 z-50" : "hidden"} md:static md:flex-row md:space-y-0`}>
                         <li>
-                            <button className="hover:underline block flex items-center gap-2" onClick={() => handleLinkClick("/")}>
+                            <Link className="hover:underline block flex items-center gap-2" to="/">
                                 <Home size={18} /> Inicio
-                            </button>
+                            </Link>
                         </li>
                         <li>
-                            <button className="hover:underline block flex items-center gap-2" onClick={() => handleLinkClick("/about")}>
+                            <Link className="hover:underline block flex items-center gap-2" to="/about">
                                 <Info size={18} /> Sobre nosotros
-                            </button>
+                            </Link>
                         </li>
                         <li className="relative" ref={dropdownRef}>
                             <button
                                 onClick={handleDropdownToggle}
                                 className="hover:underline focus:outline-none flex items-center gap-2"
                             >
-                                <Briefcase size={18} /> Nuestros servicios <ChevronDown className="ml-1" size={16} />
+                                <Code size={18} /> Nuestros servicios <ChevronDown className="ml-1" size={16} />
                             </button>
                             {isDropdownOpen && (
                                 <ul className={`bg-white text-black mt-2 shadow-xl rounded-lg border ${isMenuOpen ? "w-full mt-2 py-3" : "md:absolute md:mt-2 md:py-4 md:w-56"}`}>
-                                    {dropdownOptions.map(option => (
+                                    {serviceList.map(option => (
                                         <li key={option.path}>
-                                            <button
-                                                className="block w-full px-4 py-3 hover:bg-gray-100 text-left text-base font-medium transition-colors duration-200"
-                                                onClick={() => handleLinkClick(option.path)}
+                                            <Link
+                                                className="block w-full px-4 py-3 hover:bg-gray-100 text-left text-base font-medium transition-colors duration-200 flex items-center gap-2"
+                                                to={option.path}
+                                                onClick={closeDropdown}
                                             >
-                                                {option.label}
-                                            </button>
+                                                {option.icon}
+                                                {option.name}
+                                            </Link>
                                         </li>
                                     ))}
+                                    <li>
+                                        <Link
+                                            className="block w-full px-4 py-3 hover:bg-gray-100 text-left text-base font-medium transition-colors duration-200 flex items-center gap-2"
+                                            to="/services"
+                                            onClick={closeDropdown}
+                                        >
+                                            <List size={18} className="inline mr-2" />
+                                            Lista completa
+                                        </Link>
+                                    </li>
                                 </ul>
                             )}
                         </li>
@@ -142,21 +127,23 @@ const Navbar: React.FC = () => {
                                 <ul className={`bg-white text-black mt-2 shadow-xl rounded-lg border ${isMenuOpen ? "w-full mt-2 py-3" : "md:absolute md:mt-2 md:py-4 md:w-56"}`}>
                                     {contactList.map(option => (
                                         <li key={option.path}>
-                                            <button
-                                                className="block w-full px-4 py-3 hover:bg-gray-100 text-left text-base font-medium transition-colors duration-200"
-                                                onClick={() => handleLinkClick(option.path)}
+                                            <Link
+                                                className="block w-full px-4 py-3 hover:bg-gray-100 text-left text-base font-medium transition-colors duration-200 flex items-center gap-2"
+                                                to={option.path}
+                                                onClick={() => setIsContactDropdownOpen(false)}
                                             >
+                                                {option.icon}
                                                 {option.name}
-                                            </button>
+                                            </Link>
                                         </li>
                                     ))}
                                 </ul>
                             )}
                         </li>
                         <li>
-                            <button className="hover:underline block flex items-center gap-2" onClick={() => handleLinkClick("/portfolio")}>
-                                <Folder size={18} /> Portafolio
-                            </button>
+                            <Link className="hover:underline block flex items-center gap-2" to="/portfolio">
+                                <Briefcase size={18} /> Portafolio
+                            </Link>
                         </li>
                         {productionMode && clientsPortalUrl && (
                         <li>
@@ -164,11 +151,10 @@ const Navbar: React.FC = () => {
                                 href={clientsPortalUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-2 px-3 py-1.5 bg-red-700 hover:bg-red-800 text-black font-bold rounded shadow-lg transition-colors duration-200 text-white"
-                                style={{ textDecoration: "none" }}
+                                className="flex items-center gap-2 font-semibold rounded shadow-lg transition-colors duration-200 text-red-500 hover:underline"
                             >
                                 <LogIn size={22} />
-                                Acceso clientes
+                                Área clientes
                             </a>
                         </li>
                         )}
@@ -181,12 +167,6 @@ const Navbar: React.FC = () => {
                     </div>
                 </div>
             </nav>
-            {isModalOpen && (
-                <RouterContactModal
-                    onConfirm={confirmNavigation}
-                    onCancel={cancelNavigation}
-                />
-            )}
         </>
     )
 }

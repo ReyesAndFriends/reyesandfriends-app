@@ -11,7 +11,7 @@ interface FormErrors {
     [key: string]: string | undefined;
 }
 
-const API_URL = `${import.meta.env.VITE_API_URL}/contact`;
+const CONTACT_URL = `${import.meta.env.VITE_API_URL}/contact`;
 
 export const useContactFormValidator = () => {
     const [errors, setErrors] = useState<FormErrors>({});
@@ -43,7 +43,7 @@ export const useContactFormValidator = () => {
     };
 
     const handleSubmit = async (formData: any) => {
-        // Prepara el número con +56 antes de enviar
+        // Prepare number with +56 Chilean prefix before send
         const dataToSend = {
             ...formData,
             cellphone: formData.cellphone ? `+56${formData.cellphone}` : "",
@@ -52,7 +52,7 @@ export const useContactFormValidator = () => {
 
         setIsSubmitting(true);
         try {
-            const response = await axios.post(API_URL, dataToSend, {
+            const response = await axios.post(CONTACT_URL, dataToSend, {
                 headers: {
                     "Content-Type": "application/json",
                 },

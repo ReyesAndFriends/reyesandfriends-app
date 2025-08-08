@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AlertTriangle, X } from "lucide-react";
+import { Mail, X } from "lucide-react";
 
 interface ContactModalProps {
     message: string | null;
@@ -40,7 +40,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ message, onClose }) => {
                     <X className="w-6 h-6" />
                 </button>
                 <div className="flex items-center justify-center mb-4">
-                    <AlertTriangle className="text-red-600 w-10 h-10 mr-2" />
+                    <Mail className="text-red-600 w-10 h-10 mr-2" />
                     <h2 className="text-2xl font-semibold text-red-500">Mensaje</h2>
                 </div>
                 <p className="mb-8 text-zinc-300 text-center">{message}</p>
