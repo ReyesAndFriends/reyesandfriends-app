@@ -1,6 +1,6 @@
-# Reyes&Friends-App
-
 <div align="center">
+    
+# Reyes&Friends-App
 
 ![Reyes&Friends Logo](https://github.com/user-attachments/assets/46a61f38-9e31-458d-aa43-3bfec13c7dc7)
 
@@ -9,8 +9,11 @@ Repositorio oficial de la web de Reyes&Friends, desarrollada con tecnologías mo
 </div>
 
 <p align="center">
-    <a href="LICENSE">Ver licencia del proyecto</a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/-Ver%20licencia%20del%20proyecto-8b0000?style=for-the-badge" alt="Licencia del proyecto" />
+  </a>
 </p>
+
 
 ## Tech Stack
 
@@ -18,9 +21,7 @@ Repositorio oficial de la web de Reyes&Friends, desarrollada con tecnologías mo
 
 <div align="center">
 
-[![React](https://img.shields.io/badge/React-61dafb?logo=react&logoColor=white)](https://react.dev/)
-[![Refine](https://img.shields.io/badge/Refine-24292f?logo=refine&logoColor=white)](https://refine.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38bdf8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+<img src="https://skillicons.dev/icons?i=react,typescript,tailwindcss" alt="Front-end Stack" width="300"/>
 
 </div>
 
@@ -28,14 +29,7 @@ Repositorio oficial de la web de Reyes&Friends, desarrollada con tecnologías mo
 
 <div align="center">
 
-[![Python](https://img.shields.io/badge/Python-blue?logo=python&logoColor=white)](https://www.python.org/)
-[![Flask](https://img.shields.io/badge/Flask-black?logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
-[![Flask-CORS](https://img.shields.io/badge/Flask--CORS-yellow?logo=python&logoColor=white)](https://flask-cors.readthedocs.io/)
-[![Flask-Mail](https://img.shields.io/badge/Flask--Mail-green?logo=python&logoColor=white)](https://pythonhosted.org/Flask-Mail/)
-[![pymongo](https://img.shields.io/badge/pymongo-brightgreen?logo=mongodb&logoColor=white)](https://pymongo.readthedocs.io/)
-[![gunicorn](https://img.shields.io/badge/gunicorn-009688?logo=gunicorn&logoColor=white)](https://gunicorn.org/)
-[![Docker](https://img.shields.io/badge/Docker-2496ed?logo=docker&logoColor=white)](https://www.docker.com/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+<img src="https://skillicons.dev/icons?i=python,flask,mysql,docker" alt="Back-end Stack" width="400"/>
 
 </div>
 
