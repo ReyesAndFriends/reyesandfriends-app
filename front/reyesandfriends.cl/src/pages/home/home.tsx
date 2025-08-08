@@ -4,11 +4,28 @@ import { Link } from "react-router-dom";
 import TerminalMessage from "./components/TerminalMessage";
 import MethodologySteps from "./components/MethodologySteps";
 import WhyChooseReyesAndFriends from "./components/WhyChooseReyesAndFriends";
+import { Helmet } from "react-helmet-async";
 
 const Home: React.FC = () => {
     
     return (
         <>
+            <Helmet>
+                <title>Inicio | Reyes&Friends</title>
+                <meta
+                    name="description"
+                    content="Bienvenido a Reyes&Friends, tu aliado en soluciones digitales personalizadas."
+                />
+                <meta property="og:title" content="Inicio | Reyes&Friends" />
+                <meta property="og:description" content="Bienvenido a Reyes&Friends, tu aliado en soluciones digitales personalizadas." />
+                <meta property="og:image" content="/img/open-graph-images/default-style.png" />
+                <meta property="og:type" content="website" />
+
+                <meta name="twitter:title" content="Inicio | Reyes&Friends" />
+                <meta name="twitter:description" content="Bienvenido a Reyes&Friends, tu aliado en soluciones digitales personalizadas." />
+                <meta name="twitter:image" content="/img/open-graph-images/default-style.png" />
+            </Helmet>
+            
             <section className="bg-cover bg-center relative min-h-[800px] md:min-h-[800px] flex items-center">
                 <div className="absolute inset-0 bg-hero-section"></div>
                 <div className="absolute inset-0">
