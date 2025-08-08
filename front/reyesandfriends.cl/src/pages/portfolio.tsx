@@ -1,4 +1,5 @@
 import { Flower } from "lucide-react";
+import { Link } from "react-router";
 import React from "react";
 
 const Portfolio: React.FC = () => {
@@ -25,11 +26,15 @@ const Portfolio: React.FC = () => {
                         <Flower className="w-8 h-8" />
                         Algún día habrá rosas aquí...
                     </h1>
-                    <p className="text-xl text-red-100 max-w-xl">
+                    <p className="text-xl text-red-100 max-w-xl mb-4">
                         Esta sección de portafolio está en construcción.<br />
                         Pronto compartiremos nuestros proyectos y logros.<br /><br />
                         ¡Esperen cosas bonitas!
                     </p>
+                    <Link
+                        to="/" className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-all duration-300 flex items-center gap-2 font-semibold transform hover:scale-105">
+                        Volver a la página principal
+                    </Link>
                 </div>
             </section>
         </>
