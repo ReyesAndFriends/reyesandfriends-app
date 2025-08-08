@@ -64,26 +64,6 @@ def postContact():
         
         mail.send(msg)
 
-        # Send webhook to Reyes&Friends Admin panel
-
-        laravel_webhook_url = os.getenv("LARAVEL_WEBHOOK_URL")
-        laravel_token = os.getenv("LARAVEL_WEBHOOK_TOKEN")
-
-        try:
-            requests.post(
-                laravel_webhook_url,
-                json={
-                    "event": "new_contact_form",
-                    "notified_at": datetime.now().isoformat()
-                },
-                headers={
-                    "X-FLASK-TOKEN": laravel_token
-                },
-                timeout=5
-            )
-        except Exception as webhook_error:
-            print(f"[!] Webhook Laravel falló: {webhook_error}")
-
         return jsonify({
             "message": "¡Gracias por contactarnos! Dentro de poco recibirás un correo de confirmación sobre tu solicitud.",
         }), 201
