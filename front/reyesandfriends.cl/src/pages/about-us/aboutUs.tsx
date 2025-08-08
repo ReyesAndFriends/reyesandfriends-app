@@ -1,8 +1,25 @@
 import { Info } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 const AboutUs = () => {
     return (
         <>
+            <Helmet>
+                <title>Sobre Nosotros | Reyes&Friends</title>
+                <meta
+                    name="description"
+                    content="Conoce más sobre Reyes&Friends y nuestro compromiso con la innovación y la excelencia en el desarrollo de soluciones digitales."
+                />
+                <meta property="og:title" content="Sobre Nosotros | Reyes&Friends" />
+                <meta property="og:description" content="Descubre la misión, visión y valores que impulsan a Reyes&Friends en la creación de soluciones digitales." />
+                <meta property="og:image" content="/img/open-graph-images/about-us.png" />
+                <meta property="og:type" content="website" />
+
+                <meta name="twitter:title" content="Sobre Nosotros | Reyes&Friends" />
+                <meta name="twitter:description" content="Información sobre Reyes&Friends y nuestro enfoque en la innovación y la excelencia." />
+                <meta name="twitter:image" content="/img/open-graph-images/about-us.png" />
+            </Helmet>
+
             <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
                 <div className="absolute inset-0 bg-hero-section"></div>
                 <div className="absolute inset-0">
