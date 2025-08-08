@@ -64,8 +64,8 @@ const WhyChooseReyesAndFriends = () => {
                         <button
                             key={f.key}
                             onClick={() => setSelected(f.key)}
-                            className={`w-full px-6 py-2 rounded-full font-semibold transition-all
-                                ${selected === f.key ? "bg-red-600 text-white shadow-lg" : "bg-zinc-800 text-red-400 hover:bg-red-700 hover:text-white"}
+                            className={`w-full px-6 py-2 rounded font-semibold transition-all
+                                ${selected === f.key ? "bg-red-700 text-white shadow-lg" : "bg-zinc-800 text-red-400 hover:bg-red-700 hover:text-white"}
                             `}
                         >
                             {f.title}
