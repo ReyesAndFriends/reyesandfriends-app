@@ -1,10 +1,26 @@
 import { Flower } from "lucide-react";
 import { Link } from "react-router";
 import React from "react";
+import { Helmet } from "react-helmet-async";
 
 const Portfolio: React.FC = () => {
     return (
         <>
+            <Helmet>
+                <title>Portafolio | Reyes&Friends</title>
+                <meta
+                    name="description"
+                    content="Conoce los proyectos realizados por Reyes&Friends. Esta sección está en construcción, pero pronto podrás ver todo lo que hemos logrado."
+                />
+                <meta property="og:title" content="Portafolio | Reyes&Friends" />
+                <meta property="og:description" content="Esta sección está en construcción. Muy pronto mostraremos nuestros proyectos de desarrollo y soluciones TI." />
+                <meta property="og:image" content="/img/reyesandfriends_social.png" />
+                <meta property="og:type" content="website" />
+
+                <meta name="twitter:title" content="Portafolio | Reyes&Friends" />
+                <meta name="twitter:description" content="Proyectos y soluciones desarrolladas por Reyes&Friends. Próximamente disponible." />
+                <meta name="twitter:image" content="/img/reyesandfriends_social.png" />
+            </Helmet>
             <section className="bg-cover bg-center relative min-h-screen flex items-center justify-center">
                 <div className="absolute inset-0 bg-hero-section"></div>
                 <div className="absolute inset-0">
