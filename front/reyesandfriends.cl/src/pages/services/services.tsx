@@ -1,12 +1,28 @@
 import { useServiceList } from "../../hooks/services/useServiceList";
 import { Link } from "react-router";
 import { List } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 const Services = () => {
     const services = useServiceList();
 
     return (
         <>
+            <Helmet>
+                <title>Servicios | Reyes&Friends</title>
+                <meta
+                    name="description"
+                    content="Descubre los servicios que ofrecemos en Reyes&Friends. Esta sección está en construcción, pero pronto podrás ver todo lo que hemos preparado para ti."
+                />
+                <meta property="og:title" content="Servicios | Reyes&Friends" />
+                <meta property="og:description" content="Esta sección está en construcción. Muy pronto mostraremos nuestros servicios y soluciones TI." />
+                <meta property="og:image" content="/img/open-graph-images/service-list.png" />
+                <meta property="og:type" content="website" />
+
+                <meta name="twitter:title" content="Servicios | Reyes&Friends" />
+                <meta name="twitter:description" content="Servicios y soluciones desarrolladas por Reyes&Friends. Próximamente disponible." />
+                <meta name="twitter:image" content="/img/open-graph-images/service-list.png" />
+            </Helmet>
             <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
                 <div className="absolute inset-0 bg-hero-section"></div>
                 <div className="absolute inset-0">
