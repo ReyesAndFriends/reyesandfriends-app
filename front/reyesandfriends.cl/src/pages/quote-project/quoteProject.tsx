@@ -19,6 +19,8 @@ import { usePhaseThreeValidate } from './phases/phaseThree/usePhaseThreeValidate
 import { usePhaseFourValidate } from './phases/phaseFour/usePhaseFourValidate';
 import { usePhaseFiveValidate } from './phases/phaseFive/usePhaseFiveValidate';
 
+import { Helmet } from 'react-helmet-async';
+
 const QuoteProject: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
@@ -305,6 +307,21 @@ const QuoteProject: React.FC = () => {
   }
 
   return (
+    <>
+    <Helmet>
+      <title>Cotiza tu proyecto | Reyes&Friends</title>
+      <meta
+      name="description"
+      content="Cotiza tu proyecto dinámicamente con Reyes&Friends"
+      />
+      <meta property="og:title" content="Cotiza tu proyecto | Reyes&Friends" />
+      <meta property="og:description" content="Cotiza tu proyecto dinámicamente con Reyes&Friends" />
+      <meta property="og:image" content="/img/open-graph-images/quote-project.png" />
+      <meta property="og:type" content="website" />
+      <meta name="twitter:title" content="Cotiza tu proyecto | Reyes&Friends" />
+      <meta name="twitter:description" content="Cotiza tu proyecto dinámicamente con Reyes&Friends" />
+      <meta name="twitter:image" content="/img/open-graph-images/quote-project.png" />
+    </Helmet>
     <div>
       <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
         <div className="absolute inset-0 bg-hero-section"></div>
@@ -406,6 +423,7 @@ const QuoteProject: React.FC = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 
