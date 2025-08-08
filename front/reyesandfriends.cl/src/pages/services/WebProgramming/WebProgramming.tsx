@@ -1,9 +1,23 @@
 import { Globe, Gem, Ban, Download } from "lucide-react";
 import { Link } from "react-router";
+import { Helmet } from "react-helmet-async";
 
 const WebProgramming = () => {
     return (
         <>
+            <Helmet>
+                  <title>Servicio de Programación Web | Reyes&Friends</title>
+                  <meta
+                  name="description"
+                  content="Ofrecemos servicios de programación web a medida para tu negocio."/>
+                  <meta property="og:title" content="Servicio de Programación Web | Reyes&Friends" />
+                  <meta property="og:description" content="Ofrecemos servicios de programación web a medida para tu negocio." />
+                  <meta property="og:image" content="/img/open-graph-images/web-programming.png" />
+                  <meta property="og:type" content="website" />
+                  <meta name="twitter:title" content="Servicio de Programación Web | Reyes&Friends" />
+                  <meta name="twitter:description" content="Ofrecemos servicios de programación web a medida para tu negocio." />
+                  <meta name="twitter:image" content="/img/open-graph-images/web-programming.png" />
+            </Helmet>
             <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
                 <div className="absolute inset-0 bg-hero-section"></div>
                 <div className="absolute inset-0">
