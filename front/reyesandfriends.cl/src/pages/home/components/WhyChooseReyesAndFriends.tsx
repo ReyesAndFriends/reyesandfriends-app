@@ -79,12 +79,16 @@ const WhyChooseReyesAndFriends = () => {
                         <h2 className="text-2xl md:text-4xl mb-4 text-white">{currentFeature?.subtitle}</h2>
                         {currentFeature?.description}
                     </div>
-                    <div className="flex justify-center md:col-span-1 order-1 md:order-2 mb-6 md:mb-0">
-                        <img
-                            src={currentFeature?.image}
-                            alt="reyes&friends"
-                            className="w-full h-auto max-w-xs md:max-w-md object-cover"
-                        />
+                    <div className="flex justify-center items-center md:col-span-1 order-1 md:order-2 mb-6 md:mb-0">
+                        <div className="flex items-center justify-center w-full h-full select-none" style={{ minHeight: 160 }}>
+                            <img
+                                src={currentFeature?.image}
+                                alt="reyes&friends"
+                                draggable={false}
+                                className="object-contain max-h-40 max-w-xs md:max-w-md w-auto h-auto select-none pointer-events-none"
+                                onContextMenu={e => e.preventDefault()}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
