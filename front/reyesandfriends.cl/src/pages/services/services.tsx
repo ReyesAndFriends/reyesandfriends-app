@@ -55,7 +55,7 @@ const Services = () => {
             </section>
 
             <section className="py-16 bg-zinc-900 text-white">
-                <div className="container mx-auto px-4">
+                <div className="container mx-auto px-4 max-w-7xl">
                     <h2 className="text-3xl mb-12 text-center text-red-600 relative">
                         <span className="bg-zinc-900 px-4 relative z-10 text-white">Lista de servicios</span>
                         <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
