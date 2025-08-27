@@ -1,6 +1,6 @@
 import type React from "react"
 import { useState, useEffect, useRef } from "react"
-import { Menu, X, ChevronDown, Home, Info, Briefcase, Mail, Code, LogIn, List } from "lucide-react"
+import { Menu, X, ChevronDown, Home, Info, Mail, Code, LogIn, List, DollarSign } from "lucide-react"
 import useNavOptions from "./useNavOptions"
 import { useContactList } from "../../../hooks/services/useServiceList"
 import { useServiceList } from "../../../hooks/services/useServiceList"
@@ -57,7 +57,6 @@ const Navbar: React.FC = () => {
     const productionMode = import.meta.env.VITE_PRODUCTION_MODE === "true"
     const clientsPortalUrl = import.meta.env.VITE_CLIENTS_PORTAL_URL
 
-
     return (
         <>
             <nav
@@ -78,8 +77,16 @@ const Navbar: React.FC = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link className="hover:underline block flex items-center gap-2" to="/about">
-                                <Info size={18} /> Sobre nosotros
+                            <Link
+                                className="block flex items-center gap-2 font-semibold"
+                                to="/web-planes"
+                                style={{ display: "flex", alignItems: "center" }}
+                            >
+                                <DollarSign size={18} className="mr-1" />
+                                <span className="hover:underline">Planes Web</span>
+                                <span className="ml-1 px-2 py-0.5 rounded text-white text-xs font-bold bg-red-600" style={{marginLeft: 4}}>
+                                    NUEVO
+                                </span>
                             </Link>
                         </li>
                         <li className="relative" ref={dropdownRef}>
@@ -87,7 +94,7 @@ const Navbar: React.FC = () => {
                                 onClick={handleDropdownToggle}
                                 className="hover:underline focus:outline-none flex items-center gap-2"
                             >
-                                <Code size={18} /> Nuestros servicios <ChevronDown className="ml-1" size={16} />
+                                <Code size={18} /> Servicios personalizados <ChevronDown className="ml-1" size={16} />
                             </button>
                             {isDropdownOpen && (
                                 <ul className={`bg-white text-black mt-2 shadow-xl rounded-lg border ${isMenuOpen ? "w-full mt-2 py-3" : "md:absolute md:mt-2 md:py-4 md:w-56"}`}>
@@ -141,8 +148,8 @@ const Navbar: React.FC = () => {
                             )}
                         </li>
                         <li>
-                            <Link className="hover:underline block flex items-center gap-2" to="/portfolio">
-                                <Briefcase size={18} /> Portafolio
+                            <Link className="hover:underline block flex items-center gap-2" to="/about">
+                                <Info size={18} /> Sobre nosotros
                             </Link>
                         </li>
                         {productionMode && clientsPortalUrl && (
