@@ -13,7 +13,7 @@ project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 sys.path.insert(0, project_root)
 
 from app import create_app
-from app.models import db, ContactCategory, ContactForm, ProjectQuote, ContactStatus
+from app.models import db, ContactCategory, ContactStatus
 
 def init_database():
     """Initialize the database by creating tables and initial data."""
@@ -88,7 +88,7 @@ def reset_database(auto_confirm=False):
             print("Deleting tables...")
             db.drop_all()
             print("✅ Tables deleted")
-            
+
             init_database()
         else:
             print("❌ Operation cancelled")

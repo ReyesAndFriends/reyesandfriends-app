@@ -244,3 +244,27 @@ class ProjectQuote(db.Model):
                 'additionalComments': self.additional_comments or ''
             }
         }
+
+class WebPlanRequest(db.Model):
+    __tablename__ = 'web_plan_requests'
+
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(50), nullable=False)
+    last_name = db.Column(db.String(50), nullable=False)
+    correo = db.Column(db.String(120), nullable=False)
+    rut = db.Column(db.String(20), nullable=False)
+    rut_type = db.Column(db.String(20), nullable=False)
+    cellphone = db.Column(db.String(20), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'correo': self.correo,
+            'rut': self.rut,
+            'rut_type': self.rut_type,
+            'cellphone': self.cellphone,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
