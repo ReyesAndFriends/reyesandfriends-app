@@ -16,7 +16,6 @@ const WebPlanes = () => {
 
     const handleCloseModal = () => {
         setModalOpen(false);
-        // No limpiamos selectedSlug aquí, lo haremos en onExitComplete
     };
 
     return (
@@ -74,7 +73,7 @@ const WebPlanes = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
                         <div className="flex justify-center mb-8 md:mb-0">
                             <img
-                                src="/img/planes/ilustracion-planes-fijos.png"
+                                src="/img/plans/ilustracion-planes-fijos.jpg"
                                 alt="Ilustracion de planes fijos"
                                 className="rounded-lg shadow-lg w-full max-w-md aspect-[16/9] object-cover"
                             />
