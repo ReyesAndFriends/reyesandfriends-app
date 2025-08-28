@@ -180,7 +180,7 @@ const QuoteWebPlanModal: React.FC<QuoteWebPlanModalProps> = ({ slug, open, onClo
                                     <div className="flex justify-between items-center mb-1">
                                         <label className="block text-sm font-medium text-zinc-400">Teléfono</label>
                                         <span className="text-xs text-red-500 min-h-[1em]">
-                                            {errors.telefono}
+                                            {errors.cellphone}
                                         </span>
                                     </div>
                                     <div className="flex">
@@ -188,9 +188,9 @@ const QuoteWebPlanModal: React.FC<QuoteWebPlanModalProps> = ({ slug, open, onClo
                                             +56
                                         </span>
                                         <input
-                                            name="telefono"
+                                            name="cellphone"
                                             placeholder="912345678"
-                                            value={form.telefono}
+                                            value={form.cellphone}
                                             onChange={handleTelefonoChange}
                                             className="w-full border border-zinc-800 bg-zinc-950 rounded-r px-3 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-red-600"
                                             inputMode="numeric"

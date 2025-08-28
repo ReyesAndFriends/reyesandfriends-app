@@ -6,7 +6,7 @@ interface FormState {
     correo: string;
     rut: string;
     rut_type: string;
-    telefono: string;
+    cellphone: string; 
 }
 
 export default function useValidatePlanModal(plan: any) {
@@ -16,16 +16,16 @@ export default function useValidatePlanModal(plan: any) {
         correo: "",
         rut: "",
         rut_type: "natural",
-        telefono: ""
+        cellphone: "" 
     });
 
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
     const validarRut = (rut: string) => {
-        rut = rut.replace(/\./g, '').replace(/-/g, '');
-        if (rut.length < 8) return false;
+        rut = rut.replace(/\./g, '').replace(/-/g, '').toUpperCase();
+        if (!/^\d{7,8}[0-9K]$/.test(rut)) return false;
         let cuerpo = rut.slice(0, -1);
-        let dv = rut.slice(-1).toUpperCase();
+        let dv = rut.slice(-1);
         let suma = 0, multiplo = 2;
         for (let i = cuerpo.length - 1; i >= 0; i--) {
             suma += parseInt(cuerpo[i]) * multiplo;
@@ -37,10 +37,10 @@ export default function useValidatePlanModal(plan: any) {
     };
 
     const formatearRut = (rut: string) => {
-        rut = rut.replace(/\D/g, "");
-        if (rut.length === 0) return "";
-        let dv = rut.slice(-1);
+        rut = rut.replace(/\./g, '').replace(/-/g, '').toUpperCase();
+        if (rut.length < 2) return rut;
         let cuerpo = rut.slice(0, -1);
+        let dv = rut.slice(-1);
         let cuerpoFormateado = "";
         while (cuerpo.length > 3) {
             cuerpoFormateado = "." + cuerpo.slice(-3) + cuerpoFormateado;
@@ -51,12 +51,13 @@ export default function useValidatePlanModal(plan: any) {
     };
 
     const handleRutChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let value = e.target.value.replace(/[^0-9kK]/g, "");
-        value = value.slice(0, 9);
+        let value = e.target.value.replace(/[^0-9kK]/g, "").toUpperCase();
+        // Permitir hasta 8 dígitos + 1 DV (máximo 9 caracteres), pero si el usuario pega el RUT completo, permitir hasta 10
+        value = value.slice(0, 10);
         if (value.length > 1) {
             value = formatearRut(value);
         }
-        value = value.slice(0, 12);
+        value = value.slice(0, 12); // por si acaso, para no exceder el input
         setForm(f => ({ ...f, rut: value }));
     };
 
@@ -86,8 +87,8 @@ export default function useValidatePlanModal(plan: any) {
             value = value.replace(/^([^9])/, "");
             value = value.slice(0, 9);
         }
-        setForm(f => ({ ...f, telefono: value }));
-        setErrors(errs => ({ ...errs, telefono: "" }));
+        setForm(f => ({ ...f, cellphone: value })); 
+        setErrors(errs => ({ ...errs, cellphone: "" })); 
     };
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -100,8 +101,8 @@ export default function useValidatePlanModal(plan: any) {
         else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.correo)) newErrors.correo = "Correo inválido.";
         if (!form.rut.trim()) newErrors.rut = "El RUT es obligatorio.";
         else if (!validarRut(form.rut)) newErrors.rut = "RUT inválido.";
-        if (!form.telefono.trim()) newErrors.telefono = "El teléfono es obligatorio.";
-        else if (!/^9\d{8}$/.test(form.telefono)) newErrors.telefono = "Teléfono inválido. Debe comenzar con 9 y tener 9 dígitos.";
+        if (!form.cellphone.trim()) newErrors.cellphone = "El teléfono es obligatorio."; 
+        else if (!/^9\d{8}$/.test(form.cellphone)) newErrors.cellphone = "Teléfono inválido. Debe comenzar con 9 y tener 9 dígitos."; 
 
         setErrors(newErrors);
 
@@ -123,7 +124,7 @@ export default function useValidatePlanModal(plan: any) {
             correo: "",
             rut: "",
             rut_type: "natural",
-            telefono: ""
+            cellphone: "" 
         });
         setErrors({});
     }, []);
