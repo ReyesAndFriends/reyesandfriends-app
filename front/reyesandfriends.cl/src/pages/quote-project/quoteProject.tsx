@@ -134,8 +134,8 @@ const QuoteProject: React.FC = () => {
             <div className="max-w-3xl text-white mx-auto">
               <img
                 src="/img/logo/crown_white.svg"
-                className="w-32 h-32 object-contain mx-auto mb-6"
-                alt="reyes&friends_crown"
+                className="w-32 h-32 object-contain mx-auto mb-6 pointer-events-none"
+                alt="La corona de Reyes&Friends"
               />
               <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block">
                 ¡Cotización Enviada Exitosamente!
@@ -234,8 +234,8 @@ const QuoteProject: React.FC = () => {
             <div className="max-w-3xl text-white mx-auto">
               <img
                 src="/img/logo/crown_white.svg"
-                className="w-32 h-32 object-contain mx-auto mb-6"
-                alt="reyes&friends_crown"
+                className="w-32 h-32 object-contain mx-auto mb-6 pointer-events-none"
+                alt="La corona de Reyes&Friends"
               />
               <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block">
                 De acuerdo, {userName}
@@ -264,7 +264,7 @@ const QuoteProject: React.FC = () => {
               <img
               src="/img/quote-project/thanks.png"
               alt="Imagen de agradecimiento"
-              className="w-40 h-40 object-contain mx-auto hover:scale-105 transition-transform"
+              className="w-40 h-40 object-contain mx-auto hover:scale-105 transition-transform pointer-events-none"
               />
             </div>
             <div>
@@ -352,8 +352,8 @@ const QuoteProject: React.FC = () => {
             <div className="max-w-3xl text-white mx-auto">
               <img
                 src="/img/logo/crown_white.svg"
-                className="w-32 h-32 object-contain mx-auto mb-6"
-                alt="reyes&friends_crown"
+                className="w-32 h-32 object-contain mx-auto mb-6 pointer-events-none"
+                alt="La corona de Reyes&Friends"
               />
               <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block">
                 Cotiza tu proyecto
