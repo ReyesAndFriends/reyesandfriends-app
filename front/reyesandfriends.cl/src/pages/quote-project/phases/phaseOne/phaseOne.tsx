@@ -130,7 +130,7 @@ const PhaseOne: React.FC<PhaseOneProps> = ({ values, errors, handleChange }) => 
 
         <div className="mb-4">
           <label htmlFor="contactMethod" className="block text-gray-300 font-bold mb-2">
-            ¿Cómo quieres que te contactemos? (Requerido)
+            ¿Por donde prefieres que te contactemos? (Requerido)
           </label>
           <select
             id="contactMethod"
@@ -142,8 +142,9 @@ const PhaseOne: React.FC<PhaseOneProps> = ({ values, errors, handleChange }) => 
             <option value="" disabled>
               Selecciona una opción
             </option>
-            <option value="email">Email</option>
+            <option value="email">Correo electrónico</option>
             <option value="whatsapp">WhatsApp</option>
+            <option value="both">Ambas</option>
           </select>
           {errors.contactMethod && (
             <p className="text-red-500 text-sm mt-1">{errors.contactMethod}</p>
