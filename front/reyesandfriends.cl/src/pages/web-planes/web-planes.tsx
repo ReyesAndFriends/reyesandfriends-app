@@ -3,7 +3,8 @@ import { DollarSign, CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import useWebPlanesList from "./hooks/useWebPlanesList";
 import QuoteWebPlanModal from "./components/quoteWebPlanModal";
-import React, { useState } from "react";
+import { useState } from "react";
+import { Link } from "react-router";
 
 const WebPlanes = () => {
     const webPlans = useWebPlanesList();
@@ -57,7 +58,7 @@ const WebPlanes = () => {
                     </div>
                     <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
                         <span className="mb-4 bg-red-600 rounded-full px-4 py-1 text-sm font-semibold">
-                            ¡Planes sencillos y accesibles!
+                            ¡Solo pagas una vez!
                         </span>
                         <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-flex items-center gap-4">
                             <DollarSign size={40} /> Planes Web Fijos
@@ -71,6 +72,12 @@ const WebPlanes = () => {
 
             <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4 max-w-7xl">
+
+                    <h2 className="text-3xl mb-12 text-center text-red-600 relative mb-16">
+                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Planes Web Fijos</span>
+                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
+                    </h2>
+
                     <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
                         <div className="flex justify-center mb-8 md:mb-0">
                             <img
@@ -171,21 +178,49 @@ const WebPlanes = () => {
                 </div>
             </section>
 
-            <section className="py-16 text-white">
+            <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4 max-w-7xl">
-                    <h2 className="text-3xl mb-12 text-center text-red-600 relative">
-                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Páginas simples, lindas y funcionales</span>
+
+                    <h2 className="text-3xl mb-12 text-center text-red-600 relative mb-16">
+                        <span className="bg-zinc-900 px-4 relative z-10 text-white">La gran diferencia</span>
                         <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
                     </h2>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8 mb-8">
+                        <div>
+                            <h4 className="text-lg text-red-500 mb-2">Una forma diferente de hacer las cosas</h4>
+                            <h2 className="text-4xl mb-4 text-white">¿En qué se diferencian los planes fijos del cotizador de proyectos?</h2>
+                            <p className="text-lg text-gray-200 mb-4">
+                                A diferencia de nuestro cotizador de proyectos, ideal para soluciones a medida y de mayor complejidad, nuestros planes web fijos están pensados para quienes buscan una alternativa ágil, sencilla y funcional. Son paquetes predefinidos que nos permiten desarrollar tu sitio en menos tiempo, sin sacrificar calidad ni diseño.
+                            </p>
+                            <ul className="list-disc list-inside mb-4 text-base md:text-lg text-gray-200">
+                                <li>Precios fijos y totalmente transparentes.</li>
+                                <li>Entrega rápida y eficiente.</li>
+                                <li>Soluciones simples y efectivas.</li>
+                                <li>Tiempo de desarrollo reducido.</li>
+                                <li>Ideales para proyectos sencillos: páginas informativas, portafolios, emprendimientos y negocios que desean estar online rápidamente.</li>
+                            </ul>
+                        </div>
+                        <div className="flex justify-center mb-8 md:mb-0">
+                            <img
+                                src="/img/plans/code_difference.png"
+                                alt="Diferencia de código"
+                                className="w-full max-w-md object-cover pointer-events-none"
+                            />
+                        </div>
+                    </div>
+
                     <div className="flex flex-col items-center">
                         <div className="relative mb-8">
                             <blockquote className="bg-black rounded-xl px-8 py-8 shadow-lg border-l-4 border-red-600 text-center text-xl md:text-2xl text-gray-100 relative z-10">
-                                Nuestros planes fijos son perfectos si buscas una web sencilla, bonita y lista en poco tiempo, sin complicaciones. Ideales para quienes quieren estar online rápido y sin preocuparse por detalles técnicos. Si necesitas algo más avanzado, como una tienda o un sistema a medida, revisa nuestros servicios personalizados.
+                                ¿Buscas una solución rápida y sin complicaciones? Nuestros planes web fijos son la opción perfecta para ti. Si en el futuro requieres algo más avanzado, siempre podrás utilizar nuestro <Link to="/quote-project" className="text-red-500 underline">cotizador para proyectos personalizados</Link> o actualizar tu sitio existente.
                             </blockquote>
                         </div>
                     </div>
                 </div>
             </section>
+
+
             {selectedSlug && (
                 <QuoteWebPlanModal
                     slug={selectedSlug}
