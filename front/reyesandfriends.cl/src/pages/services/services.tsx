@@ -1,6 +1,6 @@
 import { useServiceList } from "../../hooks/services/useServiceList";
 import { Link } from "react-router";
-import { List } from "lucide-react";
+import { Code } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
 const Services = () => {
@@ -39,12 +39,12 @@ const Services = () => {
                         <img
                             src="/img/services/FullList/services-list.png"
                             alt="Ilustración de servicios"
-                            className="h-96 w-auto object-contain"
+                            className="h-96 w-auto object-contain pointer-events-none"
                         />
                     </div>
                     <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
                         <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-flex items-center gap-4">
-                            <List size={40} /> Nuestros Servicios
+                            <Code size={40} /> Nuestros Servicios
                         </h1>
                         <p className="text-xl mb-8">
                             Ofrecemos una amplia gama de servicios digitales para ayudarte a destacar en el mundo online. Desde desarrollo web hasta un panel empresarial personalizado, tenemos la solución perfecta para ti.
@@ -72,7 +72,7 @@ const Services = () => {
                                         <img
                                             src={service.image}
                                             alt={service.name}
-                                            className="w-full h-64 object-cover object-center rounded-md"
+                                            className="w-full h-64 object-cover object-center rounded-md pointer-events-none"
                                             style={{ aspectRatio: "1 / 1" }}
                                         />
                                     </div>

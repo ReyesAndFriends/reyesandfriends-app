@@ -1,6 +1,6 @@
 import type React from "react"
 import { useState, useEffect, useRef } from "react"
-import { Menu, X, ChevronDown, Home, Info, Mail, Code, LogIn, List, DollarSign, Gem } from "lucide-react"
+import { Menu, X, ChevronDown, Home, Info, Mail, Code, LogIn, DollarSign, Gem } from "lucide-react"
 import useNavOptions from "./useNavOptions"
 import { useContactList } from "../../../hooks/services/useServiceList"
 import { useServiceList } from "../../../hooks/services/useServiceList"
@@ -144,7 +144,7 @@ const Navbar: React.FC = () => {
                                             to="/services"
                                             onClick={closeDropdown}
                                         >
-                                            <List size={18} className="inline mr-2" />
+                                            <Code size={18} className="inline mr-2" />
                                             Lista completa
                                         </Link>
                                     </li>
