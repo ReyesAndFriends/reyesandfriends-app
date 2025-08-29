@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
-import { DollarSign } from "lucide-react";
+import { DollarSign, CheckCircle } from "lucide-react";
+import { motion } from "framer-motion";
 import useWebPlanesList from "./hooks/useWebPlanesList";
 import QuoteWebPlanModal from "./components/quoteWebPlanModal";
 import React, { useState } from "react";
@@ -51,7 +52,7 @@ const WebPlanes = () => {
                         <img
                             src="/img/plans/web-plans-hero.png"
                             alt="Ilustración de planes web"
-                            className="h-96 w-auto object-contain"
+                            className="h-96 w-auto object-contain pointer-events-none"
                         />
                     </div>
                     <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
@@ -75,7 +76,7 @@ const WebPlanes = () => {
                             <img
                                 src="/img/plans/ilustracion-planes-fijos.jpg"
                                 alt="Ilustracion de planes fijos"
-                                className="rounded-lg shadow-lg w-full max-w-md aspect-[16/9] object-cover"
+                                className="rounded-lg shadow-lg w-full max-w-md aspect-[16/9] object-cover pointer-events-none"
                             />
                         </div>
                         <div>
@@ -100,46 +101,72 @@ const WebPlanes = () => {
 
             <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4 max-w-7xl">
-                    <h2 className="text-3xl mb-12 text-center text-red-600 relative">
-                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Nuestros planes web</span>
+                    <h2 className="text-3xl mb-12 text-center text-red-600 relative mb-16">
+                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Planes disponibles</span>
                         <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
                     </h2>
                     <div className="flex flex-wrap justify-center gap-8 items-stretch">
-                        {webPlans.map((plan, idx) => (
-                            <div
-                                key={idx}
-                                className="w-full max-w-xs bg-black rounded-lg shadow-lg p-6 flex flex-col h-[540px] justify-between"
-                            >
-                                <div className="overflow-hidden rounded-md mb-3">
-                                    <img
-                                        src={plan.image}
-                                        alt={plan.name}
-                                        className="w-full h-48 object-cover object-center rounded-md pointer-events-none"
-                                        style={{ aspectRatio: "1 / 1" }}
-                                    />
-                                </div>
-                                <div className="flex-grow flex flex-col items-center">
-                                    <h3 className="text-lg font-bold mb-2 text-center">{plan.name}</h3>
-                                    <p className="text-xs text-gray-300 text-center mb-3">{plan.description}</p>
-                                    <ul className="text-xs text-gray-200 mb-4 list-disc list-inside overflow-auto max-h-32">
-                                        {plan.features.map((feature, i) => (
-                                            <li key={i}>{feature}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                                <div className="mt-auto flex flex-col items-center">
-                                    <div className="text-2xl font-semibold text-red-500 mb-2">
-                                        {plan.price.toLocaleString("es-CL", { style: "currency", currency: "CLP", minimumFractionDigits: 0 })}
+                        {webPlans.map((plan, idx) => {
+                            const isRecommended = idx === 1;
+                            const Card = isRecommended ? motion.div : "div";
+                            return (
+                                <Card
+                                    key={idx}
+                                    className={`w-full max-w-xs bg-black rounded-lg shadow-lg p-6 flex flex-col justify-between relative ${
+                                        isRecommended ? "border-2 border-red-600 shadow-xl scale-105 z-10" : ""
+                                    }`}
+                                    {...(isRecommended
+                                        ? {
+                                              initial: { scale: 0.95, boxShadow: "0 0 0px #dc2626" },
+                                              animate: { scale: 1.05, boxShadow: "0 0 32px #dc262655" },
+                                              transition: { type: "spring", stiffness: 200, damping: 15 }
+                                          }
+                                        : {})}
+                                >
+                                    {isRecommended && (
+                                        <motion.div
+                                            className="absolute -top-5 left-1/2 -translate-x-1/2 bg-red-600 text-white px-4 py-1 rounded-full text-xs font-bold shadow-lg z-20"
+                                            initial={{ scale: 0.8, opacity: 0 }}
+                                            animate={{ scale: 1, opacity: 1 }}
+                                            transition={{ delay: 0.2, type: "spring", stiffness: 300 }}
+                                        >
+                                            ★ Recomendado
+                                        </motion.div>
+                                    )}
+                                    <div className="overflow-hidden rounded-md mb-3">
+                                        <img
+                                            src={plan.image}
+                                            alt={plan.name}
+                                            className="w-full h-48 object-cover object-center rounded-md pointer-events-none"
+                                            style={{ aspectRatio: "1 / 1" }}
+                                        />
                                     </div>
-                                    <button
-                                        className="bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded transition-colors text-sm font-semibold cursor-pointer w-full"
-                                        onClick={() => handleSelectPlan(plan.slug)}
-                                    >
-                                        Seleccionar plan
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
+                                    <div className="flex-grow flex flex-col items-center">
+                                        <h3 className="text-lg font-bold mb-2 text-center">{plan.name}</h3>
+                                        <p className="text-xs text-gray-300 text-center mb-3">{plan.description}</p>
+                                        <ul className="text-xs text-gray-200 mb-4 space-y-2">
+                                            {plan.features.map((feature, i) => (
+                                                <li key={i} className="flex items-start gap-2">
+                                                    <CheckCircle className="text-red-600 flex-shrink-0 mt-0.5" size={18} />
+                                                    <span>{feature}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    <div className="mt-auto flex flex-col items-center">
+                                        <div className="text-2xl font-semibold text-red-500 mb-2">
+                                            {plan.price.toLocaleString("es-CL", { style: "currency", currency: "CLP", minimumFractionDigits: 0 })}
+                                        </div>
+                                        <button
+                                            className="bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded transition-colors text-sm font-semibold cursor-pointer w-full"
+                                            onClick={() => handleSelectPlan(plan.slug)}
+                                        >
+                                            Seleccionar plan
+                                        </button>
+                                    </div>
+                                </Card>
+                            );
+                        })}
                     </div>
                 </div>
             </section>
