@@ -26,7 +26,7 @@ const AboutUs = () => {
                     <img
                         src="/img/background/background-web.jpg"
                         alt="fondo de la sección"
-                        className="w-full h-full object-cover opacity-5 filter grayscale"
+                        className="w-full h-full object-cover opacity-5 filter grayscale pointer-events-none"
                         draggable={false}
                         onContextMenu={e => e.preventDefault()}
                     />
@@ -63,10 +63,10 @@ const AboutUs = () => {
                 </div>
             </section>
 
-            <section className="py-16 bg-zinc-800 text-white">
+            <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4 max-w-7xl">
                     <h2 className="text-3xl mb-12 text-center text-red-600 relative">
-                        <span className="bg-zinc-800 px-4 relative z-10 text-white">Nuestro Equipo</span>
+                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Nuestro Equipo</span>
                         <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
@@ -74,7 +74,7 @@ const AboutUs = () => {
                             <img
                                 src="/img/about-us/team.png"
                                 alt="Imagen ilustrativa del equipo de Reyes&Friends"
-                                className="rounded-lg shadow-lg w-full max-w-md aspect-[16/9] object-cover"
+                                className="rounded-lg shadow-lg w-full max-w-md aspect-[16/9] object-cover pointer-events-none"
                             />
                         </div>
                         <div>
@@ -109,17 +109,17 @@ const AboutUs = () => {
                             <img
                                 src="/img/about-us/reyesandfriends-theme.png"
                                 alt="El logo de Reyes&Friends como si fuera un tema de Spotify"
-                                className="rounded-lg shadow-lg w-full max-w-xs"
+                                className="rounded-lg shadow-lg w-full max-w-xs pointer-events-none"
                             />
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section className="py-16 bg-zinc-800 text-white">
+            <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4 max-w-7xl">
                     <h2 className="text-3xl mb-12 text-center text-red-600 relative">
-                        <span className="bg-zinc-800 px-4 relative z-10 text-white">Innovación y Futuro</span>
+                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Innovación y Futuro</span>
                         <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
@@ -127,7 +127,7 @@ const AboutUs = () => {
                             <img
                                 src="/img/about-us/frameworks.png"
                                 alt="Ilustración de tecnologías modernas"
-                                className="rounded-lg"
+                                className="pointer-events-none"
                             />
                         </div>
                         <div className="order-2 md:order-1">
