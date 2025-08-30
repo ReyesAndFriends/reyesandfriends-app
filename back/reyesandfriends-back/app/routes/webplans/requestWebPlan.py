@@ -122,6 +122,6 @@ def request_web_plan():
         return jsonify({"error": str(e)}), 500
 
     return jsonify({
-        "message": "Solicitud de Plan Web Fijo recibida.",
+        "message": f"¡Gracias por tu solicitud, {first_name}! Hemos recibido tu solicitud de Plan Web Fijo correctamente. Pronto nos pondremos en contacto contigo. Tu número de solicitud es: {request_number}",
         "request_number": request_number
-    }), 201
+        }), 201
