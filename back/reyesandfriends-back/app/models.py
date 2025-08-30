@@ -249,9 +249,10 @@ class WebPlanRequest(db.Model):
     __tablename__ = 'web_plan_requests'
 
     id = db.Column(db.Integer, primary_key=True)
+    request_number = db.Column(db.String(20), unique=True, nullable=False)  # WP-2025-001 format
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
-    correo = db.Column(db.String(120), nullable=False)
+    user_email = db.Column(db.String(120), nullable=False)
     rut = db.Column(db.String(20), nullable=False)
     rut_type = db.Column(db.String(20), nullable=False)
     cellphone = db.Column(db.String(20), nullable=False)
@@ -260,9 +261,10 @@ class WebPlanRequest(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
+            'request_number': self.request_number,
             'first_name': self.first_name,
             'last_name': self.last_name,
-            'correo': self.correo,
+            'user_email': self.user_email,
             'rut': self.rut,
             'rut_type': self.rut_type,
             'cellphone': self.cellphone,
