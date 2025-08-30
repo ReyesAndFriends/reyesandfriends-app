@@ -1,24 +1,20 @@
-import { Instagram, Mail } from "lucide-react";
 import { Link } from "react-router";
 
 export default function FloatingSocialBar() {
   return (
-    <div className="fixed top-1/2 right-4 -translate-y-1/2 z-50 flex flex-col space-y-4">
+    <div className="fixed top-1/2 right-4 -translate-y-1/2 z-50 flex flex-col">
       <Link
-        to="https://www.instagram.com/reyesandfriends.cl"
+        to="https://wa.me/56982034567?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios."
         target="_blank"
         rel="noopener noreferrer"
-        className="bg-pink-500 hover:bg-pink-600 text-white p-3 rounded-full shadow-lg transition duration-300"
-        title="Visita nuestro Instagram"
+        title="Contáctanos por WhatsApp"
+        className="bg-gradient-to-br from-green-400 via-green-500 to-green-600 p-4 rounded-full shadow-xl transition duration-300 flex items-center justify-center border-4 border-white hover:scale-110 hover:rotate-6"
       >
-        <Instagram className="w-5 h-5" />
-      </Link>
-      <Link
-        to="/contact"
-        className="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg transition duration-300"
-        title="Contáctanos"
-      >
-        <Mail className="w-5 h-5" />
+        <img
+          src="/img/icons/whatsapp.png"
+          alt="WhatsApp"
+          className="w-10 h-10 pointer-events-none"
+        />
       </Link>
     </div>
   );
