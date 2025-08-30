@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 export default function FloatingSocialBar() {
   return (
-    <div className="fixed top-1/2 right-4 -translate-y-1/2 z-50 flex flex-col">
+    <div className="fixed bottom-4 right-4 z-50 flex flex-col">
       <Link
         to="https://wa.me/56982034567?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios."
         target="_blank"
