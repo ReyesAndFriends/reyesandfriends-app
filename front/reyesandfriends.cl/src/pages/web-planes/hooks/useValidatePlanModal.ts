@@ -1,9 +1,11 @@
 import { useState, useCallback } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 interface FormState {
     first_name: string;
     last_name: string;
-    correo: string;
+    email: string;
     rut: string;
     rut_type: string;
     cellphone: string; 
@@ -13,13 +15,16 @@ export default function useValidatePlanModal(plan: any) {
     const [form, setForm] = useState<FormState>({
         first_name: "",
         last_name: "",
-        correo: "",
+        email: "",
         rut: "",
         rut_type: "natural",
         cellphone: "" 
     });
 
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
+    const [loading, setLoading] = useState(false);
+    const [successMessage, setSuccessMessage] = useState<string | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const validarRut = (rut: string) => {
         rut = rut.replace(/\./g, '').replace(/-/g, '').toUpperCase();
@@ -91,14 +96,16 @@ export default function useValidatePlanModal(plan: any) {
         setErrors(errs => ({ ...errs, cellphone: "" })); 
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setSuccessMessage(null);
+        setErrorMessage(null);
         const newErrors: { [key: string]: string } = {};
 
         if (!form.first_name.trim()) newErrors.first_name = "El nombre es obligatorio.";
         if (!form.last_name.trim()) newErrors.last_name = "Los apellidos son obligatorios.";
-        if (!form.correo.trim()) newErrors.correo = "El correo es obligatorio.";
-        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.correo)) newErrors.correo = "Correo inválido.";
+        if (!form.email.trim()) newErrors.email = "El correo es obligatorio.";
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) newErrors.email = "Correo inválido.";
         if (!form.rut.trim()) newErrors.rut = "El RUT es obligatorio.";
         else if (!validarRut(form.rut)) newErrors.rut = "RUT inválido.";
         if (!form.cellphone.trim()) newErrors.cellphone = "El teléfono es obligatorio."; 
@@ -107,13 +114,29 @@ export default function useValidatePlanModal(plan: any) {
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
+            setLoading(true);
             const rutSinFormato = form.rut.replace(/\./g, '').replace(/-/g, '');
-            console.log({
-                ...form,
-                rut: rutSinFormato,
-                plan
-            });
-            // form send here
+            try {
+                const res = await fetch(`${API_URL}/webplans/request`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        ...form,
+                        rut: rutSinFormato,
+                        plan: plan?.slug
+                    })
+                });
+                if (res.status === 201) {
+                    const data = await res.json();
+                    setSuccessMessage(data.message);
+                } else {
+                    setErrorMessage("En estos momentos no se pudo enviar la solicitud. Intenta más tarde.");
+                }
+            } catch {
+                setErrorMessage("En estos momentos no se pudo enviar la solicitud. Intenta más tarde.");
+            } finally {
+                setLoading(false);
+            }
         }
     };
 
@@ -121,12 +144,15 @@ export default function useValidatePlanModal(plan: any) {
         setForm({
             first_name: "",
             last_name: "",
-            correo: "",
+            email: "",
             rut: "",
             rut_type: "natural",
             cellphone: "" 
         });
         setErrors({});
+        setSuccessMessage(null);
+        setErrorMessage(null);
+        setLoading(false);
     }, []);
 
     return {
@@ -137,6 +163,9 @@ export default function useValidatePlanModal(plan: any) {
         handleRutTypeChange,
         handleTelefonoChange,
         handleSubmit,
-        resetForm
+        resetForm,
+        loading,
+        successMessage,
+        errorMessage
     };
 }
