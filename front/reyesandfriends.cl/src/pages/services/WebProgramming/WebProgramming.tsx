@@ -34,7 +34,7 @@ const WebProgramming = () => {
                         <img
                             src="/img/services/WebProgramming/logo.png"
                             alt="Programación Web"
-                            className="max-w-full h-auto"
+                            className="max-w-full h-auto pointer-events-none"
                         />
                     </div>
                     <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
@@ -70,7 +70,7 @@ const WebProgramming = () => {
                                 <img
                                     src="/img/services/WebProgramming/responsive.png"
                                     alt="Ilustración de diseño responsivo"
-                                    className="max-h-[350px] w-auto object-contain"
+                                    className="max-h-[350px] w-auto object-contain pointer-events-none"
                                 />
                             </div>
                             <div className="md:w-1/2 w-full flex flex-col justify-center p-8">
@@ -108,7 +108,7 @@ const WebProgramming = () => {
                                 <img
                                     src="/img/services/WebProgramming/SEO.png"
                                     alt="Un gráfico de SEO en 3D"
-                                    className="max-h-[350px] w-auto object-contain"
+                                    className="max-h-[350px] w-auto object-contain pointer-events-none"
                                 />
                             </div>
 
@@ -136,7 +136,7 @@ const WebProgramming = () => {
                                 <img
                                     src="/img/services/WebProgramming/suit-image.png"
                                     alt="Un traje elegante como tu empresa"
-                                    className="object-contain max-h-[150px] w-auto"
+                                    className="object-contain max-h-[150px] w-auto pointer-events-none"
                                 />
                             </div>
                         </div>
