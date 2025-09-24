@@ -1,6 +1,6 @@
 import type React from "react"
 import { useState, useEffect, useRef } from "react"
-import { Menu, X, ChevronDown, Home, Info, Mail, Code, LogIn, DollarSign, Gem } from "lucide-react"
+import { Menu, X, ChevronDown, HandHeart, Info, Mail, Code, LogIn, DollarSign, Gem } from "lucide-react"
 import useNavOptions from "./useNavOptions"
 import { useContactList } from "../../../hooks/services/useServiceList"
 import { useServiceList } from "../../../hooks/services/useServiceList"
@@ -83,7 +83,7 @@ const Navbar: React.FC = () => {
             >
                 <div className="container mx-auto flex justify-between items-center px-4">
                     <Link to="/">
-                        <img src="/img/logo/logo_white_2.svg" className="h-12 mb-2" alt="Reyes and Friends Logo" />
+                        <img src="/img/logo/logo_white_2.svg" className="h-12 mb-2 pointer-events-none" alt="Reyes&Friends" />
                     </Link>
                     <ul className={`md:flex space-x-0 md:space-x-6 text-lg md:ml-auto md:justify-end ${isMenuOpen ? "flex flex-col space-y-4 absolute top-full left-0 w-full bg-black p-4 z-50" : "hidden"} md:static md:flex-row md:space-y-0`}>
                         <li>
@@ -157,7 +157,7 @@ const Navbar: React.FC = () => {
                                 onClick={() => setIsHelpDropdownOpen(!isHelpDropdownOpen)}
                                 className="hover:underline focus:outline-none flex items-center gap-2"
                             >
-                                <Info size={18} /> Ayuda <ChevronDown className="ml-1" size={16} />
+                                <Info size={18} /> Nosotros <ChevronDown className="ml-1" size={16} />
                             </button>
                             <AnimatePresence>
                             {isHelpDropdownOpen && (
@@ -169,6 +169,16 @@ const Navbar: React.FC = () => {
                                     transition={{ duration: 0.18 }}
                                     className={`bg-white text-black mt-2 shadow-xl rounded-lg border ${isMenuOpen ? "w-full mt-2 py-3" : "md:absolute md:mt-2 md:py-4 md:w-56"}`}
                                 >
+                                    <li>
+                                        <Link
+                                            className="block w-full px-4 py-3 hover:bg-gray-100 text-left text-base font-medium transition-colors duration-200 flex items-center gap-2"
+                                            to="/social-media"
+                                            onClick={() => setIsHelpDropdownOpen(false)}
+                                        >
+                                            <HandHeart size={18} className="mr-2" />
+                                            Redes sociales
+                                        </Link>
+                                    </li>
                                     <li>
                                         <Link
                                             className="block w-full px-4 py-3 hover:bg-gray-100 text-left text-base font-medium transition-colors duration-200 flex items-center gap-2"

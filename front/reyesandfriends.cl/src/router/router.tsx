@@ -11,6 +11,7 @@ import Contact from "../pages/contact/contact";
 import Services from "../pages/services/services";
 import AboutUs from "../pages/about-us/aboutUs";
 import QuotePage from "../pages/quote-project/quoteProject";
+import SocialMedia from "../pages/social-media/social-media";
 
 // Services pages
 import WebProgramming from "../pages/services/WebProgramming/WebProgramming";
@@ -45,6 +46,7 @@ const AnimatedRoutes: React.FC = () => {
                 <Route path="/contact" element={<motion.div {...pageTransition}><Contact /></motion.div>} />
                 <Route path="/quote-project" element={<motion.div {...pageTransition}><QuotePage /></motion.div>} />
                 <Route path="/web-planes" element={<motion.div {...pageTransition}><WebPlanes /></motion.div>} />
+                <Route path="/social-media" element={<motion.div {...pageTransition}><SocialMedia /></motion.div>} />
                 <Route path="*" element={<motion.div {...pageTransition}><Error /></motion.div>} />
             </Routes>
         </AnimatePresence>
