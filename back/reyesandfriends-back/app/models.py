@@ -270,3 +270,19 @@ class WebPlanRequest(db.Model):
             'cellphone': self.cellphone,
             'created_at': self.created_at.isoformat() if self.created_at else None
         }
+class VisitersCounter(db.Model):
+    __tablename__ = 'visitors_counter'
+        
+    id = db.Column(db.Integer, primary_key=True)
+    ip_address = db.Column(db.String(45), unique=True, nullable=False)  # Supports IPv6
+    country = db.Column(db.String(100), nullable=True)
+    country_name = db.Column(db.String(100), nullable=True)
+    date_visited = db.Column(db.DateTime, default=datetime.utcnow)
+        
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'ipAddress': self.ip_address,
+            'country': self.country,
+            'dateVisited': self.date_visited.isoformat() if self.date_visited else None
+        }
