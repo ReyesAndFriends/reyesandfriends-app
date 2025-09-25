@@ -21,6 +21,9 @@ import WebPlanes from "../pages/web-planes/web-planes";
 // Error handler
 import Error from "../pages/error/Error";
 
+// Register visitors
+import { useRegisterVisitors } from "../hooks/registerVisitors/useRegisterVisitors";
+
 const pageTransition = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
@@ -54,6 +57,8 @@ const AnimatedRoutes: React.FC = () => {
 };
 
 const AppRouter: React.FC = () => {
+    useRegisterVisitors();
+    
     return (
         <Router>
             <Layout>
