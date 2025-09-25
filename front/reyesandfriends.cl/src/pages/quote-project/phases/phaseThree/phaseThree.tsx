@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ServiceOption } from '../../../../hooks/services/useServiceList';
 
 type PhaseThreeProps = {
@@ -16,6 +16,13 @@ type PhaseThreeProps = {
     handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
     validate: () => boolean;
     serviceList: ServiceOption[];
+};
+
+const formatCLP = (value: string) => {
+    if (!value) return "";
+    const numeric = value.replace(/\./g, '').replace(/^0+/, '');
+    if (!numeric) return "";
+    return Number(numeric).toLocaleString('es-CL');
 };
 
 const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, serviceList }) => {
@@ -42,6 +49,8 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
     // Only run on mount and if projectType changes
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [serviceList]);
+
+    const budgetInputRef = useRef<HTMLInputElement>(null);
 
     return (
         <div className="container mx-auto px-4 max-w-3xl">
@@ -150,9 +159,22 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                             type="text"
                             id="estimatedBudget"
                             name="estimatedBudget"
-                            value={values.estimatedBudget}
-                            onChange={handleChange}
+                            value={formatCLP(values.estimatedBudget)}
+                            onChange={(e) => {
+                                const rawValue = e.target.value.replace(/\./g, '');
+                                handleChange({
+                                    ...e,
+                                    target: {
+                                        ...e.target,
+                                        value: rawValue,
+                                        name: "estimatedBudget"
+                                    }
+                                } as React.ChangeEvent<HTMLInputElement>);
+                            }}
+                            ref={budgetInputRef}
                             className="w-full pl-8 p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                            inputMode="numeric"
+                            autoComplete="off"
                         />
                     </div>
                     {errors.estimatedBudget && <p className="text-red-500 text-sm mt-1">{errors.estimatedBudget}</p>}

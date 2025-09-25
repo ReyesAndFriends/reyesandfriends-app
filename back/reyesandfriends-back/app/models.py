@@ -244,3 +244,45 @@ class ProjectQuote(db.Model):
                 'additionalComments': self.additional_comments or ''
             }
         }
+
+class WebPlanRequest(db.Model):
+    __tablename__ = 'web_plan_requests'
+
+    id = db.Column(db.Integer, primary_key=True)
+    request_number = db.Column(db.String(20), unique=True, nullable=False)  # WP-2025-001 format
+    first_name = db.Column(db.String(50), nullable=False)
+    last_name = db.Column(db.String(50), nullable=False)
+    user_email = db.Column(db.String(120), nullable=False)
+    rut = db.Column(db.String(20), nullable=False)
+    rut_type = db.Column(db.String(20), nullable=False)
+    cellphone = db.Column(db.String(20), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'request_number': self.request_number,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'user_email': self.user_email,
+            'rut': self.rut,
+            'rut_type': self.rut_type,
+            'cellphone': self.cellphone,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
+class VisitersCounter(db.Model):
+    __tablename__ = 'visitors_counter'
+        
+    id = db.Column(db.Integer, primary_key=True)
+    ip_address = db.Column(db.String(45), unique=True, nullable=False)  # Supports IPv6
+    country = db.Column(db.String(100), nullable=True)
+    country_name = db.Column(db.String(100), nullable=True)
+    date_visited = db.Column(db.DateTime, default=datetime.utcnow)
+        
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'ipAddress': self.ip_address,
+            'country': self.country,
+            'dateVisited': self.date_visited.isoformat() if self.date_visited else None
+        }

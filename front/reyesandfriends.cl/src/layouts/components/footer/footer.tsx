@@ -12,10 +12,13 @@ const Footer: React.FC = () => {
                             <div className="flex items-center mb-4">
                                 <img
                                     src="/img/logo/crown_red.svg"
-                                    className="w-10 h-10 object-contain mr-3"
+                                    className="w-12 h-12 object-contain mr-4 pointer-events-none"
                                     alt="reyes&friends_crown"
                                 />
-                                <h2 className="text-lg font-bold text-white">Reyes&Friends</h2>
+                                <div className="flex flex-col">
+                                    <span className="text-2xl font-semibold text-white tracking-wider leading-none">REYES</span>
+                                    <span className="text-base text-white leading-none">&FRIENDS</span>
+                                </div>
                             </div>
                             <p className="text-sm">
                                 Realizando soluciones personalizadas y únicas para tu emprendimiento desde 2025.

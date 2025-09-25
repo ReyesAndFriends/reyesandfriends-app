@@ -49,4 +49,10 @@ def create_app():
     from .routes.quote import quote as quote_bp
     app.register_blueprint(quote_bp, url_prefix='/quotes')
 
+    from .routes.webplans import webPlans as webplans_bp
+    app.register_blueprint(webplans_bp, url_prefix='/webplans')
+
+    from .routes.visitors import visitors as visitors_bp
+    app.register_blueprint(visitors_bp, url_prefix='/visitors')
+
     return app

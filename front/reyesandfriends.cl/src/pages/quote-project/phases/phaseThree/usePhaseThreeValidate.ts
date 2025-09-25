@@ -16,6 +16,12 @@ export const usePhaseThreeValidate = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
+        if (name === "estimatedBudget") {
+            const numericValue = value.replace(/[^0-9.]/g, "");
+            setValues((prev) => ({ ...prev, [name]: numericValue }));
+            setErrors((prev) => ({ ...prev, [name]: "" }));
+            return;
+        }
         setValues((prev) => ({ ...prev, [name]: value }));
         setErrors((prev) => ({ ...prev, [name]: "" }));
     };

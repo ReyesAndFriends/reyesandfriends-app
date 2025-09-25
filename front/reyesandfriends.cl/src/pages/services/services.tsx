@@ -1,6 +1,6 @@
 import { useServiceList } from "../../hooks/services/useServiceList";
 import { Link } from "react-router";
-import { List } from "lucide-react";
+import { Code } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
 const Services = () => {
@@ -39,12 +39,12 @@ const Services = () => {
                         <img
                             src="/img/services/FullList/services-list.png"
                             alt="Ilustración de servicios"
-                            className="h-96 w-auto object-contain"
+                            className="h-96 w-auto object-contain pointer-events-none"
                         />
                     </div>
                     <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
                         <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-flex items-center gap-4">
-                            <List size={40} /> Nuestros Servicios
+                            <Code size={40} /> Nuestros Servicios
                         </h1>
                         <p className="text-xl mb-8">
                             Ofrecemos una amplia gama de servicios digitales para ayudarte a destacar en el mundo online. Desde desarrollo web hasta un panel empresarial personalizado, tenemos la solución perfecta para ti.
@@ -55,7 +55,7 @@ const Services = () => {
             </section>
 
             <section className="py-16 bg-zinc-900 text-white">
-                <div className="container mx-auto px-4">
+                <div className="container mx-auto px-4 max-w-7xl">
                     <h2 className="text-3xl mb-12 text-center text-red-600 relative">
                         <span className="bg-zinc-900 px-4 relative z-10 text-white">Lista de servicios</span>
                         <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
@@ -72,7 +72,7 @@ const Services = () => {
                                         <img
                                             src={service.image}
                                             alt={service.name}
-                                            className="w-full h-64 object-cover object-center rounded-md"
+                                            className="w-full h-64 object-cover object-center rounded-md pointer-events-none"
                                             style={{ aspectRatio: "1 / 1" }}
                                         />
                                     </div>

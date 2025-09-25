@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reyes&Friends - Cotización Recibida</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style type="text/css">
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.5;
+            color: #f0f0f0;
+            background-color: #1b1b1b;
+        }
+        
+
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #1b1b1b;
+            padding: 0;
+        }
+        
+
+        .header {
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+
+        .logo {
+            width: 180px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+            position: relative;
+            z-index: 2;
+        }
+        
+
+        .content {
+            padding: 30px;
+            background-color: #212121;
+            border-radius: 8px;
+            margin: 0 20px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 8px #00000033;
+        }
+        
+
+        .title {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #8B0000;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .center {
+            text-align: center;
+        }
+        
+
+        .paragraph {
+            margin-bottom: 20px;
+            color: #e0e0e0;
+        }
+        
+        .button {
+            display: inline-block;
+            background-color: #8B0000;
+            color: #ffffff;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .button:hover {
+            background-color: #5a1616;
+        }
+        
+
+        .footer {
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #a0a0a0;
+            border-top: 1px solid #333333;
+            margin-top: 30px;
+        }
+        
+
+        .social-links {
+            margin: 15px 0;
+        }
+        
+        .social-link {
+            display: inline-block;
+            margin: 0 10px;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .email-details{
+            background-color: #333333;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 3px solid #8B0000;
+            list-style-type: none;
+            margin: 0;
+        }
+
+        .auto-generated-text {
+            color: #ce2828;
+            font-weight: bold;
+            font-style: italic;
+        }
+        
+        .contact-info-box {
+            background-color: #333333;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 3px solid #8B0000;
+        }
+        
+        .contact-email-link {
+            color: #8B0000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .button-white-text {
+            color: white;
+        }
+        
+        @media screen and (max-width: 480px) {
+            .content {
+                padding: 20px;
+                margin: 0 10px;
+            }
+            
+            .title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        
+        <div class="header">
+            <img src="https://cdn.reyesandfriends.cl/assets/logo/reyesandfriends-white.svg" alt="Reyes&Friends logo" width="200" height="auto">
+        </div>
+        
+        <div class="content">
+            <h1 class="title">Solicitud de Plan Web Fijo</h1>
+            
+            <p class="paragraph">
+                Estimado/a <strong>{{ user_name }}</strong>,
+            </p>
+            
+            <p class="paragraph">
+                Gracias por solicitar un Plan Web Fijo con Reyes&Friends. Hemos recibido tu solicitud exitosamente y nuestro equipo se encuentra revisándola.
+            </p>
+
+            <p class="subtitle">Detalles de tu solicitud:</p>
+            
+            <div class="paragraph email-details">
+                <strong>Código de Solicitud:</strong><br>
+                {{ request_number }}<br>
+                <strong>RUT:</strong><br>
+                {{ rut }}<br>
+                <strong>Tipo de RUT:</strong><br>
+                {{ rut_type }}<br>
+                <strong>Celular:</strong><br>
+                {{ cellphone }}
+            </div>
+            
+            <p class="paragraph">
+                Nuestro equipo técnico revisará tu solicitud y te contactaremos dentro de las próximas 24-48 horas para coordinar los siguientes pasos del proceso de solicitud.
+                Recuerda que esta solicitud es flexible y puede ajustarse según tus necesidades. Si deseas modificar algún detalle o agregar información, no dudes en comunicarlo. Nuestro objetivo es que la solicitud se adapte perfectamente a tus expectativas.
+            </p>
+            
+            <p class="paragraph contact-info-box">
+                <strong>¿Necesitas contactarnos directamente?</strong><br>
+                Si tienes alguna consulta urgente o adicional, puedes escribirnos a: 
+                <a href="mailto:contacto@reyesandfriends.cl" class="contact-email-link">contacto@reyesandfriends.cl</a>
+            </p>
+            
+            <p class="paragraph center">
+                <a href="https://reyesandfriends.cl" class="button button-white-text">Descubre más en nuestro sitio web</a>
+            </p>
+                        
+            <p class="paragraph">
+                Atentamente,<br>
+                El equipo de Reyes&Friends
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p>© <script>document.write(new Date().getFullYear());</script> Reyes&Friends
+            <br>Todos los derechos reservados.</p>
+            <p class="auto-generated-text">Este email es generado automáticamente por el sistema. Por favor no responder.</p>
+        </div> 
+    </div>
+</body>
+</html>
+</html>

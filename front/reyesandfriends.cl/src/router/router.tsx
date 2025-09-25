@@ -11,12 +11,18 @@ import Contact from "../pages/contact/contact";
 import Services from "../pages/services/services";
 import AboutUs from "../pages/about-us/aboutUs";
 import QuotePage from "../pages/quote-project/quoteProject";
+import SocialMedia from "../pages/social-media/social-media";
 
 // Services pages
 import WebProgramming from "../pages/services/WebProgramming/WebProgramming";
 
+import WebPlanes from "../pages/web-planes/web-planes";
+
 // Error handler
 import Error from "../pages/error/Error";
+
+// Register visitors
+import { useRegisterVisitors } from "../hooks/registerVisitors/useRegisterVisitors";
 
 const pageTransition = {
     initial: { opacity: 0 },
@@ -42,6 +48,8 @@ const AnimatedRoutes: React.FC = () => {
                 <Route path="/portfolio" element={<motion.div {...pageTransition}><Portfolio /></motion.div>} />
                 <Route path="/contact" element={<motion.div {...pageTransition}><Contact /></motion.div>} />
                 <Route path="/quote-project" element={<motion.div {...pageTransition}><QuotePage /></motion.div>} />
+                <Route path="/web-planes" element={<motion.div {...pageTransition}><WebPlanes /></motion.div>} />
+                <Route path="/social-media" element={<motion.div {...pageTransition}><SocialMedia /></motion.div>} />
                 <Route path="*" element={<motion.div {...pageTransition}><Error /></motion.div>} />
             </Routes>
         </AnimatePresence>
@@ -49,6 +57,8 @@ const AnimatedRoutes: React.FC = () => {
 };
 
 const AppRouter: React.FC = () => {
+    useRegisterVisitors();
+    
     return (
         <Router>
             <Layout>

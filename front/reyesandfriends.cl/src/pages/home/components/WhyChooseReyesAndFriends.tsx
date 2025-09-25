@@ -49,7 +49,7 @@ const WhyChooseReyesAndFriends = () => {
 
     return (
         <section className="py-16 text-white">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 max-w-7xl">
                 <h2 className="text-3xl mb-12 text-center text-red-600 relative">
                     <span className="bg-zinc-900 px-4 relative z-10 text-white">¿Por qué elegirnos?</span>
                     <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
@@ -79,12 +79,16 @@ const WhyChooseReyesAndFriends = () => {
                         <h2 className="text-2xl md:text-4xl mb-4 text-white">{currentFeature?.subtitle}</h2>
                         {currentFeature?.description}
                     </div>
-                    <div className="flex justify-center md:col-span-1 order-1 md:order-2 mb-6 md:mb-0">
-                        <img
-                            src={currentFeature?.image}
-                            alt="reyes&friends"
-                            className="w-full h-auto max-w-xs md:max-w-md object-cover"
-                        />
+                    <div className="flex justify-center items-center md:col-span-1 order-1 md:order-2 mb-6 md:mb-0">
+                        <div className="flex items-center justify-center w-full h-full select-none" style={{ minHeight: 160 }}>
+                            <img
+                                src={currentFeature?.image}
+                                alt="reyes&friends"
+                                draggable={false}
+                                className="object-contain max-h-40 max-w-xs md:max-w-md w-auto h-auto select-none pointer-events-none"
+                                onContextMenu={e => e.preventDefault()}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -93,7 +93,7 @@ const QuoteProject: React.FC = () => {
       // Send quote request
       await submitQuote(quoteData);
       setIsSubmitted(true);
-      
+
     } catch (err) {
       console.error('Error al enviar la cotización:', err);
     }
@@ -134,8 +134,8 @@ const QuoteProject: React.FC = () => {
             <div className="max-w-3xl text-white mx-auto">
               <img
                 src="/img/logo/crown_white.svg"
-                className="w-32 h-32 object-contain mx-auto mb-6"
-                alt="reyes&friends_crown"
+                className="w-32 h-32 object-contain mx-auto mb-6 pointer-events-none"
+                alt="La corona de Reyes&Friends"
               />
               <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block">
                 ¡Cotización Enviada Exitosamente!
@@ -147,10 +147,10 @@ const QuoteProject: React.FC = () => {
           </div>
         </section>
 
-        <div className="container mx-auto px-4 max-w-3xl py-12">
+        <div className="container mx-auto px-4 max-w-7xl py-12">
           <div className="bg-black p-8 rounded-lg shadow-lg text-center">
             <h2 className="text-2xl font-bold text-white mb-6">Detalles de tu Cotización</h2>
-            
+
             {formattedResponse && (
               <div className="text-left bg-zinc-900 p-6 rounded-lg mb-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-white">
@@ -159,7 +159,7 @@ const QuoteProject: React.FC = () => {
                     <p>{formattedResponse.quoteNumber}</p>
                   </div>
                   <div>
-                    <strong className="text-green-400">Cliente:</strong>
+                    <strong className="text-green-400">Nombre del Cliente:</strong>
                     <p>{formattedResponse.customerName}</p>
                   </div>
                   <div>
@@ -234,8 +234,8 @@ const QuoteProject: React.FC = () => {
             <div className="max-w-3xl text-white mx-auto">
               <img
                 src="/img/logo/crown_white.svg"
-                className="w-32 h-32 object-contain mx-auto mb-6"
-                alt="reyes&friends_crown"
+                className="w-32 h-32 object-contain mx-auto mb-6 pointer-events-none"
+                alt="La corona de Reyes&Friends"
               />
               <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block">
                 De acuerdo, {userName}
@@ -258,41 +258,54 @@ const QuoteProject: React.FC = () => {
           <ResumeProject formData={finalData} />
         </motion.div>
 
-        <div className="text-center my-8">
-          <h2 className="text-3xl font-bold text-white">¿Listo para enviar? ¡No te preocupes por los detalles!</h2>
-          <p className="text-lg text-gray-300">
-            Esta información es solo una referencia inicial. Si más adelante quieres ajustar algo, ¡siempre podremos conversarlo y adaptarlo juntos!
-          </p>
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
+            <div className="flex justify-center mb-8 md:mb-0">
+              <img
+              src="/img/quote-project/thanks.png"
+              alt="Imagen de agradecimiento"
+              className="w-40 h-40 object-contain mx-auto hover:scale-105 transition-transform pointer-events-none"
+              />
+            </div>
+            <div>
+              <h4 className="text-lg text-red-500 mb-2">¡No te preocupes por los detalles!</h4>
+              <h2 className="text-4xl mb-4 text-white">¿Listo para enviar?</h2>
+              <p className="text-lg text-gray-200">
+                Gracias por tomar tu tiempo en nuestro cotizador. Con esta información proporcionada, nos haremos idea de lo que necesitas, y si más adelante quieres ajustar algo, ¡siempre podremos conversarlo y adaptarlo juntos!
+              </p>
+            </div>
+          </div>
         </div>
 
+
         <div className="flex justify-center mt-8 mb-8 gap-4">
-            <button
+          <button
             type="button"
             onClick={() => setShowSummary(false)}
             disabled={isLoading}
             className="bg-zinc-700 hover:bg-zinc-800 disabled:bg-zinc-600 text-white px-6 py-3 rounded transition-colors flex items-center gap-2"
-            >
+          >
             <ArrowLeft size={18} />
             Editar
-            </button>
+          </button>
 
-            <button
+          <button
             type="button"
             onClick={handleSubmitQuote}
             disabled={isLoading}
             className="bg-red-700 hover:bg-red-800 disabled:bg-red-600 text-white px-6 py-3 rounded transition-colors flex items-center gap-2"
-            >
+          >
             {isLoading ? (
               <>
-              Enviando...
+                Enviando...
               </>
             ) : (
               <>
-              <FileText size={18} />
-              Enviar Cotización
+                <FileText size={18} />
+                Enviar Cotización
               </>
             )}
-            </button>
+          </button>
         </div>
 
         {error && (
@@ -308,121 +321,130 @@ const QuoteProject: React.FC = () => {
 
   return (
     <>
-    <Helmet>
-      <title>Cotiza tu proyecto | Reyes&Friends</title>
-      <meta
-      name="description"
-      content="Cotiza tu proyecto dinámicamente con Reyes&Friends"
-      />
-      <meta property="og:title" content="Cotiza tu proyecto | Reyes&Friends" />
-      <meta property="og:description" content="Cotiza tu proyecto dinámicamente con Reyes&Friends" />
-      <meta property="og:image" content="/img/open-graph-images/quote-project.png" />
-      <meta property="og:type" content="website" />
-      <meta name="twitter:title" content="Cotiza tu proyecto | Reyes&Friends" />
-      <meta name="twitter:description" content="Cotiza tu proyecto dinámicamente con Reyes&Friends" />
-      <meta name="twitter:image" content="/img/open-graph-images/quote-project.png" />
-    </Helmet>
-    <div>
-      <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
-        <div className="absolute inset-0 bg-hero-section"></div>
-        <div className="absolute inset-0">
-          <img
-            src="/img/background/background-web.jpg"
-            alt="fondo de la sección"
-            className="w-full h-full object-cover opacity-5 filter grayscale"
-            draggable={false}
-            onContextMenu={e => e.preventDefault()}
-          />
-        </div>
-        <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col items-center justify-center text-center flex-1">
-          <div className="max-w-3xl text-white mx-auto">
+      <Helmet>
+        <title>Cotiza tu proyecto | Reyes&Friends</title>
+        <meta
+          name="description"
+          content="Cotiza tu proyecto dinámicamente con Reyes&Friends"
+        />
+        <meta property="og:title" content="Cotiza tu proyecto | Reyes&Friends" />
+        <meta property="og:description" content="Cotiza tu proyecto dinámicamente con Reyes&Friends" />
+        <meta property="og:image" content="/img/open-graph-images/quote-project.png" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:title" content="Cotiza tu proyecto | Reyes&Friends" />
+        <meta name="twitter:description" content="Cotiza tu proyecto dinámicamente con Reyes&Friends" />
+        <meta name="twitter:image" content="/img/open-graph-images/quote-project.png" />
+      </Helmet>
+
+      <div>
+        <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
+          <div className="absolute inset-0 bg-hero-section"></div>
+          <div className="absolute inset-0">
             <img
-              src="/img/logo/crown_white.svg"
-              className="w-32 h-32 object-contain mx-auto mb-6"
-              alt="reyes&friends_crown"
+              src="/img/background/background-web.jpg"
+              alt="fondo de la sección"
+              className="w-full h-full object-cover opacity-5 filter grayscale"
+              draggable={false}
+              onContextMenu={e => e.preventDefault()}
             />
-            <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block">
-              Cotiza tu proyecto
-            </h1>
-            <p className="text-xl mb-8 text-red-100">
-              Has tomado una gran decisión al elegirnos para tu proyecto!
-              <br />
-              Ahora cuéntanos más sobre lo que tienes en mente.
-            </p>
           </div>
-        </div>
-      </section>
+          <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col items-center justify-center text-center flex-1">
+            <div className="max-w-3xl text-white mx-auto">
+              <img
+                src="/img/logo/crown_white.svg"
+                className="w-32 h-32 object-contain mx-auto mb-6 pointer-events-none"
+                alt="La corona de Reyes&Friends"
+              />
+              <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block">
+                Cotiza tu proyecto
+              </h1>
+              <p className="text-xl mb-8 text-red-100">
+                Has tomado una gran decisión al elegirnos para tu proyecto!
+                <br />
+                Ahora cuéntanos más sobre lo que tienes en mente.
+              </p>
+            </div>
+          </div>
+        </section>
 
-      <section className="py-16 max-w-4xl mx-auto px-4">
-        <div className="mb-12">
-          <div className="relative mb-2">
-            <div className="flex justify-between text-sm text-gray-400 mb-1">
-              {[...Array(totalSteps)].map((_, i) => (
+        <section className="py-16 max-w-7xl mx-auto px-4">
+          <div className="mb-12">
+            <div className="relative mb-2 mt-2">
+
+              <div className="relative mb-12">
+                <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
+                <h2 className="text-3xl text-center text-red-500 relative z-10">
+                  <span className="bg-zinc-900 px-4 relative z-10 text-white">Cotizador de proyectos</span>
+                </h2>
+              </div>
+
+              <div className="flex justify-between text-sm text-gray-400 ">
+                {[...Array(totalSteps)].map((_, i) => (
+                  <div
+                    key={i}
+                    className={`w-full text-center ${i === currentStep ? 'text-white font-bold' : ''}`}
+                  >
+                    Fase {i + 1}
+                  </div>
+                ))}
+              </div>
+              <div className="w-full h-2 bg-zinc-700 rounded">
                 <div
-                  key={i}
-                  className={`w-full text-center ${i === currentStep ? 'text-white font-bold' : ''}`}
+                  className="h-2 bg-red-600 rounded transition-all duration-300"
+                  style={{ width: `${progressPercent}%` }}
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentStep}
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 0.3 }}
+              >
+                {steps[currentStep]}
+              </motion.div>
+            </AnimatePresence>
+
+            <div className="flex justify-center mt-8 gap-4">
+              {currentStep > 0 && (
+                <button
+                  type="button"
+                  onClick={handlePrev}
+                  className="bg-zinc-700 hover:bg-zinc-800 text-white px-6 py-3 rounded transition-colors flex items-center gap-2"
                 >
-                  Fase {i + 1}
-                </div>
-              ))}
-            </div>
-            <div className="w-full h-2 bg-zinc-700 rounded">
-              <div
-                className="h-2 bg-red-600 rounded transition-all duration-300"
-                style={{ width: `${progressPercent}%` }}
-              ></div>
+                  <ArrowLeft size={18} />
+                  Anterior
+                </button>
+              )}
+
+              {currentStep < totalSteps - 1 ? (
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors flex items-center gap-2"
+                >
+                  Siguiente
+                  <ArrowRight size={18} />
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleShowSummary}
+                  className="bg-green-700 hover:bg-green-800 text-white px-6 py-3 rounded transition-colors flex items-center gap-2"
+                >
+                  <FileText size={18} />
+                  Resumen
+                </button>
+              )}
             </div>
           </div>
-        </div>
-
-        <div>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentStep}
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -100 }}
-              transition={{ duration: 0.3 }}
-            >
-              {steps[currentStep]}
-            </motion.div>
-          </AnimatePresence>
-
-          <div className="flex justify-center mt-8 gap-4">
-            {currentStep > 0 && (
-              <button
-                type="button"
-                onClick={handlePrev}
-                className="bg-zinc-700 hover:bg-zinc-800 text-white px-6 py-3 rounded transition-colors flex items-center gap-2"
-              >
-                <ArrowLeft size={18} />
-                Anterior
-              </button>
-            )}
-
-            {currentStep < totalSteps - 1 ? (
-              <button
-                type="button"
-                onClick={handleNext}
-                className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors flex items-center gap-2"
-              >
-                Siguiente
-                <ArrowRight size={18} />
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={handleShowSummary}
-                className="bg-green-700 hover:bg-green-800 text-white px-6 py-3 rounded transition-colors flex items-center gap-2"
-              >
-                <FileText size={18} />
-                Resumen
-              </button>
-            )}
-          </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
     </>
   );
 };

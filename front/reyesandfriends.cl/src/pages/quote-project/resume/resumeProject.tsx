@@ -17,6 +17,11 @@ const projectTypeMap: Record<string, string> = {
   notSure: "No está seguro",
 };
 
+const companyTypeMap: Record<string, string> = {
+  personal: "Proyecto Personal",
+  business: "Proyecto Empresarial",
+};
+
 const hostingMap: Record<string, string> = {
   yes: "Sí, necesita hosting",
   no: "No necesita hosting",
@@ -39,6 +44,12 @@ const deliveryMap: Record<string, string> = {
 const booleanMap: Record<string, string> = {
   yes: "Sí",
   no: "No",
+};
+
+const contactMethodMap: Record<string, string> = {
+  email: "Correo electrónico",
+  whatsapp: "WhatsApp",
+  both: "Ambas (Correo o WhatsApp)",
 };
 
 const getValue = (val?: string) => val?.trim() || "No especificado";
@@ -73,19 +84,17 @@ const Badge = ({ children, color = "bg-green-700" }: { children: React.ReactNode
 
 const ResumeProject: React.FC<ResumeProjectProps> = ({ formData }) => {
   return (
-    <div className="container mx-auto px-4 max-w-5xl mt-10">
-      <div className="flex flex-col items-center mb-10">
-        <Badge color="bg-red-700">Resumen</Badge>
-        <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2 flex items-center gap-2">
-          <Layers className="inline-block text-red-700" size={32} /> Detalles de tu Cotización
-        </h1>
-        <p className="text-gray-300 text-lg text-center max-w-xl">
-          Revisa cuidadosamente la información antes de enviar tu solicitud. Si necesitas modificar algo, puedes volver atrás.
-        </p>
+    <div className="container mx-auto px-4 max-w-7xl mt-10">
+
+      <div className="relative mb-12">
+        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
+        <h2 className="text-3xl text-center text-red-500 relative z-10">
+          <span className="bg-zinc-900 px-4 relative z-10 text-white">Detalle de su Cotización</span>
+        </h2>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Section icon={<User size={22} />} title="Fase 1: Información Personal">
+        <Section icon={<User size={22} />} title="Fase 1: Información Personal" className="hover:scale-105 transition-transform duration-200">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div>
               <Badge color="bg-zinc-700"><Mail size={14} className="inline mr-1" /> Email</Badge>
@@ -101,12 +110,14 @@ const ResumeProject: React.FC<ResumeProjectProps> = ({ formData }) => {
             </div>
             <div className="md:col-span-2">
               <Badge color="bg-zinc-700"><BadgeCheck size={14} className="inline mr-1" /> Método de Contacto</Badge>
-              <span className="text-white">{getValue(formData.phaseOne.contactMethod)}</span>
+              <span className="text-white">
+                {contactMethodMap[formData.phaseOne.contactMethod] || getValue(formData.phaseOne.contactMethod)}
+              </span>
             </div>
           </div>
         </Section>
 
-        <Section icon={<Building2 size={22} />} title="Fase 2: Empresa">
+        <Section icon={<Building2 size={22} />} title="Fase 2: Empresa" className="hover:scale-105 transition-transform duration-200">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div>
               <Badge color="bg-zinc-700">Empresa</Badge>
@@ -114,7 +125,9 @@ const ResumeProject: React.FC<ResumeProjectProps> = ({ formData }) => {
             </div>
             <div>
               <Badge color="bg-zinc-700">Tipo</Badge>
-              <span className="text-white">{getValue(formData.phaseTwo.companyType)}</span>
+              <span className="text-white">
+                {companyTypeMap[formData.phaseTwo.companyType] || getValue(formData.phaseTwo.companyType)}
+              </span>
             </div>
             <div className="md:col-span-2">
               <Badge color="bg-zinc-700">Propósito</Badge>
@@ -123,7 +136,7 @@ const ResumeProject: React.FC<ResumeProjectProps> = ({ formData }) => {
           </div>
         </Section>
 
-        <Section icon={<Code2 size={22} />} title="Fase 3: Alcance Técnico y Funcional">
+        <Section icon={<Code2 size={22} />} title="Fase 3: Alcance Técnico y Funcional" className="hover:scale-105 transition-transform duration-200">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div>
               <Badge color="bg-zinc-700"><Layers size={14} className="inline mr-1" /> Tipo de Proyecto</Badge>
@@ -164,7 +177,7 @@ const ResumeProject: React.FC<ResumeProjectProps> = ({ formData }) => {
           </div>
         </Section>
 
-        <Section icon={<Server size={22} />} title="Fase 4: Despliegue y Servicios">
+        <Section icon={<Server size={22} />} title="Fase 4: Despliegue y Servicios" className="hover:scale-105 transition-transform duration-200">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div>
               <Badge color="bg-zinc-700"><Server size={14} className="inline mr-1" /> Hosting</Badge>
@@ -194,7 +207,7 @@ const ResumeProject: React.FC<ResumeProjectProps> = ({ formData }) => {
         <Section
           icon={<Settings2 size={22} />}
           title="Fase 5: Preferencias Técnicas"
-          className="md:col-span-2"
+          className="md:col-span-2 hover:scale-105 transition-transform duration-200"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div>
@@ -224,6 +237,7 @@ const ResumeProject: React.FC<ResumeProjectProps> = ({ formData }) => {
           </div>
         </Section>
       </div>
+
     </div>
   );
 };

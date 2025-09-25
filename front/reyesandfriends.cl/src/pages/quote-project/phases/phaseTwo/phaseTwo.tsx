@@ -18,12 +18,12 @@ const PhaseTwo: React.FC<PhaseTwoProps> = ({ values, errors, handleChange }) => 
                 <h1 className='block text-white font-bold mb-4'>Fase 2. Empresa y propósito del proyecto</h1>
                 
                 <div className="mb-4">
-                    <label htmlFor="companyName" className="block text-gray-300 font-bold mb-2">Nombre de la empresa (Si aplica)</label>
+                    <label htmlFor="companyName" className="block text-gray-300 font-bold mb-2">Nombre o razón social de la empresa (Si aplica)</label>
                     <input 
                         type="text" 
                         id="companyName" 
                         name="companyName" 
-                        placeholder="Ejemplo: Reyes&Friends SPA" 
+                        placeholder="Ejemplo: Reyes&Friends SpA" 
                         value={values.companyName} 
                         onChange={handleChange} 
                         className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
