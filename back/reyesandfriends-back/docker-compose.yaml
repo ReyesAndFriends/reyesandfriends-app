@@ -4,3 +4,5 @@ services:
     ports:
       - "5006:5006"
     restart: always
+    environment:
+      - TZ=America/Santiago
