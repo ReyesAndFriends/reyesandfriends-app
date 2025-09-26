@@ -3,9 +3,11 @@ from datetime import datetime, timedelta
 from sqlalchemy import func, desc, and_
 from app.models import VisitersCounter
 from app import db
+from app.utils.middleware.check_ip_allowed import check_ip_allowed
 from . import visitors
 
 @visitors.route('/stats', methods=['GET'])
+@check_ip_allowed
 def get_stats():
     """Get comprehensive visitor statistics"""
     try:
