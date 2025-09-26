@@ -1,24 +1,23 @@
 from flask import Blueprint, jsonify
-from app.models import ProjectQuote
+from app.models import WebPlanRequest
 from app.utils.middleware.check_ip_allowed import check_ip_allowed
-from . import quote
+from . import webPlans
 
-get_quote_bp = Blueprint('get_quote', __name__)
+get_webPlan_bp = Blueprint('get_webPlan', __name__)
 
-@quote.route('/<int:quote_id>', methods=['GET'])
+@webPlans.route('/<int:plan_id>', methods=['GET'])
 @check_ip_allowed
-def get_quote(quote_id):
+def get_web_plan(plan_id):
     try:
-        quote = ProjectQuote.query.get(quote_id)
-        if not quote:
+        web_plan = WebPlanRequest.query.get(plan_id)
+        if not web_plan:
             return jsonify({
                 'success': False,
-                'error': 'Cotización no encontrada.'
+                'error': 'Solicitud de plan web no encontrada.'
             }), 404
         return jsonify({
             'success': True,
-            'quote': quote.to_dict(),
-            'phases': quote.to_phases_dict()
+            'web_plan': web_plan.to_dict()
         }), 200
     except Exception as e:
         return jsonify({
