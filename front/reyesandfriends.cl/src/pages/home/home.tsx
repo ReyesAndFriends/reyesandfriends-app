@@ -1,12 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ChevronRight, Gem, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import TerminalMessage from "./components/TerminalMessage";
 import MethodologySteps from "./components/MethodologySteps";
 import WhyChooseReyesAndFriends from "./components/WhyChooseReyesAndFriends";
 import { Helmet } from "react-helmet-async";
 
 const Home: React.FC = () => {
+
+    const subtitles = [
+        "tu crecimiento digital",
+        "tu éxito en línea",
+        "tu presencia web",
+        "tu transformación digital",
+        "tu innovación tecnológica",
+        "tu futuro digital",
+        "tu negocio en la nube",
+        "tu solución tecnológica",
+        "tu plataforma digital",
+        "tu estrategia en línea",
+        "tu imperio digital",
+        "tu marca en línea",
+        "tu proyecto web",
+        "tu sueño digital",
+    ];
+
+    const [currentSubtitleIndex, setCurrentSubtitleIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentSubtitleIndex((prevIndex) => 
+                (prevIndex + 1) % subtitles.length
+            );
+        }, 4000);
+
+        return () => clearInterval(interval);
+    }, [subtitles.length]);
     
     return (
         <>
@@ -42,13 +72,29 @@ const Home: React.FC = () => {
                         <h1 className="text-5xl md:text-6xl mb-2 text-white drop-shadow-lg tracking-tight">
                             Impulsamos
                         </h1>
-                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block text-white drop-shadow">
-                            tu crecimiento digital
+                        <h1 className="text-4xl md:text-5xl mb-6 inline-block text-white drop-shadow">
+                            <AnimatePresence mode="wait" initial={false}>
+                                <motion.span
+                                    key={subtitles[currentSubtitleIndex]}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    transition={{ 
+                                        duration: 0.3,
+                                        ease: "easeInOut"
+                                    }}
+                                    className="text-red-600"
+                                >
+                                    {subtitles[currentSubtitleIndex]}
+                                </motion.span>
+                            </AnimatePresence>
                         </h1>
-                        <p className="text-2xl mb-8 text-white drop-shadow-sm">
-                            ¡Transforma tu negocio con tecnología a tu medida!<br />
-                            Creamos sitios web, plataformas y soluciones digitales innovadoras para que tu empresa crezca y destaque en el mundo digital.
-                        </p>
+                        <div className="mb-8 w-full flex flex-col items-center">
+                            <p className="text-2xl text-white drop-shadow-sm">
+                                ¡Transforma tu negocio con tecnología a tu medida!<br />
+                                Creamos sitios web, plataformas y soluciones digitales innovadoras para que tu empresa crezca y destaque en el mundo digital.
+                            </p>
+                        </div>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                             <Link
                                 to="/quote-project"
