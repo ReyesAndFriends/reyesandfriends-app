@@ -85,36 +85,36 @@ const Navbar: React.FC = () => {
                     <Link to="/">
                         <img src="/img/logo/logo_white_2.svg" className="h-12 mb-2 pointer-events-none" alt="Reyes&Friends" />
                     </Link>
-                    <ul className={`md:flex space-x-0 md:space-x-6 text-lg md:ml-auto md:justify-end ${isMenuOpen ? "flex flex-col space-y-4 absolute top-full left-0 w-full bg-black p-4 z-50" : "hidden"} md:static md:flex-row md:space-y-0`}>
+                    <ul className={`md:flex space-x-0 md:space-x-4 text-base md:ml-auto md:justify-end ${isMenuOpen ? "flex flex-col space-y-4 absolute top-full left-0 w-full bg-black p-4 z-50" : "hidden"} md:static md:flex-row md:space-y-0`}>
                         <li>
                             <Link
-                                className="block flex items-center gap-2 font-semibold"
+                                className="block flex items-center gap-1 font-medium"
                                 to="/web-planes"
                                 style={{ display: "flex", alignItems: "center" }}
                             >
-                                <DollarSign size={18} className="mr-1" />
+                                <DollarSign size={16} />
                                 <span className="hover:underline">Planes Web</span>
-                                <span className="ml-1 px-2 py-0.5 rounded text-white text-xs font-bold bg-red-600" style={{marginLeft: 4}}>
-                                    NUEVO
+                                <span className="ml-1 px-1.5 py-0.5 rounded text-white text-xs font-bold bg-red-600">
+                                    Recomendado
                                 </span>
                             </Link>
                         </li>
                         <li>
                             <Link
-                                className="block flex items-center gap-2 font-semibold"
+                                className="block flex items-center gap-1 font-medium"
                                 to="/quote-project"
                                 style={{ display: "flex", alignItems: "center" }}
                             >
-                                <Gem size={18} className="mr-1" />
-                                <span className="hover:underline">Cotiza tu proyecto</span>
+                                <Gem size={16} />
+                                <span className="hover:underline">Cotizar Proyecto</span>
                             </Link>
                         </li>
                         <li className="relative" ref={dropdownRef}>
                             <button
                                 onClick={handleDropdownToggle}
-                                className="hover:underline focus:outline-none flex items-center gap-2"
+                                className="hover:underline focus:outline-none flex items-center gap-1"
                             >
-                                <Code size={18} /> Servicios personalizados <ChevronDown className="ml-1" size={16} />
+                                <Code size={16} /> Servicios Web <ChevronDown className="ml-1" size={14} />
                             </button>
                             <AnimatePresence>
                             {isDropdownOpen && (
@@ -129,7 +129,7 @@ const Navbar: React.FC = () => {
                                     {serviceList.map(option => (
                                         <li key={option.path}>
                                             <Link
-                                                className="block w-full px-4 py-3 hover:bg-gray-100 text-left text-base font-medium transition-colors duration-200 flex items-center gap-2"
+                                                className="block w-full px-3 py-2.5 hover:bg-gray-100 text-left text-sm font-medium transition-colors duration-200 flex items-center gap-2"
                                                 to={option.path}
                                                 onClick={closeDropdown}
                                             >
@@ -140,11 +140,11 @@ const Navbar: React.FC = () => {
                                     ))}
                                     <li>
                                         <Link
-                                            className="block w-full px-4 py-3 hover:bg-gray-100 text-left text-base font-medium transition-colors duration-200 flex items-center gap-2"
+                                            className="block w-full px-3 py-2.5 hover:bg-gray-100 text-left text-sm font-medium transition-colors duration-200 flex items-center gap-2"
                                             to="/services"
                                             onClick={closeDropdown}
                                         >
-                                            <Code size={18} className="inline mr-2" />
+                                            <Code size={16} className="inline mr-2" />
                                             Lista completa
                                         </Link>
                                     </li>
@@ -155,9 +155,9 @@ const Navbar: React.FC = () => {
                         <li className="relative" ref={helpDropdownRef}>
                             <button
                                 onClick={() => setIsHelpDropdownOpen(!isHelpDropdownOpen)}
-                                className="hover:underline focus:outline-none flex items-center gap-2"
+                                className="hover:underline focus:outline-none flex items-center gap-1"
                             >
-                                <Info size={18} /> Nosotros <ChevronDown className="ml-1" size={16} />
+                                <Info size={16} /> Nosotros <ChevronDown className="ml-1" size={14} />
                             </button>
                             <AnimatePresence>
                             {isHelpDropdownOpen && (
@@ -167,35 +167,35 @@ const Navbar: React.FC = () => {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -10 }}
                                     transition={{ duration: 0.18 }}
-                                    className={`bg-white text-black mt-2 shadow-xl rounded-lg border ${isMenuOpen ? "w-full mt-2 py-3" : "md:absolute md:mt-2 md:py-4 md:w-56"}`}
+                                    className={`bg-white text-black mt-2 shadow-xl rounded-lg border ${isMenuOpen ? "w-full mt-2 py-3" : "md:absolute md:mt-2 md:py-4 md:w-52"}`}
                                 >
                                     <li>
                                         <Link
-                                            className="block w-full px-4 py-3 hover:bg-gray-100 text-left text-base font-medium transition-colors duration-200 flex items-center gap-2"
+                                            className="block w-full px-3 py-2.5 hover:bg-gray-100 text-left text-sm font-medium transition-colors duration-200 flex items-center gap-2"
                                             to="/social-media"
                                             onClick={() => setIsHelpDropdownOpen(false)}
                                         >
-                                            <HandHeart size={18} className="mr-2" />
+                                            <HandHeart size={16} className="mr-2" />
                                             Redes sociales
                                         </Link>
                                     </li>
                                     <li>
                                         <Link
-                                            className="block w-full px-4 py-3 hover:bg-gray-100 text-left text-base font-medium transition-colors duration-200 flex items-center gap-2"
+                                            className="block w-full px-3 py-2.5 hover:bg-gray-100 text-left text-sm font-medium transition-colors duration-200 flex items-center gap-2"
                                             to="/about"
                                             onClick={() => setIsHelpDropdownOpen(false)}
                                         >
-                                            <Info size={18} className="mr-2" />
+                                            <Info size={16} className="mr-2" />
                                             Sobre nosotros
                                         </Link>
                                     </li>
                                     <li>
                                         <Link
-                                            className="block w-full px-4 py-3 hover:bg-gray-100 text-left text-base font-medium transition-colors duration-200 flex items-center gap-2"
+                                            className="block w-full px-3 py-2.5 hover:bg-gray-100 text-left text-sm font-medium transition-colors duration-200 flex items-center gap-2"
                                             to="/contact"
                                             onClick={() => setIsHelpDropdownOpen(false)}
                                         >
-                                            <Mail size={18} className="mr-2" />
+                                            <Mail size={16} className="mr-2" />
                                             Contáctanos
                                         </Link>
                                     </li>
@@ -209,9 +209,9 @@ const Navbar: React.FC = () => {
                                 href={clientsPortalUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-2 font-semibold rounded shadow-lg transition-colors duration-200 text-red-500 hover:underline"
+                                className="flex items-center gap-1 font-medium rounded shadow-lg transition-colors duration-200 text-red-500 hover:underline"
                             >
-                                <LogIn size={22} />
+                                <LogIn size={18} />
                                 Área clientes
                             </a>
                         </li>
