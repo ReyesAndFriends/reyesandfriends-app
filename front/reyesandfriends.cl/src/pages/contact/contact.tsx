@@ -95,17 +95,17 @@ const Contact = () => {
                 onClose={handleModalClose}
             />
             <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
-                <div className="absolute inset-0 bg-hero-section"></div>
+                <div className="absolute inset-0 bg-hero-section z-10"></div>
                 <div className="absolute inset-0">
                     <img
                         src="/img/background/background-web.jpg"
-                        alt="fondo de la sección"
-                        className="w-full h-full object-cover opacity-5 filter grayscale"
+                        alt="Ilustración de fondo - Edificios"
+                        className="w-full h-full object-cover filter grayscale z-0"
                         draggable={false}
                         onContextMenu={e => e.preventDefault()}
                     />
                 </div>
-                <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col items-center justify-center text-center flex-1">
+                <div className="container mx-auto px-4 py-24 relative z-20 flex flex-col items-center justify-center text-center flex-1">
                     <div className="max-w-2xl text-white mx-auto">
                         <img
                             src="/img/logo/crown_white.svg"
@@ -123,8 +123,18 @@ const Contact = () => {
                 </div>
             </section>
 
-            <section className="py-16 bg-zinc-900">
-                <div className="container mx-auto px-4 max-w-7xl">
+            <section className="py-16 bg-zinc-900 relative">
+                <div className="absolute inset-0 bg-hero-section z-10"></div>
+                <div className="absolute inset-0">
+                    <img
+                        src="/img/background/background-web.jpg"
+                        alt="Ilustración de fondo - Edificios"
+                        className="w-full h-full object-cover filter grayscale z-0"
+                        draggable={false}
+                        onContextMenu={e => e.preventDefault()}
+                    />
+                </div>
+                <div className="container mx-auto px-4 max-w-7xl relative z-20">
                     <div className="relative mb-12">
                         <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
                         <h2 className="text-3xl text-center text-red-500 relative z-10">

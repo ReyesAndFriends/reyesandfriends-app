@@ -38,12 +38,12 @@ const WebPlanes = () => {
             </Helmet>
 
             <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
-                <div className="absolute inset-0 bg-hero-section"></div>
+                <div className="absolute inset-0 bg-hero-section z-10"></div>
                 <div className="absolute inset-0">
                     <img
                         src="/img/background/background-web.jpg"
-                        alt="fondo de la sección"
-                        className="w-full h-full object-cover opacity-5 filter grayscale"
+                        alt="Ilustración de fondo - Edificios"
+                        className="w-full h-full object-cover filter grayscale z-0"
                         draggable={false}
                         onContextMenu={e => e.preventDefault()}
                     />
@@ -119,15 +119,14 @@ const WebPlanes = () => {
                             return (
                                 <Card
                                     key={idx}
-                                    className={`w-full max-w-xs bg-black rounded-lg shadow-lg p-6 flex flex-col justify-between relative ${
-                                        isRecommended ? "border-2 border-red-600 shadow-xl scale-105 z-10" : ""
-                                    }`}
+                                    className={`w-full max-w-xs bg-black rounded-lg shadow-lg p-6 flex flex-col justify-between relative ${isRecommended ? "border-2 border-red-600 shadow-xl scale-105 z-10" : ""
+                                        }`}
                                     {...(isRecommended
                                         ? {
-                                              initial: { scale: 0.95, boxShadow: "0 0 0px #dc2626" },
-                                              animate: { scale: 1.05, boxShadow: "0 0 32px #dc262655" },
-                                              transition: { type: "spring", stiffness: 200, damping: 15 }
-                                          }
+                                            initial: { scale: 0.95, boxShadow: "0 0 0px #dc2626" },
+                                            animate: { scale: 1.05, boxShadow: "0 0 32px #dc262655" },
+                                            transition: { type: "spring", stiffness: 200, damping: 15 }
+                                        }
                                         : {})}
                                 >
                                     {isRecommended && (

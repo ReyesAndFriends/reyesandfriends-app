@@ -120,12 +120,12 @@ const QuoteProject: React.FC = () => {
     return (
       <div>
         <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
-          <div className="absolute inset-0 bg-hero-section"></div>
+          <div className="absolute inset-0 bg-hero-section z-10"></div>
           <div className="absolute inset-0">
             <img
               src="/img/background/background-web.jpg"
-              alt="fondo de la sección"
-              className="w-full h-full object-cover opacity-5 filter grayscale"
+              alt="Ilustración de fondo - Edificios"
+              className="w-full h-full object-cover filter grayscale z-0"
               draggable={false}
               onContextMenu={e => e.preventDefault()}
             />
@@ -220,12 +220,12 @@ const QuoteProject: React.FC = () => {
     return (
       <div>
         <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
-          <div className="absolute inset-0 bg-hero-section"></div>
+          <div className="absolute inset-0 bg-hero-section z-10"></div>
           <div className="absolute inset-0">
             <img
               src="/img/background/background-web.jpg"
-              alt="fondo de la sección"
-              className="w-full h-full object-cover opacity-5 filter grayscale"
+              alt="Ilustración de fondo - Edificios"
+              className="w-full h-full object-cover filter grayscale z-0"
               draggable={false}
               onContextMenu={e => e.preventDefault()}
             />
@@ -262,9 +262,9 @@ const QuoteProject: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
             <div className="flex justify-center mb-8 md:mb-0">
               <img
-              src="/img/quote-project/thanks.png"
-              alt="Imagen de agradecimiento"
-              className="w-40 h-40 object-contain mx-auto hover:scale-105 transition-transform pointer-events-none"
+                src="/img/quote-project/thanks.png"
+                alt="Imagen de agradecimiento"
+                className="w-40 h-40 object-contain mx-auto hover:scale-105 transition-transform pointer-events-none"
               />
             </div>
             <div>
@@ -338,12 +338,12 @@ const QuoteProject: React.FC = () => {
 
       <div>
         <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
-          <div className="absolute inset-0 bg-hero-section"></div>
+          <div className="absolute inset-0 bg-hero-section z-10"></div>
           <div className="absolute inset-0">
             <img
               src="/img/background/background-web.jpg"
-              alt="fondo de la sección"
-              className="w-full h-full object-cover opacity-5 filter grayscale"
+              alt="Ilustración de fondo - Edificios"
+              className="w-full h-full object-cover filter grayscale z-0"
               draggable={false}
               onContextMenu={e => e.preventDefault()}
             />

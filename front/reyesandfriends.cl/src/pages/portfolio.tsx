@@ -22,12 +22,12 @@ const Portfolio: React.FC = () => {
                 <meta name="twitter:image" content="/img/open-graph-images/portfolio.png" />
             </Helmet>
             <section className="bg-cover bg-center relative min-h-screen flex items-center justify-center">
-                <div className="absolute inset-0 bg-hero-section"></div>
+                <div className="absolute inset-0 bg-hero-section z-10"></div>
                 <div className="absolute inset-0">
                     <img
                         src="/img/background/background-web.jpg"
-                        alt="fondo de la sección"
-                        className="w-full h-full object-cover opacity-5 filter grayscale"
+                        alt="Ilustración de fondo - Edificios"
+                        className="w-full h-full object-cover filter grayscale z-0"
                         draggable={false}
                         onContextMenu={e => e.preventDefault()}
                     />

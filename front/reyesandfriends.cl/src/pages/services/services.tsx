@@ -24,12 +24,12 @@ const Services = () => {
                 <meta name="twitter:image" content="/img/open-graph-images/service-list.png" />
             </Helmet>
             <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
-                <div className="absolute inset-0 bg-hero-section"></div>
+                <div className="absolute inset-0 bg-hero-section z-10"></div>
                 <div className="absolute inset-0">
                     <img
                         src="/img/background/background-web.jpg"
-                        alt="fondo de la sección"
-                        className="w-full h-full object-cover opacity-5 filter grayscale"
+                        alt="Ilustración de fondo - Edificios"
+                        className="w-full h-full object-cover filter grayscale z-0"
                         draggable={false}
                         onContextMenu={e => e.preventDefault()}
                     />

@@ -21,12 +21,12 @@ const AboutUs = () => {
             </Helmet>
 
             <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
-                <div className="absolute inset-0 bg-hero-section"></div>
+                <div className="absolute inset-0 bg-hero-section z-10"></div>
                 <div className="absolute inset-0">
                     <img
                         src="/img/background/background-web.jpg"
-                        alt="fondo de la sección"
-                        className="w-full h-full object-cover opacity-5 filter grayscale pointer-events-none"
+                        alt="Ilustración de fondo - Edificios"  
+                        className="w-full h-full object-cover filter grayscale z-0"
                         draggable={false}
                         onContextMenu={e => e.preventDefault()}
                     />
