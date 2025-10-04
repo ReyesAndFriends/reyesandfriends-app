@@ -112,6 +112,15 @@ const Home: React.FC = () => {
                             </Link>
                         </div>
                     </div>
+                    <div className="hidden md:flex flex-1 justify-center items-center ml-8">
+                        <img
+                            src="/img/home/laptop-mockup.png"
+                            alt="Mockup laptop"
+                            className="max-w-md md:max-w-lg lg:max-w-xl w-full h-auto drop-shadow-2xl"
+                            draggable={false}
+                            onContextMenu={e => e.preventDefault()}
+                        />
+                    </div>
                 </div>
             </section>
 
