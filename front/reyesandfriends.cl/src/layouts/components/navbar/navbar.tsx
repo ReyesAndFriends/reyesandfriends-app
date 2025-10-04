@@ -1,6 +1,6 @@
 import type React from "react"
 import { useState, useEffect, useRef } from "react"
-import { Menu, X, ChevronDown, HandHeart, Info, Mail, Code, LogIn, DollarSign, Gem } from "lucide-react"
+import { Menu, X, ChevronDown, HandHeart, Info, Mail, Code, LogIn } from "lucide-react"
 import useNavOptions from "./useNavOptions"
 import { useContactList } from "../../../hooks/services/useServiceList"
 import { useServiceList } from "../../../hooks/services/useServiceList"
@@ -85,36 +85,30 @@ const Navbar: React.FC = () => {
                     <Link to="/">
                         <img src="/img/logo/logo_white_2.svg" className="h-12 mb-2 pointer-events-none" alt="Reyes&Friends" />
                     </Link>
-                    <ul className={`md:flex space-x-0 md:space-x-4 text-base md:ml-auto md:justify-end ${isMenuOpen ? "flex flex-col space-y-4 absolute top-full left-0 w-full bg-black p-4 z-50" : "hidden"} md:static md:flex-row md:space-y-0`}>
+                    
+                    <ul className={`md:flex space-x-0 md:space-x-8 text-base ${isMenuOpen ? "flex flex-col space-y-4 absolute top-full left-0 w-full bg-black p-4 z-50" : "hidden"} md:static md:flex-row md:space-y-0`}>
                         <li>
                             <Link
-                                className="block flex items-center gap-1 font-medium"
+                                className="block font-medium hover:underline transition-all duration-200"
                                 to="/web-planes"
-                                style={{ display: "flex", alignItems: "center" }}
                             >
-                                <DollarSign size={16} />
-                                <span className="hover:underline">Planes Web</span>
-                                <span className="ml-1 px-1.5 py-0.5 rounded text-white text-xs font-bold bg-red-600">
-                                    Recomendado
-                                </span>
+                                Planes Web
                             </Link>
                         </li>
                         <li>
                             <Link
-                                className="block flex items-center gap-1 font-medium"
+                                className="block font-medium hover:underline transition-all duration-200"
                                 to="/quote-project"
-                                style={{ display: "flex", alignItems: "center" }}
                             >
-                                <Gem size={16} />
-                                <span className="hover:underline">Cotizar Proyecto</span>
+                                Cotizar Proyecto
                             </Link>
                         </li>
                         <li className="relative" ref={dropdownRef}>
                             <button
                                 onClick={handleDropdownToggle}
-                                className="hover:underline focus:outline-none flex items-center gap-1"
+                                className="hover:underline focus:outline-none flex items-center font-medium transition-all duration-200"
                             >
-                                <Code size={16} /> Servicios Web <ChevronDown className="ml-1" size={14} />
+                                Servicios Web <ChevronDown className="ml-1" size={14} />
                             </button>
                             <AnimatePresence>
                             {isDropdownOpen && (
@@ -155,9 +149,9 @@ const Navbar: React.FC = () => {
                         <li className="relative" ref={helpDropdownRef}>
                             <button
                                 onClick={() => setIsHelpDropdownOpen(!isHelpDropdownOpen)}
-                                className="hover:underline focus:outline-none flex items-center gap-1"
+                                className="hover:underline focus:outline-none flex items-center font-medium transition-all duration-200"
                             >
-                                <Info size={16} /> Nosotros <ChevronDown className="ml-1" size={14} />
+                                Nosotros <ChevronDown className="ml-1" size={14} />
                             </button>
                             <AnimatePresence>
                             {isHelpDropdownOpen && (
@@ -203,20 +197,33 @@ const Navbar: React.FC = () => {
                             )}
                             </AnimatePresence>
                         </li>
+                        
                         {productionMode && clientsPortalUrl && (
-                        <li>
-                            <a
-                                href={clientsPortalUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-1 font-medium rounded shadow-lg transition-colors duration-200 text-red-500 hover:underline"
-                            >
-                                <LogIn size={18} />
-                                Área clientes
-                            </a>
-                        </li>
+                            <li className="md:hidden">
+                                <a
+                                    href={clientsPortalUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded transition-colors duration-200"
+                                >
+                                    <LogIn size={16} />
+                                    Área clientes
+                                </a>
+                            </li>
                         )}
                     </ul>
+
+                    {productionMode && clientsPortalUrl && (
+                        <a
+                            href={clientsPortalUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hidden md:flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded transition-colors duration-200"
+                        >
+                            <LogIn size={16} />
+                            Área clientes
+                        </a>
+                    )}
                     
                     <div className="md:hidden">
                         <button onClick={toggleMenu} className="focus:outline-none" aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}>
