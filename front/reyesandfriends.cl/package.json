@@ -37,6 +37,7 @@
   },
   "scripts": {
     "dev": "refine dev",
+    "host": "vite --host",
     "build": "tsc && refine build",
     "start": "refine start",
     "refine": "refine"
