@@ -212,6 +212,8 @@ BOOLEAN_MAP = {
 def get_mapped_value(map_dict, key):
     return map_dict.get(key, key)  # Return original value if map not exists.
 
+current_year = datetime.utcnow().year
+
 def send_quote_confirmation_email(quote):
     """Send confirmation email to the client"""
     try:
@@ -228,6 +230,7 @@ def send_quote_confirmation_email(quote):
             hosting_service=get_mapped_value(HOSTING_MAP, quote.hosting_service),
             has_domain=get_mapped_value(DOMAIN_MAP, quote.has_domain),
             delivery_timeframe=get_mapped_value(DELIVERY_MAP, quote.delivery_timeframe),
+            current_year=current_year
         )
         
         msg = Message(
