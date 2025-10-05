@@ -49,10 +49,13 @@ def postContact():
         db.session.add(contact_form)
         db.session.commit()
 
+        current_year = datetime.now().year
+
         user_name = f"{data['first_name']} {data['last_name']}"
         email_html = render_template(
             'emails/contact-success.html',
             user_name=user_name,
+            current_year=current_year
         )
 
         msg = Message(
