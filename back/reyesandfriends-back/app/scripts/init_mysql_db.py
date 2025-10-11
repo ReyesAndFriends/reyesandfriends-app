@@ -23,7 +23,7 @@ def init_database():
     with app.app_context():
         print("Creating tables...")
         db.create_all()
-        print("✅ Tables created successfully")
+        print("Tables created successfully")
         
         # Insert contact statuses if they don't exist
         statuses_data = [
@@ -38,9 +38,9 @@ def init_database():
             if not existing_status:
                 status = ContactStatus(name=status_data["name"])
                 db.session.add(status)
-                print(f"✅ Status inserted: {status_data['name']}")
+                print(f"Status inserted: {status_data['name']}")
             else:
-                print(f"⚠️  Status already exists: {status_data['name']}")
+                print(f"Status already exists: {status_data['name']}")
 
         # Insert contact categories if they don't exist
         categories_data = [
@@ -62,15 +62,15 @@ def init_database():
                     slug=category_data["slug"]
                 )
                 db.session.add(category)
-                print(f"✅ Category inserted: {category_data['name']}")
+                print(f"Category inserted: {category_data['name']}")
             else:
-                print(f"⚠️  Category already exists: {category_data['name']}")
+                print(f"Category already exists: {category_data['name']}")
         
         # Save changes
         db.session.commit()
-        print("✅ Contact categories and statuses initialized correctly")
+        print("Contact categories and statuses initialized correctly")
         
-        print("✅ Database initialized completely")
+        print("Database initialized completely")
 
 def reset_database(auto_confirm=False):
     """Delete all tables and recreate them."""
@@ -78,7 +78,7 @@ def reset_database(auto_confirm=False):
     app = create_app()
     
     with app.app_context():
-        print("⚠️  WARNING: This will delete all existing tables and data.")
+        print("WARNING: This will delete all existing tables and data.")
         if auto_confirm:
             confirm = "yes"
         else:
@@ -87,11 +87,11 @@ def reset_database(auto_confirm=False):
         if confirm.lower() in ['yes', 'y', 'sí', 'si']:
             print("Deleting tables...")
             db.drop_all()
-            print("✅ Tables deleted")
+            print("Tables deleted")
 
             init_database()
         else:
-            print("❌ Operation cancelled")
+            print("Operation cancelled")
 
 if __name__ == "__main__":
     valid_flags = ["--reset", "--fresh"]
@@ -102,7 +102,7 @@ if __name__ == "__main__":
         elif flag == "--fresh":
             reset_database(auto_confirm=True)
         else:
-            print(f"❌ Invalid flag: {flag}")
+            print(f"Invalid flag: {flag}")
             print("Valid flags are:")
             for f in valid_flags:
                 print(f"  {f}")
