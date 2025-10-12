@@ -12,7 +12,7 @@ mail_username = os.getenv("MAIL_USERNAME")
 if not mail_username:
     raise RuntimeError("MAIL_USERNAME is not set in the environment variables.")
 
-@quote.route('/quote-project', methods=['POST'])
+@quote.route('/', methods=['POST'])
 def submit_quote():
     """
     Main endpoint to send a complete quote

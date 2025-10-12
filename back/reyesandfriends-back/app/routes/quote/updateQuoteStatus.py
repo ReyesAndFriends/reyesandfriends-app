@@ -2,7 +2,7 @@ from flask import request, jsonify
 from app.models import db, ProjectQuote
 from . import quote
 
-@quote.route('/quote/<int:quote_id>/status', methods=['PUT'])
+@quote.route('/<int:quote_id>/status', methods=['PUT'])
 def update_quote_status(quote_id):
     try:
         data = request.get_json()
