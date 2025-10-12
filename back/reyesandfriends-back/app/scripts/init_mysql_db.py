@@ -13,7 +13,7 @@ project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 sys.path.insert(0, project_root)
 
 from app import create_app
-from app.models import db, ContactCategory, ContactStatus
+from app.models import db, ContactCategory, ContactStatus, ProjectQuoteStatus
 
 def init_database():
     """Initialize the database by creating tables and initial data."""
@@ -66,9 +66,30 @@ def init_database():
             else:
                 print(f"Category already exists: {category_data['name']}")
         
+        project_quote_statuses_data = [
+            {"name": "Enviado", "slug":"submitted"},
+            {"name": "Leído (sin revisar)", "slug":"unread"},
+            {"name": "En revisión", "slug":"in_review"},
+            {"name": "Aprobada", "slug":"approved"},
+            {"name": "Cancelada", "slug":"cancelled"},
+        ]
+        
+        print("Inserting project quote statuses...")
+        for status_data in project_quote_statuses_data:
+            existing_status = ProjectQuoteStatus.query.filter_by(name=status_data["name"]).first()
+            if not existing_status:
+                status = ProjectQuoteStatus(
+                    name=status_data["name"],
+                    slug=status_data["slug"]
+                )
+                db.session.add(status)
+                print(f"Project quote status inserted: {status_data['name']}")
+            else:
+                print(f"Project quote status already exists: {status_data['name']}")
+
         # Save changes
         db.session.commit()
-        print("Contact categories and statuses initialized correctly")
+        print("Contact categories, statuses, and project quote statuses initialized correctly")
         
         print("Database initialized completely")
 

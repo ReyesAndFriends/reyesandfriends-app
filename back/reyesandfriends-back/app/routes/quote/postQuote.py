@@ -39,7 +39,6 @@ def submit_quote():
         # Create new quote
         quote = ProjectQuote()
         quote.quote_number = quote.generate_quote_number()
-        quote.status = 'submitted'
         quote.submitted_at = datetime.utcnow()
         
         # Fill data from phases
@@ -62,7 +61,6 @@ def submit_quote():
             'quote': {
                 'id': quote.id,
                 'quote_number': quote.quote_number,
-                'status': quote.status,
                 'submitted_at': quote.submitted_at.isoformat(),
                 'customer_name': f"{quote.first_name} {quote.last_name}",
                 'email': quote.email,

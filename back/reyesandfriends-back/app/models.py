@@ -1,7 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from sqlalchemy import Numeric
-import json
 
 db = SQLAlchemy()
 
@@ -93,12 +91,28 @@ class ContactFormReply(db.Model):
             'created_at': self.created_at.isoformat() if self.created_at else None
         }
 
+class ProjectQuoteStatus(db.Model):
+    __tablename__ = 'project_quote_statuses'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), unique=True, nullable=False)
+    slug = db.Column(db.String(50), unique=True, nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'slug': self.slug,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
+
 class ProjectQuote(db.Model):
     __tablename__ = 'project_quotes'
     
     id = db.Column(db.Integer, primary_key=True)
     quote_number = db.Column(db.String(20), unique=True, nullable=False)  # QT-2025-001 format
-    status = db.Column(db.String(20), default='draft')  # draft, submitted, reviewed, approved, rejected
+    status_id = db.Column(db.Integer, db.ForeignKey('project_quote_statuses.id'), nullable=False, default=1)    
     
     # Phase 1: Personal Data
     first_name = db.Column(db.String(50), nullable=False)

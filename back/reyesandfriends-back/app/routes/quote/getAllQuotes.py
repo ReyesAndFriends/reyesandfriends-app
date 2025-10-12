@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from app.models import ProjectQuote
+from app.models import ProjectQuote, ProjectQuoteStatus
 from . import quote
 from app.utils.middleware.check_ip_allowed import check_ip_allowed
 
@@ -7,7 +7,6 @@ from app.utils.middleware.check_ip_allowed import check_ip_allowed
 @check_ip_allowed
 def get_quotes():
     try:
-        status = request.args.get('status')
         email = request.args.get('email')
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
@@ -16,7 +15,6 @@ def get_quotes():
         allowed_order_fields = {
             'id': ProjectQuote.id,
             'quote_number': ProjectQuote.quote_number,
-            'status': ProjectQuote.status,
             'first_name': ProjectQuote.first_name,
             'last_name': ProjectQuote.last_name,
             'email': ProjectQuote.email,
@@ -30,9 +28,7 @@ def get_quotes():
             order_clause = order_column.asc()
         else:
             order_clause = order_column.desc()
-        query = ProjectQuote.query
-        if status:
-            query = query.filter(ProjectQuote.status == status)
+        query = ProjectQuote.query.join(ProjectQuoteStatus, ProjectQuote.status_id == ProjectQuoteStatus.id, isouter=True)
         if email:
             query = query.filter(ProjectQuote.email == email)
         query = query.order_by(order_clause)
@@ -43,14 +39,21 @@ def get_quotes():
         )
         quotes = []
         for quote in paginated.items:
+            # Get status info from the joined table
+            status_info = None
+            if quote.status_id:
+                status = ProjectQuoteStatus.query.get(quote.status_id)
+                if status:
+                    status_info = {'name': status.name, 'slug': status.slug}
+            
             quotes.append({
                 'id': quote.id,
                 'quote_number': quote.quote_number,
-                'status': quote.status,
                 'customer_name': f"{quote.first_name} {quote.last_name}",
                 'email': quote.email,
                 'project_type': quote.project_type,
                 'company_name': quote.company_name,
+                'status': status_info,
                 'created_at': quote.created_at.isoformat(),
                 'submitted_at': quote.submitted_at.isoformat() if quote.submitted_at else None
             })
