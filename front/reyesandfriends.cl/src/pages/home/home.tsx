@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ChevronRight, Gem, Mail } from "lucide-react";
+import { ChevronRight, } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import TerminalMessage from "./components/TerminalMessage";
@@ -95,20 +95,13 @@ const Home: React.FC = () => {
                                 Creamos sitios web, plataformas y soluciones digitales innovadoras para que tu empresa crezca y destaque en el mundo digital.
                             </p>
                         </div>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                        <div className="flex flex-col gap-4 justify-center md:justify-start">
                             <Link
                                 to="/quote-project"
-                                className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-all duration-300 flex items-center gap-2 font-semibold transform hover:scale-105"
+                                className="bg-red-700 hover:bg-red-800 text-white px-10 py-5 rounded transition-all duration-300 flex items-center gap-4 font-semibold hover:scale-105 text-2xl"
                             >
-                                <Gem className="h-5 w-5" />
-                                Cotiza tu proyecto
-                            </Link>
-                            <Link
-                                to="/contact"
-                                className="bg-transparent hover:bg-red-800/30 text-white px-6 py-3 rounded border-2 border-white transition-all duration-300 flex items-center gap-2 font-semibold transform hover:scale-105"
-                            >
-                                <Mail className="h-5 w-5" />
-                                Contáctanos
+                                Trabajemos juntos
+                                <ChevronRight className="h-7 w-7" />
                             </Link>
                         </div>
                     </div>
