@@ -1,6 +1,6 @@
 from flask import request, jsonify, render_template
 from flask_mail import Message
-from app.models import db, ProjectQuote
+from app.models import db, ProjectQuote, ProjectQuoteCategory
 from app import mail
 from datetime import datetime
 import os
@@ -64,7 +64,7 @@ def submit_quote():
                 'submitted_at': quote.submitted_at.isoformat(),
                 'customer_name': f"{quote.first_name} {quote.last_name}",
                 'email': quote.email,
-                'project_type': quote.project_type
+                'project_type_id': quote.project_type_id
             }
         }), 201
         
@@ -94,7 +94,15 @@ def update_quote_from_data(quote, data):
     
     # Phase 3: Technical scope
     phase_three = data.get('phaseThree', {})
-    quote.project_type = phase_three.get('projectType', '').strip()
+    project_type_slug = phase_three.get('projectType', '').strip()
+    
+    # Find project category by slug
+    project_category = ProjectQuoteCategory.query.filter_by(slug=project_type_slug).first()
+    if not project_category:
+        # If slug doesn't exist, use 'invalid' category as fallback
+        project_category = ProjectQuoteCategory.query.filter_by(slug='invalid').first()
+    
+    quote.project_type_id = project_category.id if project_category else None
     quote.other_project_type = phase_three.get('otherProjectType', '').strip()
     quote.not_sure_project_type = phase_three.get('notSureProjectType', '').strip()
     quote.has_start_date = phase_three.get('hasStartDate', '').strip()
@@ -216,11 +224,19 @@ def send_quote_confirmation_email(quote):
     """Send confirmation email to the client"""
     try:
         user_name = f"{quote.first_name} {quote.last_name}"
+        
+        # Get project type name from category
+        project_type_name = "No especificado"
+        if quote.project_type_id:
+            project_category = ProjectQuoteCategory.query.get(quote.project_type_id)
+            if project_category:
+                project_type_name = project_category.name
+        
         email_html = render_template(
             'emails/quote-success.html',
             user_name=user_name,
             quote_number=quote.quote_number,
-            project_type=get_mapped_value(PROJECT_TYPE_MAP, quote.project_type),
+            project_type=project_type_name,
             company_name=quote.company_name,
             email=quote.email,
             phone=quote.phone,

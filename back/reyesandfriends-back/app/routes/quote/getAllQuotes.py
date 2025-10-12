@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from app.models import ProjectQuote, ProjectQuoteStatus
+from app.models import ProjectQuote, ProjectQuoteStatus, ProjectQuoteCategory
 from . import quote
 from app.utils.middleware.check_ip_allowed import check_ip_allowed
 
@@ -18,7 +18,7 @@ def get_quotes():
             'first_name': ProjectQuote.first_name,
             'last_name': ProjectQuote.last_name,
             'email': ProjectQuote.email,
-            'project_type': ProjectQuote.project_type,
+            'project_type_id': ProjectQuote.project_type_id,
             'company_name': ProjectQuote.company_name,
             'created_at': ProjectQuote.created_at,
             'submitted_at': ProjectQuote.submitted_at
@@ -28,7 +28,7 @@ def get_quotes():
             order_clause = order_column.asc()
         else:
             order_clause = order_column.desc()
-        query = ProjectQuote.query.join(ProjectQuoteStatus, ProjectQuote.status_id == ProjectQuoteStatus.id, isouter=True)
+        query = ProjectQuote.query.join(ProjectQuoteStatus, ProjectQuote.status_id == ProjectQuoteStatus.id, isouter=True).join(ProjectQuoteCategory, ProjectQuote.project_type_id == ProjectQuoteCategory.id, isouter=True)
         if email:
             query = query.filter(ProjectQuote.email == email)
         query = query.order_by(order_clause)
@@ -46,12 +46,19 @@ def get_quotes():
                 if status:
                     status_info = {'name': status.name, 'slug': status.slug}
             
+            # Get project type info from the joined table
+            project_type_info = None
+            if quote.project_type_id:
+                project_category = ProjectQuoteCategory.query.get(quote.project_type_id)
+                if project_category:
+                    project_type_info = {'name': project_category.name, 'slug': project_category.slug}
+            
             quotes.append({
                 'id': quote.id,
                 'quote_number': quote.quote_number,
                 'customer_name': f"{quote.first_name} {quote.last_name}",
                 'email': quote.email,
-                'project_type': quote.project_type,
+                'project_type': project_type_info,
                 'company_name': quote.company_name,
                 'status': status_info,
                 'created_at': quote.created_at.isoformat(),

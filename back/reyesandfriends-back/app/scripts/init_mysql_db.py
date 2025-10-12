@@ -13,7 +13,7 @@ project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 sys.path.insert(0, project_root)
 
 from app import create_app
-from app.models import db, ContactCategory, ContactStatus, ProjectQuoteStatus
+from app.models import db, ContactCategory, ContactStatus, ProjectQuoteStatus, ProjectQuoteCategory
 
 def init_database():
     """Initialize the database by creating tables and initial data."""
@@ -86,10 +86,32 @@ def init_database():
                 print(f"Project quote status inserted: {status_data['name']}")
             else:
                 print(f"Project quote status already exists: {status_data['name']}")
+        
+        project_quote_categories_data = [
+            {"name": "Desarrollo Web", "slug": "web-development"},
+            {"name": "Software Empresarial", "slug": "enterprise-software"},
+            {"name": "Aplicaciones Móviles", "slug": "mobile-apps"},
+            {"name": "E-commerce", "slug": "e-commerce"},
+            {"name": "Entretenimiento", "slug": "entertainment"},
+            {"name": "No especificado", "slug": "invalid"},
+        ]
+        
+        print("Inserting project quote categories...")
+        for category_data in project_quote_categories_data:
+            existing_category = ProjectQuoteCategory.query.filter_by(slug=category_data["slug"]).first()
+            if not existing_category:
+                category = ProjectQuoteCategory(
+                    name=category_data["name"],
+                    slug=category_data["slug"]
+                )
+                db.session.add(category)
+                print(f"Project quote category inserted: {category_data['name']}")
+            else:
+                print(f"Project quote category already exists: {category_data['name']}")
 
         # Save changes
         db.session.commit()
-        print("Contact categories, statuses, and project quote statuses initialized correctly")
+        print("Contact categories, statuses, project quote statuses and categories initialized correctly")
         
         print("Database initialized completely")
 

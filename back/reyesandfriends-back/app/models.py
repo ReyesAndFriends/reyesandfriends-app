@@ -106,6 +106,22 @@ class ProjectQuoteStatus(db.Model):
             'slug': self.slug,
             'created_at': self.created_at.isoformat() if self.created_at else None
         }
+class ProjectQuoteCategory(db.Model):
+    __tablename__ = 'project_quote_categories'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    slug = db.Column(db.String(50), nullable=False, unique=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+        
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'slug': self.slug,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
+
 
 class ProjectQuote(db.Model):
     __tablename__ = 'project_quotes'
@@ -127,7 +143,7 @@ class ProjectQuote(db.Model):
     project_purpose = db.Column(db.Text, nullable=True)
     
     # Phase 3: Technical and Functional Scope
-    project_type = db.Column(db.String(50), nullable=False)  # webProgramming, enterpriseSoftware, etc.
+    project_type_id = db.Column(db.Integer, db.ForeignKey('project_quote_categories.id'), nullable=False)
     other_project_type = db.Column(db.String(200), nullable=True)
     not_sure_project_type = db.Column(db.Text, nullable=True)
     has_start_date = db.Column(db.String(10), nullable=False)  # yes/no
@@ -135,6 +151,10 @@ class ProjectQuote(db.Model):
     estimated_budget = db.Column(db.String(50), nullable=True)
     delivery_timeframe = db.Column(db.String(50), nullable=True)
     project_details = db.Column(db.Text, nullable=True)
+    
+    # Relationships
+    status = db.relationship('ProjectQuoteStatus', backref='project_quotes', lazy=True)
+    project_type = db.relationship('ProjectQuoteCategory', backref='project_quotes', lazy=True)
     
     # Phase 4: Deployment and Additional Services
     hosting_service = db.Column(db.String(10), nullable=False)  # yes/no
@@ -170,10 +190,24 @@ class ProjectQuote(db.Model):
         return f"QT-{current_year}-{str(count + 1).zfill(3)}"
     
     def to_dict(self):
+        # Get status info
+        status_info = None
+        if self.status_id:
+            status = ProjectQuoteStatus.query.get(self.status_id)
+            if status:
+                status_info = {'name': status.name, 'slug': status.slug}
+        
+        # Get project type info
+        project_type_info = None
+        if self.project_type_id:
+            project_category = ProjectQuoteCategory.query.get(self.project_type_id)
+            if project_category:
+                project_type_info = {'name': project_category.name, 'slug': project_category.slug}
+        
         return {
             'id': self.id,
             'quote_number': self.quote_number,
-            'status': self.status,
+            'status': status_info,
             
             # Phase 1
             'first_name': self.first_name,
@@ -188,7 +222,7 @@ class ProjectQuote(db.Model):
             'project_purpose': self.project_purpose,
             
             # Phase 3
-            'project_type': self.project_type,
+            'project_type': project_type_info,
             'other_project_type': self.other_project_type,
             'not_sure_project_type': self.not_sure_project_type,
             'has_start_date': self.has_start_date,
@@ -235,7 +269,7 @@ class ProjectQuote(db.Model):
                 'projectPurpose': self.project_purpose or ''
             },
             'phaseThree': {
-                'projectType': self.project_type or '',
+                'projectType': self.project_type_id or '',
                 'otherProjectType': self.other_project_type or '',
                 'notSureProjectType': self.not_sure_project_type or '',
                 'hasStartDate': self.has_start_date or '',
