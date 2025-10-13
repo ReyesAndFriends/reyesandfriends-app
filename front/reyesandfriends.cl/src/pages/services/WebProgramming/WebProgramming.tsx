@@ -34,7 +34,7 @@ const WebProgramming = () => {
                         <img
                             src="/img/services/WebProgramming/logo.png"
                             alt="Programación Web"
-                            className="max-w-full h-auto pointer-events-none"
+                            className="max-w-xl pointer-events-none"
                         />
                     </div>
                     <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
