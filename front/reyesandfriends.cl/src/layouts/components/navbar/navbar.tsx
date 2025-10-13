@@ -1,6 +1,6 @@
 import type React from "react"
 import { useState, useEffect, useRef } from "react"
-import { Menu, X, ChevronDown, HandHeart, Info, Mail, Code, LogIn } from "lucide-react"
+import { Menu, X, ChevronDown, HandHeart, Info, Mail, LogIn } from "lucide-react"
 import useNavOptions from "./useNavOptions"
 import { useContactList } from "../../../hooks/services/useServiceList"
 import { useServiceList } from "../../../hooks/services/useServiceList"
@@ -108,7 +108,7 @@ const Navbar: React.FC = () => {
                                 onClick={handleDropdownToggle}
                                 className="hover:underline focus:outline-none flex items-center font-medium transition-all duration-200"
                             >
-                                Servicios Web <ChevronDown className="ml-1" size={14} />
+                                Nuestros Servicios <ChevronDown className="ml-1" size={14} />
                             </button>
                             <AnimatePresence>
                             {isDropdownOpen && (

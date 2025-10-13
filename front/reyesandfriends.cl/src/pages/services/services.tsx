@@ -1,4 +1,5 @@
 import { useServiceList } from "../../hooks/services/useServiceList";
+import { ChevronRight, } from "lucide-react";
 import { Link } from "react-router";
 import { Menu } from "lucide-react";
 import { Helmet } from "react-helmet-async";
@@ -77,7 +78,10 @@ const Services = () => {
                                         />
                                     </div>
                                     <div className="flex-grow">
-                                        <h3 className="text-md font-semibold mb-2 text-center">{service.name}</h3>
+                                        <h3 className="text-md font-semibold mb-2 text-center flex items-center justify-center gap-2">
+                                            <span>{service.icon}</span>
+                                            {service.name}
+                                        </h3>
                                         <p className="text-xs text-gray-300 text-center line-clamp-3">
                                             {service.description}
                                         </p>
@@ -87,7 +91,7 @@ const Services = () => {
                                             className="bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded transition-colors text-sm flex items-center gap-2 font-semibold"
                                             to={service.path}
                                         >
-                                            Ver detalles
+                                            Ver detalles <ChevronRight />
                                         </Link>
                                     </div>
                                 </div>
