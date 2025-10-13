@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import TerminalMessage from "./components/TerminalMessage";
 import MethodologySteps from "./components/MethodologySteps";
 import WhyChooseReyesAndFriends from "./components/WhyChooseReyesAndFriends";
+import AnimatedMockups from "./components/AnimatedMockups";
 import { Helmet } from "react-helmet-async";
 
 const Home: React.FC = () => {
@@ -106,13 +107,7 @@ const Home: React.FC = () => {
                         </div>
                     </div>
                     <div className="hidden md:flex flex-1 justify-center items-center ml-8">
-                        <img
-                            src="/img/home/laptop-mockup.png"
-                            alt="Mockup laptop"
-                            className="max-w-md md:max-w-lg lg:max-w-xl w-full h-auto drop-shadow-2xl"
-                            draggable={false}
-                            onContextMenu={e => e.preventDefault()}
-                        />
+                        <AnimatedMockups />
                     </div>
                 </div>
             </section>
