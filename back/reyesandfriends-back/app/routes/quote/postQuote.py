@@ -86,11 +86,11 @@ def update_quote_from_data(quote, data):
     quote.phone = phase_one.get('phone', '').strip()
     quote.contact_method = phase_one.get('contactMethod', '').strip()
     
-    # Phase 2: Company and purpose
+    # Phase 2: Company and purpose (nullable fields)
     phase_two = data.get('phaseTwo', {})
-    quote.company_name = phase_two.get('companyName', '').strip()
-    quote.company_type = phase_two.get('companyType', '').strip()
-    quote.project_purpose = phase_two.get('projectPurpose', '').strip()
+    quote.company_name = phase_two.get('companyName', '').strip() or None
+    quote.company_type = phase_two.get('companyType', '').strip() or None
+    quote.project_purpose = phase_two.get('projectPurpose', '').strip() or None
     
     # Phase 3: Technical scope
     phase_three = data.get('phaseThree', {})
@@ -103,28 +103,28 @@ def update_quote_from_data(quote, data):
         project_category = ProjectQuoteCategory.query.filter_by(slug='invalid').first()
     
     quote.project_type_id = project_category.id if project_category else None
-    quote.other_project_type = phase_three.get('otherProjectType', '').strip()
-    quote.not_sure_project_type = phase_three.get('notSureProjectType', '').strip()
+    quote.other_project_type = phase_three.get('otherProjectType', '').strip() or None
+    quote.not_sure_project_type = phase_three.get('notSureProjectType', '').strip() or None
     quote.has_start_date = phase_three.get('hasStartDate', '').strip()
-    quote.start_date = phase_three.get('startDate', '').strip()
-    quote.estimated_budget = phase_three.get('estimatedBudget', '').strip()
-    quote.delivery_timeframe = phase_three.get('deliveryTimeframe', '').strip()
-    quote.project_details = phase_three.get('projectDetails', '').strip()
+    quote.start_date = phase_three.get('startDate', '').strip() or None
+    quote.estimated_budget = phase_three.get('estimatedBudget', '').strip() or None
+    quote.delivery_timeframe = phase_three.get('deliveryTimeframe', '').strip() or None
+    quote.project_details = phase_three.get('projectDetails', '').strip() or None
     
     # Phase 4: Deployment and services
     phase_four = data.get('phaseFour', {})
     quote.hosting_service = phase_four.get('hostingService', '').strip()
     quote.has_domain = phase_four.get('hasDomain', '').strip()
-    quote.domain_name = phase_four.get('domainName', '').strip()
-    quote.domain_suggestion = phase_four.get('domainSuggestion', '').strip()
+    quote.domain_name = phase_four.get('domainName', '').strip() or None
+    quote.domain_suggestion = phase_four.get('domainSuggestion', '').strip() or None
     
-    # Phase 5: Extras and final information
+    # Phase 5: Extras and final information (nullable fields)
     phase_five = data.get('phaseFive', {})
-    quote.technology_preference = phase_five.get('technologyPreference', '').strip()
-    quote.technology_list = phase_five.get('technologyList', '').strip()
-    quote.avoid_technology_list = phase_five.get('avoidTechnologyList', '').strip()
-    quote.key_functionalities = phase_five.get('keyFunctionalities', '').strip()
-    quote.additional_comments = phase_five.get('additionalComments', '').strip()
+    quote.technology_preference = phase_five.get('technologyPreference', '').strip() or None
+    quote.technology_list = phase_five.get('technologyList', '').strip() or None
+    quote.avoid_technology_list = phase_five.get('avoidTechnologyList', '').strip() or None
+    quote.key_functionalities = phase_five.get('keyFunctionalities', '').strip() or None
+    quote.additional_comments = phase_five.get('additionalComments', '').strip() or None
 
 def validate_quote_data(data):
     """Validate required data for the quote"""
@@ -183,41 +183,6 @@ def is_valid_phone(phone):
     pattern = r'^\+569\d{8}$'
     return re.match(pattern, phone) is not None
 
-# Mapping dictionaries for various fields
-
-PROJECT_TYPE_MAP = {
-    "webProgramming": "Programación web",
-    "other": "Otro",
-    "notSure": "No está seguro",
-}
-
-HOSTING_MAP = {
-    "yes": "Sí, necesita hosting",
-    "no": "No necesita hosting",
-}
-
-DOMAIN_MAP = {
-    "yes": "Sí, tiene dominio propio",
-    "no": "No tiene dominio y necesita uno",
-    "notSure": "No está seguro todavía",
-}
-
-DELIVERY_MAP = {
-    "no": "No",
-    "lessThan1Month": "Menos de 1 mes",
-    "1To3Months": "1 a 3 meses",
-    "3To6Months": "3 a 6 meses",
-    "flexible": "Flexible",
-}
-
-BOOLEAN_MAP = {
-    "yes": "Sí",
-    "no": "No",
-}
-
-def get_mapped_value(map_dict, key):
-    return map_dict.get(key, key)  # Return original value if map not exists.
-
 current_year = datetime.utcnow().year
 
 def send_quote_confirmation_email(quote):
@@ -241,9 +206,9 @@ def send_quote_confirmation_email(quote):
             email=quote.email,
             phone=quote.phone,
             submitted_date=quote.submitted_at.strftime('%d/%m/%Y %H:%M'),
-            hosting_service=get_mapped_value(HOSTING_MAP, quote.hosting_service),
-            has_domain=get_mapped_value(DOMAIN_MAP, quote.has_domain),
-            delivery_timeframe=get_mapped_value(DELIVERY_MAP, quote.delivery_timeframe),
+            hosting_service=quote.hosting_service,
+            has_domain=quote.has_domain,
+            delivery_timeframe=quote.delivery_timeframe,
             current_year=current_year
         )
         
