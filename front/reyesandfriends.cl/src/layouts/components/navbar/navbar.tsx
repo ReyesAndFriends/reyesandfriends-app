@@ -138,7 +138,7 @@ const Navbar: React.FC = () => {
                                             to="/services"
                                             onClick={closeDropdown}
                                         >
-                                            <Code size={16} className="inline mr-2" />
+                                            <Menu size={16} className="inline mr-2" />
                                             Lista completa
                                         </Link>
                                     </li>

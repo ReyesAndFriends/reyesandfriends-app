@@ -1,4 +1,4 @@
-import { Globe, Mail, Gem } from "lucide-react";
+import { Code, Building2, Mail, Gem } from "lucide-react";
 
 export interface ServiceOption {
     name: string;
@@ -13,11 +13,19 @@ const serviceList: ServiceOption[] = [
     { 
         name: "Programación web", 
         path: "/services/web-development", 
-        value: "webProgramming", 
+        value: "web-development", 
         image: "/img/services/FullList/web_programming.jpeg", 
         description: "Desarrollamos software web innovador y adaptable para cualquier dispositivo.",
-        icon: (() => <Globe size={18} className="inline mr-2" />)()
+        icon: (() => <Code size={18} className="inline mr-2" />)()
     },
+    {
+        name: "Software Empresarial",
+        path: "/services/enterprise-software",
+        value: "enterprise-software",
+        image: "/img/services/FullList/enterprise-software.webp",
+        description: "Desarrollamos soluciones empresariales a la medida para optimizar tus operaciones, automatizar procesos y mejorar la eficiencia de tu negocio.",
+        icon: (() => <Building2 size={18} className="inline mr-2" />)()
+    }
 
 ];
 
