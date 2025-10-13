@@ -46,11 +46,11 @@ const WebProgramming = () => {
                         </p>
 
                         <Link
-                            to="/quote-project?service=webProgramming"
+                            to="/quote-project?service=web-development"
                             className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-all duration-300 flex items-center gap-2 font-semibold transform hover:scale-105"
                         >
                             <Gem className="h-5 w-5" />
-                            Me interesa, cotizar un proyecto
+                            Me interesa, cotizar mi sitio web
                         </Link>
 
                     </div>
@@ -139,6 +139,20 @@ const WebProgramming = () => {
                                     className="object-contain max-h-[150px] w-auto pointer-events-none"
                                 />
                             </div>
+                        </div>
+
+                        <div className="flex flex-col items-center justify-center gap-6 rounded-lg overflow-hidden shadow-lg bg-black p-8">
+                            <h3 className="text-2xl font-semibold mb-2 text-red-500 text-center">Haz crecer tu presencia en línea</h3>
+                            <p className="text-zinc-200 mb-6 text-center">
+                                Lleva tu negocio al mundo digital con una página web profesional y funcional. Aumenta tu alcance, conecta con más clientes y destaca frente a la competencia con soluciones web personalizadas.
+                            </p>
+                            <Link
+                                to="/quote-project?service=web-development"
+                                className="bg-red-700 hover:bg-red-800 text-white px-8 py-4 rounded transition-all duration-300 flex items-center justify-center gap-3 font-semibold text-lg transform hover:scale-105 w-full max-w-md"
+                            >
+                                <Gem className="h-6 w-6" />
+                                Me interesa, cotizar mi sitio web
+                            </Link>
                         </div>
 
                     </div>
