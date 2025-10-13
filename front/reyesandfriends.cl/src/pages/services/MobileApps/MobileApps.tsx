@@ -66,16 +66,15 @@ const MobileApps = () => {
                         <div className="flex flex-col md:flex-row items-stretch gap-0 rounded-lg overflow-hidden shadow-lg bg-black">
                             <div className="md:w-1/2 w-full flex items-center justify-center">
                                 <img
-                                    src="/img/services/MobileApps/native-performance.png"
-                                    alt="Ilustración de rendimiento nativo"
+                                    src="/img/services/MobileApps/design-mobile.png"
+                                    alt="Ilustración de diseño móvil"
                                     className="max-h-[200px] w-auto object-contain pointer-events-none"
                                 />
                             </div>
                             <div className="md:w-1/2 w-full flex flex-col justify-center p-8">
-                                <h3 className="text-2xl font-semibold mb-2 text-red-500">Rendimiento nativo optimizado</h3>
+                                <h3 className="text-2xl font-semibold mb-2 text-red-500">Diseño atractivo</h3>
                                 <p className="text-zinc-200">
-                                    Desarrollamos aplicaciones nativas para Android que aprovechan al máximo las capacidades del dispositivo. 
-                                    <strong> Velocidad, fluidez y experiencia de usuario excepcional</strong> son nuestras prioridades.
+                                    Nuestras aplicaciones buscan un diseño atractivo y funcional, adaptado a las necesidades de tu negocio y a las expectativas de tus usuarios.
                                 </p>
                             </div>
                         </div>
@@ -92,31 +91,12 @@ const MobileApps = () => {
 
                             <div className="md:w-1/2 w-full flex items-center justify-center">
                                 <img
-                                    src="/img/services/MobileApps/integration.png"
-                                    alt="Integración de sistemas"
+                                    src="/img/services/MobileApps/api-integration.png"
+                                    alt="Integración de API móvil"
                                     className="max-h-[200px] w-auto object-contain pointer-events-none"
                                 />
                             </div>
 
-                        </div>
-
-                        <div className="flex flex-col md:flex-row items-stretch gap-0 rounded-lg overflow-hidden shadow-lg bg-black">
-
-                            <div className="md:w-1/2 w-full flex items-center justify-center">
-                                <img
-                                    src="/img/services/MobileApps/ui-design.png"
-                                    alt="Diseño de interfaz móvil"
-                                    className="max-h-[250px] w-auto object-contain pointer-events-none"
-                                />
-                            </div>
-
-                            <div className="md:w-1/2 w-full flex flex-col justify-center p-8">
-                                <h3 className="text-2xl font-semibold mb-2 text-red-500">Diseño intuitivo y atractivo</h3>
-                                <p className="text-zinc-200">
-                                    Creamos interfaces modernas y fáciles de usar que siguen las mejores prácticas de Material Design. 
-                                    Tu app no solo funcionará bien, sino que también <strong>se verá increíble</strong> y será fácil de usar.
-                                </p>
-                            </div>
                         </div>
 
                         <div className="flex flex-col items-center justify-center gap-6 rounded-lg overflow-hidden shadow-lg bg-black p-8">
