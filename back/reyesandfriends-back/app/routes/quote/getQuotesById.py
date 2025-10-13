@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify
-from app.models import ProjectQuote
+from app.models import ProjectQuote, ProjectQuoteStatus
 from app.utils.middleware.check_ip_allowed import check_ip_allowed
+from app import db
 from . import quote
 
 get_quote_bp = Blueprint('get_quote', __name__)
@@ -15,6 +16,13 @@ def get_quote(quote_id):
                 'success': False,
                 'error': 'Cotización no encontrada.'
             }), 404
+        
+        # Update the quote status to "read_unreviewed" if it's currently "submitted"
+        if quote.status and quote.status.slug == 'submitted':
+            read_unreviewed_status = ProjectQuoteStatus.query.filter_by(slug='read_unreviewed').first()
+            if read_unreviewed_status:
+                quote.status_id = read_unreviewed_status.id
+                db.session.commit()
         
         quote_data = quote.to_dict()
         
