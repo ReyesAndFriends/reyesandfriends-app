@@ -43,7 +43,7 @@ const serviceList: ServiceOption[] = [
         icon: (() => <ShoppingCart size={18} className="inline mr-2" />)()
     },
     {
-        name: "Entretenimiento",
+        name: "Entretenimiento y más",
         path: "/services/entertainment",
         value: "entertainment",
         image: "/img/services/FullList/entertainment.jpg",

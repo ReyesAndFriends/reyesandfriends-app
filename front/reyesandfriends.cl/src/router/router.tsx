@@ -18,6 +18,7 @@ import WebProgramming from "../pages/services/WebProgramming/WebProgramming";
 import EnterpriseSoftware from "../pages/services/EnterpriseSoftware/EnterpriseSoftware";
 import MobileApps from "../pages/services/MobileApps/MobileApps";
 import ECommerce from "../pages/services/E-commerce/E-commerce";
+import Entertainment from "../pages/services/Entertainment/Entertainment";
 
 import WebPlanes from "../pages/web-planes/web-planes";
 
@@ -50,6 +51,7 @@ const AnimatedRoutes: React.FC = () => {
                 <Route path="/services/enterprise-software" element={<motion.div {...pageTransition}><EnterpriseSoftware/></motion.div>} />
                 <Route path="/services/mobile-apps" element={<motion.div {...pageTransition}><MobileApps/></motion.div>} />
                 <Route path="/services/e-commerce" element={<motion.div {...pageTransition}><ECommerce/></motion.div>} />
+                <Route path="/services/entertainment" element={<motion.div {...pageTransition}><Entertainment/></motion.div>} />
                 <Route path="/about" element={<motion.div {...pageTransition}><AboutUs /></motion.div>} />
                 <Route path="/portfolio" element={<motion.div {...pageTransition}><Portfolio /></motion.div>} />
                 <Route path="/contact" element={<motion.div {...pageTransition}><Contact /></motion.div>} />
