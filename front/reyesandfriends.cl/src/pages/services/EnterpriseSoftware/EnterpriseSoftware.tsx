@@ -28,7 +28,7 @@ const EnterpriseSoftware = () => {
                     />
                 </div>
                 <div className="container mx-auto px-4 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-                    <div className="flex justify-center">
+                    <div className="flex justify-center hidden md:block">
                         <img
                             src="/img/services/EnterpriseSoftware/logo.png"
                             alt="Software Empresarial"
