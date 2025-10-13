@@ -1,4 +1,4 @@
-import { Globe, Building2, Mail, Gem, Smartphone } from "lucide-react";
+import { Globe, Building2, Mail, Gem, Smartphone, ShoppingCart, Joystick } from "lucide-react";
 
 export interface ServiceOption {
     name: string;
@@ -33,6 +33,22 @@ const serviceList: ServiceOption[] = [
         image: "/img/services/FullList/mobile-apps.jpg",
         description: "Creamos aplicaciones móviles para Android, ofreciendo experiencias nativas y multiplataforma.",
         icon: (() => <Smartphone size={18} className="inline mr-2" />)()
+    },
+    {
+        name: "E-commerce",
+        path: "/services/e-commerce",
+        value: "e-commerce",
+        image: "/img/services/FullList/e-commerce.webp",
+        description: "Desarrollamos soluciones de comercio electrónico personalizadas para impulsar tu negocio en línea.",
+        icon: (() => <ShoppingCart size={18} className="inline mr-2" />)()
+    },
+    {
+        name: "Entretenimiento",
+        path: "/services/entertainment",
+        value: "entertainment",
+        image: "/img/services/FullList/entertainment.jpg",
+        description: "Realizamos páginas web, servicios y aplicaciones para la industria del entretenimiento, tales como música, cine, videojuegos y más.",
+        icon: (() => <Joystick size={18} className="inline mr-2" />)()
     }
 ];
 
