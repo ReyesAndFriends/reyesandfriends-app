@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from app.models import ProjectQuote, ProjectQuoteStatus
+from app.models import ProjectQuote
 from app.utils.middleware.check_ip_allowed import check_ip_allowed
 from . import quote
 

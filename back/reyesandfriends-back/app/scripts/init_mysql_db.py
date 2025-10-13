@@ -68,7 +68,7 @@ def init_database():
         
         project_quote_statuses_data = [
             {"name": "Enviado", "slug":"submitted"},
-            {"name": "Leído (sin revisar)", "slug":"unread"},
+            {"name": "Leído (sin revisar)", "slug":"read_unreviewed"},
             {"name": "En revisión", "slug":"in_review"},
             {"name": "Aprobada", "slug":"approved"},
             {"name": "Cancelada", "slug":"cancelled"},
