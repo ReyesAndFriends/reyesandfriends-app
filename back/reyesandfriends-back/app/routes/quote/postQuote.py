@@ -32,7 +32,7 @@ def submit_quote():
         if validation_errors:
             return jsonify({
                 'success': False,
-                'error': 'Validation failed',
+                'error': 'La validación falló',
                 'errors': validation_errors
             }), 400
         
@@ -57,7 +57,7 @@ def submit_quote():
         
         return jsonify({
             'success': True,
-            'message': 'Quote submitted successfully',
+            'message': 'Cotización de proyecto recibida con éxito.',
             'quote': {
                 'id': quote.id,
                 'quote_number': quote.quote_number,
@@ -72,7 +72,7 @@ def submit_quote():
         db.session.rollback()
         return jsonify({
             'success': False,
-            'error': f'Internal server error: {str(e)}'
+            'error': f'Error interno del servidor: {str(e)}'
         }), 500
 
 def update_quote_from_data(quote, data):
@@ -222,4 +222,4 @@ def send_quote_confirmation_email(quote):
         mail.send(msg)
         
     except Exception as e:
-        raise Exception(f"Failed to send confirmation email: {str(e)}")
+        raise Exception(f"Error al enviar el correo de confirmación: {str(e)}")
