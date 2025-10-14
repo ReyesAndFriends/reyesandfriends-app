@@ -1,8 +1,22 @@
+/* Hero section gradients - Default (reyes) */
 .bg-hero-section {
     background-image: linear-gradient(to right, #4b0d0d, #2d0a09);
     opacity: 0.95;
 }
 
+/* Hero section gradients - Halloween */
+[data-theme="reyes-halloween"] .bg-hero-section {
+    background-image: linear-gradient(to right, #3e2061, #391948);
+    opacity: 0.90;
+}
+
+/* Hero section gradients - Christmas */
+[data-theme="reyes-christmas"] .bg-hero-section {
+    background-image: linear-gradient(to right, #14532d, #ad1717);
+    opacity: 0.95;
+}
+
+/* Default theme (reyes) */
 .bg-reyes { 
     @apply bg-red-700; 
 }
@@ -13,6 +27,29 @@
     @apply bg-red-600; 
 }
 
+/* Halloween theme */
+[data-theme="reyes-halloween"] .bg-reyes { 
+    @apply bg-orange-600; 
+}
+[data-theme="reyes-halloween"] .bg-reyes-dark { 
+    @apply bg-orange-800; 
+}
+[data-theme="reyes-halloween"] .bg-reyes-light { 
+    @apply bg-orange-400; 
+}
+
+/* Christmas theme */
+[data-theme="reyes-christmas"] .bg-reyes { 
+    @apply bg-green-700; 
+}
+[data-theme="reyes-christmas"] .bg-reyes-dark { 
+    @apply bg-green-800; 
+}
+[data-theme="reyes-christmas"] .bg-reyes-light { 
+    @apply bg-green-600; 
+}
+
+/* Hover backgrounds - Default */
 .hover\:bg-reyes:hover { 
     @apply bg-red-700; 
 }
@@ -23,6 +60,29 @@
     @apply bg-red-600; 
 }
 
+/* Hover backgrounds - Halloween */
+[data-theme="reyes-halloween"] .hover\:bg-reyes:hover { 
+    @apply bg-orange-600; 
+}
+[data-theme="reyes-halloween"] .hover\:bg-reyes-dark:hover { 
+    @apply bg-orange-800; 
+}
+[data-theme="reyes-halloween"] .hover\:bg-reyes-light:hover { 
+    @apply bg-orange-400; 
+}
+
+/* Hover backgrounds - Christmas */
+[data-theme="reyes-christmas"] .hover\:bg-reyes:hover { 
+    @apply bg-green-700; 
+}
+[data-theme="reyes-christmas"] .hover\:bg-reyes-dark:hover { 
+    @apply bg-green-800; 
+}
+[data-theme="reyes-christmas"] .hover\:bg-reyes-light:hover { 
+    @apply bg-green-600; 
+}
+
+/* Text colors - Default */
 .text-reyes { 
     @apply text-red-700; 
 }
@@ -33,7 +93,29 @@
     @apply text-red-600; 
 }
 
-/* Text hovers */
+/* Text colors - Halloween */
+[data-theme="reyes-halloween"] .text-reyes { 
+    @apply text-orange-600; 
+}
+[data-theme="reyes-halloween"] .text-reyes-dark { 
+    @apply text-orange-800; 
+}
+[data-theme="reyes-halloween"] .text-reyes-light { 
+    @apply text-orange-400; 
+}
+
+/* Text colors - Christmas */
+[data-theme="reyes-christmas"] .text-reyes { 
+    @apply text-green-700; 
+}
+[data-theme="reyes-christmas"] .text-reyes-dark { 
+    @apply text-green-800; 
+}
+[data-theme="reyes-christmas"] .text-reyes-light { 
+    @apply text-green-600; 
+}
+
+/* Text hovers - Default */
 .hover\:text-reyes:hover { 
     @apply text-red-700; 
 }
@@ -44,6 +126,29 @@
     @apply text-red-600; 
 }
 
+/* Text hovers - Halloween */
+[data-theme="reyes-halloween"] .hover\:text-reyes:hover { 
+    @apply text-orange-600; 
+}
+[data-theme="reyes-halloween"] .hover\:text-reyes-dark:hover { 
+    @apply text-orange-800; 
+}
+[data-theme="reyes-halloween"] .hover\:text-reyes-light:hover { 
+    @apply text-orange-400; 
+}
+
+/* Text hovers - Christmas */
+[data-theme="reyes-christmas"] .hover\:text-reyes:hover { 
+    @apply text-green-700; 
+}
+[data-theme="reyes-christmas"] .hover\:text-reyes-dark:hover { 
+    @apply text-green-800; 
+}
+[data-theme="reyes-christmas"] .hover\:text-reyes-light:hover { 
+    @apply text-green-600; 
+}
+
+/* Border colors - Default */
 .border-reyes { 
     @apply border-red-700; 
 }
@@ -54,7 +159,29 @@
     @apply border-red-600; 
 }
 
-/* Border hovers */
+/* Border colors - Halloween */
+[data-theme="reyes-halloween"] .border-reyes { 
+    @apply border-orange-600; 
+}
+[data-theme="reyes-halloween"] .border-reyes-dark { 
+    @apply border-orange-800; 
+}
+[data-theme="reyes-halloween"] .border-reyes-light { 
+    @apply border-orange-400; 
+}
+
+/* Border colors - Christmas */
+[data-theme="reyes-christmas"] .border-reyes { 
+    @apply border-green-700; 
+}
+[data-theme="reyes-christmas"] .border-reyes-dark { 
+    @apply border-green-800; 
+}
+[data-theme="reyes-christmas"] .border-reyes-light { 
+    @apply border-green-600; 
+}
+
+/* Border hovers - Default */
 .hover\:border-reyes:hover { 
     @apply border-red-700; 
 }
@@ -65,6 +192,29 @@
     @apply border-red-600; 
 }
 
+/* Border hovers - Halloween */
+[data-theme="reyes-halloween"] .hover\:border-reyes:hover { 
+    @apply border-orange-600; 
+}
+[data-theme="reyes-halloween"] .hover\:border-reyes-dark:hover { 
+    @apply border-orange-800; 
+}
+[data-theme="reyes-halloween"] .hover\:border-reyes-light:hover { 
+    @apply border-orange-400; 
+}
+
+/* Border hovers - Christmas */
+[data-theme="reyes-christmas"] .hover\:border-reyes:hover { 
+    @apply border-green-700; 
+}
+[data-theme="reyes-christmas"] .hover\:border-reyes-dark:hover { 
+    @apply border-green-800; 
+}
+[data-theme="reyes-christmas"] .hover\:border-reyes-light:hover { 
+    @apply border-green-600; 
+}
+
+/* Ring colors - Default */
 .ring-reyes { 
     @apply ring-red-700; 
 }
@@ -75,7 +225,29 @@
     @apply ring-red-600; 
 }
 
-/* Ring hovers */
+/* Ring colors - Halloween */
+[data-theme="reyes-halloween"] .ring-reyes { 
+    @apply ring-orange-600; 
+}
+[data-theme="reyes-halloween"] .ring-reyes-dark { 
+    @apply ring-orange-800; 
+}
+[data-theme="reyes-halloween"] .ring-reyes-light { 
+    @apply ring-orange-400; 
+}
+
+/* Ring colors - Christmas */
+[data-theme="reyes-christmas"] .ring-reyes { 
+    @apply ring-green-700; 
+}
+[data-theme="reyes-christmas"] .ring-reyes-dark { 
+    @apply ring-green-800; 
+}
+[data-theme="reyes-christmas"] .ring-reyes-light { 
+    @apply ring-green-600; 
+}
+
+/* Ring hovers - Default */
 .hover\:ring-reyes:hover { 
     @apply ring-red-700; 
 }
@@ -86,7 +258,29 @@
     @apply ring-red-600; 
 }
 
-/* Ring focus */
+/* Ring hovers - Halloween */
+[data-theme="reyes-halloween"] .hover\:ring-reyes:hover { 
+    @apply ring-orange-600; 
+}
+[data-theme="reyes-halloween"] .hover\:ring-reyes-dark:hover { 
+    @apply ring-orange-800; 
+}
+[data-theme="reyes-halloween"] .hover\:ring-reyes-light:hover { 
+    @apply ring-orange-400; 
+}
+
+/* Ring hovers - Christmas */
+[data-theme="reyes-christmas"] .hover\:ring-reyes:hover { 
+    @apply ring-green-700; 
+}
+[data-theme="reyes-christmas"] .hover\:ring-reyes-dark:hover { 
+    @apply ring-green-800; 
+}
+[data-theme="reyes-christmas"] .hover\:ring-reyes-light:hover { 
+    @apply ring-green-600; 
+}
+
+/* Ring focus - Default */
 .focus\:ring-reyes:focus { 
     @apply ring-red-700; 
 }
@@ -95,4 +289,26 @@
 }
 .focus\:ring-reyes-light:focus { 
     @apply ring-red-600; 
+}
+
+/* Ring focus - Halloween */
+[data-theme="reyes-halloween"] .focus\:ring-reyes:focus { 
+    @apply ring-orange-600; 
+}
+[data-theme="reyes-halloween"] .focus\:ring-reyes-dark:focus { 
+    @apply ring-orange-800; 
+}
+[data-theme="reyes-halloween"] .focus\:ring-reyes-light:focus { 
+    @apply ring-orange-400; 
+}
+
+/* Ring focus - Christmas */
+[data-theme="reyes-christmas"] .focus\:ring-reyes:focus { 
+    @apply ring-green-700; 
+}
+[data-theme="reyes-christmas"] .focus\:ring-reyes-dark:focus { 
+    @apply ring-green-800; 
+}
+[data-theme="reyes-christmas"] .focus\:ring-reyes-light:focus { 
+    @apply ring-green-600; 
 }
