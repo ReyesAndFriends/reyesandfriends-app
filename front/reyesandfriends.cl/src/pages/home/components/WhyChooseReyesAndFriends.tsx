@@ -50,9 +50,9 @@ const WhyChooseReyesAndFriends = () => {
     return (
         <section className="py-16 text-white">
             <div className="container mx-auto px-4 max-w-7xl">
-                <h2 className="text-3xl mb-12 text-center text-red-600 relative">
+                <h2 className="text-3xl mb-12 text-center text-reyes-light relative">
                     <span className="bg-zinc-900 px-4 relative z-10 text-white">¿Por qué elegirnos?</span>
-                    <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
+                    <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-reyes-dark -z-0"></div>
                 </h2>
 
                 <p className="text-white text-lg text-center mb-8">
@@ -65,7 +65,7 @@ const WhyChooseReyesAndFriends = () => {
                             key={f.key}
                             onClick={() => setSelected(f.key)}
                             className={`w-full px-6 py-2 rounded font-semibold transition-all
-                                ${selected === f.key ? "bg-red-700 text-white shadow-lg" : "bg-zinc-800 text-red-400 hover:bg-red-700 hover:text-white"}
+                                ${selected === f.key ? "bg-reyes text-white shadow-lg" : "bg-zinc-800 hover:bg-reyes-dark hover:text-white"}
                             `}
                         >
                             {f.title}
@@ -75,7 +75,7 @@ const WhyChooseReyesAndFriends = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-8">
                     <div className="md:col-span-2 order-2 md:order-1">
-                        <h4 className="text-lg text-red-500 mb-2">{currentFeature?.title}</h4>
+                        <h4 className="text-lg text-reyes-light mb-2">{currentFeature?.title}</h4>
                         <h2 className="text-2xl md:text-4xl mb-4 text-white">{currentFeature?.subtitle}</h2>
                         {currentFeature?.description}
                     </div>

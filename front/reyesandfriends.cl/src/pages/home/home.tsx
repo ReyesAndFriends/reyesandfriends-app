@@ -30,13 +30,13 @@ const Home: React.FC = () => {
 
             <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4 max-w-7xl">
-                    <h2 className="text-3xl mb-12 text-center text-red-600 relative">
+                    <h2 className="text-3xl mb-12 text-center relative">
                         <span className="bg-zinc-900 px-4 relative z-10 text-white">¿Qué hacemos?</span>
-                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
+                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-reyes-dark -z-0"></div>
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                         <div>
-                            <h4 className="text-lg text-red-500 mb-2">Un negocio informático a tu medida</h4>
+                            <h4 className="text-lg text-reyes-light mb-2">Un negocio informático a tu medida</h4>
                             <h2 className="text-4xl mb-4 text-white">Soluciones digitales personalizadas</h2>
                             <p className="text-gray-300 text-lg">
                                 Somos un negocio informático con múltiples aptitudes. Nos especializamos en el desarrollo de soluciones digitales personalizadas, abarcando desde sitios web hasta software empresarial y servicios tecnológicos adaptados a las necesidades de cada cliente.
@@ -52,7 +52,7 @@ const Home: React.FC = () => {
                     <div className="text-left mt-8">
                         <Link
                             to="/services"
-                            className="text-red-500 hover:underline font-semibold inline-flex items-center gap-1 transition-colors"
+                            className="text-reyes-light hover:underline font-semibold inline-flex items-center gap-1 transition-colors"
                         >
                             Conoce todos nuestros servicios
                             <ChevronRight className="h-4 w-4" />
@@ -63,9 +63,9 @@ const Home: React.FC = () => {
 
             <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4 max-w-7xl">
-                    <h2 className="text-3xl mb-12 text-center text-red-600 relative">
+                    <h2 className="text-3xl mb-12 text-center relative">
                         <span className="bg-zinc-900 px-4 relative z-10 text-white">Nuestra metodología</span>
-                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
+                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-reyes-dark -z-0"></div>
                     </h2>
 
                     <div className="text-center mt-8 mb-12">

@@ -1,0 +1,66 @@
+.bg-hero-section {
+    background-image: linear-gradient(to right, #4b0d0d, #2d0a09);
+    opacity: 0.95;
+}
+
+.bg-reyes { 
+    @apply bg-red-700; 
+}
+.bg-reyes-dark { 
+    @apply bg-red-800; 
+}
+.bg-reyes-light { 
+    @apply bg-red-600; 
+}
+
+.hover\:bg-reyes:hover { 
+    @apply bg-red-700; 
+}
+.hover\:bg-reyes-dark:hover { 
+    @apply bg-red-800; 
+}
+.hover\:bg-reyes-light:hover { 
+    @apply bg-red-600; 
+}
+
+.text-reyes { 
+    @apply text-red-700; 
+}
+.text-reyes-dark { 
+    @apply text-red-800; 
+}
+.text-reyes-light { 
+    @apply text-red-600; 
+}
+
+/* Text hovers */
+.hover\:text-reyes:hover { 
+    @apply text-red-700; 
+}
+.hover\:text-reyes-dark:hover { 
+    @apply text-red-800; 
+}
+.hover\:text-reyes-light:hover { 
+    @apply text-red-600; 
+}
+
+.border-reyes { 
+    @apply border-red-700; 
+}
+.border-reyes-dark { 
+    @apply border-red-800; 
+}
+.border-reyes-light { 
+    @apply border-red-600; 
+}
+
+/* Border hovers */
+.hover\:border-reyes:hover { 
+    @apply border-red-700; 
+}
+.hover\:border-reyes-dark:hover { 
+    @apply border-red-800; 
+}
+.hover\:border-reyes-light:hover { 
+    @apply border-red-600; 
+}

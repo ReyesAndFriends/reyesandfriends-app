@@ -82,7 +82,7 @@ const HomeHeroSection: React.FC<HomeHeroSectionProps> = ({
                                     duration: 0.3,
                                     ease: "easeInOut"
                                 }}
-                                className="text-red-600"
+                                className="text-reyes"
                             >
                                 {subtitles[currentSubtitleIndex]}
                             </motion.span>
@@ -101,7 +101,7 @@ const HomeHeroSection: React.FC<HomeHeroSectionProps> = ({
                     <div className="flex flex-col gap-4 justify-center md:justify-start">
                         <Link
                             to={ctaLink}
-                            className="bg-red-700 hover:bg-red-800 text-white px-10 py-5 rounded transition-all duration-300 flex items-center gap-4 font-semibold hover:scale-105 text-2xl"
+                            className="bg-reyes hover:bg-reyes-dark text-white px-10 py-5 rounded transition-all duration-300 flex items-center gap-4 font-semibold hover:scale-105 text-2xl"
                         >
                             {ctaText}
                             <ChevronRight className="h-7 w-7" />
