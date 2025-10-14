@@ -3,6 +3,7 @@ import { ChevronRight, } from "lucide-react";
 import { Link } from "react-router";
 import { Menu } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import HeroSection from "../../layouts/components/HeroSection/HeroSection";
 
 const Services = () => {
     const services = useServiceList();
@@ -24,36 +25,13 @@ const Services = () => {
                 <meta name="twitter:description" content="Servicios digitales profesionales: desarrollo web, hosting, soluciones empresariales y más. Tu partner tecnológico de confianza." />
                 <meta name="twitter:image" content="/img/open-graph-images/service-list.png" />
             </Helmet>
-            <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
-                <div className="absolute inset-0 bg-hero-section z-10"></div>
-                <div className="absolute inset-0">
-                    <img
-                        src="/img/background/background-web.jpg"
-                        alt="Ilustración de fondo - Edificios"
-                        className="w-full h-full object-cover filter grayscale z-0"
-                        draggable={false}
-                        onContextMenu={e => e.preventDefault()}
-                    />
-                </div>
-                <div className="container mx-auto px-4 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-                    <div className="flex justify-center hidden md:block">
-                        <img
-                            src="/img/services/FullList/services-list.png"
-                            alt="Ilustración de servicios"
-                            className="h-96 w-auto object-contain pointer-events-none"
-                        />
-                    </div>
-                    <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
-                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-reyes-dark pb-4 inline-flex items-center gap-4">
-                            <Menu size={40} /> Nuestros Servicios
-                        </h1>
-                        <p className="text-xl mb-8">
-                            Ofrecemos una amplia gama de servicios digitales para ayudarte a destacar en el mundo online. Desde desarrollo web hasta un panel empresarial personalizado, tenemos la solución perfecta para ti.
-                        </p>
 
-                    </div>
-                </div>
-            </section>
+            <HeroSection 
+            icon={Menu}
+            logoImage="/img/services/FullList/services-list.png"
+            title="Nuestros Servicios"
+            subtitle="Ofrecemos una amplia gama de servicios digitales para ayudarte a destacar en el mundo online. Desde desarrollo web hasta un panel empresarial personalizado, tenemos la solución perfecta para ti." 
+            />
 
             <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4 max-w-7xl">
