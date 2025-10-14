@@ -204,7 +204,7 @@ const Navbar: React.FC = () => {
                                     href={clientsPortalUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded transition-colors duration-200"
+                                    className="flex items-center gap-2 px-4 py-2 bg-reyes hover:bg-reyes-dark text-white font-medium rounded transition-colors duration-200"
                                 >
                                     <LogIn size={16} />
                                     Área clientes
@@ -218,7 +218,7 @@ const Navbar: React.FC = () => {
                             href={clientsPortalUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hidden md:flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded transition-colors duration-200"
+                            className="hidden md:flex items-center gap-2 px-4 py-2 bg-reyes hover:bg-reyes-dark text-white font-medium rounded transition-all transform hover:scale-105"
                         >
                             <LogIn size={16} />
                             Área clientes
