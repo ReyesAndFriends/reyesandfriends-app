@@ -3,7 +3,7 @@ import { ChevronRight, } from "lucide-react";
 import { Link } from "react-router";
 import { Menu } from "lucide-react";
 import { Helmet } from "react-helmet-async";
-import HeroSection from "../../layouts/components/HeroSection/HeroSection";
+import HeroSection from "../../layouts/components/hero-section/hero-section";
 
 const Services = () => {
     const services = useServiceList();

@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from './components/navbar/navbar';
 import Footer from './components/footer/footer';
 
-import FloatingSocialBar from './components/FloatingSocialBar/FloatingSocialBar';
+import FloatingSocialBar from './components/floating-social-bar/floating-social-bar';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return (

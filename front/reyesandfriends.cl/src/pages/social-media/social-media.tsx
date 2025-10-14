@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from "react-helmet-async";
 import { HandHeart } from "lucide-react";
-import HeroSection from '../../layouts/components/HeroSection/HeroSection';
+import HeroSection from '../../layouts/components/hero-section/hero-section';
 
 const SocialMedia = () => {
 

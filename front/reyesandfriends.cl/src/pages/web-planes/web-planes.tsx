@@ -4,7 +4,7 @@ import useWebPlanesList from "./hooks/useWebPlanesList";
 import QuoteWebPlanModal from "./components/quoteWebPlanModal";
 import { useState } from "react";
 import { Link } from "react-router";
-import HeroSection from "../../layouts/components/HeroSection/HeroSection";
+import HeroSection from "../../layouts/components/hero-section/hero-section";
 
 const WebPlanes = () => {
     const webPlans = useWebPlanesList();

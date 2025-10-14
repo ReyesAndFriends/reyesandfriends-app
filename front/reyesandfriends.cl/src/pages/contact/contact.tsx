@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import ContactModal from "./modal/contactModal";
 import { Helmet } from "react-helmet-async";
 import { Contact2 } from "lucide-react";
-import HeroSection from "../../layouts/components/HeroSection/HeroSection";
+import HeroSection from "../../layouts/components/hero-section/hero-section";
 
 function capitalizeWords(str: string) {
     return str.replace(/\b\w/g, char => char.toUpperCase()).replace(/\B\w/g, char => char.toLowerCase());

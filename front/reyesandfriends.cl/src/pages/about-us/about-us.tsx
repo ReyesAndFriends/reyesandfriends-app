@@ -1,6 +1,6 @@
 import { Info } from "lucide-react";
 import { Helmet } from "react-helmet-async";
-import HeroSection from "../../layouts/components/HeroSection/HeroSection";
+import HeroSection from "../../layouts/components/hero-section/hero-section";
 
 const AboutUs = () => {
     return (
