@@ -4,6 +4,7 @@ import useWebPlanesList from "./hooks/useWebPlanesList";
 import QuoteWebPlanModal from "./components/quoteWebPlanModal";
 import { useState } from "react";
 import { Link } from "react-router";
+import HeroSection from "../../layouts/components/HeroSection/HeroSection";
 
 const WebPlanes = () => {
     const webPlans = useWebPlanesList();
@@ -36,38 +37,12 @@ const WebPlanes = () => {
                 <meta name="twitter:image" content="/img/open-graph-images/web-plans.png" />
             </Helmet>
 
-            <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
-                <div className="absolute inset-0 bg-hero-section z-10"></div>
-                <div className="absolute inset-0">
-                    <img
-                        src="/img/background/background-web.jpg"
-                        alt="Ilustración de fondo - Edificios"
-                        className="w-full h-full object-cover filter grayscale z-0"
-                        draggable={false}
-                        onContextMenu={e => e.preventDefault()}
-                    />
-                </div>
-                <div className="container mx-auto px-4 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-                    <div className="flex justify-center hidden md:block">
-                        <img
-                            src="/img/plans/web-plans-hero.png"
-                            alt="Ilustración de planes web"
-                            className="h-96 w-auto object-contain pointer-events-none"
-                        />
-                    </div>
-                    <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
-                        <span className="mb-4 bg-reyes rounded-full px-4 py-1 text-sm font-semibold">
-                            ¡Solo pagas una vez!
-                        </span>
-                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-reyes-dark pb-4 inline-flex items-center gap-4">
-                            <DollarSign size={40} /> Planes Web Fijos
-                        </h1>
-                        <p className="text-xl mb-8">
-                            Necesitas un todo en uno sin tanta complejidad? Nuestros planes web fijos están diseñados para ofrecerte una solución completa y asequible, adaptada a las necesidades de tu negocio.
-                        </p>
-                    </div>
-                </div>
-            </section>
+            <HeroSection 
+            icon={DollarSign}
+            logoImage="img/plans/web-plans-hero.png"
+            title="Planes Web"
+            subtitle="Necesitas algo más simple y rápido? Revisa nuestros planes web fijos y accede a una solución profesional para tu negocio. ¡Solo pagas una vez!"
+            />
 
             <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4 max-w-7xl">
@@ -86,19 +61,37 @@ const WebPlanes = () => {
                             />
                         </div>
                         <div>
-                            <h4 className="text-lg text-reyes-light mb-2">Rápido, simple y funcional</h4>
+                            <h4 className="text-lg mb-2">Rápido, simple y funcional</h4>
                             <h2 className="text-4xl mb-4 text-white">¿Qué incluyen nuestros planes web fijos?</h2>
                             <p className="text-lg text-gray-200 mb-4">
                                 Nuestros planes web fijos están diseñados para quienes buscan una solución rápida, sencilla y funcional. Son paquetes ya preparados que nos permiten crear tu sitio en menos tiempo, sin sacrificar calidad ni diseño.
                             </p>
                             <ul className="list-disc list-inside mb-4 text-base md:text-lg text-gray-200">
-                                <li>Pago único por el desarrollo inicial de tu sitio web.</li>
-                                <li>Incluye dominio .cl y hosting gratis por el primer año.</li>
-                                <li>Una vez entregado tu sitio, solo pagas el mantenimiento anual y la renovación del dominio si decides continuar.</li>
-                                <li>Ideal para proyectos simples: páginas informativas, portafolios, emprendimientos y negocios que quieren estar online rápido.</li>
+                                <li>
+                                    <strong>Pago único:</strong> Pagas una sola vez y <strong>no te preocupas más</strong>.
+                                </li>
+                                <li>
+                                    <strong>Dominio y hosting incluidos:</strong> Incluye dominio .cl y hosting gratis por el primer año.
+                                    <span> Para <strong>dominios .com</strong> u otros, se aplican costos adicionales.</span>
+                                </li>
+                                <li>
+                                    <strong>Mantenimiento anual:</strong> Una vez entregado tu sitio, solo pagas el mantenimiento anual y la renovación del dominio si decides continuar.
+                                </li>
+                                <li>
+                                    <strong>Ideal para proyectos simples:</strong> Páginas informativas, portafolios, emprendimientos y negocios que quieren estar online rápido.
+                                </li>
+                                <li>
+                                    <strong>Diseño moderno y SEO:</strong> Diseños modernos, adaptativos y optimizados para SEO.
+                                </li>
+                                <li>
+                                    <strong>Despliegue incluido:</strong> Nos encargamos del desarrollo completo y la puesta en marcha de tu sitio.
+                                </li>
+                                <li>
+                                    <strong>Escalable:</strong> Puedes agregar más funcionalidades en el futuro sin importar que sea un sitio web fijo.
+                                </li>
                             </ul>
                             <p className="text-lg text-gray-200">
-                                Así puedes tener presencia online profesional, sin complicaciones ni costos mensuales. Si en el futuro necesitas algo más avanzado, siempre podrás migrar a un servicio personalizado.
+                                Con estos proyectos, aseguras una presencia online profesional y efectiva sin complicaciones. Si en el futuro necesitas algo más avanzado, siempre puedes utilizar nuestro <Link to="/quote-project" className="text-reyes hover:text-reyes-light hover:underline transition-all">cotizador para proyectos personalizados</Link> o actualizar tu sitio existente.
                             </p>
                         </div>
                     </div>
@@ -173,10 +166,10 @@ const WebPlanes = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8 mb-8">
                         <div>
-                            <h4 className="text-lg text-reyes-light mb-2">Una forma diferente de hacer las cosas</h4>
+                            <h4 className="text-lg text-reyes-light mb-2">Sin importar la opción, te ayudamos</h4>
                             <h2 className="text-4xl mb-4 text-white">¿En qué se diferencian los planes fijos del cotizador de proyectos?</h2>
                             <p className="text-lg text-gray-200 mb-4">
-                                A diferencia de nuestro cotizador de proyectos, ideal para soluciones a medida y de mayor complejidad, nuestros planes web fijos están pensados para quienes buscan una alternativa ágil, sencilla y funcional. Son paquetes predefinidos que nos permiten desarrollar tu sitio en menos tiempo, sin sacrificar calidad ni diseño.
+                                A diferencia de nuestro <Link to="/quote-project" className="text-reyes hover:text-reyes-light hover:underline transition-all">cotizador para proyectos</Link>, ideal para soluciones a medida y de mayor complejidad, nuestros planes web fijos están pensados para quienes buscan una alternativa ágil, sencilla y funcional. Son paquetes predefinidos que nos permiten desarrollar tu sitio en menos tiempo, sin sacrificar calidad ni diseño.
                             </p>
                             <ul className="list-disc list-inside mb-4 text-base md:text-lg text-gray-200">
                                 <li>Precios fijos y totalmente transparentes.</li>
@@ -198,7 +191,7 @@ const WebPlanes = () => {
                     <div className="flex flex-col items-center">
                         <div className="relative mb-8">
                             <blockquote className="bg-black rounded-xl px-8 py-8 shadow-lg border-l-4 border-reyes-dark text-center text-xl md:text-2xl text-gray-100 relative z-10">
-                                ¿Buscas una solución rápida y sin complicaciones? Nuestros planes web fijos son la opción perfecta para ti. Si en el futuro requieres algo más avanzado, siempre podrás utilizar nuestro <Link to="/quote-project" className="text-reyes hover:text-reyes-light hover:underline transition-all">cotizador para proyectos personalizados</Link> o actualizar tu sitio existente.
+                                Si no estás seguro de qué opción elegir, siempre podrás utilizar nuestro <Link to="/quote-project" className="text-reyes hover:text-reyes-light hover:underline transition-all">cotizador para proyectos personalizados</Link> y potenciar tu sitio web!
                             </blockquote>
                         </div>
                     </div>
