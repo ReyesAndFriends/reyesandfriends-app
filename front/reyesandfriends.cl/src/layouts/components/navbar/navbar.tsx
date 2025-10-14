@@ -170,7 +170,7 @@ const Navbar: React.FC = () => {
                                             onClick={() => setIsHelpDropdownOpen(false)}
                                         >
                                             <HandHeart size={16} className="mr-2" />
-                                            Redes sociales
+                                            Redes Sociales
                                         </Link>
                                     </li>
                                     <li>

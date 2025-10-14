@@ -15,7 +15,7 @@ const HeroQuoteForm: React.FC = () => {
         : "/img/background/background-web.jpg";
 
   // Typewriter states for title
-  const title = "Cotiza tu proyecto";
+  const title = "Cotizar Proyecto";
   const [displayedTitle, setDisplayedTitle] = useState(title[0]);
   const [titleCursorVisible, setTitleCursorVisible] = useState(true);
 
@@ -89,9 +89,7 @@ const HeroQuoteForm: React.FC = () => {
               </h1>
             </div>
             <p className="text-xl mb-8 text-white mt-4">
-              Has tomado una gran decisión al elegirnos para tu proyecto!
-              <br />
-              Ahora cuéntanos más sobre lo que tienes en mente.
+              ¡Estamos emocionados de ayudarte! Cuéntanos tu idea en nuestro formulario y te enviaremos una cotización personalizada para hacerla realidad.
             </p>
             </div>
         </div>
