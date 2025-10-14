@@ -7,7 +7,7 @@
 /* Hero section gradients - Halloween */
 [data-theme="reyes-halloween"] .bg-hero-section {
     background-image: linear-gradient(to right, #3e2061, #391948);
-    opacity: 0.90;
+    opacity: 0.80;
 }
 
 /* Hero section gradients - Christmas */

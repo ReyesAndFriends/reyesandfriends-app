@@ -35,7 +35,7 @@ const HomeHeroSection: React.FC<HomeHeroSectionProps> = ({
         "tu sueño digital",
     ],
     description = "¡Transforma tu negocio con tecnología a tu medida!\nCreamos sitios web, plataformas y soluciones digitales innovadoras para que tu empresa crezca y destaque en el mundo digital.",
-    ctaText = "Trabajemos juntos",
+    ctaText = "Cotiza tu proyecto",
     ctaLink = "/quote-project",
     backgroundImage = "/img/background/background-web.jpg",
     backgroundAlt = "Ilustración de fondo - Edificios",
@@ -54,12 +54,25 @@ const HomeHeroSection: React.FC<HomeHeroSectionProps> = ({
         return () => clearInterval(interval);
     }, [subtitles.length, animationInterval]);
 
+    // Check background from theme system
+    const [theme, setTheme] = useState<string>("reyes");
+
+    useEffect(() => {
+        const savedTheme = localStorage.getItem("page_theme");
+        if (savedTheme) setTheme(savedTheme);
+    }, []);
+
+    const heroBackgroundImage =
+        theme === "reyes-halloween"
+            ? "/img/background/background-halloween.jpg"
+            : backgroundImage;
+
     return (
         <section className="bg-cover bg-center relative min-h-[800px] md:min-h-[800px] flex items-center">
             <div className="absolute inset-0 bg-hero-section z-10"></div>
             <div className="absolute inset-0">
                 <img
-                    src={backgroundImage}
+                    src={heroBackgroundImage}
                     alt={backgroundAlt}  
                     className="w-full h-full object-cover filter grayscale z-0"
                     draggable={false}
@@ -68,10 +81,10 @@ const HomeHeroSection: React.FC<HomeHeroSectionProps> = ({
             </div>
             <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col md:flex-row items-center justify-center text-center md:text-left flex-1">
                 <div className="flex-1 flex flex-col items-center md:items-start justify-center max-w-2xl mx-auto">
-                    <h1 className="text-5xl md:text-6xl mb-2 text-white drop-shadow-lg tracking-tight">
+                    <h1 className="text-5xl md:text-6xl mb-2 text-white drop-shadow-lg tracking-tight font-semibold">
                         {title}
                     </h1>
-                    <h1 className="text-4xl md:text-5xl mb-6 inline-block text-white drop-shadow">
+                    <h1 className="text-4xl md:text-5xl mb-6 inline-block text-white drop-shadow font-semibold">
                         <AnimatePresence mode="wait" initial={false}>
                             <motion.span
                                 key={subtitles[currentSubtitleIndex]}
