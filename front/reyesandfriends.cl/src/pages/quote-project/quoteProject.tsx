@@ -21,6 +21,11 @@ import { usePhaseFiveValidate } from './phases/phaseFive/usePhaseFiveValidate';
 
 import { Helmet } from 'react-helmet-async';
 
+// Hero sections
+import HeroQuoteForm from './HeroSections/HeroQuoteForm';
+import HeroQuoteSummary from './HeroSections/HeroQuoteSummary';
+import HeroQuoteSuccess from './HeroSections/HeroQuoteSuccess';
+
 const QuoteProject: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
@@ -119,34 +124,7 @@ const QuoteProject: React.FC = () => {
 
     return (
       <div>
-        <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
-          <div className="absolute inset-0 bg-hero-section z-10"></div>
-          <div className="absolute inset-0">
-            <img
-              src="/img/background/background-web.jpg"
-              alt="Ilustración de fondo - Edificios"
-              className="w-full h-full object-cover filter grayscale z-0"
-              draggable={false}
-              onContextMenu={e => e.preventDefault()}
-            />
-          </div>
-          <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col items-center justify-center text-center flex-1">
-            <div className="max-w-3xl text-white mx-auto">
-              <img
-                src="/img/logo/crown_white.svg"
-                className="w-32 h-32 object-contain mx-auto mb-6 pointer-events-none"
-                alt="La corona de Reyes&Friends"
-              />
-              <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-reyes-dark pb-4 inline-block">
-                ¡Cotización Enviada Exitosamente!
-              </h1>
-              <p className="text-xl mb-8 text-white">
-                Gracias por confiar en nosotros. Hemos recibido tu solicitud y nos pondremos en contacto contigo muy pronto.
-              </p>
-            </div>
-          </div>
-        </section>
-
+        <HeroQuoteSuccess />
         <div className="container mx-auto px-4 max-w-7xl py-12">
           <div className="bg-black p-8 rounded-lg shadow-lg text-center">
             <h2 className="text-2xl font-bold text-white mb-6">Detalles de tu Cotización</h2>
@@ -215,34 +193,7 @@ const QuoteProject: React.FC = () => {
 
     return (
       <div>
-        <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
-          <div className="absolute inset-0 bg-hero-section z-10"></div>
-          <div className="absolute inset-0">
-            <img
-              src="/img/background/background-web.jpg"
-              alt="Ilustración de fondo - Edificios"
-              className="w-full h-full object-cover filter grayscale z-0"
-              draggable={false}
-              onContextMenu={e => e.preventDefault()}
-            />
-          </div>
-          <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col items-center justify-center text-center flex-1">
-            <div className="max-w-3xl text-white mx-auto">
-              <img
-                src="/img/logo/crown_white.svg"
-                className="w-32 h-32 object-contain mx-auto mb-6 pointer-events-none"
-                alt="La corona de Reyes&Friends"
-              />
-              <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-reyes-dark pb-4 inline-block">
-                De acuerdo, {userName}
-              </h1>
-              <p className="text-xl mb-8 text-white">
-                Aquí tienes un resumen de la información que nos has proporcionado. Por favor, revísala y si todo está bien, envíanos el formulario.
-              </p>
-            </div>
-          </div>
-        </section>
-
+        <HeroQuoteSummary userName={userName} />
         <motion.div
           key="resume-project"
           initial={{ opacity: 0, x: 100 }}
@@ -333,36 +284,7 @@ const QuoteProject: React.FC = () => {
       </Helmet>
 
       <div>
-        <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
-          <div className="absolute inset-0 bg-hero-section z-10"></div>
-          <div className="absolute inset-0">
-            <img
-              src="/img/background/background-web.jpg"
-              alt="Ilustración de fondo - Edificios"
-              className="w-full h-full object-cover filter grayscale z-0"
-              draggable={false}
-              onContextMenu={e => e.preventDefault()}
-            />
-          </div>
-          <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col items-center justify-center text-center flex-1">
-            <div className="max-w-3xl text-white mx-auto">
-              <img
-                src="/img/logo/crown_white.svg"
-                className="w-32 h-32 object-contain mx-auto mb-6 pointer-events-none"
-                alt="La corona de Reyes&Friends"
-              />
-              <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-reyes-dark pb-4 inline-block">
-                Cotiza tu proyecto
-              </h1>
-              <p className="text-xl mb-8 text-white">
-                Has tomado una gran decisión al elegirnos para tu proyecto!
-                <br />
-                Ahora cuéntanos más sobre lo que tienes en mente.
-              </p>
-            </div>
-          </div>
-        </section>
-
+        <HeroQuoteForm />
         <section className="py-16 max-w-7xl mx-auto px-4">
           <div className="mb-12">
             <div className="relative mb-2 mt-2">
