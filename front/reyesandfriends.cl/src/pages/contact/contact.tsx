@@ -112,10 +112,10 @@ const Contact = () => {
                             className="w-32 h-32 object-contain mx-auto mb-6"
                             alt="reyes&friends_crown"
                         />
-                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block">
+                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-reyes-dark pb-4 inline-block">
                             Contáctanos
                         </h1>
-                        <p className="text-xl mb-8 text-red-100">
+                        <p className="text-xl mb-8 text-white">
                             Si tienes alguna pregunta o inquietud, no dudes en ponerte en contacto con nosotros.
                             Estamos aquí para ayudarte y responder a tus consultas.
                         </p>
@@ -126,20 +126,20 @@ const Contact = () => {
             <section className="py-16 bg-zinc-900">
                 <div className="container mx-auto px-4 max-w-7xl">
                     <div className="relative mb-12">
-                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
-                        <h2 className="text-3xl text-center text-red-500 relative z-10">
+                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-reyes-dark -z-0"></div>
+                        <h2 className="text-3xl text-center relative z-10">
                             <span className="bg-zinc-900 px-4 relative z-10 text-white">Envíanos un mensaje</span>
                         </h2>
                     </div>
                     <div className="bg-black p-8 rounded-lg shadow-lg">
                         {(categoriesError || loading) ? (
                             <div className="flex flex-col items-center justify-center py-12">
-                                <h2 className="text-red-500 text-2xl font-bold mb-2">Error al cargar</h2>
+                                <h2 className="text-reyes text-2xl font-bold mb-2">Error al cargar</h2>
                                 <p className="text-white text-lg mb-4 text-center">
                                     {loading ? "Recargando..." : categoriesError}
                                 </p>
                                 <button
-                                    className="bg-red-600 text-white font-bold py-2 px-6 rounded-sm hover:bg-red-700 transition-colors"
+                                    className="bg-reyes text-white font-bold py-2 px-6 rounded-sm hover:bg-reyes-dark transition-colors"
                                     onClick={refetch}
                                     disabled={loading}
                                 >
@@ -159,12 +159,12 @@ const Contact = () => {
                                         type="text"
                                         id="first_name"
                                         name="first_name"
-                                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                                         placeholder="Ingresa tu nombre"
                                         value={firstName}
                                         onChange={handleFirstNameChange}
                                     />
-                                    {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
+                                    {errors.name && <p className="text-reyes text-sm">{errors.name}</p>}
                                 </div>
                                 <div className="col-span-1">
                                     <label htmlFor="last_name" className="block text-gray-300 font-bold mb-2">Apellido (requerido)</label>
@@ -172,12 +172,12 @@ const Contact = () => {
                                         type="text"
                                         id="last_name"
                                         name="last_name"
-                                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                                         placeholder="Ingresa tu apellido"
                                         value={lastName}
                                         onChange={handleLastNameChange}
                                     />
-                                    {errors.last_name && <p className="text-red-500 text-sm">{errors.last_name}</p>}
+                                    {errors.last_name && <p className="text-reyes text-sm">{errors.last_name}</p>}
                                 </div>
                                 <div className="col-span-1">
                                     <label htmlFor="cellphone" className="block text-gray-300 font-bold mb-2">Número de Teléfono (requerido)</label>
@@ -190,7 +190,7 @@ const Contact = () => {
                                             id="cellphone"
                                             name="cellphone"
                                             maxLength={9}
-                                            className="w-full p-3 rounded-r-sm bg-zinc-800 text-white border border-zinc-700 border-l-0 focus:outline-none focus:ring-2 focus:ring-red-600"
+                                            className="w-full p-3 rounded-r-sm bg-zinc-800 text-white border border-zinc-700 border-l-0 focus:outline-none focus:ring-2 focus:ring-reyes"
                                             placeholder="912345678"
                                             pattern="[0-9]{9}"
                                             inputMode="numeric"
@@ -198,7 +198,7 @@ const Contact = () => {
                                             onChange={handleCellphoneChange}
                                         />
                                     </div>
-                                    {errors.cellphone && <p className="text-red-500 text-sm">{errors.cellphone}</p>}
+                                    {errors.cellphone && <p className="text-reyes text-sm">{errors.cellphone}</p>}
                                 </div>
                                 <div className="col-span-1">
                                     <label htmlFor="email" className="block text-gray-300 font-bold mb-2">Email (requerido)</label>
@@ -206,17 +206,17 @@ const Contact = () => {
                                         type="email"
                                         id="email"
                                         name="email"
-                                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                                         placeholder="Ingresa tu email"
                                     />
-                                    {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+                                    {errors.email && <p className="text-reyes text-sm">{errors.email}</p>}
                                 </div>
                                 <div className="md:col-span-2 col-span-1">
                                     <label htmlFor="category" className="block text-gray-300 font-bold mb-2">Categoría (requerido)</label>
                                     <select
                                         id="category"
                                         name="category"
-                                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                                     >
                                         <option value="">Selecciona una categoría</option>
                                         {categories.map((category, index) => (
@@ -225,7 +225,7 @@ const Contact = () => {
                                             </option>
                                         ))}
                                     </select>
-                                    {errors.category && <p className="text-red-500 text-sm">{errors.category}</p>}
+                                    {errors.category && <p className="text-reyes text-sm">{errors.category}</p>}
                                 </div>
                                 <div className="col-span-1">
                                     <label htmlFor="message" className="block text-gray-300 font-bold mb-2 md:hidden">Mensaje (requerido)</label>
@@ -236,15 +236,15 @@ const Contact = () => {
                                         id="message"
                                         name="message"
                                         rows={5}
-                                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                                         placeholder="Escribe tu mensaje aquí..."
                                     ></textarea>
-                                    {errors.message && <p className="text-red-500 text-sm">{errors.message}</p>}
+                                    {errors.message && <p className="text-reyes text-sm">{errors.message}</p>}
                                 </div>
                                 <div className="md:col-span-2 col-span-1">
                                     <button
                                         type="submit"
-                                        className="w-full bg-red-600 text-white font-bold py-3 rounded-sm hover:bg-red-700 transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed"
+                                        className="w-full bg-reyes text-white font-bold py-3 rounded-sm hover:bg-reyes-dark transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed"
                                         disabled={!isFormValid || isSubmitting}
                                     >
                                         {isSubmitting ? "Enviando..." : "Enviar"}

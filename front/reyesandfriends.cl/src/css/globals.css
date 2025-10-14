@@ -64,3 +64,35 @@
 .hover\:border-reyes-light:hover { 
     @apply border-red-600; 
 }
+
+.ring-reyes { 
+    @apply ring-red-700; 
+}
+.ring-reyes-dark { 
+    @apply ring-red-800; 
+}
+.ring-reyes-light { 
+    @apply ring-red-600; 
+}
+
+/* Ring hovers */
+.hover\:ring-reyes:hover { 
+    @apply ring-red-700; 
+}
+.hover\:ring-reyes-dark:hover { 
+    @apply ring-red-800; 
+}
+.hover\:ring-reyes-light:hover { 
+    @apply ring-red-600; 
+}
+
+/* Ring focus */
+.focus\:ring-reyes:focus { 
+    @apply ring-red-700; 
+}
+.focus\:ring-reyes-dark:focus { 
+    @apply ring-red-800; 
+}
+.focus\:ring-reyes-light:focus { 
+    @apply ring-red-600; 
+}

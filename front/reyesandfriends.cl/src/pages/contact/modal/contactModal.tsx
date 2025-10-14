@@ -34,19 +34,19 @@ const ContactModal: React.FC<ContactModalProps> = ({ message, onClose }) => {
             }`}>
                 <button
                     onClick={handleClose}
-                    className="absolute top-4 right-4 text-zinc-400 hover:text-red-500 transition-colors"
+                    className="absolute top-4 right-4 text-white hover:text-reyes transition-colors"
                     aria-label="Cerrar"
                 >
                     <X className="w-6 h-6" />
                 </button>
                 <div className="flex items-center justify-center mb-4">
-                    <Mail className="text-red-600 w-10 h-10 mr-2" />
-                    <h2 className="text-2xl font-semibold text-red-500">Mensaje</h2>
+                    <Mail className="text-white w-10 h-10 mr-2" />
+                    <h2 className="text-2xl font-semibold text-white">Mensaje</h2>
                 </div>
                 <p className="mb-8 text-zinc-300 text-center">{message}</p>
                 <button
                     onClick={handleClose}
-                    className="w-full bg-red-700 hover:bg-red-800 text-white font-bold py-3 rounded-lg transition-colors"
+                    className="w-full bg-reyes hover:bg-reyes-dark text-white font-bold py-3 rounded-lg transition-colors"
                 >
                     Cerrar
                 </button>
