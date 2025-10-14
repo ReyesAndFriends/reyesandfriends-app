@@ -11,7 +11,7 @@ export interface ServiceOption {
 
 const serviceList: ServiceOption[] = [
     { 
-        name: "Programación web", 
+        name: "Programación Web", 
         path: "/services/web-development", 
         value: "web-development", 
         image: "/img/services/FullList/web-programming.jpeg", 
@@ -27,7 +27,7 @@ const serviceList: ServiceOption[] = [
         icon: (() => <Building2 size={18} className="inline mr-2" />)()
     },
     {
-        name: "Aplicaciones móviles",
+        name: "Aplicaciones Móviles",
         path: "/services/mobile-apps",
         value: "mobile-apps",
         image: "/img/services/FullList/mobile-apps.jpg",
