@@ -23,7 +23,7 @@ import Entertainment from "../pages/services/Entertainment/Entertainment";
 import WebPlanes from "../pages/web-planes/web-planes";
 
 // Error handler
-import Error from "../pages/error/Error";
+import Error from "../pages/error/error";
 
 // Register visitors
 import { useRegisterVisitors } from "../hooks/registerVisitors/useRegisterVisitors";
