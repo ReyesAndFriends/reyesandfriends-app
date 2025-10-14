@@ -59,9 +59,9 @@ const PhaseOne: React.FC<PhaseOneProps> = ({ values, errors, handleChange }) => 
             placeholder="Ingresa tu nombre"
             value={values.firstName}
             onChange={handleChange}
-            className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+            className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
           />
-          {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
+          {errors.firstName && <p className="text-reyes-light text-sm mt-1">{errors.firstName}</p>}
         </div>
 
 
@@ -76,9 +76,9 @@ const PhaseOne: React.FC<PhaseOneProps> = ({ values, errors, handleChange }) => 
             placeholder="Ingresa tu apellido"
             value={values.lastName}
             onChange={handleChange}
-            className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+            className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
           />
-          {errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
+          {errors.lastName && <p className="text-reyes-light text-sm mt-1">{errors.lastName}</p>}
         </div>
 
 
@@ -93,9 +93,9 @@ const PhaseOne: React.FC<PhaseOneProps> = ({ values, errors, handleChange }) => 
             placeholder="Ingresa tu email"
             value={values.email}
             onChange={handleChange}
-            className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+            className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
           />
-          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+          {errors.email && <p className="text-reyes-light text-sm mt-1">{errors.email}</p>}
         </div>
 
 
@@ -118,13 +118,13 @@ const PhaseOne: React.FC<PhaseOneProps> = ({ values, errors, handleChange }) => 
               placeholder="912345678"
               value={localPhone}
               onChange={handleLocalPhoneChange}
-              className="w-full p-3 rounded-r-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+              className="w-full p-3 rounded-r-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
               maxLength={9}
               inputMode="numeric"
               pattern="[0-9]*"
             />
           </div>
-          {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+          {errors.phone && <p className="text-reyes-light text-sm mt-1">{errors.phone}</p>}
         </div>
 
 
@@ -137,7 +137,7 @@ const PhaseOne: React.FC<PhaseOneProps> = ({ values, errors, handleChange }) => 
             name="contactMethod"
             value={values.contactMethod}
             onChange={handleChange}
-            className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+            className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
           >
             <option value="" disabled>
               Selecciona una opción
@@ -147,7 +147,7 @@ const PhaseOne: React.FC<PhaseOneProps> = ({ values, errors, handleChange }) => 
             <option value="both">Ambas</option>
           </select>
           {errors.contactMethod && (
-            <p className="text-red-500 text-sm mt-1">{errors.contactMethod}</p>
+            <p className="text-reyes-light text-sm mt-1">{errors.contactMethod}</p>
           )}
         </div>
       </div>

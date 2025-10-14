@@ -137,10 +137,10 @@ const QuoteProject: React.FC = () => {
                 className="w-32 h-32 object-contain mx-auto mb-6 pointer-events-none"
                 alt="La corona de Reyes&Friends"
               />
-              <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block">
+              <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-reyes-dark pb-4 inline-block">
                 ¡Cotización Enviada Exitosamente!
               </h1>
-              <p className="text-xl mb-8 text-red-100">
+              <p className="text-xl mb-8 text-white">
                 Gracias por confiar en nosotros. Hemos recibido tu solicitud y nos pondremos en contacto contigo muy pronto.
               </p>
             </div>
@@ -153,7 +153,7 @@ const QuoteProject: React.FC = () => {
 
             {formattedResponse && (
               <div className="text-left bg-zinc-900 p-6 rounded-lg mb-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-white">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-white">
                   <div>
                     <strong className="text-green-400">Número de Cotización:</strong>
                     <p>{formattedResponse.quoteNumber}</p>
@@ -161,10 +161,6 @@ const QuoteProject: React.FC = () => {
                   <div>
                     <strong className="text-green-400">Nombre del Cliente:</strong>
                     <p>{formattedResponse.customerName}</p>
-                  </div>
-                  <div>
-                    <strong className="text-green-400">Tipo de Proyecto:</strong>
-                    <p>{formattedResponse.projectType}</p>
                   </div>
                   <div>
                     <strong className="text-green-400">Fecha de Envío:</strong>
@@ -178,7 +174,7 @@ const QuoteProject: React.FC = () => {
               <h3 className="text-lg font-bold text-white mb-4">¿Qué sigue?</h3>
               <ul className="text-gray-300 text-left space-y-2">
                 <li>• Revisaremos tu solicitud en detalle</li>
-                <li>• Nos pondremos en contacto contigo en un plazo de 24-48 horas</li>
+                <li>• Nos pondremos en contacto contigo en <strong>un plazo de 24-48 horas</strong></li>
                 <li>• Te enviaremos una propuesta personalizada</li>
                 <li>• Podremos agendar una reunión para discutir los detalles</li>
               </ul>
@@ -188,14 +184,14 @@ const QuoteProject: React.FC = () => {
               <button
                 type="button"
                 onClick={handleStartOver}
-                className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors"
+                className="bg-reyes hover:bg-reyes-dark text-white px-6 py-3 rounded transition-all hover:scale-105"
               >
                 Crear Nueva Cotización
               </button>
               <button
                 type="button"
                 onClick={() => window.location.href = '/'}
-                className="bg-zinc-700 hover:bg-zinc-800 text-white px-6 py-3 rounded transition-colors"
+                className="bg-zinc-700 hover:bg-zinc-800 text-white px-6 py-3 rounded transition-all hover:scale-105"
               >
                 Volver al Inicio
               </button>
@@ -237,10 +233,10 @@ const QuoteProject: React.FC = () => {
                 className="w-32 h-32 object-contain mx-auto mb-6 pointer-events-none"
                 alt="La corona de Reyes&Friends"
               />
-              <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block">
+              <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-reyes-dark pb-4 inline-block">
                 De acuerdo, {userName}
               </h1>
-              <p className="text-xl mb-8 text-red-100">
+              <p className="text-xl mb-8 text-white">
                 Aquí tienes un resumen de la información que nos has proporcionado. Por favor, revísala y si todo está bien, envíanos el formulario.
               </p>
             </div>
@@ -268,7 +264,7 @@ const QuoteProject: React.FC = () => {
               />
             </div>
             <div>
-              <h4 className="text-lg text-red-500 mb-2">¡No te preocupes por los detalles!</h4>
+              <h4 className="text-lg text-reyes-light mb-2">¡No te preocupes por los detalles!</h4>
               <h2 className="text-4xl mb-4 text-white">¿Listo para enviar?</h2>
               <p className="text-lg text-gray-200">
                 Gracias por tomar tu tiempo en nuestro cotizador. Con esta información proporcionada, nos haremos idea de lo que necesitas, y si más adelante quieres ajustar algo, ¡siempre podremos conversarlo y adaptarlo juntos!
@@ -293,7 +289,7 @@ const QuoteProject: React.FC = () => {
             type="button"
             onClick={handleSubmitQuote}
             disabled={isLoading}
-            className="bg-red-700 hover:bg-red-800 disabled:bg-red-600 text-white px-6 py-3 rounded transition-colors flex items-center gap-2"
+            className="bg-reyes hover:bg-reyes-dark disabled:bg-reyes-light text-white px-6 py-3 rounded transition-all flex items-center gap-2"
           >
             {isLoading ? (
               <>
@@ -309,7 +305,7 @@ const QuoteProject: React.FC = () => {
         </div>
 
         {error && (
-          <div className="bg-red-600 text-white p-4 rounded mb-4 mx-auto max-w-3xl">
+          <div className="bg-reyes-dark text-white p-4 rounded mb-4 mx-auto max-w-3xl">
             <p className="font-bold">Error al enviar la cotización:</p>
             <p>{error}</p>
           </div>
@@ -355,10 +351,10 @@ const QuoteProject: React.FC = () => {
                 className="w-32 h-32 object-contain mx-auto mb-6 pointer-events-none"
                 alt="La corona de Reyes&Friends"
               />
-              <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-block">
+              <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-reyes-dark pb-4 inline-block">
                 Cotiza tu proyecto
               </h1>
-              <p className="text-xl mb-8 text-red-100">
+              <p className="text-xl mb-8 text-white">
                 Has tomado una gran decisión al elegirnos para tu proyecto!
                 <br />
                 Ahora cuéntanos más sobre lo que tienes en mente.
@@ -372,8 +368,8 @@ const QuoteProject: React.FC = () => {
             <div className="relative mb-2 mt-2">
 
               <div className="relative mb-12">
-                <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
-                <h2 className="text-3xl text-center text-red-500 relative z-10">
+                <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-reyes-dark -z-0"></div>
+                <h2 className="text-3xl text-center text-reyes-light relative z-10">
                   <span className="bg-zinc-900 px-4 relative z-10 text-white">Cotizador de proyectos</span>
                 </h2>
               </div>
@@ -390,7 +386,7 @@ const QuoteProject: React.FC = () => {
               </div>
               <div className="w-full h-2 bg-zinc-700 rounded">
                 <div
-                  className="h-2 bg-red-600 rounded transition-all duration-300"
+                  className="h-2 bg-reyes rounded transition-all duration-300"
                   style={{ width: `${progressPercent}%` }}
                 ></div>
               </div>
@@ -415,7 +411,7 @@ const QuoteProject: React.FC = () => {
                 <button
                   type="button"
                   onClick={handlePrev}
-                  className="bg-zinc-700 hover:bg-zinc-800 text-white px-6 py-3 rounded transition-colors flex items-center gap-2"
+                  className="bg-zinc-700 hover:bg-zinc-800 text-white px-6 py-3 rounded transition-colors flex items-center gap-2 hover:scale-105"
                 >
                   <ArrowLeft size={18} />
                   Anterior
@@ -426,7 +422,7 @@ const QuoteProject: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleNext}
-                  className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-colors flex items-center gap-2"
+                  className="bg-reyes-dark hover:bg-reyes-light text-white px-6 py-3 rounded transition-colors flex items-center gap-2 hover:scale-105"
                 >
                   Siguiente
                   <ArrowRight size={18} />
@@ -435,7 +431,7 @@ const QuoteProject: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleShowSummary}
-                  className="bg-green-700 hover:bg-green-800 text-white px-6 py-3 rounded transition-colors flex items-center gap-2"
+                  className="bg-green-700 hover:bg-green-800 text-white px-6 py-3 rounded transition-colors flex items-center gap-2 hover:scale-105"
                 >
                   <FileText size={18} />
                   Resumen

@@ -28,13 +28,13 @@ const PhaseFive: React.FC<PhaseFiveProps> = ({ values, errors, handleChange }) =
                         name="technologyPreference"
                         value={values.technologyPreference}
                         onChange={handleChange}
-                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                     >
                         <option value="" disabled>Selecciona una opción</option>
                         <option value="yes">Sí</option>
                         <option value="no">No</option>
                     </select>
-                    {errors.technologyPreference && <p className="text-red-500 text-sm mt-1">{errors.technologyPreference}</p>}
+                    {errors.technologyPreference && <p className="text-reyes-light text-sm mt-1">{errors.technologyPreference}</p>}
                 </div>
 
                 {values.technologyPreference === "yes" && (
@@ -49,9 +49,9 @@ const PhaseFive: React.FC<PhaseFiveProps> = ({ values, errors, handleChange }) =
                                 value={values.technologyList}
                                 onChange={handleChange}
                                 placeholder="Ejemplo: React, Tailwind, Node.js"
-                                className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                                className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                             ></textarea>
-                            {errors.technologyList && <p className="text-red-500 text-sm mt-1">{errors.technologyList}</p>}
+                            {errors.technologyList && <p className="text-reyes-light text-sm mt-1">{errors.technologyList}</p>}
                         </div>
 
                         <div className="mb-4">
@@ -64,9 +64,9 @@ const PhaseFive: React.FC<PhaseFiveProps> = ({ values, errors, handleChange }) =
                                 value={values.avoidTechnologyList}
                                 onChange={handleChange}
                                 placeholder="Ejemplo: PHP, jQuery"
-                                className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                                className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                             ></textarea>
-                            {errors.avoidTechnologyList && <p className="text-red-500 text-sm mt-1">{errors.avoidTechnologyList}</p>}
+                            {errors.avoidTechnologyList && <p className="text-reyes-light text-sm mt-1">{errors.avoidTechnologyList}</p>}
                         </div>
                     </>
                 )}
@@ -81,9 +81,9 @@ const PhaseFive: React.FC<PhaseFiveProps> = ({ values, errors, handleChange }) =
                         value={values.keyFunctionalities}
                         onChange={handleChange}
                         placeholder="Describe las funcionalidades clave que necesitas en el proyecto. min 50, max 2000 caracteres."
-                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                     ></textarea>
-                    {errors.keyFunctionalities && <p className="text-red-500 text-sm mt-1">{errors.keyFunctionalities}</p>}
+                    {errors.keyFunctionalities && <p className="text-reyes-light text-sm mt-1">{errors.keyFunctionalities}</p>}
                 </div>
 
                 <div className="mb-4">
@@ -96,9 +96,9 @@ const PhaseFive: React.FC<PhaseFiveProps> = ({ values, errors, handleChange }) =
                         value={values.additionalComments}
                         onChange={handleChange}
                         placeholder="Escribe aquí cualquier comentario o duda adicional que tengas. min 50, max 2000 caracteres."
-                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                     ></textarea>
-                    {errors.additionalComments && <p className="text-red-500 text-sm mt-1">{errors.additionalComments}</p>}
+                    {errors.additionalComments && <p className="text-reyes-light text-sm mt-1">{errors.additionalComments}</p>}
                 </div>
             </div>
         </div>

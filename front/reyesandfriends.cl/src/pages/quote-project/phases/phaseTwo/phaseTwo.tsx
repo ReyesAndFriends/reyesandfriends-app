@@ -26,9 +26,9 @@ const PhaseTwo: React.FC<PhaseTwoProps> = ({ values, errors, handleChange }) => 
                         placeholder="Ejemplo: Reyes&Friends SpA" 
                         value={values.companyName} 
                         onChange={handleChange} 
-                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                     />
-                    {errors.companyName && <p className="text-red-500 text-sm mt-1">{errors.companyName}</p>}
+                    {errors.companyName && <p className="text-reyes-light text-sm mt-1">{errors.companyName}</p>}
                 </div>
 
                 <div className="mb-4">
@@ -38,13 +38,13 @@ const PhaseTwo: React.FC<PhaseTwoProps> = ({ values, errors, handleChange }) => 
                         name="companyType" 
                         value={values.companyType} 
                         onChange={handleChange} 
-                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                     >
                         <option value="" disabled>Selecciona una opción</option>
                         <option value="personal">Personal</option>
                         <option value="business">Empresarial</option>
                     </select>
-                    {errors.companyType && <p className="text-red-500 text-sm mt-1">{errors.companyType}</p>}
+                    {errors.companyType && <p className="text-reyes-light text-sm mt-1">{errors.companyType}</p>}
                 </div>
 
                 <div className="mb-4">
@@ -55,9 +55,9 @@ const PhaseTwo: React.FC<PhaseTwoProps> = ({ values, errors, handleChange }) => 
                         placeholder="Describe lo que buscas obtener o lograr con este proyecto. min 50, max 2000 caracteres." 
                         value={values.projectPurpose} 
                         onChange={handleChange} 
-                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                     ></textarea>
-                    {errors.projectPurpose && <p className="text-red-500 text-sm mt-1">{errors.projectPurpose}</p>}
+                    {errors.projectPurpose && <p className="text-reyes-light text-sm mt-1">{errors.projectPurpose}</p>}
                 </div>
             </div>
         </div>
