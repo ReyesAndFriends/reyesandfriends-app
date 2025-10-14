@@ -26,6 +26,8 @@ const HeroSection = ({
     const heroBackgroundImage =
         theme === "reyes-halloween"
             ? "/img/background/background-halloween.jpg"
+            : theme === "reyes-christmas"
+            ? "/img/background/background-christmas.jpg"
             : "/img/background/background-web.jpg";
 
     // Typewriter states for title

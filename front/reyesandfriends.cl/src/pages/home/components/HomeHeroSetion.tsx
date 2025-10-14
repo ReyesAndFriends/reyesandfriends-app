@@ -91,6 +91,8 @@ const HomeHeroSection: React.FC<HomeHeroSectionProps> = ({
     const heroBackgroundImage =
         theme === "reyes-halloween"
             ? "/img/background/background-halloween.jpg"
+            : theme === "reyes-christmas"
+            ? "/img/background/background-christmas.jpg"
             : backgroundImage;
 
     return (
