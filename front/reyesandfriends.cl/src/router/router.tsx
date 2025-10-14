@@ -9,16 +9,16 @@ import Home from "../pages/home/home";
 import Portfolio from "../pages/portfolio";
 import Contact from "../pages/contact/contact";
 import Services from "../pages/services/services";
-import AboutUs from "../pages/about-us/aboutUs";
-import QuotePage from "../pages/quote-project/quoteProject";
+import AboutUs from "../pages/about-us/about-us";
+import QuotePage from "../pages/quote-project/quote-project";
 import SocialMedia from "../pages/social-media/social-media";
 
 // Services pages
-import WebProgramming from "../pages/services/WebProgramming/WebProgramming";
-import EnterpriseSoftware from "../pages/services/EnterpriseSoftware/EnterpriseSoftware";
-import MobileApps from "../pages/services/MobileApps/MobileApps";
-import ECommerce from "../pages/services/E-commerce/E-commerce";
-import Entertainment from "../pages/services/Entertainment/Entertainment";
+import WebProgramming from "../pages/services/WebProgramming/web-programming";
+import EnterpriseSoftware from "../pages/services/EnterpriseSoftware/enterprise-software";
+import MobileApps from "../pages/services/MobileApps/mobile-apps";
+import ECommerce from "../pages/services/E-commerce/e-commerce";
+import Entertainment from "../pages/services/Entertainment/entertainment";
 
 import WebPlanes from "../pages/web-planes/web-planes";
 
