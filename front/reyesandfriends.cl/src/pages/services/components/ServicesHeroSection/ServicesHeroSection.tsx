@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { LucideIcon, Gem } from "lucide-react";
 import { Link } from "react-router";
 
@@ -20,12 +21,25 @@ const ServicesHeroSection = ({
     buttonText,
     altText = "Ilustración de fondo"
 }: ServicesHeroSectionProps) => {
+
+    const [theme, setTheme] = useState<string>("reyes");
+
+    useEffect(() => {
+        const savedTheme = localStorage.getItem("page_theme");
+        if (savedTheme) setTheme(savedTheme);
+    }, []);
+
+    const heroBackgroundImage =
+        theme === "reyes-halloween"
+            ? "/img/background/background-halloween.jpg"
+            : "/img/background/background-web.jpg";
+
     return (
         <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
             <div className="absolute inset-0 bg-hero-section z-10"></div>
             <div className="absolute inset-0">
                 <img
-                    src="/img/background/background-web.jpg" 
+                    src={heroBackgroundImage}
                     alt={altText}
                     className="w-full h-full object-cover filter grayscale z-0"
                     draggable={false}
