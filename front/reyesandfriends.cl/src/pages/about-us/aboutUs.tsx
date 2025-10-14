@@ -1,5 +1,6 @@
 import { Info } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import HeroSection from "../../layouts/components/HeroSection/HeroSection";
 
 const AboutUs = () => {
     return (
@@ -20,31 +21,12 @@ const AboutUs = () => {
                 <meta name="twitter:image" content="/img/open-graph-images/about-us.png" />
             </Helmet>
 
-            <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
-                <div className="absolute inset-0 bg-hero-section z-10"></div>
-                <div className="absolute inset-0">
-                    <img
-                        src="/img/background/background-web.jpg"
-                        alt="Ilustración de fondo - Edificios"  
-                        className="w-full h-full object-cover filter grayscale z-0"
-                        draggable={false}
-                        onContextMenu={e => e.preventDefault()}
-                    />
-                </div>
-                <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col items-center justify-center text-center flex-1">
-                    <div className="max-w-2xl text-white mx-auto">
-                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-reyes-dark pb-4 inline-flex items-center gap-4">
-                            <span className="flex items-center gap-4">
-                                <Info size={40} />
-                                Sobre Nosotros
-                            </span>
-                        </h1>
-                        <p className="text-xl mb-8">
-                            En Reyes&Friends, nos dedicamos a crear soluciones digitales innovadoras que transforman la forma en que las empresas operan y se conectan con sus clientes.
-                        </p>
-                    </div>
-                </div>
-            </section>
+            <HeroSection 
+            icon={Info}
+            logoImage="/img/about-us/illustration.png"
+            title="Sobre Nosotros"
+            subtitle="En Reyes&Friends, nos dedicamos a crear soluciones digitales innovadoras que transforman la forma en que las empresas operan y se conectan con sus clientes." 
+            />
 
             <section className="py-16 text-white">
                 <div className="container mx-auto px-4 max-w-7xl">
