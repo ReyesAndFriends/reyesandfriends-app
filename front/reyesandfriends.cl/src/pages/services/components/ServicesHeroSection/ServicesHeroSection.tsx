@@ -102,7 +102,7 @@ const ServicesHeroSection = ({
                                         : "text-reyes drop-shadow-lg"
                                 }
                             />
-                            <h1 className="text-5xl md:text-5xl text-white drop-shadow-lg tracking-tight font-semibold">
+                            <h1 className="text-4xl md:text-5xl text-white drop-shadow-lg tracking-tight font-semibold 3xl:text-6xl">
                                 {displayedTitle}
                                 {titleCursorVisible && (
                                     <span className="typewriter-cursor-title">&nbsp;</span>

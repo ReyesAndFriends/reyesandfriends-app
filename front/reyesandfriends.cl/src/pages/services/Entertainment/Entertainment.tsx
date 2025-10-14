@@ -1,6 +1,7 @@
 import { Film, Star, Joystick, Gem, Users, Gamepad2, Image, Share, Bot } from "lucide-react";
 import { Link } from "react-router";
 import { Helmet } from "react-helmet-async";
+import ServicesHeroSection from "../components/ServicesHeroSection/ServicesHeroSection";
 
 const Entertainment = () => {
     return (
@@ -16,45 +17,17 @@ const Entertainment = () => {
                 <meta name="twitter:description" content="Servicios de desarrollo para entretenimiento: plataformas creativas, bots, foros y contenido multimedia personalizado." />
                 <meta name="twitter:image" content="/img/open-graph-images/entertainment.png" />
             </Helmet>
-            <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
-                <div className="absolute inset-0 bg-hero-section z-10"></div>
-                <div className="absolute inset-0">
-                    <img
-                        src="/img/background/background-web.jpg"
-                        alt="Ilustración de fondo - Edificios"  
-                        className="w-full h-full object-cover filter grayscale z-0"
-                        draggable={false}
-                        onContextMenu={e => e.preventDefault()}
-                    />
-                </div>
-                <div className="container mx-auto px-4 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-                    <div className="flex justify-center hidden md:block">
-                        <img
-                            src="/img/services/Entertainment/logo.png"
-                            alt="Entertainment"
-                            className="max-w-lg pointer-events-none"
-                        />
-                    </div>
-                    <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
-                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-reyes-dark pb-4 inline-flex items-center gap-4">
-                            <Joystick size={40} /> Entretenimiento y más
-                        </h1>
-                        <p className="text-xl mb-8">
-                           Sabemos que no todo siempre tiene que ser serio, el entretenimiento también es importante. Por eso ofrecemos servicios personalizados para la industria del entretenimiento, desarrollando plataformas como blogs, foros y contenido multimedia que capturan la esencia de tu marca o persona.
-                        </p>
 
-                        <Link
-                            to="/quote-project?service=entertainment"
-                            className="bg-reyes hover:bg-reyes-dark text-white px-6 py-3 rounded transition-all duration-300 flex items-center gap-2 font-semibold transform hover:scale-105"
-                        >
-                            <Gem className="h-5 w-5" />
-                            Me interesa, cotizar servicio
-                        </Link>
-
-                    </div>
-                </div>
-            </section>
-
+            <ServicesHeroSection
+                logoImage="/img/services/Entertainment/logo.png"
+                title="Entretenimiento y más"
+                description="Sabemos que no todo siempre tiene que ser serio, el entretenimiento también es importante. Por eso ofrecemos servicios personalizados para la industria del entretenimiento, desarrollando plataformas como blogs, foros y contenido multimedia que capturan la esencia de tu marca o persona."
+                icon={Joystick}
+                quoteService="entertainment"
+                buttonText="Me interesa, cotizar servicio"
+                altText="Ilustración de fondo - Entretenimiento y más"
+            />
+            
             <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4 max-w-7xl">
                     <h2 className="text-3xl mb-12 text-center relative">
