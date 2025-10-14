@@ -56,7 +56,7 @@ const HomeHeroSection: React.FC<HomeHeroSectionProps> = ({
 
     return (
         <section className="bg-cover bg-center relative min-h-[800px] md:min-h-[800px] flex items-center">
-            <div className="absolute inset-0 bg-halloween z-10"></div>
+            <div className="absolute inset-0 bg-hero-section z-10"></div>
             <div className="absolute inset-0">
                 <img
                     src={backgroundImage}
