@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from "react-helmet-async";
 import { HandHeart } from "lucide-react";
+import HeroSection from '../../layouts/components/HeroSection/HeroSection';
 
 const SocialMedia = () => {
 
@@ -42,35 +43,13 @@ const SocialMedia = () => {
                 <meta name="twitter:image" content="/img/open-graph-images/social-media.png" />
             </Helmet>
 
-            <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
-                <div className="absolute inset-0 bg-hero-section z-10"></div>
-                <div className="absolute inset-0">
-                    <img
-                        src="/img/background/background-web.jpg"
-                        alt="Ilustración de fondo - Edificios"
-                        className="w-full h-full object-cover filter grayscale z-0"
-                        draggable={false}
-                        onContextMenu={e => e.preventDefault()}
-                    />
-                </div>
-                <div className="container mx-auto px-4 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-                    <div className="flex justify-center hidden md:block">
-                        <img
-                            src="/img/social-media/illustration.png"
-                            alt="Ilustración de redes sociales"
-                            className="h-96 w-auto object-contain pointer-events-none"
-                        />
-                    </div>
-                    <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
-                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-reyes-dark pb-4 inline-flex items-center gap-4">
-                            <HandHeart size={40} /> Nuestras Redes Sociales
-                        </h1>
-                        <p className="text-xl mb-8">
-                            Necesitas un todo en uno sin tanta complejidad? Nuestros planes web fijos están diseñados para ofrecerte una solución completa y asequible, adaptada a las necesidades de tu negocio.
-                        </p>
-                    </div>
-                </div>
-            </section>
+            <HeroSection 
+            icon={HandHeart}
+            logoImage="/img/social-media/illustration.png"
+            title="Redes Sociales"
+            subtitle="Conecta con nosotros a través de nuestras redes sociales. Síguenos para estar al día con nuestras novedades y contenido exclusivo." 
+            />
+
 
             <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4 max-w-7xl">
