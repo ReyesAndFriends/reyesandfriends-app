@@ -44,7 +44,7 @@ const Services = () => {
                         />
                     </div>
                     <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
-                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-flex items-center gap-4">
+                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-reyes-dark pb-4 inline-flex items-center gap-4">
                             <Menu size={40} /> Nuestros Servicios
                         </h1>
                         <p className="text-xl mb-8">
@@ -57,9 +57,9 @@ const Services = () => {
 
             <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4 max-w-7xl">
-                    <h2 className="text-3xl mb-12 text-center text-red-600 relative">
+                    <h2 className="text-3xl mb-12 text-center relative">
                         <span className="bg-zinc-900 px-4 relative z-10 text-white">Lista de servicios</span>
-                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
+                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-reyes-dark -z-0"></div>
                     </h2>
                     <div className="flex flex-wrap justify-center gap-8">
                         {services
@@ -88,7 +88,7 @@ const Services = () => {
                                     </div>
                                     <div className="flex justify-center mt-3">
                                         <Link
-                                            className="bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded transition-colors text-sm flex items-center gap-2 font-semibold"
+                                            className="bg-reyes hover:bg-reyes-dark text-white px-4 py-2 rounded transition-colors text-sm flex items-center gap-2 font-semibold"
                                             to={service.path}
                                         >
                                             Ver detalles <ChevronRight />
