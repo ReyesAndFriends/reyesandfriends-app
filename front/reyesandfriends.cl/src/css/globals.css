@@ -12,7 +12,7 @@
 
 /* Hero section gradients - Christmas */
 [data-theme="reyes-christmas"] .bg-hero-section {
-    background-image: linear-gradient(to right, #29586f, #1e3e78);
+    background-image: linear-gradient(to right, #0b4513, #740e0e); /* verde y rojo */
     opacity: 0.85;
 }
 
@@ -46,7 +46,7 @@
     @apply bg-green-800; 
 }
 [data-theme="reyes-christmas"] .bg-reyes-light { 
-    @apply bg-green-600; 
+    @apply bg-red-600; /* rojo para el light */
 }
 
 /* Hover backgrounds - Default */
@@ -79,7 +79,7 @@
     @apply bg-green-800; 
 }
 [data-theme="reyes-christmas"] .hover\:bg-reyes-light:hover { 
-    @apply bg-green-600; 
+    @apply bg-red-600; /* rojo para el light */
 }
 
 /* Text colors - Default */
@@ -112,7 +112,7 @@
     @apply text-green-800; 
 }
 [data-theme="reyes-christmas"] .text-reyes-light { 
-    @apply text-green-600; 
+    @apply text-red-600; /* rojo para el light */
 }
 
 /* Text hovers - Default */
@@ -145,7 +145,7 @@
     @apply text-green-800; 
 }
 [data-theme="reyes-christmas"] .hover\:text-reyes-light:hover { 
-    @apply text-green-600; 
+    @apply text-red-600; /* rojo para el light */
 }
 
 /* Border colors - Default */
@@ -178,7 +178,7 @@
     @apply border-green-800; 
 }
 [data-theme="reyes-christmas"] .border-reyes-light { 
-    @apply border-green-600; 
+    @apply border-red-600; /* rojo para el light */
 }
 
 /* Border hovers - Default */
@@ -211,7 +211,7 @@
     @apply border-green-800; 
 }
 [data-theme="reyes-christmas"] .hover\:border-reyes-light:hover { 
-    @apply border-green-600; 
+    @apply border-red-600; /* rojo para el light */
 }
 
 /* Ring colors - Default */
@@ -244,7 +244,7 @@
     @apply ring-green-800; 
 }
 [data-theme="reyes-christmas"] .ring-reyes-light { 
-    @apply ring-green-600; 
+    @apply ring-red-600; /* rojo para el light */
 }
 
 /* Ring hovers - Default */
@@ -277,7 +277,7 @@
     @apply ring-green-800; 
 }
 [data-theme="reyes-christmas"] .hover\:ring-reyes-light:hover { 
-    @apply ring-green-600; 
+    @apply ring-red-600; /* rojo para el light */
 }
 
 /* Ring focus - Default */
@@ -310,5 +310,5 @@
     @apply ring-green-800; 
 }
 [data-theme="reyes-christmas"] .focus\:ring-reyes-light:focus { 
-    @apply ring-green-600; 
+    @apply ring-red-600; /* rojo para el light */
 }
