@@ -20,15 +20,15 @@ const Error = () => {
                         className="w-24 h-24 object-contain mx-auto mb-6"
                         alt="reyes&friends_crown"
                     />
-                    <h1 className="text-4xl md:text-5xl mb-4 text-white drop-shadow-lg flex items-center justify-center gap-2 border-b-4 border-red-500 pb-4 inline-block">
+                    <h1 className="text-4xl md:text-5xl mb-4 text-white drop-shadow-lg flex items-center justify-center gap-2 border-b-4 border-reyes-dark pb-4 inline-block">
                         <Ban className="w-8 h-8" />
                         La página que has accedido no existe.
                     </h1>
-                    <p className="text-xl text-red-100 max-w-xl mb-4">
+                    <p className="text-xl text-white max-w-xl mb-4">
                        Es posible que la URL sea incorrecta o que la página haya sido eliminada. Por favor, verifica la dirección o vuelve a la página principal.
                     </p>
                     <Link
-                        to="/" className="bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded transition-all duration-300 flex items-center gap-2 font-semibold transform hover:scale-105">
+                        to="/" className="bg-reyes hover:bg-reyes-dark text-white px-6 py-3 rounded transition-all duration-300 flex items-center gap-2 font-semibold transform hover:scale-105">
                         Volver a la página principal
                     </Link>
                 </div>
