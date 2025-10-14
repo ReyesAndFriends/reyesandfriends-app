@@ -56,7 +56,7 @@ const AboutUs = () => {
                             <img
                                 src="/img/about-us/team.png"
                                 alt="Imagen ilustrativa del equipo de Reyes&Friends"
-                                className="rounded-lg shadow-lg w-full max-w-md aspect-[16/9] object-cover pointer-events-none"
+                                className="w-full max-w-md aspect-[16/9] object-cover pointer-events-none"
                             />
                         </div>
                         <div>

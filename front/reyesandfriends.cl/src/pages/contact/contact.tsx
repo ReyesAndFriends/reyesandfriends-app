@@ -3,6 +3,8 @@ import { useContactFormValidator } from "../../hooks/contact/useContactFormValid
 import { useState, useRef } from "react";
 import ContactModal from "./modal/contactModal";
 import { Helmet } from "react-helmet-async";
+import { Contact2 } from "lucide-react";
+import HeroSection from "../../layouts/components/HeroSection/HeroSection";
 
 function capitalizeWords(str: string) {
     return str.replace(/\b\w/g, char => char.toUpperCase()).replace(/\B\w/g, char => char.toLowerCase());
@@ -94,34 +96,13 @@ const Contact = () => {
                 message={finalMessage}
                 onClose={handleModalClose}
             />
-            <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
-                <div className="absolute inset-0 bg-hero-section z-10"></div>
-                <div className="absolute inset-0">
-                    <img
-                        src="/img/background/background-web.jpg"
-                        alt="Ilustración de fondo - Edificios"
-                        className="w-full h-full object-cover filter grayscale z-0"
-                        draggable={false}
-                        onContextMenu={e => e.preventDefault()}
-                    />
-                </div>
-                <div className="container mx-auto px-4 py-24 relative z-20 flex flex-col items-center justify-center text-center flex-1">
-                    <div className="max-w-2xl text-white mx-auto">
-                        <img
-                            src="/img/logo/crown_white.svg"
-                            className="w-32 h-32 object-contain mx-auto mb-6"
-                            alt="reyes&friends_crown"
-                        />
-                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-reyes-dark pb-4 inline-block">
-                            Contáctanos
-                        </h1>
-                        <p className="text-xl mb-8 text-white">
-                            Si tienes alguna pregunta o inquietud, no dudes en ponerte en contacto con nosotros.
-                            Estamos aquí para ayudarte y responder a tus consultas.
-                        </p>
-                    </div>
-                </div>
-            </section>
+
+            <HeroSection 
+            icon={Contact2}
+            logoImage="/img/contact/illustration.png"
+            title="Contacto"
+            subtitle="En Reyes&Friends, estamos aquí para ayudarte. Si tienes alguna pregunta o inquietud, no dudes en ponerte en contacto con nosotros."
+            />
 
             <section className="py-16 bg-zinc-900">
                 <div className="container mx-auto px-4 max-w-7xl">
