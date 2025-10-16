@@ -56,7 +56,7 @@ const AboutUs = () => {
                             <img
                                 src="/img/about-us/team.png"
                                 alt="Imagen ilustrativa del equipo de Reyes&Friends"
-                                className="w-full max-w-md aspect-[16/9] object-cover pointer-events-none"
+                                className="w-full aspect-[16/9] object-cover pointer-events-none"
                             />
                         </div>
                         <div>
@@ -91,7 +91,7 @@ const AboutUs = () => {
                             <img
                                 src="/img/about-us/reyesandfriends-theme.png"
                                 alt="El logo de Reyes&Friends como si fuera un tema de Spotify"
-                                className="rounded-lg shadow-lg w-full max-w-xs pointer-events-none"
+                                className="w-full pointer-events-none"
                             />
                         </div>
                     </div>
