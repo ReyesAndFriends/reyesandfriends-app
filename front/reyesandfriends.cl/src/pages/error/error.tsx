@@ -69,8 +69,15 @@ const Error = () => {
                         onContextMenu={e => e.preventDefault()}
                     />
                 </div>
-                <div className="container mx-auto px-4 py-24 relative z-10 grid grid-cols-1 items-center gap-8">
-                    <div className="max-w-2xl text-white mx-auto flex flex-col items-center">
+                <div className="container mx-auto px-4 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
+                    <div className="flex justify-center hidden md:block">
+                        <img
+                            src="/img/error/robot-error.png"
+                            alt="Robot de error"
+                            className="max-w-md pointer-events-none"
+                        />
+                    </div>
+                    <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
                         <div className="flex items-center gap-4 mb-2">
                             <Ban size={48} className="text-reyes drop-shadow-lg" />
                             <h1 className="text-4xl md:text-5xl text-white drop-shadow-lg tracking-tight font-semibold 3xl:text-6xl">
@@ -80,7 +87,7 @@ const Error = () => {
                                 )}
                             </h1>
                         </div>
-                        <p className="text-xl mb-8 text-center max-w-xl">
+                        <p className="text-xl mb-8 text-center md:text-left max-w-xl">
                             La URL que has ingresado no existe o ha sido movida. Por favor, verifica la dirección o regresa a la página principal.
                         </p>
                         <Link
