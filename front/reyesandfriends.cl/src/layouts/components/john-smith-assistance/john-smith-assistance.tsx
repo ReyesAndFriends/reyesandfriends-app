@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import { marked } from "marked";
+import "./john-smith-assistance.css";
 
 const ENABLE_JOHN_SMITH = import.meta.env.VITE_ENABLE_JOHN_SMITH_ASSISTANCE === "true";
 const JOHN_SMITH_WS_URL = import.meta.env.VITE_JOHN_SMITH_WS_URL || null;
@@ -124,6 +126,7 @@ function JohnSmithAssistance() {
   const handleSendMessage = () => {
     const text = inputValue.trim();
     if (!text) return;
+    if (isTyping) return;
     setMessages((prev) => [...prev, { from: "user", text }]);
     setInputValue("");
     if (wsRef.current && wsConnected) {
@@ -134,6 +137,7 @@ function JohnSmithAssistance() {
 
   const handleOptionClick = (optionIdx: number) => {
     if (!wsConnected || wsFailed) return;
+    if (isTyping) return;
     const userMsg = { from: "user", text: options[optionIdx].label };
     setMessages((prev) => [...prev, userMsg]);
     setStep(1);
@@ -217,6 +221,10 @@ function JohnSmithAssistance() {
       }
     };
   };
+
+  function renderMarkdown(text: string) {
+    return { __html: marked.parse(text) };
+  }
 
   if (!ENABLE_JOHN_SMITH) return null;
 
@@ -317,7 +325,10 @@ function JohnSmithAssistance() {
                           transition={{ delay: idx * 0.1 }}
                           className="bg-gray-100 rounded-lg p-3 text-gray-700 text-sm self-start max-w-[85%]"
                         >
-                          {msg.text}
+                          <span
+                            className="johnsmith-markdown"
+                            dangerouslySetInnerHTML={renderMarkdown(msg.text)}
+                          />
                         </motion.div>
                       ) : (
                         <motion.div
@@ -348,18 +359,18 @@ function JohnSmithAssistance() {
 
                   <div className="flex gap-2 mt-2">
                     <input
-                      className="flex-1 border rounded-lg px-3 py-2 text-sm"
+                      className="flex-1 border rounded-lg px-3 py-2 text-sm disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed"
                       type="text"
                       placeholder="Escribe tu mensaje..."
                       value={inputValue}
                       onChange={e => setInputValue(e.target.value)}
                       onKeyDown={e => { if (e.key === "Enter") handleSendMessage(); }}
-                      disabled={!wsConnected || wsFailed}
+                      disabled={!wsConnected || wsFailed || isTyping}
                     />
                     <button
-                      className="bg-red-600 hover:bg-red-700 transition text-white rounded-lg px-4 py-2 text-sm"
+                      className="bg-red-600 hover:bg-red-700 transition text-white rounded-lg px-4 py-2 text-sm disabled:bg-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed"
                       onClick={handleSendMessage}
-                      disabled={!wsConnected || wsFailed}
+                      disabled={!wsConnected || wsFailed || isTyping}
                     >
                       Enviar
                     </button>
@@ -370,10 +381,10 @@ function JohnSmithAssistance() {
                       {options.map((opt, idx) => (
                         <motion.button
                           key={opt.label}
-                          className="bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-lg px-3 py-2 text-left text-sm transition"
+                          className="bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-lg px-3 py-2 text-left text-sm transition disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed"
                           whileTap={{ scale: 0.97 }}
                           onClick={() => handleOptionClick(idx)}
-                          disabled={!wsConnected || wsFailed}
+                          disabled={!wsConnected || wsFailed || isTyping}
                         >
                           {opt.label}
                         </motion.button>
