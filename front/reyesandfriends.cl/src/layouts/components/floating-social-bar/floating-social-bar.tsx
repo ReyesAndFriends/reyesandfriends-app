@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 export default function FloatingSocialBar() {
   return (
-    <div className="fixed bottom-4 right-4 z-50 flex flex-col">
+    <div className="fixed bottom-4 left-4 z-40 flex flex-col">
       <Link
         to="https://wa.me/56982034567?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios."
         target="_blank"
@@ -13,7 +13,7 @@ export default function FloatingSocialBar() {
         <img
           src="/img/icons/whatsapp.png"
           alt="WhatsApp"
-          className="w-10 h-10 pointer-events-none"
+          className="w-8 h-8 pointer-events-none"
         />
       </Link>
     </div>
