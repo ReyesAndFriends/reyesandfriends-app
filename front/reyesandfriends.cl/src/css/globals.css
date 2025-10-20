@@ -12,7 +12,7 @@
 
 /* Hero section gradients - Christmas */
 [data-theme="reyes-christmas"] .bg-hero-section {
-    background-image: linear-gradient(to right, #0b4513, #740e0e); /* verde y rojo */
+    background-image: linear-gradient(to right, #0b4513, #740e0e); 
     opacity: 0.85;
 }
 
@@ -26,6 +26,88 @@
 .bg-reyes-light { 
     @apply bg-red-600; 
 }
+.bg-reyes-secondary {
+    @apply bg-gray-700;
+}
+.bg-reyes-secondary-dark {
+    @apply bg-gray-900;
+}
+.bg-reyes-secondary-light {
+    @apply bg-gray-500;
+}
+/* Hover, border, ring, text para secondary */
+.hover\:bg-reyes-secondary:hover {
+    @apply bg-gray-700;
+}
+.hover\:bg-reyes-secondary-dark:hover {
+    @apply bg-gray-900;
+}
+.hover\:bg-reyes-secondary-light:hover {
+    @apply bg-gray-500;
+}
+.border-reyes-secondary {
+    @apply border-gray-700;
+}
+.border-reyes-secondary-dark {
+    @apply border-gray-900;
+}
+.border-reyes-secondary-light {
+    @apply border-gray-500;
+}
+.hover\:border-reyes-secondary:hover {
+    @apply border-gray-700;
+}
+.hover\:border-reyes-secondary-dark:hover {
+    @apply border-gray-900;
+}
+.hover\:border-reyes-secondary-light:hover {
+    @apply border-gray-500;
+}
+.ring-reyes-secondary {
+    @apply ring-gray-700;
+}
+.ring-reyes-secondary-dark {
+    @apply ring-gray-900;
+}
+.ring-reyes-secondary-light {
+    @apply ring-gray-500;
+}
+.hover\:ring-reyes-secondary:hover {
+    @apply ring-gray-700;
+}
+.hover\:ring-reyes-secondary-dark:hover {
+    @apply ring-gray-900;
+}
+.hover\:ring-reyes-secondary-light:hover {
+    @apply ring-gray-500;
+}
+.focus\:ring-reyes-secondary:focus {
+    @apply ring-gray-700;
+}
+.focus\:ring-reyes-secondary-dark:focus {
+    @apply ring-gray-900;
+}
+.focus\:ring-reyes-secondary-light:focus {
+    @apply ring-gray-500;
+}
+.text-reyes-secondary {
+    @apply text-gray-700;
+}
+.text-reyes-secondary-dark {
+    @apply text-gray-900;
+}
+.text-reyes-secondary-light {
+    @apply text-gray-500;
+}
+.hover\:text-reyes-secondary:hover {
+    @apply text-gray-700;
+}
+.hover\:text-reyes-secondary-dark:hover {
+    @apply text-gray-900;
+}
+.hover\:text-reyes-secondary-light:hover {
+    @apply text-gray-500;
+}
 
 /* Halloween theme */
 [data-theme="reyes-halloween"] .bg-reyes { 
@@ -37,6 +119,87 @@
 [data-theme="reyes-halloween"] .bg-reyes-light { 
     @apply bg-orange-400; 
 }
+[data-theme="reyes-halloween"] .bg-reyes-secondary {
+    @apply bg-purple-700;
+}
+[data-theme="reyes-halloween"] .bg-reyes-secondary-dark {
+    @apply bg-purple-900;
+}
+[data-theme="reyes-halloween"] .bg-reyes-secondary-light {
+    @apply bg-purple-500;
+}
+[data-theme="reyes-halloween"] .hover\:bg-reyes-secondary:hover {
+    @apply bg-purple-700;
+}
+[data-theme="reyes-halloween"] .hover\:bg-reyes-secondary-dark:hover {
+    @apply bg-purple-900;
+}
+[data-theme="reyes-halloween"] .hover\:bg-reyes-secondary-light:hover {
+    @apply bg-purple-500;
+}
+[data-theme="reyes-halloween"] .border-reyes-secondary {
+    @apply border-purple-700;
+}
+[data-theme="reyes-halloween"] .border-reyes-secondary-dark {
+    @apply border-purple-900;
+}
+[data-theme="reyes-halloween"] .border-reyes-secondary-light {
+    @apply border-purple-500;
+}
+[data-theme="reyes-halloween"] .hover\:border-reyes-secondary:hover {
+    @apply border-purple-700;
+}
+[data-theme="reyes-halloween"] .hover\:border-reyes-secondary-dark:hover {
+    @apply border-purple-900;
+}
+[data-theme="reyes-halloween"] .hover\:border-reyes-secondary-light:hover {
+    @apply border-purple-500;
+}
+[data-theme="reyes-halloween"] .ring-reyes-secondary {
+    @apply ring-purple-700;
+}
+[data-theme="reyes-halloween"] .ring-reyes-secondary-dark {
+    @apply ring-purple-900;
+}
+[data-theme="reyes-halloween"] .ring-reyes-secondary-light {
+    @apply ring-purple-500;
+}
+[data-theme="reyes-halloween"] .hover\:ring-reyes-secondary:hover {
+    @apply ring-purple-700;
+}
+[data-theme="reyes-halloween"] .hover\:ring-reyes-secondary-dark:hover {
+    @apply ring-purple-900;
+}
+[data-theme="reyes-halloween"] .hover\:ring-reyes-secondary-light:hover {
+    @apply ring-purple-500;
+}
+[data-theme="reyes-halloween"] .focus\:ring-reyes-secondary:focus {
+    @apply ring-purple-700;
+}
+[data-theme="reyes-halloween"] .focus\:ring-reyes-secondary-dark:focus {
+    @apply ring-purple-900;
+}
+[data-theme="reyes-halloween"] .focus\:ring-reyes-secondary-light:focus {
+    @apply ring-purple-500;
+}
+[data-theme="reyes-halloween"] .text-reyes-secondary {
+    @apply text-purple-700;
+}
+[data-theme="reyes-halloween"] .text-reyes-secondary-dark {
+    @apply text-purple-900;
+}
+[data-theme="reyes-halloween"] .text-reyes-secondary-light {
+    @apply text-purple-500;
+}
+[data-theme="reyes-halloween"] .hover\:text-reyes-secondary:hover {
+    @apply text-purple-700;
+}
+[data-theme="reyes-halloween"] .hover\:text-reyes-secondary-dark:hover {
+    @apply text-purple-900;
+}
+[data-theme="reyes-halloween"] .hover\:text-reyes-secondary-light:hover {
+    @apply text-purple-500;
+}
 
 /* Christmas theme */
 [data-theme="reyes-christmas"] .bg-reyes { 
@@ -46,7 +209,88 @@
     @apply bg-green-800; 
 }
 [data-theme="reyes-christmas"] .bg-reyes-light { 
-    @apply bg-red-600; /* rojo para el light */
+    @apply bg-red-600; 
+}
+[data-theme="reyes-christmas"] .bg-reyes-secondary {
+    @apply bg-yellow-400;
+}
+[data-theme="reyes-christmas"] .bg-reyes-secondary-dark {
+    @apply bg-yellow-600;
+}
+[data-theme="reyes-christmas"] .bg-reyes-secondary-light {
+    @apply bg-yellow-500;
+}
+[data-theme="reyes-christmas"] .hover\:bg-reyes-secondary:hover {
+    @apply bg-yellow-400;
+}
+[data-theme="reyes-christmas"] .hover\:bg-reyes-secondary-dark:hover {
+    @apply bg-yellow-600;
+}
+[data-theme="reyes-christmas"] .hover\:bg-reyes-secondary-light:hover {
+    @apply bg-yellow-500;
+}
+[data-theme="reyes-christmas"] .border-reyes-secondary {
+    @apply border-yellow-400;
+}
+[data-theme="reyes-christmas"] .border-reyes-secondary-dark {
+    @apply border-yellow-600;
+}
+[data-theme="reyes-christmas"] .border-reyes-secondary-light {
+    @apply border-yellow-500;
+}
+[data-theme="reyes-christmas"] .hover\:border-reyes-secondary:hover {
+    @apply border-yellow-400;
+}
+[data-theme="reyes-christmas"] .hover\:border-reyes-secondary-dark:hover {
+    @apply border-yellow-600;
+}
+[data-theme="reyes-christmas"] .hover\:border-reyes-secondary-light:hover {
+    @apply border-yellow-500;
+}
+[data-theme="reyes-christmas"] .ring-reyes-secondary {
+    @apply ring-yellow-400;
+}
+[data-theme="reyes-christmas"] .ring-reyes-secondary-dark {
+    @apply ring-yellow-600;
+}
+[data-theme="reyes-christmas"] .ring-reyes-secondary-light {
+    @apply ring-yellow-500;
+}
+[data-theme="reyes-christmas"] .hover\:ring-reyes-secondary:hover {
+    @apply ring-yellow-400;
+}
+[data-theme="reyes-christmas"] .hover\:ring-reyes-secondary-dark:hover {
+    @apply ring-yellow-600;
+}
+[data-theme="reyes-christmas"] .hover\:ring-reyes-secondary-light:hover {
+    @apply ring-yellow-500;
+}
+[data-theme="reyes-christmas"] .focus\:ring-reyes-secondary:focus {
+    @apply ring-yellow-400;
+}
+[data-theme="reyes-christmas"] .focus\:ring-reyes-secondary-dark:focus {
+    @apply ring-yellow-600;
+}
+[data-theme="reyes-christmas"] .focus\:ring-reyes-secondary-light:focus {
+    @apply ring-yellow-500;
+}
+[data-theme="reyes-christmas"] .text-reyes-secondary {
+    @apply text-yellow-400;
+}
+[data-theme="reyes-christmas"] .text-reyes-secondary-dark {
+    @apply text-yellow-600;
+}
+[data-theme="reyes-christmas"] .text-reyes-secondary-light {
+    @apply text-yellow-500;
+}
+[data-theme="reyes-christmas"] .hover\:text-reyes-secondary:hover {
+    @apply text-yellow-400;
+}
+[data-theme="reyes-christmas"] .hover\:text-reyes-secondary-dark:hover {
+    @apply text-yellow-600;
+}
+[data-theme="reyes-christmas"] .hover\:text-reyes-secondary-light:hover {
+    @apply text-yellow-500;
 }
 
 /* Hover backgrounds - Default */
@@ -79,7 +323,7 @@
     @apply bg-green-800; 
 }
 [data-theme="reyes-christmas"] .hover\:bg-reyes-light:hover { 
-    @apply bg-red-600; /* rojo para el light */
+    @apply bg-red-600; 
 }
 
 /* Text colors - Default */
@@ -112,7 +356,7 @@
     @apply text-green-800; 
 }
 [data-theme="reyes-christmas"] .text-reyes-light { 
-    @apply text-red-600; /* rojo para el light */
+    @apply text-red-600; 
 }
 
 /* Text hovers - Default */
@@ -145,7 +389,7 @@
     @apply text-green-800; 
 }
 [data-theme="reyes-christmas"] .hover\:text-reyes-light:hover { 
-    @apply text-red-600; /* rojo para el light */
+    @apply text-red-600; 
 }
 
 /* Border colors - Default */
@@ -178,7 +422,7 @@
     @apply border-green-800; 
 }
 [data-theme="reyes-christmas"] .border-reyes-light { 
-    @apply border-red-600; /* rojo para el light */
+    @apply border-red-600; 
 }
 
 /* Border hovers - Default */
@@ -211,7 +455,7 @@
     @apply border-green-800; 
 }
 [data-theme="reyes-christmas"] .hover\:border-reyes-light:hover { 
-    @apply border-red-600; /* rojo para el light */
+    @apply border-red-600;
 }
 
 /* Ring colors - Default */
@@ -244,7 +488,7 @@
     @apply ring-green-800; 
 }
 [data-theme="reyes-christmas"] .ring-reyes-light { 
-    @apply ring-red-600; /* rojo para el light */
+    @apply ring-red-600; 
 }
 
 /* Ring hovers - Default */
@@ -277,7 +521,7 @@
     @apply ring-green-800; 
 }
 [data-theme="reyes-christmas"] .hover\:ring-reyes-light:hover { 
-    @apply ring-red-600; /* rojo para el light */
+    @apply ring-red-600; 
 }
 
 /* Ring focus - Default */
@@ -310,5 +554,5 @@
     @apply ring-green-800; 
 }
 [data-theme="reyes-christmas"] .focus\:ring-reyes-light:focus { 
-    @apply ring-red-600; /* rojo para el light */
+    @apply ring-red-600; 
 }

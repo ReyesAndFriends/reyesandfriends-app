@@ -28,12 +28,12 @@ export default function FloatingSocialBar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Contáctanos por WhatsApp"
-                className="bg-gradient-to-br from-green-400 via-green-500 to-green-600 p-3 rounded-full shadow transition flex items-center border-2 border-white hover:scale-110"
+                className="w-14 h-14 rounded-full bg-gradient-to-br from-green-400 via-green-500 to-green-600 text-white shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center"
               >
                 <img
                   src="/img/icons/whatsapp.png"
                   alt="WhatsApp"
-                  className="w-6 h-6 pointer-events-none"
+                  className="w-7 h-7 pointer-events-none"
                 />
               </Link>
             </motion.div>
@@ -49,9 +49,9 @@ export default function FloatingSocialBar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Síguenos en Facebook"
-                className="bg-gradient-to-br from-blue-500 via-blue-700 to-blue-900 p-3 rounded-full shadow transition flex items-center border-2 border-white hover:scale-110"
+                className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 via-blue-700 to-blue-900 text-white shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center"
               >
-                <FacebookIcon className="w-6 h-6 pointer-events-none text-white" />
+                <FacebookIcon className="w-7 h-7 pointer-events-none text-white" />
               </Link>
             </motion.div>
 
@@ -66,9 +66,9 @@ export default function FloatingSocialBar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Síguenos en Instagram"
-                className="bg-gradient-to-br from-pink-400 via-pink-500 to-pink-600 p-3 rounded-full shadow transition flex items-center border-2 border-white hover:scale-110"
+                className="w-14 h-14 rounded-full bg-gradient-to-br from-pink-400 via-pink-500 to-pink-600 text-white shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center"
               >
-                <InstagramIcon className="w-6 h-6 pointer-events-none text-white" />
+                <InstagramIcon className="w-7 h-7 pointer-events-none text-white" />
               </Link>
             </motion.div>
           </motion.div>
@@ -76,7 +76,7 @@ export default function FloatingSocialBar() {
       </AnimatePresence>
       <button
         onClick={() => setOpen((prev) => !prev)}
-        className="bg-reyes hover:bg-reyes-light p-4 rounded-full shadow-xl transition duration-300 flex items-center justify-center border-4 border-white hover:scale-110 hover:rotate-6"
+        className="w-14 h-14 rounded-full bg-reyes-secondary hover:bg-reyes-secondary-light text-white shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center"
         title="Abrir redes sociales"
       >
         <Contact className="w-8 h-8 pointer-events-none text-white" />
