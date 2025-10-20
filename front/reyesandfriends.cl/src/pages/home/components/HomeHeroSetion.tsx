@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
 import AnimatedMockups from "./AnimatedMockups";
 
 interface HomeHeroSectionProps {
@@ -35,7 +34,7 @@ const HomeHeroSection: React.FC<HomeHeroSectionProps> = ({
         "tu sueño digital",
     ],
     description = "¡Transforma tu negocio con tecnología a tu medida!\nCreamos sitios web, plataformas y soluciones digitales innovadoras para que tu empresa crezca y destaque en el mundo digital.",
-    ctaText = "Cotiza tu proyecto",
+    ctaText = "Cotizar proyecto",
     ctaLink = "/quote-project",
     backgroundImage = "/img/background/background-web.jpg",
     backgroundAlt = "Ilustración de fondo - Edificios",
@@ -123,17 +122,17 @@ const HomeHeroSection: React.FC<HomeHeroSectionProps> = ({
                 </div>
                 <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col md:flex-row items-center justify-center text-center md:text-left flex-1">
                     <div className="flex-1 flex flex-col items-center md:items-start justify-center max-w-2xl mx-auto">
-                        <h1 className="text-5xl md:text-6xl mb-2 text-white drop-shadow-lg tracking-tight font-semibold">
+                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-2 text-white drop-shadow-lg tracking-tight font-semibold">
                             {title}
                         </h1>
-                        <h1 className="text-4xl md:text-5xl mb-6 inline-block text-white drop-shadow font-semibold">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-6 inline-block text-white drop-shadow font-semibold">
                             <span className="text-reyes">
                                 {displayedText}
                                 <span className="typewriter-cursor">&nbsp;</span>
                             </span>
                         </h1>
                         <div className="mb-8 w-full flex flex-col items-center">
-                            <p className="text-2xl text-white drop-shadow-sm">
+                            <p className="text-lg sm:text-xl md:text-2xl text-white drop-shadow-sm">
                                 {description.split('\n').map((line, index) => (
                                     <React.Fragment key={index}>
                                         {line}
@@ -141,19 +140,33 @@ const HomeHeroSection: React.FC<HomeHeroSectionProps> = ({
                                     </React.Fragment>
                                 ))}
                             </p>
+                            <div className="text-base sm:text-lg md:text-xl text-gray-200 text-center md:text-left w-full mt-6">
+                                Planes web desde <span className="font-semibold text-white text-xl sm:text-2xl md:text-3xl"><p className="text-3xl sm:text-4xl md:text-5xl">$99.990</p></span>
+                            </div>
                         </div>
-                        <div className="flex flex-col gap-4 justify-center md:justify-start">
-                            <Link
-                                to={ctaLink}
-                                className="bg-reyes hover:bg-reyes-dark text-white px-10 py-5 rounded transition-all duration-300 flex items-center gap-4 font-semibold hover:scale-105 text-2xl"
-                            >
-                                {ctaText}
-                                <ChevronRight className="h-7 w-7" />
-                            </Link>
+                        <div className="flex flex-col md:flex-row gap-3 justify-center md:justify-start w-full">
+                            <div className="flex flex-col md:flex-row gap-3 w-full">
+                                <Link
+                                    to={ctaLink}
+                                    className="flex-1 bg-reyes hover:bg-reyes-dark text-white px-6 sm:px-8 py-3 sm:py-4 rounded transition-all duration-300 flex items-center gap-3 font-semibold hover:scale-105 text-base sm:text-lg justify-center min-w-[140px] sm:min-w-[180px] md:mr-2"
+                                    style={{ minWidth: "140px" }}
+                                >
+                                    {ctaText}
+                                    <ChevronRight className="h-6 sm:h-7 w-6 sm:w-7" />
+                                </Link>
+                                <Link
+                                    to="/web-planes"
+                                    className="flex-1 bg-transparent border-2 border-white outline-none text-white px-6 sm:px-8 py-3 sm:py-4 rounded transition-all duration-300 flex items-center gap-3 font-semibold hover:scale-105 hover:bg-white hover:text-reyes text-base sm:text-lg justify-center min-w-[140px] sm:min-w-[180px]"
+                                    style={{ minWidth: "140px" }}
+                                >
+                                    Ver planes web
+                                    <ChevronRight className="h-6 sm:h-7 w-6 sm:w-7" />
+                                </Link>
+                            </div>
                         </div>
                     </div>
                     {showMockups && (
-                        <div className="hidden md:flex flex-1 justify-center items-center ml-8">
+                        <div className="md:flex flex-1 justify-center items-center ml-8">
                             <AnimatedMockups />
                         </div>
                     )}
