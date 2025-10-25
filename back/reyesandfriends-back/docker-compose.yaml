@@ -6,3 +6,9 @@ services:
     restart: always
     environment:
       - TZ=America/Santiago
+
+  init-db:
+    build: ./
+    command: python app/scripts/init_mysql_db.py --fresh
+    environment:
+      - TZ=America/Santiago
