@@ -48,6 +48,7 @@ function JohnSmithAssistance() {
   ];
 
   useEffect(() => {
+    if (!ENABLE_JOHN_SMITH) return;
     if (!JOHN_SMITH_WS_URL) return;
     setWsConnecting(true);
     let ws = new WebSocket(JOHN_SMITH_WS_URL);
@@ -129,6 +130,7 @@ function JohnSmithAssistance() {
     if (isTyping) return;
     setMessages((prev) => [...prev, { from: "user", text }]);
     setInputValue("");
+    if (!ENABLE_JOHN_SMITH) return;
     if (wsRef.current && wsConnected) {
       wsRef.current.send(text);
       setStep(1);
@@ -141,6 +143,7 @@ function JohnSmithAssistance() {
     const userMsg = { from: "user", text: options[optionIdx].label };
     setMessages((prev) => [...prev, userMsg]);
     setStep(1);
+    if (!ENABLE_JOHN_SMITH) return;
     if (wsRef.current && wsConnected) {
       wsRef.current.send(options[optionIdx].label);
     }
@@ -167,6 +170,7 @@ function JohnSmithAssistance() {
   };
 
   const handleRetryConnection = () => {
+    if (!ENABLE_JOHN_SMITH) return;
     setWsFailed(false);
     setWsConnected(false);
     setWsConnecting(true);
