@@ -7,6 +7,7 @@ from app import mail
 import os
 from dotenv import load_dotenv
 from flask import render_template
+import re
 
 load_dotenv()
 
@@ -35,7 +36,14 @@ def generate_request_number():
     next_seq = last_seq + 1
     return f"{prefix}{next_seq:03d}"
 
-@webPlans.route('/', methods=['POST'])
+def is_valid_rut(rut):
+    """
+    Validates Chilean RUT format: 7 or 8 digits, hyphen, 1 digit or 'K'.
+    Examples: 99999999-9, 9999999-9, 12345678-K
+    """
+    return bool(re.fullmatch(r"\d{7,8}-[\dkK]", rut))
+
+@webPlans.route('', methods=['POST'])
 def request_web_plan():
     data = request.json
 
@@ -61,6 +69,9 @@ def request_web_plan():
 
     if not isinstance(rut, str):
         return jsonify({"error": "rut debe ser una cadena de texto"}), 400
+
+    if not is_valid_rut(rut):
+        return jsonify({"error": "rut debe tener el formato correcto: 7 u 8 dígitos, guion, dígito o 'K'. Ejemplo: 99999999-9"}), 400
 
     if not isinstance(cellphone, str):
         return jsonify({"error": "cellphone debe ser una cadena de texto"}), 400
@@ -114,7 +125,6 @@ def request_web_plan():
             html=email_html
         )
         mail.send(msg)
-
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500

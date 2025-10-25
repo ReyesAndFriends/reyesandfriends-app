@@ -191,7 +191,7 @@ const WebPlanes = () => {
 
                     <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 justify-center flex">
                         <Link
-                            to="/contact"
+                            to="/web-planes/landingpro/order"
                             className="bg-reyes text-white px-8 py-3 rounded-lg font-semibold hover:bg-reyes-dark transition-all text-center hover:scale-105 transform"
                         >
                             <DollarSign className="inline-block mr-2 mb-1" size={16} />
