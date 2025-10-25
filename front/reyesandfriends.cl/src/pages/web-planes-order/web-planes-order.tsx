@@ -1,8 +1,9 @@
 import React, { useState, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { DollarSign } from "lucide-react";
 import HeroSection from "../../layouts/components/hero-section/hero-section";
 import { useSubmitWebPlan } from "./hooks/useSubmitWebPlan";
+import { useSlugList } from "./hooks/useSlugList";
 
 function capitalizeWords(str: string) {
     return str.replace(/\b\w/g, char => char.toUpperCase()).replace(/\B\w/g, char => char.toLowerCase());
@@ -22,6 +23,26 @@ function formatRutInput(value: string) {
 
 const WebPlanesOrder = () => {
     const { slug } = useParams<{ slug: string }>();
+    const navigate = useNavigate();
+    const { isValidSlug } = useSlugList();
+
+    if (!isValidSlug(slug)) {
+        return (
+            <section className="flex flex-col items-center justify-center min-h-[60vh] bg-zinc-900">
+                <div className="bg-black p-8 rounded-lg shadow-lg text-center">
+                    <h2 className="text-2xl font-bold text-red-400 mb-4">Plan no válido</h2>
+                    <p className="text-white mb-6">El plan solicitado no existe o no está disponible.</p>
+                    <button
+                        className="bg-reyes text-white font-bold py-2 px-6 rounded-sm hover:bg-reyes-dark transition-colors"
+                        onClick={() => navigate("/web-planes")}
+                    >
+                        Volver a planes
+                    </button>
+                </div>
+            </section>
+        );
+    }
+
     const WEBPLAN_SLUG = slug || "not-specified";
 
     const [firstName, setFirstName] = useState("");
@@ -93,7 +114,7 @@ const WebPlanesOrder = () => {
                 icon={DollarSign}
                 logoImage="/img/plans/code_difference.png"
                 title="Ordenar Plan Web"
-                subtitle="Completa el formulario para iniciar tu proyecto web fijo. ¡Solo paga una vez!"
+                subtitle="Completa el formulario para iniciar tu proyecto web fijo. Te contactaremos pronto para empezar tu desarrollo."
             />
             {finalMessage && (
                 <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
