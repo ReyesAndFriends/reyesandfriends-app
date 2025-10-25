@@ -45,19 +45,6 @@ const Error = () => {
 
     return (
         <>
-            <style>
-                {`
-                .typewriter-cursor-title {
-                    border-right: 2px solid #fff;
-                    margin-left: 0.25rem;
-                    animation: blink-cursor 0.7s steps(1) infinite;
-                }
-                @keyframes blink-cursor {
-                    0%, 100% { opacity: 1; }
-                    50% { opacity: 0; }
-                }
-                `}
-            </style>
             <section className="bg-cover bg-center relative min-h-screen flex items-center justify-center">
                 <div className="absolute inset-0 bg-hero-section z-10"></div>
                 <div className="absolute inset-0">
@@ -71,11 +58,13 @@ const Error = () => {
                 </div>
                 <div className="container mx-auto px-4 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
                     <div className="flex justify-center hidden md:block">
-                        <img
-                            src="/img/error/robot-error.png"
-                            alt="Robot de error"
-                            className="max-w-md pointer-events-none"
-                        />
+                        <div className="robot-fade-mask">
+                            <img
+                                src="/img/error/robot-error.png"
+                                alt="Robot de error"
+                                className="max-w-md pointer-events-none"
+                            />
+                        </div>
                     </div>
                     <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
                         <div className="flex items-center gap-4 mb-2">
