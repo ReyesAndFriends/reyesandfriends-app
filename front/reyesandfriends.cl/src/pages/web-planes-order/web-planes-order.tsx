@@ -91,7 +91,7 @@ const WebPlanesOrder = () => {
         <>
             <HeroSection
                 icon={DollarSign}
-                logoImage="img/plans/web-plans-hero.png"
+                logoImage="/img/plans/code_difference.png"
                 title="Ordenar Plan Web"
                 subtitle="Completa el formulario para iniciar tu proyecto web fijo. ¡Solo paga una vez!"
             />
