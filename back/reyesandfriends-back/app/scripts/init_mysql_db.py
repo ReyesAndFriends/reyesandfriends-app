@@ -13,7 +13,7 @@ project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 sys.path.insert(0, project_root)
 
 from app import create_app
-from app.models import db, ContactCategory, ContactStatus, ProjectQuoteStatus, ProjectQuoteCategory
+from app.models import db, ContactCategory, ContactStatus, ProjectQuoteStatus, ProjectQuoteCategory, WebPlanList
 
 def init_database():
     """Initialize the database by creating tables and initial data."""
@@ -109,10 +109,35 @@ def init_database():
             else:
                 print(f"Project quote category already exists: {category_data['name']}")
 
+        web_plan_list_data = [
+            {
+                "name": "Proyecto LandingPro",
+                "slug": "landingpro",
+                "description": "Página web tipo landing page profesional, ideal para presentar servicios, personas, tu negocio o productos de manera efectiva y atractiva.",
+                "demo_url": "https://demo.landingpro.reyesandfriends.cl/",
+                "price_clp": 99990,
+            },
+        ]
+
+        print("Inserting web plan list data...")
+        for plan_data in web_plan_list_data:
+            existing_plan = WebPlanList.query.filter_by(slug=plan_data["slug"]).first()
+            if not existing_plan:
+                plan = WebPlanList(
+                    name=plan_data["name"],
+                    slug=plan_data["slug"],
+                    description=plan_data["description"],
+                    demo_url=plan_data["demo_url"],
+                    price_clp=plan_data["price_clp"]
+                )
+                db.session.add(plan)
+                print(f"Web plan inserted: {plan_data['name']}")
+            else:
+                print(f"Web plan already exists: {plan_data['name']}")
+
         # Save changes
         db.session.commit()
         print("Contact categories, statuses, project quote statuses and categories initialized correctly")
-        
         print("Database initialized completely")
 
 def reset_database(auto_confirm=False):

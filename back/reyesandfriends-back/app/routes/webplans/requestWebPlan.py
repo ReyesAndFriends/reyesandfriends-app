@@ -1,6 +1,6 @@
 from flask import jsonify, request
 from . import webPlans
-from app.models import WebPlanRequest, db
+from app.models import WebPlanRequest, WebPlanList, db
 from datetime import datetime
 from flask_mail import Message
 from app import mail
@@ -35,86 +35,84 @@ def generate_request_number():
     next_seq = last_seq + 1
     return f"{prefix}{next_seq:03d}"
 
-def formatRut(rut):
-    """
-    Format RUT to stylish format.
-    Example: '123456789' -> '12.345.678-9'
-    """
-    rut = rut.replace(".", "").replace("-", "")
-    if len(rut) < 2:
-        return rut
-    cuerpo = rut[:-1]
-    dv = rut[-1]
-    cuerpo_formateado = "{:,}".format(int(cuerpo)).replace(",", ".")
-    return f"{cuerpo_formateado}-{dv}"
-
-
-@webPlans.route('/request', methods=['POST'])
+@webPlans.route('/', methods=['POST'])
 def request_web_plan():
     data = request.json
 
-    required_fields = ["first_name", "last_name", "email", "rut", "rut_type", "cellphone"]
-    for field in required_fields:
-        if field not in data:
-            return jsonify({"error": f"Missing field: {field}"}), 400
+    required_fields = ["first_name", "last_name", "email", "rut", "cellphone", "webplan_slug"]
+    missing_fields = [field for field in required_fields if field not in data]
+
+    if missing_fields:
+        return jsonify({
+            "error": "Faltan campos requeridos",
+            "missing_fields": missing_fields
+        }), 422
 
     first_name = data["first_name"]
     last_name = data["last_name"]
     email = data["email"]
     rut = data["rut"]
-    rut_type = data["rut_type"]
     cellphone = data["cellphone"]
+    webplan_slug = data["webplan_slug"]
+    whatsapp_response = data.get("whatsapp_response", False)
 
     if not isinstance(first_name, str) or not isinstance(last_name, str) or not isinstance(email, str):
-        return jsonify({"error": "first_name, last_name y email deben ser strings"}), 400
+        return jsonify({"error": "first_name, last_name y email deben ser cadenas de texto"}), 400
 
-    if not isinstance(rut, str) or not rut.isdigit():
-        return jsonify({"error": "rut debe ser un string solo con números"}), 400
+    if not isinstance(rut, str):
+        return jsonify({"error": "rut debe ser una cadena de texto"}), 400
 
-    if rut_type not in ["natural", "empresa"]:
-        return jsonify({"error": "rut_type debe ser 'natural' o 'empresa'"}), 400
+    if not isinstance(cellphone, str):
+        return jsonify({"error": "cellphone debe ser una cadena de texto"}), 400
 
-    try:
-        cellphone_int = int(cellphone)
-    except (ValueError, TypeError):
-        return jsonify({"error": "cellphone debe ser un número entero"}), 400
+    if not isinstance(webplan_slug, str):
+        return jsonify({"error": "webplan_slug debe ser una cadena de texto"}), 400
+
+    if not isinstance(whatsapp_response, bool):
+        return jsonify({"error": "whatsapp_response debe ser un valor booleano"}), 400
+
+    webplan = WebPlanList.query.filter_by(slug=webplan_slug).first()
+    if not webplan:
+        return jsonify({"error": "No se encontró el plan web para el slug proporcionado"}), 404
 
     request_number = generate_request_number()
 
     try:
-    
         web_plan_request = WebPlanRequest(
             first_name=first_name,
             last_name=last_name,
             user_email=email,
             rut=rut,
-            rut_type=rut_type,
+            webplan_id=webplan.id,
             cellphone=cellphone,
+            whatsapp_response=whatsapp_response,
             request_number=request_number
         )
         db.session.add(web_plan_request)
         db.session.commit()
 
-        user_name = f"{data['first_name']} {data['last_name']}"
-
-        formated_rut = formatRut(rut)
+        user_name = f"{first_name} {last_name}"
 
         email_html = render_template(
-                'emails/webplan-success.html',
-                user_name=user_name,
-                rut=formated_rut,
-                rut_type=rut_type.capitalize(),
-                cellphone=cellphone,
-                request_number=request_number
-            )
+            'emails/webplan-success.html',
+            user_name=user_name,
+            rut=rut,
+            cellphone=cellphone,
+            request_number=request_number,
+            webplan_name=webplan.name,
+            webplan_description=webplan.description,
+            webplan_price=webplan.price_clp,
+            webplan_demo_url=webplan.demo_url,
+            current_year=datetime.utcnow().year,
+            whatsapp_response="Sí" if whatsapp_response else "No"
+        )
 
         msg = Message(
-                subject="Solicitud de contacto recibida",
-                sender=mail_username,
-                recipients=[data['email']],
-                html=email_html
-            )
-            
+            subject="Web Plan Request Received",
+            sender=mail_username,
+            recipients=[email],
+            html=email_html
+        )
         mail.send(msg)
 
     except Exception as e:
@@ -122,6 +120,6 @@ def request_web_plan():
         return jsonify({"error": str(e)}), 500
 
     return jsonify({
-        "message": f"¡Gracias por tu solicitud, {first_name}! Hemos recibido tu solicitud de Plan Web Fijo correctamente. Pronto nos pondremos en contacto contigo. Tu número de solicitud es: {request_number}",
+        "message": f"¡Gracias por tu solicitud, {first_name}! Tu solicitud de Plan Web ha sido recibida exitosamente. Te contactaremos pronto. Tu número de solicitud es: {request_number}",
         "request_number": request_number
-        }), 201
+    }), 201

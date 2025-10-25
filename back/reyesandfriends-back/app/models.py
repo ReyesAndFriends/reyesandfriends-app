@@ -292,18 +292,41 @@ class ProjectQuote(db.Model):
                 'additionalComments': self.additional_comments or ''
             }
         }
+    
+class WebPlanList(db.Model):
+    __tablename__ = 'web_plan_lists'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    slug = db.Column(db.String(50), nullable=False, unique=True)
+    description = db.Column(db.Text, nullable=True)
+    demo_url = db.Column(db.String(200), nullable=True)
+    price_clp = db.Column(db.Float, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'slug': self.slug,
+            'description': self.description,
+            'price_clp': self.price_clp,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
+
 
 class WebPlanRequest(db.Model):
     __tablename__ = 'web_plan_requests'
 
     id = db.Column(db.Integer, primary_key=True)
-    request_number = db.Column(db.String(20), unique=True, nullable=False)  # WP-2025-001 format
+    request_number = db.Column(db.String(20), unique=True, nullable=False)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     user_email = db.Column(db.String(120), nullable=False)
     rut = db.Column(db.String(20), nullable=False)
-    rut_type = db.Column(db.String(20), nullable=False)
+    webplan_id = db.Column(db.Integer, db.ForeignKey('web_plan_lists.id'), nullable=True)
     cellphone = db.Column(db.String(20), nullable=False)
+    whatsapp_response = db.Column(db.Boolean, nullable=False, default=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def to_dict(self):
@@ -314,10 +337,12 @@ class WebPlanRequest(db.Model):
             'last_name': self.last_name,
             'user_email': self.user_email,
             'rut': self.rut,
-            'rut_type': self.rut_type,
+            'webplan_id': self.webplan_id,
             'cellphone': self.cellphone,
+            'whatsapp_response': self.whatsapp_response,
             'created_at': self.created_at.isoformat() if self.created_at else None
         }
+
 class VisitersCounter(db.Model):
     __tablename__ = 'visitors_counter'
         

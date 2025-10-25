@@ -145,6 +145,26 @@
             background: #5a1616 !important;
         }
 
+        .nano_demo_button {
+            display: inline-block;
+            font-weight: bold;
+            font-size: 16px;
+            margin: 10px 0px;
+            padding: 12px 40px;
+            box-sizing: border-box;
+            color: #fff !important;
+            background: #6a23ac !important;
+            border-radius: 6px;
+            text-decoration: none;
+            outline: none;
+            border: none;
+        }
+
+        .nano_demo_button:hover {
+            background: #521b86 !important;
+            color: #fff !important;
+        }
+
         .nano_margin {
             float: left;
             width: 100%;
@@ -398,8 +418,17 @@
                             <div class="nano_details">
                                 <strong>Código de Solicitud:</strong> {{ request_number }}<br>
                                 <strong>RUT:</strong> {{ rut }}<br>
-                                <strong>Tipo de RUT:</strong> {{ rut_type }}<br>
                                 <strong>Celular:</strong> {{ cellphone }}
+                            </div>
+                            
+                            <div class="nano_h4">Plan Web Seleccionado:</div>
+                            <div class="nano_details">
+                                <strong>Nombre:</strong> {{ webplan_name }}<br>
+                                <strong>Descripción:</strong> {{ webplan_description }}<br>
+                                <strong>Precio:</strong> ${{ "{:,.0f}".format(webplan_price) }} CLP<br>
+                                {% if webplan_demo_url %}
+                                    <a href="{{ webplan_demo_url }}" class="nano_demo_button" target="_blank">Visitar Demo</a>
+                                {% endif %}
                             </div>
                             
                             <div class="nano_p">
