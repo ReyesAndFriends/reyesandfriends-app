@@ -119,7 +119,7 @@ def request_web_plan():
         )
 
         msg = Message(
-            subject="Web Plan Request Received",
+            subject="Solicitud de Plan Web Recibida",
             sender=mail_username,
             recipients=[email],
             html=email_html
