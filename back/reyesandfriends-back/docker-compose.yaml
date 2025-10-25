@@ -12,3 +12,9 @@ services:
     command: python app/scripts/init_mysql_db.py --fresh
     environment:
       - TZ=America/Santiago
+
+  export-data-email:
+    build: ./
+    command: python app/scripts/export_mysql_db.py --mail backups@reyesandfriends.cl
+    environment:
+      - TZ=America/Santiago

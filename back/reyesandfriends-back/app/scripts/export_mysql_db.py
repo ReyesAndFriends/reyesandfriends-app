@@ -1,14 +1,15 @@
 """
 Script to export MySQL database tables to JSON files.
-This script exports data from relevant tables to separate JSON files for backup or migration purposes.
+Exports data from relevant tables to JSON for backup or migration.
 """
 
 import os
 import sys
 import json
-
 import argparse
 import zipfile
+import io
+from datetime import datetime
 from flask_mail import Mail, Message
 from dotenv import load_dotenv
 
@@ -20,28 +21,26 @@ sys.path.insert(0, project_root)
 from app import create_app
 from app.models import db, ContactForm, ContactFormReply, ProjectQuote, WebPlanRequest, VisitersCounter
 
-def export_model_to_json(model, export_path):
-    """Export all records of a model to a JSON file."""
+def export_model_to_json_string(model):
+    """Export all records of a model to a JSON string."""
     records = model.query.all()
-    data = [r.to_dict() if hasattr(r, 'to_dict') else {c.name: getattr(r, c.name) for c in r.__table__.columns} for r in records]
-    filename = f"{model.__tablename__}.json"
-    filepath = os.path.join(export_path, filename)
-    with open(filepath, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-    print(f"Exported {len(data)} records from {model.__tablename__} to {filepath}")
+    data = [r.to_dict() if hasattr(r, 'to_dict') else {col.name: getattr(r, col.name) for col in r.__table__.columns} for r in records]
+    json_str = json.dumps(data, ensure_ascii=False, indent=2)
+    print(f"Exported {len(data)} records from {model.__tablename__}")
+    return model.__tablename__, json_str
 
-def zip_exported_files(export_path, zip_filename):
-    """Compress all JSON files in export_path into a zip file."""
-    zip_filepath = os.path.join(export_path, zip_filename)
-    with zipfile.ZipFile(zip_filepath, 'w') as zipf:
-        for fname in os.listdir(export_path):
-            if fname.endswith('.json'):
-                zipf.write(os.path.join(export_path, fname), fname)
-    print(f"Compressed files into {zip_filepath}")
-    return zip_filepath
+def zip_json_strings_in_memory(json_dict):
+    """Compress all JSON strings in json_dict into a zip file in memory."""
+    mem_zip = io.BytesIO()
+    with zipfile.ZipFile(mem_zip, 'w') as zipf:
+        for table_name, json_str in json_dict.items():
+            zipf.writestr(f"{table_name}.json", json_str)
+    mem_zip.seek(0)
+    print("Compressed files into memory ZIP")
+    return mem_zip
 
-def send_zip_by_mail(app, zip_filepath, recipient_email):
-    """Send the zip file by email using Flask-Mail."""
+def send_zip_by_email(app, zip_bytes, zip_filename, recipient_email):
+    """Send the zip file by email using Flask-Mail, using in-memory bytes."""
     mail = Mail(app)
     with app.app_context():
         msg = Message(
@@ -50,19 +49,14 @@ def send_zip_by_mail(app, zip_filepath, recipient_email):
             recipients=[recipient_email],
             body="Adjunto el respaldo de la base de datos en formato ZIP. Por favor, mantenga este archivo seguro."
         )
-        with open(zip_filepath, "rb") as fp:
-            msg.attach(os.path.basename(zip_filepath), "application/zip", fp.read())
+        msg.attach(zip_filename, "application/zip", zip_bytes.read())
         mail.send(msg)
         print(f"Sent zip file to {recipient_email}")
 
 def main():
-    parser = argparse.ArgumentParser(description="Export MySQL tables to JSON and optionally send by mail.")
+    parser = argparse.ArgumentParser(description="Export MySQL tables to JSON and optionally send by email.")
     parser.add_argument("--mail", type=str, help="Email address to send the ZIP file to.")
     args = parser.parse_args()
-
-    export_path = os.environ.get("DB_EXPORT_PATH")
-    if not export_path:
-        sys.exit(1)
 
     if args.mail:
         allowed_domain = "@reyesandfriends.cl"
@@ -80,13 +74,20 @@ def main():
             WebPlanRequest,
             VisitersCounter
         ]
+        json_dict = {}
         for model in models_to_export:
-            export_model_to_json(model, export_path)
+            table_name, json_str = export_model_to_json_string(model)
+            json_dict[table_name] = json_str
 
     if args.mail:
-        zip_filename = "db_export.zip"
-        zip_filepath = zip_exported_files(export_path, zip_filename)
-        send_zip_by_mail(app, zip_filepath, args.mail)
+        date_str = datetime.now().strftime("%Y%m%d")
+        zip_filename = f"db_export_{date_str}.zip"
+        mem_zip = zip_json_strings_in_memory(json_dict)
+        send_zip_by_email(app, mem_zip, zip_filename, args.mail)
+    else:
+        print("\n=== Exported JSONs ===")
+        for table_name, json_str in json_dict.items():
+            print(f"\n--- {table_name}.json ---\n{json_str}")
 
 if __name__ == "__main__":
     main()
