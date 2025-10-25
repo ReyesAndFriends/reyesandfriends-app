@@ -15,9 +15,17 @@ def get_web_plan(plan_id):
                 'success': False,
                 'error': 'Solicitud de plan web no encontrada.'
             }), 404
+        web_plan_dict = web_plan.to_dict()
+        webplan = None
+        if web_plan.webplan_id:
+            from app.models import WebPlanList
+            webplan_obj = WebPlanList.query.get(web_plan.webplan_id)
+            if webplan_obj:
+                webplan = webplan_obj.to_dict()
+        web_plan_dict['webplan'] = webplan
         return jsonify({
             'success': True,
-            'web_plan': web_plan.to_dict()
+            'web_plan': web_plan_dict
         }), 200
     except Exception as e:
         return jsonify({
