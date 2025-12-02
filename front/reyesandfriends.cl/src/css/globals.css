@@ -12,8 +12,8 @@
 
 /* Hero section gradients - Christmas */
 [data-theme="reyes-christmas"] .bg-hero-section {
-    background-image: linear-gradient(to right, #0b4513, #740e0e); 
-    opacity: 0.85;
+    background-image: linear-gradient(to right, #501616, #600a07);
+    opacity: 0.80;
 }
 
 /* Default theme (reyes) */
