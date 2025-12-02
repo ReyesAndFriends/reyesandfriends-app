@@ -7,6 +7,8 @@ import { useServiceList } from "../../../hooks/services/useServiceList"
 import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 
+import ChristmasLights from "../christmas-lights/ChristmasLights"
+
 const Navbar: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const { isDropdownOpen, toggleDropdown, closeDropdown, dropdownOptions } = useNavOptions()
@@ -71,6 +73,13 @@ const Navbar: React.FC = () => {
 
     const productionMode = import.meta.env.VITE_PRODUCTION_MODE === "true"
     const clientsPortalUrl = import.meta.env.VITE_CLIENTS_PORTAL_URL || "https://panel.reyesandfriends.cl"
+
+    // Check christmas-events
+    const [theme, setTheme] = useState<string>("reyes");
+    useEffect(() => {
+        const savedTheme = localStorage.getItem("page_theme");
+        if (savedTheme) setTheme(savedTheme);
+    }, []);
 
     return (
         <>
@@ -231,6 +240,7 @@ const Navbar: React.FC = () => {
                         </button>
                     </div>
                 </div>
+                {theme === "reyes-christmas" && <ChristmasLights />}
             </nav>
         </>
     )
