@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 const STORAGE_KEY = 'page_theme';
 const DEFAULT_THEME = 'reyes';
-const ALL_THEMES = ['reyes', 'reyes-halloween', 'reyes-christmas'];
 
 // Get appropriate topic based on the current date
 const getCurrentSeasonTheme = (): string => {
@@ -15,8 +14,8 @@ const getCurrentSeasonTheme = (): string => {
     return 'reyes-halloween';
   }
   
-  // 5 dev to 5 jan: reyes-christmas
-  if ((month === 12 && day >= 5) || (month === 1 && day <= 5)) {
+  // 1 dec to 1 jan: reyes-christmas
+  if ((month === 12 && day >= 1) || (month === 1 && day <= 1)) {
     return 'reyes-christmas';
   }
 
