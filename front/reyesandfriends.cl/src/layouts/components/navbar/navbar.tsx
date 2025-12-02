@@ -127,7 +127,7 @@ const Navbar: React.FC = () => {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -10 }}
                                     transition={{ duration: 0.18 }}
-                                    className={`bg-white text-black mt-2 shadow-xl rounded-lg border ${isMenuOpen ? "w-full mt-2 py-3" : "md:absolute md:mt-2 md:py-4 md:w-56"}`}
+                                    className={`bg-white text-black mt-2 shadow-xl rounded-lg border z-50 ${isMenuOpen ? "w-full mt-2 py-3" : "md:absolute md:mt-2 md:py-4 md:w-56"}`}
                                 >
                                     {serviceList.map(option => (
                                         <li key={option.path}>
@@ -170,7 +170,7 @@ const Navbar: React.FC = () => {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -10 }}
                                     transition={{ duration: 0.18 }}
-                                    className={`bg-white text-black mt-2 shadow-xl rounded-lg border ${isMenuOpen ? "w-full mt-2 py-3" : "md:absolute md:mt-2 md:py-4 md:w-52"}`}
+                                    className={`bg-white text-black mt-2 shadow-xl rounded-lg border z-50 ${isMenuOpen ? "w-full mt-2 py-3" : "md:absolute md:mt-2 md:py-4 md:w-52"}`}
                                 >
                                     <li>
                                         <Link
