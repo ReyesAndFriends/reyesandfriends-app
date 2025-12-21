@@ -8,13 +8,17 @@ import os
 from dotenv import load_dotenv
 from flask import render_template
 import re
+import requests
 
 load_dotenv()
 
 mail_username = os.getenv("MAIL_USERNAME")
+TURNSTILE_SECRET_KEY = os.getenv("TURNSTILE_SECRET_KEY")
 
 if not mail_username:
     raise RuntimeError("MAIL_USERNAME is not set in the environment variables.")
+if not TURNSTILE_SECRET_KEY:
+    raise RuntimeError("TURNSTILE_SECRET_KEY is not set in the environment variables.")
 
 def generate_request_number():
     """Generate a unique request number in the format WP-YYYY-NNN"""
@@ -51,7 +55,7 @@ MAX_EMAIL_LEN = 100
 def request_web_plan():
     data = request.json
 
-    required_fields = ["first_name", "last_name", "email", "rut", "cellphone", "webplan_slug"]
+    required_fields = ["first_name", "last_name", "email", "rut", "cellphone", "webplan_slug", "turnstile_token"]
     missing_fields = [field for field in required_fields if field not in data]
 
     if missing_fields:
@@ -59,6 +63,21 @@ def request_web_plan():
             "error": "Faltan campos requeridos",
             "missing_fields": missing_fields
         }), 422
+
+    # Verificar Turnstile
+    turnstile_token = data["turnstile_token"]
+    remoteip = request.remote_addr
+    verify_resp = requests.post(
+        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+        data={
+            "secret": TURNSTILE_SECRET_KEY,
+            "response": turnstile_token,
+            "remoteip": remoteip
+        }
+    )
+    verify_data = verify_resp.json()
+    if not verify_data.get("success"):
+        return jsonify({"error": "No se pudo verificar el captcha. Intenta nuevamente."}), 400
 
     first_name = data["first_name"]
     last_name = data["last_name"]

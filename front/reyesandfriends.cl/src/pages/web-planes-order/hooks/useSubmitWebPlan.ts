@@ -11,6 +11,7 @@ export interface WebPlanFormData {
     cellphone: string;
     webplan_slug: string;
     whatsapp_response?: boolean;
+    turnstile_token?: string;
 }
 
 export interface SubmitResult {
@@ -35,6 +36,7 @@ export function useSubmitWebPlan(defaultSlug: string) {
         if (!data.rut.trim()) missing.push("rut");
         if (!data.cellphone.trim()) missing.push("cellphone");
         if (!data.webplan_slug.trim()) missing.push("webplan_slug");
+        if (!data.turnstile_token) missing.push("turnstile_token");
         return missing;
     }, []);
 

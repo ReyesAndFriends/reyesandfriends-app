@@ -4,6 +4,8 @@ import { DollarSign } from "lucide-react";
 import HeroSection from "../../layouts/components/hero-section/hero-section";
 import { useSubmitWebPlan } from "./hooks/useSubmitWebPlan";
 import { useSlugList } from "./hooks/useSlugList";
+import Turnstile from "react-turnstile";
+
 
 function capitalizeWords(str: string) {
     return str.replace(/\b\w/g, char => char.toUpperCase()).replace(/\B\w/g, char => char.toLowerCase());
@@ -24,6 +26,8 @@ function formatRutInput(value: string) {
 const MAX_FIRST_NAME_LEN = 50;
 const MAX_LAST_NAME_LEN = 50;
 const MAX_EMAIL_LEN = 100;
+
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || "";
 
 const WebPlanesOrder = () => {
     const { slug } = useParams<{ slug: string }>();
@@ -56,6 +60,8 @@ const WebPlanesOrder = () => {
     const [cellphone, setCellphone] = useState("");
     const [whatsappResponse, setWhatsappResponse] = useState(true);
     const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
+    const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+    const [turnstileError, setTurnstileError] = useState<string | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
 
     const {
@@ -84,13 +90,18 @@ const WebPlanesOrder = () => {
         return errors;
     };
 
-    const isFormValid = Object.keys(validateFields()).length === 0;
+    const isFormValid = Object.keys(validateFields()).length === 0 && !!turnstileToken;
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const errors = validateFields();
         setFormErrors(errors);
         if (Object.keys(errors).length > 0) return;
+        if (!turnstileToken) {
+            setTurnstileError("Debes completar el captcha.");
+            return;
+        }
+        setTurnstileError(null);
 
         await submit({
             first_name: firstName,
@@ -100,6 +111,7 @@ const WebPlanesOrder = () => {
             cellphone,
             whatsapp_response: whatsappResponse,
             webplan_slug: WEBPLAN_SLUG,
+            turnstile_token: turnstileToken,
         });
     };
 
@@ -113,6 +125,8 @@ const WebPlanesOrder = () => {
         setCellphone("");
         setWhatsappResponse(true);
         setFormErrors({});
+        setTurnstileToken(null);
+        setTurnstileError(null);
     };
 
     return (
@@ -223,7 +237,7 @@ const WebPlanesOrder = () => {
                                     id="rut"
                                     name="rut"
                                     className={`w-full p-3 rounded-sm bg-zinc-800 text-white border ${formErrors.rut ? "border-red-500" : "border-zinc-700"} focus:outline-none focus:ring-2 focus:ring-reyes`}
-                                    placeholder="Ej: 21268160-1"
+                                    placeholder="********-*"
                                     value={rut}
                                     onChange={e => {
                                         const formatted = formatRutInput(e.target.value);
@@ -271,10 +285,23 @@ const WebPlanesOrder = () => {
                                     ¿Recibir respuesta por WhatsApp?
                                 </label>
                             </div>
+                            <div className="md:col-span-2 col-span-1 flex flex-col items-center mt-2 mb-2">
+                                <Turnstile
+                                    sitekey={TURNSTILE_SITE_KEY}
+                                    onSuccess={token => {
+                                        setTurnstileToken(token);
+                                        setTurnstileError(null);
+                                    }}
+                                    onError={() => setTurnstileError("Error al cargar el captcha.")}
+                                    onExpire={() => setTurnstileToken(null)}
+                                    theme="dark"
+                                />
+                                {turnstileError && <span className="text-red-400 text-sm mt-2">{turnstileError}</span>}
+                            </div>
                             <div className="md:col-span-2 col-span-1">
                                 <button
                                     type="submit"
-                                    className="w-full bg-reyes text-white font-bold py-3 rounded-sm hover:bg-reyes-dark transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed mt-4"
+                                    className={`w-full bg-reyes text-white font-bold py-3 rounded-sm transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed mt-4${(!isSubmitting && isFormValid) ? " hover:bg-reyes-dark" : ""}`}
                                     disabled={!isFormValid || isSubmitting}
                                 >
                                     {isSubmitting ? "Enviando..." : "Ordenar"}
