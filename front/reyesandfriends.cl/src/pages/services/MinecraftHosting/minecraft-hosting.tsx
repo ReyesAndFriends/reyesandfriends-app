@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Smartphone, Gem, Box } from "lucide-react";
+import { Gem, Box } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
 const MinecraftHosting = () => {
