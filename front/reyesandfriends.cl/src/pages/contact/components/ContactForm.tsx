@@ -2,10 +2,13 @@ import React, { useState, useRef, FormEvent, ChangeEvent } from "react";
 import { useGetContactCategories } from "../../../hooks/contact/useGetContactCategories";
 import { useContactFormValidator } from "../../../hooks/contact/useContactFormValidator";
 import ContactModal from "./ContactModal";
+import Turnstile from "react-turnstile";
 
 function capitalizeWords(str: string) {
     return str.replace(/\b\w/g, char => char.toUpperCase()).replace(/\B\w/g, char => char.toLowerCase());
 }
+
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || "";
 
 const ContactForm: React.FC = () => {
     const { categories, error: categoriesError, loading, refetch } = useGetContactCategories();
@@ -15,6 +18,8 @@ const ContactForm: React.FC = () => {
     const [cellphone, setCellphone] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
+    const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+    const [turnstileError, setTurnstileError] = useState<string | null>(null);
 
     const handleCellphoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -35,6 +40,11 @@ const ContactForm: React.FC = () => {
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (!turnstileToken) {
+            setTurnstileError("Debes completar el captcha.");
+            return;
+        }
+        setTurnstileError(null);
         const formData = new FormData(e.currentTarget);
         const data = {
             first_name: firstName,
@@ -43,6 +53,7 @@ const ContactForm: React.FC = () => {
             email: formData.get("email"),
             category: formData.get("category"),
             message: formData.get("message"),
+            turnstile_token: turnstileToken,
         };
         handleSubmit(data);
     };
@@ -70,6 +81,8 @@ const ContactForm: React.FC = () => {
         setFirstName("");
         setLastName("");
         setIsFormValid(false);
+        setTurnstileToken(null);
+        setTurnstileError(null);
     };
 
     return (
@@ -99,6 +112,7 @@ const ContactForm: React.FC = () => {
                         className="grid grid-cols-1 md:grid-cols-2 gap-4"
                         onSubmit={handleFormSubmit}
                         onChange={handleInputChange}
+                        noValidate
                     >
                         <div className="col-span-1">
                             <label htmlFor="name" className="block text-gray-300 font-bold mb-2">Nombre (requerido)</label>
@@ -187,6 +201,19 @@ const ContactForm: React.FC = () => {
                                 placeholder="Escribe tu mensaje aquí..."
                             ></textarea>
                             {errors.message && <p className="text-reyes text-sm">{errors.message}</p>}
+                        </div>
+                        <div className="md:col-span-2 col-span-1 flex flex-col items-center mt-2 mb-2">
+                            <Turnstile
+                                sitekey={TURNSTILE_SITE_KEY}
+                                onSuccess={token => {
+                                    setTurnstileToken(token);
+                                    setTurnstileError(null);
+                                }}
+                                onError={() => setTurnstileError("Error al cargar el captcha.")}
+                                onExpire={() => setTurnstileToken(null)}
+                                theme="dark"
+                            />
+                            {turnstileError && <span className="text-red-400 text-sm mt-2">{turnstileError}</span>}
                         </div>
                         <div className="md:col-span-2 col-span-1">
                             <button

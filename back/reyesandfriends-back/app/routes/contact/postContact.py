@@ -12,20 +12,38 @@ import requests
 load_dotenv()
 
 mail_username = os.getenv("MAIL_USERNAME")
+TURNSTILE_SECRET_KEY = os.getenv("TURNSTILE_SECRET_KEY")
 
 if not mail_username:
     raise RuntimeError("MAIL_USERNAME is not set in the environment variables.")
+if not TURNSTILE_SECRET_KEY:
+    raise RuntimeError("TURNSTILE_SECRET_KEY is not set in the environment variables.")
 
 @contact.route('', methods=['POST'])
 def postContact():
     try:
         data = request.get_json()
 
-        required_fields = ["first_name", "last_name", "cellphone", "email", "category", "message"]
+        required_fields = ["first_name", "last_name", "cellphone", "email", "category", "message", "turnstile_token"]
         errors = {field: "es requerido." for field in required_fields if field not in data or not data[field]}
 
         if errors:
             return jsonify(errors), 422
+
+        # Validate Turnstile token
+        turnstile_token = data["turnstile_token"]
+        remoteip = request.remote_addr
+        verify_resp = requests.post(
+            "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+            data={
+                "secret": TURNSTILE_SECRET_KEY,
+                "response": turnstile_token,
+                "remoteip": remoteip
+            }
+        )
+        verify_data = verify_resp.json()
+        if not verify_data.get("success"):
+            return jsonify({"error": "No se pudo verificar el captcha. Intenta nuevamente."}), 400
 
         # Get the category to validate and obtain the ID
         category = get_contact_category_by_slug(data['category'])
