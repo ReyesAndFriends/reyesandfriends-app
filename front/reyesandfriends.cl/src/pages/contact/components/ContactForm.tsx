@@ -9,17 +9,29 @@ function capitalizeWords(str: string) {
 }
 
 const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || "";
+const MAX_FIRST_NAME_LEN = 50;
+const MAX_LAST_NAME_LEN = 50;
+const MAX_EMAIL_LEN = 100;
+const MIN_MESSAGE_LEN = 20;
+const MAX_MESSAGE_LEN = 1000;
+
+function isValidEmail(email: string) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
 
 const ContactForm: React.FC = () => {
     const { categories, error: categoriesError, loading, refetch } = useGetContactCategories();
     const { errors, handleSubmit, isSubmitting, finalMessage, setFinalMessage } = useContactFormValidator();
-    const [isFormValid, setIsFormValid] = useState(false);
     const formRef = useRef<HTMLFormElement>(null);
     const [cellphone, setCellphone] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [category, setCategory] = useState("");
+    const [message, setMessage] = useState("");
     const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
     const [turnstileError, setTurnstileError] = useState<string | null>(null);
+    const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
 
     const handleCellphoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -38,28 +50,49 @@ const ContactForm: React.FC = () => {
         setLastName(value);
     };
 
+    const validateFields = () => {
+        const errors: { [key: string]: string } = {};
+        if (!firstName.trim()) errors.first_name = "Nombre requerido";
+        else if (firstName.length > MAX_FIRST_NAME_LEN) errors.first_name = `Máximo ${MAX_FIRST_NAME_LEN} caracteres`;
+        if (!lastName.trim()) errors.last_name = "Apellido requerido";
+        else if (lastName.length > MAX_LAST_NAME_LEN) errors.last_name = `Máximo ${MAX_LAST_NAME_LEN} caracteres`;
+        if (!email.trim()) errors.email = "Email requerido";
+        else if (email.length > MAX_EMAIL_LEN) errors.email = `Máximo ${MAX_EMAIL_LEN} caracteres`;
+        else if (!isValidEmail(email)) errors.email = "Email inválido";
+        if (!cellphone.trim()) errors.cellphone = "Teléfono requerido";
+        else if (!/^\d{9}$/.test(cellphone)) errors.cellphone = "Debe tener 9 dígitos";
+        if (!category.trim()) errors.category = "Categoría requerida";
+        if (!message.trim()) errors.message = "Mensaje requerido";
+        else if (message.length < MIN_MESSAGE_LEN) errors.message = `Mínimo ${MIN_MESSAGE_LEN} caracteres`;
+        else if (message.length > MAX_MESSAGE_LEN) errors.message = `Máximo ${MAX_MESSAGE_LEN} caracteres`;
+        return errors;
+    };
+
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const errors = validateFields();
+        setFormErrors(errors);
+        if (Object.keys(errors).length > 0) return;
         if (!turnstileToken) {
             setTurnstileError("Debes completar el captcha.");
             return;
         }
         setTurnstileError(null);
-        const formData = new FormData(e.currentTarget);
         const data = {
             first_name: firstName,
             last_name: lastName,
             cellphone: cellphone,
-            email: formData.get("email"),
-            category: formData.get("category"),
-            message: formData.get("message"),
+            email: email,
+            category: category,
+            message: message,
             turnstile_token: turnstileToken,
         };
         handleSubmit(data);
     };
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLFormElement>) => {
-        const formData = new FormData(e.currentTarget);
+    const handleInputChange = () => {
+        setFormErrors({});
+        const formData = new FormData(formRef.current as HTMLFormElement);
         const isValid = [
             firstName.trim(),
             lastName.trim(),
@@ -71,7 +104,6 @@ const ContactForm: React.FC = () => {
             if (typeof value === "string") return value.trim() !== "";
             return value !== null && value !== undefined;
         });
-        setIsFormValid(isValid);
     };
 
     const handleModalClose = () => {
@@ -80,10 +112,26 @@ const ContactForm: React.FC = () => {
         setCellphone("");
         setFirstName("");
         setLastName("");
-        setIsFormValid(false);
+        setEmail("");
+        setCategory("");
+        setMessage("");
         setTurnstileToken(null);
         setTurnstileError(null);
+        setFormErrors({});
     };
+
+    // Check if message length is within limits
+    const isFormValid =
+        firstName.trim() &&
+        lastName.trim() &&
+        email.trim() &&
+        isValidEmail(email) &&
+        cellphone.trim() &&
+        /^\d{9}$/.test(cellphone) &&
+        category.trim() &&
+        message.trim().length >= MIN_MESSAGE_LEN &&
+        message.trim().length <= MAX_MESSAGE_LEN &&
+        !!turnstileToken;
 
     return (
         <>
@@ -115,16 +163,18 @@ const ContactForm: React.FC = () => {
                         noValidate
                     >
                         <div className="col-span-1">
-                            <label htmlFor="name" className="block text-gray-300 font-bold mb-2">Nombre (requerido)</label>
+                            <label htmlFor="first_name" className="block text-gray-300 font-bold mb-2">Nombre (requerido)</label>
                             <input
                                 type="text"
                                 id="first_name"
                                 name="first_name"
-                                className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
+                                maxLength={MAX_FIRST_NAME_LEN}
+                                className={`w-full p-3 rounded-sm bg-zinc-800 text-white border ${formErrors.first_name ? "border-red-500" : "border-zinc-700"} focus:outline-none focus:ring-2 focus:ring-reyes`}
                                 placeholder="Ingresa tu nombre"
                                 value={firstName}
                                 onChange={handleFirstNameChange}
                             />
+                            {formErrors.first_name && <p className="text-red-400 text-sm">{formErrors.first_name}</p>}
                             {errors.name && <p className="text-reyes text-sm">{errors.name}</p>}
                         </div>
                         <div className="col-span-1">
@@ -133,11 +183,13 @@ const ContactForm: React.FC = () => {
                                 type="text"
                                 id="last_name"
                                 name="last_name"
-                                className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
+                                maxLength={MAX_LAST_NAME_LEN}
+                                className={`w-full p-3 rounded-sm bg-zinc-800 text-white border ${formErrors.last_name ? "border-red-500" : "border-zinc-700"} focus:outline-none focus:ring-2 focus:ring-reyes`}
                                 placeholder="Ingresa tu apellido"
                                 value={lastName}
                                 onChange={handleLastNameChange}
                             />
+                            {formErrors.last_name && <p className="text-red-400 text-sm">{formErrors.last_name}</p>}
                             {errors.last_name && <p className="text-reyes text-sm">{errors.last_name}</p>}
                         </div>
                         <div className="col-span-1">
@@ -151,7 +203,7 @@ const ContactForm: React.FC = () => {
                                     id="cellphone"
                                     name="cellphone"
                                     maxLength={9}
-                                    className="w-full p-3 rounded-r-sm bg-zinc-800 text-white border border-zinc-700 border-l-0 focus:outline-none focus:ring-2 focus:ring-reyes"
+                                    className={`w-full p-3 rounded-r-sm bg-zinc-800 text-white border ${formErrors.cellphone ? "border-red-500" : "border-zinc-700"} border-l-0 focus:outline-none focus:ring-2 focus:ring-reyes`}
                                     placeholder="912345678"
                                     pattern="[0-9]{9}"
                                     inputMode="numeric"
@@ -159,6 +211,7 @@ const ContactForm: React.FC = () => {
                                     onChange={handleCellphoneChange}
                                 />
                             </div>
+                            {formErrors.cellphone && <p className="text-red-400 text-sm">{formErrors.cellphone}</p>}
                             {errors.cellphone && <p className="text-reyes text-sm">{errors.cellphone}</p>}
                         </div>
                         <div className="col-span-1">
@@ -167,9 +220,13 @@ const ContactForm: React.FC = () => {
                                 type="email"
                                 id="email"
                                 name="email"
-                                className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
+                                maxLength={MAX_EMAIL_LEN}
+                                className={`w-full p-3 rounded-sm bg-zinc-800 text-white border ${formErrors.email ? "border-red-500" : "border-zinc-700"} focus:outline-none focus:ring-2 focus:ring-reyes`}
                                 placeholder="Ingresa tu email"
+                                value={email}
+                                onChange={e => setEmail(e.target.value.slice(0, MAX_EMAIL_LEN))}
                             />
+                            {formErrors.email && <p className="text-red-400 text-sm">{formErrors.email}</p>}
                             {errors.email && <p className="text-reyes text-sm">{errors.email}</p>}
                         </div>
                         <div className="md:col-span-2 col-span-1">
@@ -177,7 +234,9 @@ const ContactForm: React.FC = () => {
                             <select
                                 id="category"
                                 name="category"
-                                className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
+                                className={`w-full p-3 rounded-sm bg-zinc-800 text-white border ${formErrors.category ? "border-red-500" : "border-zinc-700"} focus:outline-none focus:ring-2 focus:ring-reyes`}
+                                value={category}
+                                onChange={e => setCategory(e.target.value)}
                             >
                                 <option value="">Selecciona una categoría</option>
                                 {categories.map((category, index) => (
@@ -186,6 +245,7 @@ const ContactForm: React.FC = () => {
                                     </option>
                                 ))}
                             </select>
+                            {formErrors.category && <p className="text-red-400 text-sm">{formErrors.category}</p>}
                             {errors.category && <p className="text-reyes text-sm">{errors.category}</p>}
                         </div>
                         <div className="col-span-1">
@@ -197,9 +257,14 @@ const ContactForm: React.FC = () => {
                                 id="message"
                                 name="message"
                                 rows={5}
-                                className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
-                                placeholder="Escribe tu mensaje aquí..."
+                                minLength={MIN_MESSAGE_LEN}
+                                maxLength={MAX_MESSAGE_LEN}
+                                className={`w-full p-3 rounded-sm bg-zinc-800 text-white border ${formErrors.message ? "border-red-500" : "border-zinc-700"} focus:outline-none focus:ring-2 focus:ring-reyes`}
+                                placeholder={`Escribe tu mensaje aquí... (mínimo ${MIN_MESSAGE_LEN} y máximo ${MAX_MESSAGE_LEN} caracteres)`}
+                                value={message}
+                                onChange={e => setMessage(e.target.value.slice(0, MAX_MESSAGE_LEN))}
                             ></textarea>
+                            {formErrors.message && <p className="text-red-400 text-sm">{formErrors.message}</p>}
                             {errors.message && <p className="text-reyes text-sm">{errors.message}</p>}
                         </div>
                         <div className="md:col-span-2 col-span-1 flex flex-col items-center mt-2 mb-2">
