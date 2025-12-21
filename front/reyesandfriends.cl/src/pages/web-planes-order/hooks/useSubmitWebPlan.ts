@@ -50,7 +50,6 @@ export function useSubmitWebPlan(defaultSlug: string) {
         const data: WebPlanFormData = { ...formData };
         const missing = validateForm(data);
 
-        console.log("Enviando datos al backend:", data);
 
         if (missing.length > 0) {
             console.log("Campos faltantes en frontend:", missing);
@@ -63,7 +62,7 @@ export function useSubmitWebPlan(defaultSlug: string) {
 
         try {
             const res = await axios.post(`${API_URL}/webplans`, data);
-            console.log("Respuesta exitosa del backend:", res.data);
+            console.log("Petición exitosa");
             if (res.status === 201) {
                 setFinalMessage(res.data.message);
                 setRequestNumber(res.data.request_number);
