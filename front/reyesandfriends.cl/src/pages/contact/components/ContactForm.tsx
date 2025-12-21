@@ -218,7 +218,7 @@ const ContactForm: React.FC = () => {
                         <div className="md:col-span-2 col-span-1">
                             <button
                                 type="submit"
-                                className="w-full bg-reyes text-white font-bold py-3 rounded-sm hover:bg-reyes-dark transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed"
+                                className={`w-full bg-reyes text-white font-bold py-3 rounded-sm transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed${(!isSubmitting && isFormValid) ? " hover:bg-reyes-dark" : ""}`}
                                 disabled={!isFormValid || isSubmitting}
                             >
                                 {isSubmitting ? "Enviando..." : "Enviar"}
