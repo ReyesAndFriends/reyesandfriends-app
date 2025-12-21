@@ -19,6 +19,7 @@ import EnterpriseSoftware from "../pages/services/EnterpriseSoftware/enterprise-
 import MobileApps from "../pages/services/MobileApps/mobile-apps";
 import ECommerce from "../pages/services/E-commerce/e-commerce";
 import Entertainment from "../pages/services/Entertainment/entertainment";
+import MinecraftHosting from "../pages/services/MinecraftHosting/minecraft-hosting";
 
 import WebPlanes from "../pages/web-planes/web-planes";
 import WebPlanesOrder from "../pages/web-planes-order/web-planes-order";
@@ -53,6 +54,7 @@ const AnimatedRoutes: React.FC = () => {
                 <Route path="/services/mobile-apps" element={<motion.div {...pageTransition}><MobileApps/></motion.div>} />
                 <Route path="/services/e-commerce" element={<motion.div {...pageTransition}><ECommerce/></motion.div>} />
                 <Route path="/services/entertainment" element={<motion.div {...pageTransition}><Entertainment/></motion.div>} />
+                <Route path="/services/minecraft-hosting" element={<motion.div {...pageTransition}><MinecraftHosting/></motion.div>} />
                 <Route path="/about" element={<motion.div {...pageTransition}><AboutUs /></motion.div>} />
                 <Route path="/portfolio" element={<motion.div {...pageTransition}><Portfolio /></motion.div>} />
                 <Route path="/contact" element={<motion.div {...pageTransition}><Contact /></motion.div>} />

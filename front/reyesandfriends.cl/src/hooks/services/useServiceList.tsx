@@ -1,4 +1,4 @@
-import { Globe, Building2, Mail, Gem, Smartphone, ShoppingCart, Joystick } from "lucide-react";
+import { Globe, Building2, Mail, Gem, Smartphone, ShoppingCart, Joystick, Box } from "lucide-react";
 
 export interface ServiceOption {
     name: string;
@@ -49,6 +49,14 @@ const serviceList: ServiceOption[] = [
         image: "/img/services/FullList/entertainment.jpg",
         description: "Realizamos páginas web, servicios y aplicaciones para la industria del entretenimiento, tales como música, cine, videojuegos y más.",
         icon: (() => <Joystick size={18} className="inline mr-2" />)()
+    },
+    {
+        name: "Hosting Minecraft",
+        path: "/services/minecraft-hosting",
+        value: "minecraft-hosting",
+        image: "/img/services/FullList/hosting-minecraft.jpg",
+        description: "Ofrecemos servicios de hosting para servidores de Minecraft alojados en Chile, con panel administrativo, subdominio personalizado, soporte técnico y más...",
+        icon: (() => <Box size={18} className="inline mr-2" />)()
     }
 ];
 
