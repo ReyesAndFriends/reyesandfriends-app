@@ -388,7 +388,7 @@ def send_quote_confirmation_email(quote):
         )
         
         msg = Message(
-            subject='Cotización Recibida - Reyes&Friends',
+            subject='Cotización de Software recibida - Reyes&Friends',
             sender=mail_username,
             recipients=[quote.email],
             html=email_html

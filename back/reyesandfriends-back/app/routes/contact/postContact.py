@@ -113,7 +113,7 @@ def postContact():
         )
 
         msg = Message(
-            subject="Solicitud de contacto recibida",
+            subject="Solicitud de contacto recibida - Reyes&Friends",
             sender=mail_username,
             recipients=[data['email']],
             html=email_html
