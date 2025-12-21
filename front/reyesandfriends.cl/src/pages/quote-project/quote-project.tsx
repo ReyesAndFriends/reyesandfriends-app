@@ -333,7 +333,7 @@ const QuoteProject: React.FC = () => {
                 <button
                   type="button"
                   onClick={handlePrev}
-                  className="bg-zinc-700 hover:bg-zinc-800 text-white px-6 py-3 rounded transition-colors flex items-center gap-2 hover:scale-105"
+                  className="bg-reyes hover:bg-reyes-dark text-white px-6 py-3 rounded transition-colors flex items-center gap-2 font-semibold"
                 >
                   <ArrowLeft size={18} />
                   Anterior
@@ -344,7 +344,7 @@ const QuoteProject: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleNext}
-                  className="bg-reyes-dark hover:bg-reyes-light text-white px-6 py-3 rounded transition-colors flex items-center gap-2 hover:scale-105"
+                  className="bg-reyes hover:bg-reyes-dark text-white px-6 py-3 rounded transition-colors flex items-center gap-2 font-semibold"
                 >
                   Siguiente
                   <ArrowRight size={18} />
@@ -353,7 +353,7 @@ const QuoteProject: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleShowSummary}
-                  className="bg-green-700 hover:bg-green-800 text-white px-6 py-3 rounded transition-colors flex items-center gap-2 hover:scale-105"
+                  className="bg-reyes hover:bg-reyes-dark text-white px-6 py-3 rounded transition-colors flex items-center gap-2 font-semibold"
                 >
                   <FileText size={18} />
                   Resumen
