@@ -37,6 +37,7 @@ const getValidThemes = (): string[] => {
 
 export const usePageTheme = () => {
   const [theme, setTheme] = useState<string>(DEFAULT_THEME);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem(STORAGE_KEY);
@@ -45,23 +46,26 @@ export const usePageTheme = () => {
     
     if (savedTheme && validThemes.includes(savedTheme)) {
       setTheme(savedTheme);
+      setLoading(false);
     } else {
       // If no saved theme or it's invalid for the current season, use the seasonal theme
       const themeToSet = savedTheme === 'reyes' ? 'reyes' : currentSeasonTheme;
       setTheme(themeToSet);
       localStorage.setItem(STORAGE_KEY, themeToSet);
-      
+
       if (savedTheme && !validThemes.includes(savedTheme)) {
-        // Reload if the saved theme was invalid for the current season
         window.location.reload();
         return;
       }
+      setLoading(false);
     }
   }, []);
 
   // Apply theme to document
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
+    // Si loading aún no es false, lo ponemos en false después de aplicar el tema
+    if (loading) setLoading(false);
   }, [theme]);
 
   const updateTheme = (newTheme: string) => {
@@ -71,7 +75,6 @@ export const usePageTheme = () => {
       setTheme(newTheme);
       localStorage.setItem(STORAGE_KEY, newTheme);
     } else {
-      // If the theme is invalid for the season, reload and set seasonal theme
       const currentSeasonTheme = getCurrentSeasonTheme();
       localStorage.setItem(STORAGE_KEY, currentSeasonTheme);
       window.location.reload();
@@ -83,5 +86,6 @@ export const usePageTheme = () => {
     setTheme: updateTheme,
     currentSeasonTheme: getCurrentSeasonTheme(),
     validThemes: getValidThemes(),
+    loading,
   };
 };
