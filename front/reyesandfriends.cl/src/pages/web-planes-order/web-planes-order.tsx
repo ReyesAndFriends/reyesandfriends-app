@@ -71,7 +71,7 @@ const WebPlanesOrder = () => {
         if (!email.trim()) errors.email = "Email requerido";
         else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = "Email inválido";
         if (!rut.trim()) errors.rut = "RUT requerido";
-        else if (!isValidRutFormat(rut)) errors.rut = "Formato RUT inválido (Ej: 21268160-1)";
+        else if (!isValidRutFormat(rut)) errors.rut = "Formato RUT inválido (Ej: 12345678-9)";
         if (!cellphone.trim()) errors.cellphone = "Teléfono requerido";
         else if (!/^\d{9}$/.test(cellphone)) errors.cellphone = "Debe tener 9 dígitos";
         return errors;
