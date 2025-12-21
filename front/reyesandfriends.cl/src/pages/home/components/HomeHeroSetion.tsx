@@ -34,8 +34,8 @@ const HomeHeroSection: React.FC<HomeHeroSectionProps> = ({
         "tu sueño digital",
     ],
     description = "¡Transforma tu negocio con tecnología a tu medida!\nCreamos sitios web, plataformas y soluciones digitales innovadoras para que tu empresa crezca y destaque en el mundo digital.",
-    ctaText = "Cotizar proyecto",
-    ctaLink = "/quote-project",
+    ctaText = "Compra tu Página Web",
+    ctaLink = "/web-planes",
     backgroundImage = "/img/background/background-web.jpg",
     backgroundAlt = "Ilustración de fondo - Edificios",
     animationInterval = 4000,
@@ -155,11 +155,11 @@ const HomeHeroSection: React.FC<HomeHeroSectionProps> = ({
                                     <ChevronRight className="h-6 sm:h-7 w-6 sm:w-7" />
                                 </Link>
                                 <Link
-                                    to="/web-planes"
+                                    to="/quote-project"
                                     className="flex-1 bg-transparent border-2 border-white outline-none text-white px-6 sm:px-8 py-3 sm:py-4 rounded transition-all duration-300 flex items-center gap-3 font-semibold hover:scale-105 hover:bg-white hover:text-reyes text-base sm:text-lg justify-center min-w-[140px] sm:min-w-[180px]"
                                     style={{ minWidth: "140px" }}
                                 >
-                                    Ver planes web
+                                    Cotizar proyecto
                                     <ChevronRight className="h-6 sm:h-7 w-6 sm:w-7" />
                                 </Link>
                             </div>
