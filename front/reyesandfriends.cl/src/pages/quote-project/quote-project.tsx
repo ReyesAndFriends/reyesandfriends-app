@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, FileText } from 'lucide-react';
+import { ArrowLeft, ArrowRight, FileText, Home } from 'lucide-react';
 
 import PhaseOne from './phases/phaseOne/phaseOne';
 import PhaseTwo from './phases/phaseTwo/phaseTwo';
@@ -157,24 +157,27 @@ const QuoteProject: React.FC = () => {
                 <li>• Podremos agendar una reunión para discutir los detalles</li>
               </ul>
             </div>
+          </div>
 
-            <div className="flex justify-center gap-4">
+          <div className="flex justify-center gap-4 mt-4">
               <button
                 type="button"
                 onClick={handleStartOver}
-                className="bg-reyes hover:bg-reyes-dark text-white px-6 py-3 rounded transition-all hover:scale-105"
+                className="bg-reyes hover:bg-reyes-dark text-white px-6 py-3 rounded transition-colors flex items-center gap-2 font-semibold"
               >
+                <FileText size={18} />
                 Crear Nueva Cotización
               </button>
               <button
                 type="button"
                 onClick={() => window.location.href = '/'}
-                className="bg-zinc-700 hover:bg-zinc-800 text-white px-6 py-3 rounded transition-all hover:scale-105"
+                className="bg-zinc-700 hover:bg-zinc-800 text-white px-6 py-3 rounded transition-colors flex items-center gap-2 font-semibold"
               >
+                <Home size={18} />
                 Volver al Inicio
               </button>
-            </div>
           </div>
+
         </div>
       </div>
     );
@@ -230,7 +233,7 @@ const QuoteProject: React.FC = () => {
             type="button"
             onClick={() => setShowSummary(false)}
             disabled={isLoading}
-            className="bg-zinc-700 hover:bg-zinc-800 disabled:bg-zinc-600 text-white px-6 py-3 rounded transition-colors flex items-center gap-2"
+            className="bg-zinc-700 hover:bg-zinc-800 text-white px-6 py-3 rounded transition-colors flex items-center gap-2 font-semibold"
           >
             <ArrowLeft size={18} />
             Editar
@@ -240,7 +243,7 @@ const QuoteProject: React.FC = () => {
             type="button"
             onClick={handleSubmitQuote}
             disabled={isLoading}
-            className="bg-reyes hover:bg-reyes-dark disabled:bg-reyes-light text-white px-6 py-3 rounded transition-all flex items-center gap-2"
+            className="bg-reyes hover:bg-reyes-dark text-white px-6 py-3 rounded transition-colors flex items-center gap-2 font-semibold"
           >
             {isLoading ? (
               <>
