@@ -195,3 +195,7 @@
     box-shadow: 0px calc(var(--globe-height) / 6) calc(var(--globe-width) * 2) var(--globe-spread) rgba(128,0,128,0.2);
   }
 }
+
+.invisible {
+    display: none !important;
+}

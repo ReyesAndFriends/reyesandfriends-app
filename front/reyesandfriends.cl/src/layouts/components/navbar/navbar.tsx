@@ -74,13 +74,6 @@ const Navbar: React.FC = () => {
     const productionMode = import.meta.env.VITE_PRODUCTION_MODE === "true"
     const clientsPortalUrl = import.meta.env.VITE_CLIENTS_PORTAL_URL || "https://panel.reyesandfriends.cl"
 
-    // Check christmas-events
-    const [theme, setTheme] = useState<string>("reyes");
-    useEffect(() => {
-        const savedTheme = localStorage.getItem("page_theme");
-        if (savedTheme) setTheme(savedTheme);
-    }, []);
-
     return (
         <>
             <nav
@@ -240,7 +233,7 @@ const Navbar: React.FC = () => {
                         </button>
                     </div>
                 </div>
-                {theme === "reyes-christmas" && <ChristmasLights />}
+                <ChristmasLights />
             </nav>
         </>
     )
