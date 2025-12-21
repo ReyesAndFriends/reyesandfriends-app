@@ -4,7 +4,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 from flask_mail import Message
 from . import contact
-from app.models import db, ContactForm
+from app.models import db, ContactForm, BannedRut
 from app.utils.db_utils import get_contact_category_by_slug
 from app import mail 
 import requests
@@ -19,6 +19,12 @@ if not mail_username:
 if not TURNSTILE_SECRET_KEY:
     raise RuntimeError("TURNSTILE_SECRET_KEY is not set in the environment variables.")
 
+MAX_FIRST_NAME_LEN = 50
+MAX_LAST_NAME_LEN = 50
+MAX_EMAIL_LEN = 100
+MIN_MESSAGE_LEN = 20
+MAX_MESSAGE_LEN = 1000
+
 @contact.route('', methods=['POST'])
 def postContact():
     try:
@@ -26,6 +32,36 @@ def postContact():
 
         required_fields = ["first_name", "last_name", "cellphone", "email", "category", "message", "turnstile_token"]
         errors = {field: "es requerido." for field in required_fields if field not in data or not data[field]}
+
+        # Validate lenght and format
+        first_name = data.get("first_name", "")
+        last_name = data.get("last_name", "")
+        email = data.get("email", "")
+        message = data.get("message", "")
+
+        if not isinstance(first_name, str):
+            errors["first_name"] = "Debe ser texto"
+        elif len(first_name) > MAX_FIRST_NAME_LEN:
+            errors["first_name"] = f"No debe exceder {MAX_FIRST_NAME_LEN} caracteres"
+
+        if not isinstance(last_name, str):
+            errors["last_name"] = "Debe ser texto"
+        elif len(last_name) > MAX_LAST_NAME_LEN:
+            errors["last_name"] = f"No debe exceder {MAX_LAST_NAME_LEN} caracteres"
+
+        if not isinstance(email, str):
+            errors["email"] = "Debe ser texto"
+        elif len(email) > MAX_EMAIL_LEN:
+            errors["email"] = f"No debe exceder {MAX_EMAIL_LEN} caracteres"
+        elif not email or "@" not in email:
+            errors["email"] = "Debe ser un email válido"
+
+        if not isinstance(message, str):
+            errors["message"] = "Debe ser texto"
+        elif len(message) < MIN_MESSAGE_LEN:
+            errors["message"] = f"Debe tener al menos {MIN_MESSAGE_LEN} caracteres"
+        elif len(message) > MAX_MESSAGE_LEN:
+            errors["message"] = f"No debe exceder {MAX_MESSAGE_LEN} caracteres"
 
         if errors:
             return jsonify(errors), 422

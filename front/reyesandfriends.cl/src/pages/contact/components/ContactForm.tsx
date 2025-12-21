@@ -52,19 +52,40 @@ const ContactForm: React.FC = () => {
 
     const validateFields = () => {
         const errors: { [key: string]: string } = {};
-        if (!firstName.trim()) errors.first_name = "Nombre requerido";
-        else if (firstName.length > MAX_FIRST_NAME_LEN) errors.first_name = `Máximo ${MAX_FIRST_NAME_LEN} caracteres`;
-        if (!lastName.trim()) errors.last_name = "Apellido requerido";
-        else if (lastName.length > MAX_LAST_NAME_LEN) errors.last_name = `Máximo ${MAX_LAST_NAME_LEN} caracteres`;
-        if (!email.trim()) errors.email = "Email requerido";
-        else if (email.length > MAX_EMAIL_LEN) errors.email = `Máximo ${MAX_EMAIL_LEN} caracteres`;
-        else if (!isValidEmail(email)) errors.email = "Email inválido";
-        if (!cellphone.trim()) errors.cellphone = "Teléfono requerido";
-        else if (!/^\d{9}$/.test(cellphone)) errors.cellphone = "Debe tener 9 dígitos";
-        if (!category.trim()) errors.category = "Categoría requerida";
-        if (!message.trim()) errors.message = "Mensaje requerido";
-        else if (message.length < MIN_MESSAGE_LEN) errors.message = `Mínimo ${MIN_MESSAGE_LEN} caracteres`;
-        else if (message.length > MAX_MESSAGE_LEN) errors.message = `Máximo ${MAX_MESSAGE_LEN} caracteres`;
+        if (typeof firstName !== "string" || !firstName.trim())
+            errors.first_name = "Nombre requerido";
+        else if (firstName.length > MAX_FIRST_NAME_LEN)
+            errors.first_name = `Máximo ${MAX_FIRST_NAME_LEN} caracteres`;
+
+        if (typeof lastName !== "string" || !lastName.trim())
+            errors.last_name = "Apellido requerido";
+        else if (lastName.length > MAX_LAST_NAME_LEN)
+            errors.last_name = `Máximo ${MAX_LAST_NAME_LEN} caracteres`;
+
+        if (typeof email !== "string" || !email.trim())
+            errors.email = "Email requerido";
+        else if (email.length > MAX_EMAIL_LEN)
+            errors.email = `Máximo ${MAX_EMAIL_LEN} caracteres`;
+        else if (!email.includes("@"))
+            errors.email = "Debe ser un email válido";
+        else if (!isValidEmail(email))
+            errors.email = "Email inválido";
+
+        if (typeof cellphone !== "string" || !cellphone.trim())
+            errors.cellphone = "Teléfono requerido";
+        else if (!/^\d{9}$/.test(cellphone))
+            errors.cellphone = "Debe tener 9 dígitos";
+
+        if (typeof category !== "string" || !category.trim())
+            errors.category = "Categoría requerida";
+
+        if (typeof message !== "string" || !message.trim())
+            errors.message = "Mensaje requerido";
+        else if (message.length < MIN_MESSAGE_LEN)
+            errors.message = `Mínimo ${MIN_MESSAGE_LEN} caracteres`;
+        else if (message.length > MAX_MESSAGE_LEN)
+            errors.message = `Máximo ${MAX_MESSAGE_LEN} caracteres`;
+
         return errors;
     };
 
