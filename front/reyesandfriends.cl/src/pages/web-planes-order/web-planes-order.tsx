@@ -21,6 +21,10 @@ function formatRutInput(value: string) {
     return `${main}-${dv}`;
 }
 
+const MAX_FIRST_NAME_LEN = 50;
+const MAX_LAST_NAME_LEN = 50;
+const MAX_EMAIL_LEN = 100;
+
 const WebPlanesOrder = () => {
     const { slug } = useParams<{ slug: string }>();
     const navigate = useNavigate();
@@ -67,8 +71,11 @@ const WebPlanesOrder = () => {
     const validateFields = () => {
         const errors: { [key: string]: string } = {};
         if (!firstName.trim()) errors.first_name = "Nombre requerido";
+        else if (firstName.length > MAX_FIRST_NAME_LEN) errors.first_name = `Máximo ${MAX_FIRST_NAME_LEN} caracteres`;
         if (!lastName.trim()) errors.last_name = "Apellido requerido";
+        else if (lastName.length > MAX_LAST_NAME_LEN) errors.last_name = `Máximo ${MAX_LAST_NAME_LEN} caracteres`;
         if (!email.trim()) errors.email = "Email requerido";
+        else if (email.length > MAX_EMAIL_LEN) errors.email = `Máximo ${MAX_EMAIL_LEN} caracteres`;
         else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = "Email inválido";
         if (!rut.trim()) errors.rut = "RUT requerido";
         else if (!isValidRutFormat(rut)) errors.rut = "Formato RUT inválido (Ej: 12345678-9)";
@@ -173,10 +180,11 @@ const WebPlanesOrder = () => {
                                     type="text"
                                     id="first_name"
                                     name="first_name"
+                                    maxLength={MAX_FIRST_NAME_LEN}
                                     className={`w-full p-3 rounded-sm bg-zinc-800 text-white border ${formErrors.first_name ? "border-red-500" : "border-zinc-700"} focus:outline-none focus:ring-2 focus:ring-reyes`}
                                     placeholder="Ingresa tu nombre"
                                     value={firstName}
-                                    onChange={e => setFirstName(capitalizeWords(e.target.value))}
+                                    onChange={e => setFirstName(capitalizeWords(e.target.value.slice(0, MAX_FIRST_NAME_LEN)))}
                                 />
                                 {formErrors.first_name && <span className="text-red-400 text-sm">{formErrors.first_name}</span>}
                             </div>
@@ -186,10 +194,11 @@ const WebPlanesOrder = () => {
                                     type="text"
                                     id="last_name"
                                     name="last_name"
+                                    maxLength={MAX_LAST_NAME_LEN}
                                     className={`w-full p-3 rounded-sm bg-zinc-800 text-white border ${formErrors.last_name ? "border-red-500" : "border-zinc-700"} focus:outline-none focus:ring-2 focus:ring-reyes`}
                                     placeholder="Ingresa tu apellido"
                                     value={lastName}
-                                    onChange={e => setLastName(capitalizeWords(e.target.value))}
+                                    onChange={e => setLastName(capitalizeWords(e.target.value.slice(0, MAX_LAST_NAME_LEN)))}
                                 />
                                 {formErrors.last_name && <span className="text-red-400 text-sm">{formErrors.last_name}</span>}
                             </div>
@@ -199,10 +208,11 @@ const WebPlanesOrder = () => {
                                     type="email"
                                     id="email"
                                     name="email"
+                                    maxLength={MAX_EMAIL_LEN}
                                     className={`w-full p-3 rounded-sm bg-zinc-800 text-white border ${formErrors.email ? "border-red-500" : "border-zinc-700"} focus:outline-none focus:ring-2 focus:ring-reyes`}
                                     placeholder="Ingresa tu email"
                                     value={email}
-                                    onChange={e => setEmail(e.target.value)}
+                                    onChange={e => setEmail(e.target.value.slice(0, MAX_EMAIL_LEN))}
                                 />
                                 {formErrors.email && <span className="text-red-400 text-sm">{formErrors.email}</span>}
                             </div>

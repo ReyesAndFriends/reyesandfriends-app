@@ -43,6 +43,10 @@ def is_valid_rut(rut):
     """
     return bool(re.fullmatch(r"\d{7,8}-[\dkK]", rut))
 
+MAX_FIRST_NAME_LEN = 50
+MAX_LAST_NAME_LEN = 50
+MAX_EMAIL_LEN = 100
+
 @webPlans.route('', methods=['POST'])
 def request_web_plan():
     data = request.json
@@ -66,6 +70,13 @@ def request_web_plan():
 
     if not isinstance(first_name, str) or not isinstance(last_name, str) or not isinstance(email, str):
         return jsonify({"error": "first_name, last_name y email deben ser cadenas de texto"}), 400
+
+    if len(first_name) > MAX_FIRST_NAME_LEN:
+        return jsonify({"error": f"first_name no debe exceder {MAX_FIRST_NAME_LEN} caracteres"}), 400
+    if len(last_name) > MAX_LAST_NAME_LEN:
+        return jsonify({"error": f"last_name no debe exceder {MAX_LAST_NAME_LEN} caracteres"}), 400
+    if len(email) > MAX_EMAIL_LEN:
+        return jsonify({"error": f"email no debe exceder {MAX_EMAIL_LEN} caracteres"}), 400
 
     if not isinstance(rut, str):
         return jsonify({"error": "rut debe ser una cadena de texto"}), 400
