@@ -14,6 +14,30 @@ sys.path.insert(0, project_root)
 
 from app import create_app
 from app.models import db, ContactCategory, ContactStatus, ProjectQuoteStatus, ProjectQuoteCategory, WebPlanList
+from app.models import BannedRut
+
+def populate_fake_ruts():
+    """
+    Populates the BannedRut table with generic fake RUTs (7, 8, or 9 digits before the dash, with identical digits and variants with K/k).
+    """
+    print("Inserting generic fake RUTs into BannedRut...")
+    fake_ruts = set()
+    # Only RUTs with 7, 8, or 9 digits before the dash
+    for length in [7, 8, 9]:
+        for i in range(1, 10):
+            num = str(i) * length
+            fake_ruts.add(f"{num}-{i}")
+            fake_ruts.add(f"{num}-K")
+            fake_ruts.add(f"{num}-k")
+    # Insert into the database if they do not exist
+    for rut in fake_ruts:
+        exists = BannedRut.query.filter_by(rut=rut).first()
+        if not exists:
+            banned = BannedRut(rut=rut, reason="Generic/fake auto-generated RUT")
+            db.session.add(banned)
+            print(f"Fake RUT inserted: {rut}")
+        else:
+            print(f"Fake RUT already exists: {rut}")
 
 def init_database():
     """Initialize the database by creating tables and initial data."""
@@ -138,6 +162,10 @@ def init_database():
         # Save changes
         db.session.commit()
         print("Contact categories, statuses, project quote statuses and categories initialized correctly")
+        # Seed fake RUTs
+        populate_fake_ruts()
+        db.session.commit()
+        print("RUTs falsos genéricos insertados correctamente")
         print("Database initialized completely")
 
 def reset_database(auto_confirm=False):
