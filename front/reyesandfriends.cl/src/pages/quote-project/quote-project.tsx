@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, FileText, Home } from 'lucide-react';
+import Turnstile from "react-turnstile";
 
 import PhaseOne from './phases/phaseOne/phaseOne';
 import PhaseTwo from './phases/phaseTwo/phaseTwo';
@@ -26,10 +27,14 @@ import HeroQuoteForm from './HeroSections/HeroQuoteForm';
 import HeroQuoteSummary from './HeroSections/HeroQuoteSummary';
 import HeroQuoteSuccess from './HeroSections/HeroQuoteSuccess';
 
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || "";
+
 const QuoteProject: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileError, setTurnstileError] = useState<string | null>(null);
   const totalSteps = 5;
 
   const serviceList = useServiceList();
@@ -78,6 +83,13 @@ const QuoteProject: React.FC = () => {
   };
 
   const handleSubmitQuote = async () => {
+    // Validate Turnstile before submission
+    if (!turnstileToken) {
+      setTurnstileError("Debes completar el captcha.");
+      return;
+    }
+    setTurnstileError(null);
+
     try {
       // Build quotep  request data from all phases
       const quoteData = buildQuoteRequestData(
@@ -96,7 +108,10 @@ const QuoteProject: React.FC = () => {
       }
 
       // Send quote request
-      await submitQuote(quoteData);
+      await submitQuote({
+        ...quoteData,
+        turnstile_token: turnstileToken, // send token
+      });
       setIsSubmitted(true);
 
     } catch (err) {
@@ -227,8 +242,25 @@ const QuoteProject: React.FC = () => {
           </div>
         </div>
 
+        <div className="flex justify-center mb-4 mt-8">
+          <Turnstile
+            sitekey={TURNSTILE_SITE_KEY}
+            onSuccess={token => {
+              setTurnstileToken(token);
+              setTurnstileError(null);
+            }}
+            onError={() => setTurnstileError("Error al cargar el captcha.")}
+            onExpire={() => setTurnstileToken(null)}
+            theme="dark"
+          />
+        </div>
+        {turnstileError && (
+          <div className="bg-reyes-dark text-white p-2 rounded mb-4 mx-auto max-w-3xl text-center">
+            <span>{turnstileError}</span>
+          </div>
+        )}
 
-        <div className="flex justify-center mt-8 mb-8 gap-4">
+        <div className="flex justify-center mt-4 mb-8 gap-4">
           <button
             type="button"
             onClick={() => setShowSummary(false)}
@@ -242,7 +274,7 @@ const QuoteProject: React.FC = () => {
           <button
             type="button"
             onClick={handleSubmitQuote}
-            disabled={isLoading}
+            disabled={isLoading || !turnstileToken}
             className="bg-reyes hover:bg-reyes-dark text-white px-6 py-3 rounded transition-colors flex items-center gap-2 font-semibold"
           >
             {isLoading ? (

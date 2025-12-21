@@ -5,12 +5,16 @@ from app import mail
 from datetime import datetime
 import os
 from dotenv import load_dotenv
+import requests
 from . import quote
 
 load_dotenv()
 mail_username = os.getenv("MAIL_USERNAME")
+TURNSTILE_SECRET_KEY = os.getenv("TURNSTILE_SECRET_KEY")
 if not mail_username:
     raise RuntimeError("MAIL_USERNAME is not set in the environment variables.")
+if not TURNSTILE_SECRET_KEY:
+    raise RuntimeError("TURNSTILE_SECRET_KEY is not set in the environment variables.")
 
 @quote.route('/', methods=['POST'])
 def submit_quote():
@@ -26,7 +30,31 @@ def submit_quote():
                 'success': False,
                 'error': 'No data provided'
             }), 400
-        
+
+        # --- Turnstile validation ---
+        turnstile_token = data.get("turnstile_token")
+        if not turnstile_token:
+            return jsonify({
+                'success': False,
+                'error': 'Captcha requerido. Por favor completa el captcha.'
+            }), 400
+        remoteip = request.remote_addr
+        verify_resp = requests.post(
+            "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+            data={
+                "secret": TURNSTILE_SECRET_KEY,
+                "response": turnstile_token,
+                "remoteip": remoteip
+            }
+        )
+        verify_data = verify_resp.json()
+        if not verify_data.get("success"):
+            return jsonify({
+                'success': False,
+                'error': 'No se pudo verificar el captcha. Intenta nuevamente.'
+            }), 400
+        # --- end Turnstile validation ---
+
         # Validate that we have the required phases
         validation_errors = validate_quote_data(data)
         if validation_errors:

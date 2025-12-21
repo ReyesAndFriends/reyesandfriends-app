@@ -49,6 +49,7 @@ export interface QuoteRequestData {
   phaseThree: PhaseThree;
   phaseFour: PhaseFour;
   phaseFive: PhaseFive;
+  turnstile_token?: string; // <-- agregar campo opcional
 }
 
 export interface QuoteResponse {
