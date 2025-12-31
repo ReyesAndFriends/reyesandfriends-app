@@ -1,25 +1,10 @@
 import { Helmet } from "react-helmet-async";
-import { DollarSign, CheckCircle } from "lucide-react";
-import { motion } from "framer-motion";
-import useWebPlanesList from "./hooks/useWebPlanesList";
-import QuoteWebPlanModal from "./components/quoteWebPlanModal";
-import { useState } from "react";
+import { DollarSign, ViewIcon } from "lucide-react";
 import { Link } from "react-router";
+import HeroSection from "../../layouts/components/hero-section/hero-section";
+import ProjectGallery from "./components/ProjectGallery";
 
 const WebPlanes = () => {
-    const webPlans = useWebPlanesList();
-    const [modalOpen, setModalOpen] = useState(false);
-    const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
-
-    const handleSelectPlan = (slug: string) => {
-        setSelectedSlug(slug);
-        setModalOpen(true);
-    };
-
-    const handleCloseModal = () => {
-        setModalOpen(false);
-    };
-
     return (
         <>
             <Helmet>
@@ -37,69 +22,50 @@ const WebPlanes = () => {
                 <meta name="twitter:image" content="/img/open-graph-images/web-plans.png" />
             </Helmet>
 
-            <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
-                <div className="absolute inset-0 bg-hero-section"></div>
-                <div className="absolute inset-0">
-                    <img
-                        src="/img/background/background-web.jpg"
-                        alt="fondo de la sección"
-                        className="w-full h-full object-cover opacity-5 filter grayscale"
-                        draggable={false}
-                        onContextMenu={e => e.preventDefault()}
-                    />
-                </div>
-                <div className="container mx-auto px-4 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-                    <div className="flex justify-center">
-                        <img
-                            src="/img/plans/web-plans-hero.png"
-                            alt="Ilustración de planes web"
-                            className="h-96 w-auto object-contain pointer-events-none"
-                        />
-                    </div>
-                    <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
-                        <span className="mb-4 bg-red-600 rounded-full px-4 py-1 text-sm font-semibold">
-                            ¡Solo pagas una vez!
-                        </span>
-                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-flex items-center gap-4">
-                            <DollarSign size={40} /> Planes Web Fijos
-                        </h1>
-                        <p className="text-xl mb-8">
-                            Necesitas un todo en uno sin tanta complejidad? Nuestros planes web fijos están diseñados para ofrecerte una solución completa y asequible, adaptada a las necesidades de tu negocio.
-                        </p>
-                    </div>
-                </div>
-            </section>
+            <HeroSection
+                icon={DollarSign}
+                logoImage="img/plans/web-plans-hero.png"
+                title="Planes Web"
+                subtitle="Proyectos web fijos y accesibles para emprendedores, pymes y empresas. Elige el plan que más se adapte a tu negocio. ¡Solo paga una vez!"
+            />
 
-            <section className="py-16 bg-zinc-900 text-white">
+            <section className="py-16 bg-zinc-900 text-wh640pxite">
                 <div className="container mx-auto px-4 max-w-7xl">
 
-                    <h2 className="text-3xl mb-12 text-center text-red-600 relative mb-16">
-                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Planes Web Fijos</span>
-                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
+                    <h2 className="text-3xl mb-12 text-center relative mb-16">
+                        <span className="bg-zinc-900 px-4 relative z-10 text-white">¿Como funcionan?</span>
+                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-reyes-dark -z-0"></div>
                     </h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-                        <div className="flex justify-center mb-8 md:mb-0">
+                        <div className="flex flex-col items-center justify-center mb-8 md:mb-0">
                             <img
-                                src="/img/plans/ilustracion-planes-fijos.jpg"
-                                alt="Ilustracion de planes fijos"
-                                className="rounded-lg shadow-lg w-full max-w-md aspect-[16/9] object-cover pointer-events-none"
+                                src="/img/plans/mobile-ilustration.png"
+                                alt="Referencia de un proyecto"
+                                className="w-full max-w-xs object-cover pointer-events-none"
                             />
+                            <p className="text-sm text-gray-400 mt-2 text-center">Referencia de un Proyecto Web <Link className="text-reyes-light hover:underline" to="https://demo.landingpro.reyesandfriends.cl/" target="_blank">Ver demo</Link></p>
                         </div>
                         <div>
-                            <h4 className="text-lg text-red-500 mb-2">Rápido, simple y funcional</h4>
-                            <h2 className="text-4xl mb-4 text-white">¿Qué incluyen nuestros planes web fijos?</h2>
+                            <h4 className="text-lg mb-2 text-reyes">Proyectos adaptados a tus necesidades</h4>
+                            <h2 className="text-4xl mb-4 text-white">Elige una opción</h2>
                             <p className="text-lg text-gray-200 mb-4">
-                                Nuestros planes web fijos están diseñados para quienes buscan una solución rápida, sencilla y funcional. Son paquetes ya preparados que nos permiten crear tu sitio en menos tiempo, sin sacrificar calidad ni diseño.
+                                Nuestros <strong>Planes Web</strong> están diseñados para ofrecer soluciones generales, prácticas y accesibles para emprendedores, pymes y empresas que buscan establecer su presencia online de manera rápida y efectiva. Cada plan incluye un conjunto específico de características y funcionalidades que se adaptan a diferentes necesidades y presupuestos.
                             </p>
                             <ul className="list-disc list-inside mb-4 text-base md:text-lg text-gray-200">
-                                <li>Pago único por el desarrollo inicial de tu sitio web.</li>
-                                <li>Incluye dominio .cl y hosting gratis por el primer año.</li>
-                                <li>Una vez entregado tu sitio, solo pagas el mantenimiento anual y la renovación del dominio si decides continuar.</li>
-                                <li>Ideal para proyectos simples: páginas informativas, portafolios, emprendimientos y negocios que quieren estar online rápido.</li>
+                                <li>
+                                    <strong>Pago único:</strong> Pagas una sola vez y <strong>no te preocupas más</strong>.
+                                </li>
+                                <li>
+                                    <strong>Dominio y hosting incluidos:</strong> Incluye dominio .cl y hosting gratis por el primer año.
+                                    <span> Para <strong>dominios .com</strong> u otros, se aplican costos adicionales.</span>
+                                </li>
+                                <li>
+                                    <strong>Mantenimiento anual:</strong> Una vez entregado tu sitio, solo pagas el mantenimiento anual y la renovación del dominio si decides continuar.
+                                </li>
                             </ul>
                             <p className="text-lg text-gray-200">
-                                Así puedes tener presencia online profesional, sin complicaciones ni costos mensuales. Si en el futuro necesitas algo más avanzado, siempre podrás migrar a un servicio personalizado.
+                                Con estos proyectos, aseguras una presencia online profesional y efectiva sin complicaciones. Si en el futuro necesitas algo más avanzado, siempre puedes utilizar nuestro <Link to="/quote-project" className="text-reyes hover:text-reyes-light hover:underline transition-all">cotizador para proyectos personalizados</Link> o actualizar tu sitio existente.
                             </p>
                         </div>
                     </div>
@@ -108,90 +74,157 @@ const WebPlanes = () => {
 
             <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4 max-w-7xl">
-                    <h2 className="text-3xl mb-12 text-center text-red-600 relative mb-16">
-                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Planes disponibles</span>
-                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
+                    <h2 className="text-3xl mb-8 text-center relative">
+                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Lista de Proyectos</span>
+                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-reyes-dark -z-0"></div>
                     </h2>
-                    <div className="flex flex-wrap justify-center gap-8 items-stretch">
-                        {webPlans.map((plan, idx) => {
-                            const isRecommended = idx === 1;
-                            const Card = isRecommended ? motion.div : "div";
-                            return (
-                                <Card
-                                    key={idx}
-                                    className={`w-full max-w-xs bg-black rounded-lg shadow-lg p-6 flex flex-col justify-between relative ${
-                                        isRecommended ? "border-2 border-red-600 shadow-xl scale-105 z-10" : ""
-                                    }`}
-                                    {...(isRecommended
-                                        ? {
-                                              initial: { scale: 0.95, boxShadow: "0 0 0px #dc2626" },
-                                              animate: { scale: 1.05, boxShadow: "0 0 32px #dc262655" },
-                                              transition: { type: "spring", stiffness: 200, damping: 15 }
-                                          }
-                                        : {})}
-                                >
-                                    {isRecommended && (
-                                        <motion.div
-                                            className="absolute -top-5 left-1/2 -translate-x-1/2 bg-red-600 text-white px-4 py-1 rounded-full text-xs font-bold shadow-lg z-20"
-                                            initial={{ scale: 0.8, opacity: 0 }}
-                                            animate={{ scale: 1, opacity: 1 }}
-                                            transition={{ delay: 0.2, type: "spring", stiffness: 300 }}
-                                        >
-                                            ★ Recomendado
-                                        </motion.div>
-                                    )}
-                                    <div className="overflow-hidden rounded-md mb-3">
-                                        <img
-                                            src={plan.image}
-                                            alt={plan.name}
-                                            className="w-full h-48 object-cover object-center rounded-md pointer-events-none"
-                                            style={{ aspectRatio: "1 / 1" }}
-                                        />
-                                    </div>
-                                    <div className="flex-grow flex flex-col items-center">
-                                        <h3 className="text-lg font-bold mb-2 text-center">{plan.name}</h3>
-                                        <p className="text-xs text-gray-300 text-center mb-3">{plan.description}</p>
-                                        <ul className="text-xs text-gray-200 mb-4 space-y-2">
-                                            {plan.features.map((feature, i) => (
-                                                <li key={i} className="flex items-start gap-2">
-                                                    <CheckCircle className="text-red-600 flex-shrink-0 mt-0.5" size={18} />
-                                                    <span>{feature}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                    <div className="mt-auto flex flex-col items-center">
-                                        <div className="text-2xl font-semibold text-red-500 mb-2">
-                                            {plan.price.toLocaleString("es-CL", { style: "currency", currency: "CLP", minimumFractionDigits: 0 })}
-                                        </div>
-                                        <button
-                                            className="bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded transition-colors text-sm font-semibold cursor-pointer w-full"
-                                            onClick={() => handleSelectPlan(plan.slug)}
-                                        >
-                                            Seleccionar plan
-                                        </button>
-                                    </div>
-                                </Card>
-                            );
-                        })}
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12 p-12 items-start">
+
+                        <div className="flex flex-col justify-center">
+                            <img
+                                src="/img/plans/landing-pro/landing-pro-home.png"
+                                alt="Mockup del proyecto LandingPro"
+                                className="rounded shadow-xl w-full max-w-2xl aspect-[16/9] object-cover pointer-events-none mb-6"
+                            />
+                        </div>
+
+                        <div className="flex flex-col justify-center">
+                            <h3 className="text-3xl md:text-5xl text-white mb-4 flex flex-wrap items-center gap-2 md:gap-3 font-bold">
+                                Proyecto <span className="text-reyes-light">LandingPro</span>
+                            </h3>
+                            <h2 className="text-xl text-white mb-6 font-semibold"><DollarSign className="inline" />99.990</h2>
+                            <p className="text-xl text-gray-200 mb-6">
+                                Página web tipo landing page profesional, ideal para presentar servicios, personas, tu negocio o productos de manera efectiva y atractiva. <br /> <br /> Este proyecto está diseñado para captar la atención de tus visitantes y convertirlos en clientes potenciales.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 className="text-lg text-reyes-light mb-3 font-semibold text-center">Características</h4>
+                            <ul className="list-disc list-inside text-lg text-gray-200 mb-6 pl-4">
+                                <li>Diseño moderno y atractivo</li>
+                                <li>Optimización SEO básica, posicionamiento en buscadores</li>
+                                <li>Formulario de contacto con validación y respuesta de correo electrónico automática</li>
+                                <li>Integración con Google Maps (direcciones y ubicación)</li>
+                                <li>Adaptabilidad a dispositivos móviles y tabletas (responsive design)</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 className="text-lg text-reyes-light mb-3 font-semibold text-center">Usos prácticos</h4>
+                            <ul className="list-disc list-inside text-lg text-gray-200 pl-4">
+                                <li>Presentación de servicios o productos</li>
+                                <li>Captación de clientes potenciales</li>
+                                <li>Portafolio profesional</li>
+                                <li>Promoción de eventos o lanzamientos</li>
+                            </ul>
+                        </div>
+
                     </div>
+
+                    <h2 className="text-3xl mb-8 text-center relative">
+                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Imágenes del Proyecto</span>
+                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-reyes-dark -z-0"></div>
+                    </h2>
+
+                    <ProjectGallery images={[
+                        "/img/plans/landing-pro/landing-pro-home.png",
+                        "/img/plans/landing-pro/about-section.png",
+                        "/img/plans/landing-pro/clients-section.png",
+                        "/img/plans/landing-pro/contact-section.png"
+                    ]} />
+
+
                 </div>
             </section>
 
             <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4 max-w-7xl">
+                    <h2 className="text-3xl mb-8 text-center relative">
+                        <span className="bg-zinc-900 px-4 relative z-10 text-white">¿Qué incluye el proyecto?</span>
+                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-reyes-dark -z-0"></div>
+                    </h2>
+                    <div className="overflow-x-auto">
+                        <table className="min-w-full rounded-lg overflow-hidden">
+                            <thead>
+                                <tr className="bg-reyes text-white">
+                                    <th className="py-3 px-4 text-left">Incluye</th>
+                                    <th className="py-3 px-4 text-left">Descripción</th>
+                                </tr>
+                            </thead>
+                            <tbody className="bg-zinc-800">
+                                <tr className="border-b border-zinc-700">
+                                    <td className="py-3 px-4">Dominio .cl</td>
+                                    <td className="py-3 px-4">Primer año gratis. Renovación anual opcional.</td>
+                                </tr>
+                                <tr className="border-b border-zinc-700">
+                                    <td className="py-3 px-4">Hosting</td>
+                                    <td className="py-3 px-4">Primer año gratis. Renovación anual opcional.</td>
+                                </tr>
+                                <tr className="border-b border-zinc-700">
+                                    <td className="py-3 px-4">Diseño personalizado</td>
+                                    <td className="py-3 px-4">Adaptado a tu marca y necesidades.</td>
+                                </tr>
+                                <tr className="border-b border-zinc-700">
+                                    <td className="py-3 px-4">Optimización SEO</td>
+                                    <td className="py-3 px-4">Mejor posicionamiento en buscadores.</td>
+                                </tr>
+                                <tr className="border-b border-zinc-700">
+                                    <td className="py-3 px-4">Formulario de contacto</td>
+                                    <td className="py-3 px-4">Con validación y respuesta automática. Correos con diseño personalizado.</td>
+                                </tr>
+                                <tr className="border-b border-zinc-700">
+                                    <td className="py-3 px-4">Integración Google Maps</td>
+                                    <td className="py-3 px-4">Ubicación y direcciones de tu negocio.</td>
+                                </tr>
+                                <tr className="border-b border-zinc-700">
+                                    <td className="py-3 px-4">Diseño responsive</td>
+                                    <td className="py-3 px-4">Se adapta a móviles y tabletas.</td>
+                                </tr>
+                                <tr>
+                                    <td className="py-3 px-4">Soporte y asesoría</td>
+                                    <td className="py-3 px-4">Durante el proceso de desarrollo y entrega.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                    <h2 className="text-3xl mb-12 text-center text-red-600 relative mb-16">
-                        <span className="bg-zinc-900 px-4 relative z-10 text-white">La gran diferencia</span>
-                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
+                    <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 justify-center flex">
+                        <Link
+                            to="/web-planes/landingpro/order"
+                            className="bg-reyes text-white px-8 py-3 rounded-lg font-semibold hover:bg-reyes-dark transition-all text-center hover:scale-105 transform"
+                        >
+                            <DollarSign className="inline-block mr-2 mb-1" size={16} />
+                            Me interesa
+                        </Link>
+                        <Link
+                            to="https://demo.landingpro.reyesandfriends.cl/"
+                            target="_blank"
+                            className="bg-transparent text-white px-8 py-3 rounded-lg font-semibold border-2 border-white hover:bg-white hover:text-reyes transition-all text-center hover:scale-105 transform"
+                        >
+                            <ViewIcon className="inline-block mr-2 mb-1" size={16} />
+                            Ver demo
+                        </Link>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section className="py-16 bg-zinc-900 text-white">
+                <div className="container mx-auto px-4 max-w-7xl">
+
+                    <h2 className="text-3xl mb-12 text-center relative mb-16">
+                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Planes vs. Cotizador</span>
+                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-reyes-dark -z-0"></div>
                     </h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8 mb-8">
                         <div>
-                            <h4 className="text-lg text-red-500 mb-2">Una forma diferente de hacer las cosas</h4>
+                            <h4 className="text-lg text-reyes-light mb-2">Sin importar la opción, te ayudamos</h4>
                             <h2 className="text-4xl mb-4 text-white">¿En qué se diferencian los planes fijos del cotizador de proyectos?</h2>
                             <p className="text-lg text-gray-200 mb-4">
-                                A diferencia de nuestro cotizador de proyectos, ideal para soluciones a medida y de mayor complejidad, nuestros planes web fijos están pensados para quienes buscan una alternativa ágil, sencilla y funcional. Son paquetes predefinidos que nos permiten desarrollar tu sitio en menos tiempo, sin sacrificar calidad ni diseño.
+                                A diferencia de nuestro <Link to="/quote-project" className="text-reyes hover:text-reyes-light hover:underline transition-all">cotizador para proyectos</Link>, ideal para soluciones a medida y de mayor complejidad, nuestros planes web fijos están pensados para quienes buscan una alternativa ágil, sencilla y funcional. Son paquetes predefinidos que nos permiten desarrollar tu sitio en menos tiempo, sin sacrificar calidad ni diseño.
                             </p>
                             <ul className="list-disc list-inside mb-4 text-base md:text-lg text-gray-200">
                                 <li>Precios fijos y totalmente transparentes.</li>
@@ -212,8 +245,8 @@ const WebPlanes = () => {
 
                     <div className="flex flex-col items-center">
                         <div className="relative mb-8">
-                            <blockquote className="bg-black rounded-xl px-8 py-8 shadow-lg border-l-4 border-red-600 text-center text-xl md:text-2xl text-gray-100 relative z-10">
-                                ¿Buscas una solución rápida y sin complicaciones? Nuestros planes web fijos son la opción perfecta para ti. Si en el futuro requieres algo más avanzado, siempre podrás utilizar nuestro <Link to="/quote-project" className="text-red-500 underline">cotizador para proyectos personalizados</Link> o actualizar tu sitio existente.
+                            <blockquote className="bg-black rounded-xl px-8 py-8 shadow-lg border-l-4 border-reyes-dark text-center text-xl md:text-2xl text-gray-100 relative z-10">
+                                Si no estás seguro de qué opción elegir, siempre podrás utilizar nuestro <Link to="/quote-project" className="text-reyes hover:text-reyes-light hover:underline transition-all">cotizador para proyectos personalizados</Link> y potenciar tu sitio web!
                             </blockquote>
                         </div>
                     </div>
@@ -221,13 +254,6 @@ const WebPlanes = () => {
             </section>
 
 
-            {selectedSlug && (
-                <QuoteWebPlanModal
-                    slug={selectedSlug}
-                    open={modalOpen}
-                    onClose={handleCloseModal}
-                />
-            )}
         </>
     );
 };

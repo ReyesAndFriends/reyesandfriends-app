@@ -10,11 +10,14 @@ type ResumeProjectProps = {
     phaseFive: Record<string, string>;
   };
 };
-
 const projectTypeMap: Record<string, string> = {
-  webProgramming: "Programación web",
-  other: "Otro",
-  notSure: "No está seguro",
+  "web-development": "Programación web",
+  "enterprise-software": "Software Empresarial",
+  "mobile-apps": "Aplicaciones móviles",
+  "e-commerce": "E-commerce",
+  "entertainment": "Entretenimiento y más",
+  "other": "Otro",
+  "notSure": "No está seguro",
 };
 
 const companyTypeMap: Record<string, string> = {
@@ -58,7 +61,7 @@ const Section = ({
   icon,
   title,
   children,
-  color = "text-red-700",
+  color = "text-reyes",
   className = "",
 }: {
   icon: React.ReactNode;
@@ -87,8 +90,8 @@ const ResumeProject: React.FC<ResumeProjectProps> = ({ formData }) => {
     <div className="container mx-auto px-4 max-w-7xl mt-10">
 
       <div className="relative mb-12">
-        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
-        <h2 className="text-3xl text-center text-red-500 relative z-10">
+        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-reyes-dark -z-0"></div>
+        <h2 className="text-3xl text-center text-reyes-light relative z-10">
           <span className="bg-zinc-900 px-4 relative z-10 text-white">Detalle de su Cotización</span>
         </h2>
       </div>

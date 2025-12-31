@@ -49,6 +49,7 @@ export interface QuoteRequestData {
   phaseThree: PhaseThree;
   phaseFour: PhaseFour;
   phaseFive: PhaseFive;
+  turnstile_token?: string; // <-- agregar campo opcional
 }
 
 export interface QuoteResponse {
@@ -82,7 +83,7 @@ export const useSubmitQuote = () => {
       console.log('Enviando cotización:', quoteData);
       
       const response = await axios.post<QuoteResponse>(
-        `${API_URL}/quotes/quote-project`,
+        `${API_URL}/quotes/`,
         quoteData,
         {
           headers: {

@@ -64,7 +64,7 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                         id="projectType"
                         value={values.projectType}
                         onChange={handleChange}
-                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                     >
                         <option value="" disabled>Selecciona el tipo de proyecto</option>
                         {filteredServiceList.map((service) => (
@@ -75,14 +75,14 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                         <option value="other">Otro</option>
                         <option value="notSure">No estoy seguro</option>
                     </select>
-                    {errors.projectType && <p className="text-red-500 text-sm mt-1">{errors.projectType}</p>}
+                    {errors.projectType && <p className="text-reyes-light text-sm mt-1">{errors.projectType}</p>}
                     {selectedService && (
                         <p className="mt-2">
                             <a 
                                 href={selectedService.path} 
                                 target="_blank" 
                                 rel="noopener noreferrer" 
-                                className="text-red-500 hover:text-red-400 underline text-sm"
+                                className="text-reyes-light hover:text-reyes-dark underline text-sm"
                             >
                                 Ver detalles sobre {selectedService.name}
                             </a>
@@ -99,9 +99,9 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                             value={values.otherProjectType}
                             onChange={handleChange}
                             placeholder='Ej: Aplicación web, App móvil, etc.'
-                            className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                            className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                         ></textarea>
-                        {errors.otherProjectType && <p className="text-red-500 text-sm mt-1">{errors.otherProjectType}</p>}
+                        {errors.otherProjectType && <p className="text-reyes-light text-sm mt-1">{errors.otherProjectType}</p>}
                     </div>
                 )}
 
@@ -114,9 +114,9 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                             value={values.notSureProjectType}
                             placeholder='Ej: Necesito una aplicación que me ayude a gestionar mis tareas diarias.'
                             onChange={handleChange}
-                            className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                            className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                         ></textarea>
-                        {errors.notSureProjectType && <p className="text-red-500 text-sm mt-1">{errors.notSureProjectType}</p>}
+                        {errors.notSureProjectType && <p className="text-reyes-light text-sm mt-1">{errors.notSureProjectType}</p>}
                     </div>
                 )}
 
@@ -127,13 +127,13 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                         name="hasStartDate"
                         value={values.hasStartDate}
                         onChange={handleChange}
-                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                     >
                         <option value="" disabled>Selecciona una opción</option>
                         <option value="yes">Sí</option>
                         <option value="no">No</option>
                     </select>
-                    {errors.hasStartDate && <p className="text-red-500 text-sm mt-1">{errors.hasStartDate}</p>}
+                    {errors.hasStartDate && <p className="text-reyes-light text-sm mt-1">{errors.hasStartDate}</p>}
                 </div>
 
                 {values.hasStartDate === "yes" && (
@@ -145,9 +145,9 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                             name="startDate"
                             value={values.startDate}
                             onChange={handleChange}
-                            className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                            className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                         />
-                        {errors.startDate && <p className="text-red-500 text-sm mt-1">{errors.startDate}</p>}
+                        {errors.startDate && <p className="text-reyes-light text-sm mt-1">{errors.startDate}</p>}
                     </div>
                 )}
 
@@ -172,12 +172,12 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                                 } as React.ChangeEvent<HTMLInputElement>);
                             }}
                             ref={budgetInputRef}
-                            className="w-full pl-8 p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                            className="w-full pl-8 p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                             inputMode="numeric"
                             autoComplete="off"
                         />
                     </div>
-                    {errors.estimatedBudget && <p className="text-red-500 text-sm mt-1">{errors.estimatedBudget}</p>}
+                    {errors.estimatedBudget && <p className="text-reyes-light text-sm mt-1">{errors.estimatedBudget}</p>}
                 </div>
 
                 <div className="mb-4">
@@ -187,7 +187,7 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                         name="deliveryTimeframe"
                         value={values.deliveryTimeframe}
                         onChange={handleChange}
-                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                     >
                         <option value="" disabled>Selecciona una opción</option>
                         <option value="no">No</option>
@@ -196,7 +196,7 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                         <option value="3To6Months">3-6 meses</option>
                         <option value="flexible">Flexible</option>
                     </select>
-                    {errors.deliveryTimeframe && <p className="text-red-500 text-sm mt-1">{errors.deliveryTimeframe}</p>}
+                    {errors.deliveryTimeframe && <p className="text-reyes-light text-sm mt-1">{errors.deliveryTimeframe}</p>}
                 </div>
 
                 <div className="mb-4">
@@ -207,9 +207,9 @@ const PhaseThree: React.FC<PhaseThreeProps> = ({ values, errors, handleChange, s
                         value={values.projectDetails}
                         onChange={handleChange}
                         placeholder='Información libre para el proyecto Ej: Quiero que mi proyecto haga esto y esto... min 50 max 2000 caracteres.'
-                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                     ></textarea>
-                    {errors.projectDetails && <p className="text-red-500 text-sm mt-1">{errors.projectDetails}</p>}
+                    {errors.projectDetails && <p className="text-reyes-light text-sm mt-1">{errors.projectDetails}</p>}
                 </div>
             </div>
         </div>

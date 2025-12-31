@@ -1,0 +1,26 @@
+/* Aplica estilos Tailwind a los elementos Markdown del bot */
+.johnsmith-markdown p {
+  @apply mb-2 font-normal text-gray-700;
+}
+.johnsmith-markdown ul {
+  @apply list-disc pl-5 mb-2;
+}
+.johnsmith-markdown li {
+  @apply mb-1;
+}
+.johnsmith-markdown strong {
+  @apply font-semibold text-gray-900;
+}
+.johnsmith-markdown em {
+  @apply italic;
+}
+.johnsmith-markdown a {
+  @apply text-blue-600 underline hover:text-blue-800;
+}
+.johnsmith-markdown h1 {
+  @apply text-lg font-bold mb-2;
+}
+.johnsmith-markdown h2 {
+  @apply text-base font-semibold mb-2;
+}
+/* Puedes agregar más reglas según lo que uses en el Markdown */

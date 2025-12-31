@@ -1,7 +1,9 @@
 import { useServiceList } from "../../hooks/services/useServiceList";
+import { ChevronRight, } from "lucide-react";
 import { Link } from "react-router";
-import { Code } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import HeroSection from "../../layouts/components/hero-section/hero-section";
 
 const Services = () => {
     const services = useServiceList();
@@ -12,53 +14,30 @@ const Services = () => {
                 <title>Servicios | Reyes&Friends</title>
                 <meta
                     name="description"
-                    content="Descubre los servicios que ofrecemos en Reyes&Friends. Esta sección está en construcción, pero pronto podrás ver todo lo que hemos preparado para ti."
+                    content="Explora nuestra completa gama de servicios digitales en Reyes&Friends. Desarrollo web, soluciones empresariales, hosting y más para impulsar tu presencia online."
                 />
                 <meta property="og:title" content="Servicios | Reyes&Friends" />
-                <meta property="og:description" content="Esta sección está en construcción. Muy pronto mostraremos nuestros servicios y soluciones TI." />
+                <meta property="og:description" content="Servicios digitales completos: desarrollo web, soluciones empresariales, hosting y más. Descubre cómo podemos ayudarte a crecer online." />
                 <meta property="og:image" content="/img/open-graph-images/service-list.png" />
                 <meta property="og:type" content="website" />
 
                 <meta name="twitter:title" content="Servicios | Reyes&Friends" />
-                <meta name="twitter:description" content="Servicios y soluciones desarrolladas por Reyes&Friends. Próximamente disponible." />
+                <meta name="twitter:description" content="Servicios digitales profesionales: desarrollo web, hosting, soluciones empresariales y más. Tu partner tecnológico de confianza." />
                 <meta name="twitter:image" content="/img/open-graph-images/service-list.png" />
             </Helmet>
-            <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
-                <div className="absolute inset-0 bg-hero-section"></div>
-                <div className="absolute inset-0">
-                    <img
-                        src="/img/background/background-web.jpg"
-                        alt="fondo de la sección"
-                        className="w-full h-full object-cover opacity-5 filter grayscale"
-                        draggable={false}
-                        onContextMenu={e => e.preventDefault()}
-                    />
-                </div>
-                <div className="container mx-auto px-4 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-                    <div className="flex justify-center">
-                        <img
-                            src="/img/services/FullList/services-list.png"
-                            alt="Ilustración de servicios"
-                            className="h-96 w-auto object-contain pointer-events-none"
-                        />
-                    </div>
-                    <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
-                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-flex items-center gap-4">
-                            <Code size={40} /> Nuestros Servicios
-                        </h1>
-                        <p className="text-xl mb-8">
-                            Ofrecemos una amplia gama de servicios digitales para ayudarte a destacar en el mundo online. Desde desarrollo web hasta un panel empresarial personalizado, tenemos la solución perfecta para ti.
-                        </p>
 
-                    </div>
-                </div>
-            </section>
+            <HeroSection 
+            icon={Menu}
+            logoImage="/img/services/FullList/services-list.png"
+            title="Nuestros Servicios"
+            subtitle="Ofrecemos una amplia gama de servicios digitales para ayudarte a destacar en el mundo online. Desde desarrollo web hasta un panel empresarial personalizado, tenemos la solución perfecta para ti." 
+            />
 
             <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4 max-w-7xl">
-                    <h2 className="text-3xl mb-12 text-center text-red-600 relative">
+                    <h2 className="text-3xl mb-12 text-center relative">
                         <span className="bg-zinc-900 px-4 relative z-10 text-white">Lista de servicios</span>
-                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
+                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-reyes-dark -z-0"></div>
                     </h2>
                     <div className="flex flex-wrap justify-center gap-8">
                         {services
@@ -77,17 +56,20 @@ const Services = () => {
                                         />
                                     </div>
                                     <div className="flex-grow">
-                                        <h3 className="text-md font-semibold mb-2 text-center">{service.name}</h3>
+                                        <h3 className="text-md font-semibold mb-2 text-center flex items-center justify-center gap-2">
+                                            <span>{service.icon}</span>
+                                            {service.name}
+                                        </h3>
                                         <p className="text-xs text-gray-300 text-center line-clamp-3">
                                             {service.description}
                                         </p>
                                     </div>
                                     <div className="flex justify-center mt-3">
                                         <Link
-                                            className="bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded transition-colors text-sm flex items-center gap-2 font-semibold"
+                                            className="bg-reyes hover:bg-reyes-dark text-white px-4 py-2 rounded transition-colors text-sm flex items-center gap-2 font-semibold"
                                             to={service.path}
                                         >
-                                            Ver detalles
+                                            Ver detalles <ChevronRight />
                                         </Link>
                                     </div>
                                 </div>

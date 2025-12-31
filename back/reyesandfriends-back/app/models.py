@@ -1,7 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from sqlalchemy import Numeric
-import json
 
 db = SQLAlchemy()
 
@@ -93,12 +91,44 @@ class ContactFormReply(db.Model):
             'created_at': self.created_at.isoformat() if self.created_at else None
         }
 
+class ProjectQuoteStatus(db.Model):
+    __tablename__ = 'project_quote_statuses'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), unique=True, nullable=False)
+    slug = db.Column(db.String(50), unique=True, nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'slug': self.slug,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
+class ProjectQuoteCategory(db.Model):
+    __tablename__ = 'project_quote_categories'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    slug = db.Column(db.String(50), nullable=False, unique=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+        
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'slug': self.slug,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
+
+
 class ProjectQuote(db.Model):
     __tablename__ = 'project_quotes'
     
     id = db.Column(db.Integer, primary_key=True)
     quote_number = db.Column(db.String(20), unique=True, nullable=False)  # QT-2025-001 format
-    status = db.Column(db.String(20), default='draft')  # draft, submitted, reviewed, approved, rejected
+    status_id = db.Column(db.Integer, db.ForeignKey('project_quote_statuses.id'), nullable=False, default=1)    
     
     # Phase 1: Personal Data
     first_name = db.Column(db.String(50), nullable=False)
@@ -113,7 +143,7 @@ class ProjectQuote(db.Model):
     project_purpose = db.Column(db.Text, nullable=True)
     
     # Phase 3: Technical and Functional Scope
-    project_type = db.Column(db.String(50), nullable=False)  # webProgramming, enterpriseSoftware, etc.
+    project_type_id = db.Column(db.Integer, db.ForeignKey('project_quote_categories.id'), nullable=False)
     other_project_type = db.Column(db.String(200), nullable=True)
     not_sure_project_type = db.Column(db.Text, nullable=True)
     has_start_date = db.Column(db.String(10), nullable=False)  # yes/no
@@ -121,6 +151,10 @@ class ProjectQuote(db.Model):
     estimated_budget = db.Column(db.String(50), nullable=True)
     delivery_timeframe = db.Column(db.String(50), nullable=True)
     project_details = db.Column(db.Text, nullable=True)
+    
+    # Relationships
+    status = db.relationship('ProjectQuoteStatus', backref='project_quotes', lazy=True)
+    project_type = db.relationship('ProjectQuoteCategory', backref='project_quotes', lazy=True)
     
     # Phase 4: Deployment and Additional Services
     hosting_service = db.Column(db.String(10), nullable=False)  # yes/no
@@ -156,10 +190,24 @@ class ProjectQuote(db.Model):
         return f"QT-{current_year}-{str(count + 1).zfill(3)}"
     
     def to_dict(self):
+        # Get status info
+        status_info = None
+        if self.status_id:
+            status = ProjectQuoteStatus.query.get(self.status_id)
+            if status:
+                status_info = {'name': status.name, 'slug': status.slug}
+        
+        # Get project type info
+        project_type_info = None
+        if self.project_type_id:
+            project_category = ProjectQuoteCategory.query.get(self.project_type_id)
+            if project_category:
+                project_type_info = {'name': project_category.name, 'slug': project_category.slug}
+        
         return {
             'id': self.id,
             'quote_number': self.quote_number,
-            'status': self.status,
+            'status': status_info,
             
             # Phase 1
             'first_name': self.first_name,
@@ -174,7 +222,7 @@ class ProjectQuote(db.Model):
             'project_purpose': self.project_purpose,
             
             # Phase 3
-            'project_type': self.project_type,
+            'project_type': project_type_info,
             'other_project_type': self.other_project_type,
             'not_sure_project_type': self.not_sure_project_type,
             'has_start_date': self.has_start_date,
@@ -221,7 +269,7 @@ class ProjectQuote(db.Model):
                 'projectPurpose': self.project_purpose or ''
             },
             'phaseThree': {
-                'projectType': self.project_type or '',
+                'projectType': self.project_type_id or '',
                 'otherProjectType': self.other_project_type or '',
                 'notSureProjectType': self.not_sure_project_type or '',
                 'hasStartDate': self.has_start_date or '',
@@ -244,18 +292,41 @@ class ProjectQuote(db.Model):
                 'additionalComments': self.additional_comments or ''
             }
         }
+    
+class WebPlanList(db.Model):
+    __tablename__ = 'web_plan_lists'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    slug = db.Column(db.String(50), nullable=False, unique=True)
+    description = db.Column(db.Text, nullable=True)
+    demo_url = db.Column(db.String(200), nullable=True)
+    price_clp = db.Column(db.Float, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'slug': self.slug,
+            'description': self.description,
+            'price_clp': self.price_clp,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
+
 
 class WebPlanRequest(db.Model):
     __tablename__ = 'web_plan_requests'
 
     id = db.Column(db.Integer, primary_key=True)
-    request_number = db.Column(db.String(20), unique=True, nullable=False)  # WP-2025-001 format
+    request_number = db.Column(db.String(20), unique=True, nullable=False)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     user_email = db.Column(db.String(120), nullable=False)
     rut = db.Column(db.String(20), nullable=False)
-    rut_type = db.Column(db.String(20), nullable=False)
+    webplan_id = db.Column(db.Integer, db.ForeignKey('web_plan_lists.id'), nullable=True)
     cellphone = db.Column(db.String(20), nullable=False)
+    whatsapp_response = db.Column(db.Boolean, nullable=False, default=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def to_dict(self):
@@ -266,10 +337,12 @@ class WebPlanRequest(db.Model):
             'last_name': self.last_name,
             'user_email': self.user_email,
             'rut': self.rut,
-            'rut_type': self.rut_type,
+            'webplan_id': self.webplan_id,
             'cellphone': self.cellphone,
+            'whatsapp_response': self.whatsapp_response,
             'created_at': self.created_at.isoformat() if self.created_at else None
         }
+
 class VisitersCounter(db.Model):
     __tablename__ = 'visitors_counter'
         
@@ -285,4 +358,19 @@ class VisitersCounter(db.Model):
             'ipAddress': self.ip_address,
             'country': self.country,
             'dateVisited': self.date_visited.isoformat() if self.date_visited else None
+        }
+    
+class BannedRut(db.Model):
+    __tablename__ = 'banned_ruts'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    rut = db.Column(db.String(20), unique=True, nullable=False)
+    reason = db.Column(db.Text, nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'rut': self.rut,
+            'created_at': self.created_at.isoformat() if self.created_at else None
         }

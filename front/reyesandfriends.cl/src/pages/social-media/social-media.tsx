@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from "react-helmet-async";
 import { HandHeart } from "lucide-react";
+import HeroSection from '../../layouts/components/hero-section/hero-section';
 
 const SocialMedia = () => {
 
@@ -42,41 +43,19 @@ const SocialMedia = () => {
                 <meta name="twitter:image" content="/img/open-graph-images/social-media.png" />
             </Helmet>
 
-            <section className="bg-cover bg-center relative min-h-[700px] flex items-center">
-                <div className="absolute inset-0 bg-hero-section"></div>
-                <div className="absolute inset-0">
-                    <img
-                        src="/img/background/background-web.jpg"
-                        alt="fondo de la sección"
-                        className="w-full h-full object-cover opacity-5 filter grayscale"
-                        draggable={false}
-                        onContextMenu={e => e.preventDefault()}
-                    />
-                </div>
-                <div className="container mx-auto px-4 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-                    <div className="flex justify-center">
-                        <img
-                            src="/img/social-media/illustration.png"
-                            alt="Ilustración de redes sociales"
-                            className="h-96 w-auto object-contain pointer-events-none"
-                        />
-                    </div>
-                    <div className="max-w-2xl text-white mx-auto md:mx-0 md:pl-12 lg:pl-24 flex flex-col items-center md:items-start">
-                        <h1 className="text-4xl md:text-5xl mb-6 border-b-4 border-red-500 pb-4 inline-flex items-center gap-4">
-                            <HandHeart size={40} /> Nuestras Redes Sociales
-                        </h1>
-                        <p className="text-xl mb-8">
-                            Necesitas un todo en uno sin tanta complejidad? Nuestros planes web fijos están diseñados para ofrecerte una solución completa y asequible, adaptada a las necesidades de tu negocio.
-                        </p>
-                    </div>
-                </div>
-            </section>
+            <HeroSection 
+            icon={HandHeart}
+            logoImage="/img/social-media/illustration.png"
+            title="Redes Sociales"
+            subtitle="Conecta con nosotros a través de nuestras redes sociales. Síguenos para estar al día con nuestras novedades y contenido exclusivo." 
+            />
+
 
             <section className="py-16 bg-zinc-900 text-white">
                 <div className="container mx-auto px-4 max-w-7xl">
-                    <h2 className="text-3xl mb-12 text-center text-red-600 relative">
+                    <h2 className="text-3xl mb-12 text-center relative">
                         <span className="bg-zinc-900 px-4 relative z-10 text-white">Lista de Redes Sociales</span>
-                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-red-600/50 -z-0"></div>
+                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-reyes-dark -z-0"></div>
                     </h2>
                     <div className="flex flex-wrap justify-center gap-8">
                         {socialMediaItems.map((item, index) => (
@@ -100,7 +79,7 @@ const SocialMedia = () => {
                                 </div>
                                 <div className="flex justify-center mt-3">
                                     <Link
-                                        className="bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded transition-colors text-sm flex items-center gap-2 font-semibold"
+                                        className="bg-reyes hover:bg-reyes-dark text-white px-4 py-2 rounded transition-colors text-sm flex items-center gap-2 font-semibold hover:scale-105"
                                         to={item.route}
                                         target="_blank"
                                     >

@@ -112,13 +112,13 @@ export const validateQuoteData = (data: QuoteRequestData): string[] => {
  * Project type map to convert slugs to readable names
  */
 const projectTypeMap: Record<string, string> = {
-  webProgramming: "Programación web",
-  enterpriseSoftware: "Software empresarial",
-  promotionalWeb: "Páginas web promocionales",
-  ecommerceWeb: "Páginas E-Commerce",
-  fullList: "Lista completa",
-  other: "Otro",
-  notSure: "No está seguro",
+  "web-development": "Programación web",
+  "enterprise-software": "Software Empresarial", 
+  "mobile-apps": "Aplicaciones móviles",
+  "e-commerce": "E-commerce",
+  "entertainment": "Entretenimiento y más",
+  "other": "Otro",
+  "notSure": "No está seguro",
 };
 
 /**
@@ -132,7 +132,7 @@ export const formatQuoteResponse = (response: any) => {
   return {
     quoteNumber: response.quote.quote_number,
     customerName: response.quote.customer_name,
-    projectType: projectTypeMap[response.quote.project_type] || response.quote.project_type,
+    projectType: projectTypeMap[response.quote.project_type] || response.quote.project_type || "Alguno pues",
     status: response.quote.status,
     submittedAt: new Date(response.quote.submitted_at).toLocaleDateString('es-CL'),
   };

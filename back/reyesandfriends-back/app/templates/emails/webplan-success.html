@@ -1,227 +1,510 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reyes&Friends - Cotización Recibida</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style type="text/css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Plan Web Fijo - Reyes&Friends</title>
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.5;
-            color: #f0f0f0;
-            background-color: #1b1b1b;
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    <style>
+        .nano_body {
+            font-size: 16px;
+            display: block;
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
         }
-        
 
-        .email-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #1b1b1b;
-            padding: 0;
+        .nano_wrapper {
+            font-size: 16px;
+            box-sizing: border-box;
+            overflow: hidden;
+            width: 100%;
+            display: block;
+            font-weight: normal;
+            font-family: 'Poppins', 'Google Sans', 'Open Sans', 'Roboto', 'Segoe UI', 'Helvetica Neue', Helvetica, Tahoma, Arial, monospace, sans-serif;
+            background: #fafafa;
+            color: #707070;
         }
-        
 
-        .header {
-            padding: 20px;
-            text-align: center;
-            position: relative;
+        .nano_table {
+            font-size: 16px;
+            border-collapse: collapse;
+            border-spacing: 0;
+            border: 0px;
+            width: 640px;
+            max-width: 90%;
+            margin: 50px auto;
+            border-radius: 5px;
             overflow: hidden;
         }
-        
 
-        .logo {
-            width: 180px;
-            height: auto;
-            margin: 0 auto;
-            display: block;
-            position: relative;
-            z-index: 2;
-        }
-        
-
-        .content {
-            padding: 30px;
-            background-color: #212121;
-            border-radius: 8px;
-            margin: 0 20px;
-            position: relative;
-            z-index: 2;
-            box-shadow: 0 4px 8px #00000033;
-        }
-        
-
-        .title {
-            color: #ffffff;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #8B0000;
-            padding-bottom: 10px;
-            text-align: center;
+        .nano_table tr {
+            background: transparent;
+            box-sizing: border-box;
+            color: #222;
+            background: #ffffff;
         }
 
-        .subtitle {
-            color: #ffffff;
-            font-size: 20px;
-            font-weight: 500;
-            margin-bottom: 15px;
-            text-align: center;
+        .nano_table td,
+        .nano_table th {
+            border: 0px;
+            border-spacing: 0;
+            border-collapse: collapse;
+            box-sizing: border-box;
         }
 
-        .center {
-            text-align: center;
-        }
-        
-
-        .paragraph {
-            margin-bottom: 20px;
-            color: #e0e0e0;
-        }
-        
-        .button {
-            display: inline-block;
-            background-color: #8B0000;
-            color: #ffffff;
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-            margin: 20px 0;
-            text-align: center;
+        .nano_table tr td {
+            box-sizing: border-box;
         }
 
-        .button:hover {
-            background-color: #5a1616;
-        }
-        
-
-        .footer {
-            padding: 20px;
-            text-align: center;
-            font-size: 12px;
-            color: #a0a0a0;
-            border-top: 1px solid #333333;
-            margin-top: 30px;
-        }
-        
-
-        .social-links {
-            margin: 15px 0;
-        }
-        
-        .social-link {
-            display: inline-block;
-            margin: 0 10px;
-            color: #ffffff;
-            text-decoration: none;
-        }
-
-        .email-details{
-            background-color: #333333;
-            padding: 15px;
-            border-radius: 4px;
-            border-left: 3px solid #8B0000;
-            list-style-type: none;
-            margin: 0;
-        }
-
-        .auto-generated-text {
-            color: #ce2828;
-            font-weight: bold;
-            font-style: italic;
-        }
-        
-        .contact-info-box {
-            background-color: #333333;
-            padding: 15px;
-            border-radius: 4px;
-            border-left: 3px solid #8B0000;
-        }
-        
-        .contact-email-link {
+        .nano_table a {
             color: #8B0000;
-            text-decoration: none;
             font-weight: bold;
+            overflow: hidden;
+            box-sizing: border-box;
         }
-        
-        .button-white-text {
-            color: white;
+
+        .nano_table a:hover {
+            color: #5a1616;
         }
-        
-        @media screen and (max-width: 480px) {
-            .content {
-                padding: 20px;
-                margin: 0 10px;
+
+        .nano_table a:active {
+            color: #ff6600;
+        }
+
+        .nano_table a:visited {
+            color: #8e8e8e;
+        }
+
+        .nano_table a.nano_link {
+            display: inline-block;
+            width: auto !important;
+            outline: none !important;
+            text-decoration: none !important;
+        }
+
+        .nano_table a.nano_round_link {
+            float: right;
+            margin-top: 90px;
+            font-weight: 400;
+            width: auto !important;
+            outline: none !important;
+            text-decoration: none !important;
+            padding: 15px;
+            color: #8B0000;
+            border: 1px solid #8B0000;
+            border-radius: 50px;
+        }
+
+        .nano_table a.nano_arrow_link {
+            display: inline-block;
+            width: 100% !important;
+            outline: none !important;
+            color: #8B0000;
+        }
+
+        .nano_table a.nano_arrow_link img {
+            float: left;
+            width: 18px;
+            margin-right: 10px;
+            margin-bottom: 0px;
+        }
+
+        .nano_table img,
+        .nano_table a img {
+            box-sizing: border-box;
+            display: block;
+            height: auto;
+            max-width: 100%;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 0px;
+            overflow: hidden;
+        }
+
+        .nano_table a.nano_button {
+            display: inline-block;
+            font-weight: bold;
+            font-size: 16px;
+            margin: 20px 0px;
+            padding: 15px 50px;
+            box-sizing: border-box;
+            color: #ffffff !important;
+            background: #8B0000 !important;
+            border-radius: 6px;
+            text-decoration: none;
+            outline: none;
+        }
+
+        .nano_table a.nano_button:hover {
+            color: #ffffff !important;
+            background: #5a1616 !important;
+        }
+
+        .nano_demo_button {
+            display: inline-block;
+            font-weight: bold;
+            font-size: 16px;
+            margin: 10px 0px;
+            padding: 12px 40px;
+            box-sizing: border-box;
+            color: #fff !important;
+            background: #6a23ac !important;
+            border-radius: 6px;
+            text-decoration: none;
+            outline: none;
+            border: none;
+        }
+
+        .nano_demo_button:hover {
+            background: #521b86 !important;
+            color: #fff !important;
+        }
+
+        .nano_margin {
+            float: left;
+            width: 100%;
+            overflow: hidden;
+            height: 40px;
+            padding-bottom: 0px;
+            box-sizing: border-box;
+        }
+
+        .nano_div {
+            float: left;
+            width: 100%;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .nano_bg {
+            font-size: 14px;
+            color: #3c4043;
+            background: #fafafa;
+        }
+
+        .nano_radius {
+            border-radius: 6px;
+        }
+
+        .nano_border {
+            border: 1px solid #f0f0f0
+        }
+
+        .nano_bg a {
+            box-sizing: border-box;
+            color: #3c4043;
+            font-weight: normal;
+            overflow: hidden;
+        }
+
+        .nano_h1,
+        .nano_h2,
+        .nano_h3,
+        .nano_h4,
+        .nano_h7 {
+            font-weight: 600;
+            float: left;
+            width: 100%;
+            margin: 0px 0px 20px 0px !important;
+            padding: 0px;
+            box-sizing: border-box;
+            color: #3c4043;
+        }
+
+
+        .nano_h1 {
+            font-size: 29px;
+        }
+
+        .nano_h2 {
+            font-size: 26px;
+        }
+
+        .nano_h3 {
+            font-size: 23px;
+        }
+
+        .nano_h4 {
+            font-size: 20px;
+        }
+
+        .nano_h7 {
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .nano_p {
+            box-sizing: border-box;
+            font-size: 16px;
+            float: left;
+            width: 100%;
+            margin: 0px 0px 20px 0px !important;
+            color: #5f6368;
+        }
+
+        .nano_code {
+            float: left;
+            width: 100%;
+            overflow: hidden;
+            margin: 20px 0px;
+            padding: 15px;
+            box-sizing: border-box;
+            border-radius: 6px;
+            background: #8B000011;
+            color: #8B0000;
+            font-weight: 700;
+            font-size: 23px;
+            text-align: center;
+        }
+
+        .nano_code ul {
+            display: inline-block;
+            margin: 5px 5px;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            min-width: 30px;
+            border-radius: 6px;
+            background: #fff;
+            color: #3c4043;
+            font-weight: 700;
+            font-size: 21px;
+        }
+
+        .nano_divider {
+            float: left;
+            width: 100%;
+            overflow: hidden;
+            margin: 20px 0px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .nano_flex {
+            float: left;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .nano_flex a.nano_icon {
+            display: inline-block;
+        }
+
+        .nano_flex a.nano_icon img {
+            display: block;
+            width: 30px;
+            margin: 5px;
+        }
+
+        .nano_details {
+            float: left;
+            width: 100%;
+            overflow: hidden;
+            margin: 20px 0px;
+            padding: 15px;
+            box-sizing: border-box;
+            border-radius: 6px;
+            background: #f8f9fa;
+            border-left: 3px solid #8B0000;
+        }
+
+        .nano_rights {
+            color: #706d6b;
+        }
+
+        .nano_rights-font {
+            font-size: 13px;
+        }
+
+        .nano_half-flex {
+            float: left;
+            width: 100%;
+        }
+
+        .nano_half {
+            float: left;
+            width: 50%;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .nano_60 {
+            float: left;
+            width: 60%;
+            height: auto;
+            box-sizing: border-box;
+        }
+
+        .nano_40 {
+            float: left;
+            width: 40%;
+            height: auto;
+            box-sizing: border-box;
+        }
+
+        .nano_padding {
+            float: left;
+            width: 100%;
+            height: auto;
+            padding: 25px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .nano_regards {
+            float: left;
+            width: 100%;
+            height: auto;
+        }
+
+        .nano_regards-text {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        @media screen and (max-width: 640px) {
+            .nano_half {
+                width: 100%;
             }
-            
-            .title {
-                font-size: 20px;
+
+            .nano_60 {
+                width: 100%;
+            }
+
+            .nano_40 {
+                width: 100%;
+            }
+
+            .nano_table a.nano_round_link {
+                margin-top: 10px;
             }
         }
     </style>
-</head>
-<body>
-    <div class="email-container">
-        
-        <div class="header">
-            <img src="https://cdn.reyesandfriends.cl/assets/logo/reyesandfriends-white.svg" alt="Reyes&Friends logo" width="200" height="auto">
-        </div>
-        
-        <div class="content">
-            <h1 class="title">Solicitud de Plan Web Fijo</h1>
-            
-            <p class="paragraph">
-                Estimado/a <strong>{{ user_name }}</strong>,
-            </p>
-            
-            <p class="paragraph">
-                Gracias por solicitar un Plan Web Fijo con Reyes&Friends. Hemos recibido tu solicitud exitosamente y nuestro equipo se encuentra revisándola.
-            </p>
 
-            <p class="subtitle">Detalles de tu solicitud:</p>
-            
-            <div class="paragraph email-details">
-                <strong>Código de Solicitud:</strong><br>
-                {{ request_number }}<br>
-                <strong>RUT:</strong><br>
-                {{ rut }}<br>
-                <strong>Tipo de RUT:</strong><br>
-                {{ rut_type }}<br>
-                <strong>Celular:</strong><br>
-                {{ cellphone }}
-            </div>
-            
-            <p class="paragraph">
-                Nuestro equipo técnico revisará tu solicitud y te contactaremos dentro de las próximas 24-48 horas para coordinar los siguientes pasos del proceso de solicitud.
-                Recuerda que esta solicitud es flexible y puede ajustarse según tus necesidades. Si deseas modificar algún detalle o agregar información, no dudes en comunicarlo. Nuestro objetivo es que la solicitud se adapte perfectamente a tus expectativas.
-            </p>
-            
-            <p class="paragraph contact-info-box">
-                <strong>¿Necesitas contactarnos directamente?</strong><br>
-                Si tienes alguna consulta urgente o adicional, puedes escribirnos a: 
-                <a href="mailto:contacto@reyesandfriends.cl" class="contact-email-link">contacto@reyesandfriends.cl</a>
-            </p>
-            
-            <p class="paragraph center">
-                <a href="https://reyesandfriends.cl" class="button button-white-text">Descubre más en nuestro sitio web</a>
-            </p>
-                        
-            <p class="paragraph">
-                Atentamente,<br>
-                El equipo de Reyes&Friends
-            </p>
-        </div>
-        
-        <div class="footer">
-            <p>© <script>document.write(new Date().getFullYear());</script> Reyes&Friends
-            <br>Todos los derechos reservados.</p>
-            <p class="auto-generated-text">Este email es generado automáticamente por el sistema. Por favor no responder.</p>
-        </div> 
+</head>
+
+<body class="nano_body">
+    <div class="nano_wrapper">
+        <table class="nano_table">
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="nano_padding">
+
+                            <div>
+                                <a href="https://www.reyesandfriends.cl" target="_blank">
+                                    <img src="https://cdn.reyesandfriends.cl/assets/emails/banner.png" alt="image">
+                                </a>
+                            </div>
+
+                            <div class="nano_h1">Solicitud de Plan Web Fijo</div>
+                            
+                            <div class="nano_p">
+                                Estimado/a <strong>{{ user_name }}</strong>,
+                            </div>
+                            
+                            <div class="nano_p">
+                                Gracias por solicitar un Plan Web Fijo con Reyes&Friends. Hemos recibido tu solicitud exitosamente y nuestro equipo se encuentra revisándola.
+                            </div>
+
+                            <div class="nano_h4">Detalles de tu solicitud:</div>
+                            
+                            <div class="nano_details">
+                                <strong>Código de Solicitud:</strong> {{ request_number }}<br>
+                                <strong>RUT:</strong> {{ rut }}<br>
+                                <strong>Celular:</strong> +56 {{ cellphone }}
+                            </div>
+                            
+                            <div class="nano_h4">Plan Web Seleccionado:</div>
+                            <div class="nano_details">
+                                <strong>Nombre:</strong> {{ webplan_name }}<br>
+                                <strong>Descripción:</strong> {{ webplan_description }}<br>
+                                <strong>Precio:</strong> ${{ "{:,.0f}".format(webplan_price) }} CLP<br>
+                                {% if webplan_demo_url %}
+                                    <a href="{{ webplan_demo_url }}" class="nano_demo_button" target="_blank">Visitar Demo</a>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="nano_p">
+                                Nuestro equipo técnico revisará tu solicitud y te contactaremos dentro de las próximas 24-48 horas para coordinar los siguientes pasos del proceso de solicitud.
+                            </div>
+                            
+                            <div class="nano_p">
+                                Recuerda que esta solicitud es flexible y puede ajustarse según tus necesidades. Si deseas modificar algún detalle o agregar información, no dudes en comunicarlo. Nuestro objetivo es que la solicitud se adapte perfectamente a tus expectativas.
+                            </div>
+                            
+                            <div>
+                                <div class="nano_p" style="margin-bottom: 10px !important;">
+                                    <strong>¿Necesitas contactarnos directamente?</strong><br>
+                                    Si tienes alguna consulta urgente o adicional, puedes escribirnos a: 
+                                    <a href="mailto:contacto@reyesandfriends.cl">contacto@reyesandfriends.cl</a>
+                                </div>
+                            </div>
+
+                            <div class="nano_flex">
+                                <a href="https://www.reyesandfriends.cl" class="nano_button" target="_blank">Descubre más en nuestro sitio web</a>
+                            </div>
+                            
+                            <div class="nano_p">
+                                <strong>Nota:</strong> Este email es generado automáticamente por el sistema. Por favor no responder.
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="nano_padding">
+                            <div class="nano_regards">
+                                <div class="nano_regards-text">Atentamente,</div>
+                                <div>El equipo de Reyes&Friends</div>
+                            </div>
+
+                            <div class="nano_divider"></div>
+
+                            <div class="nano_flex">
+                                <a href="https://instagram.com/reyesandfriends.cl" class="nano_icon" target="_blank">
+                                    <img src="https://cdn.reyesandfriends.cl/assets/emails/instagram.webp" alt="logo">
+                                </a>
+
+                                <a href="https://www.facebook.com/people/ReyesFriends/61580531925223/" class="nano_icon" target="_blank">
+                                    <img src="https://cdn.reyesandfriends.cl/assets/emails/facebook.png" alt="logo">
+                                </a>
+
+                                <a href="https://github.com/reyesandfriends" class="nano_icon" target="_blank">
+                                    <img src="https://cdn.reyesandfriends.cl/assets/emails/github-mark.png" alt="logo">
+                                </a>
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="nano_padding nano_bg nano_rights nano_rights-font">
+                            <div>
+                                <div>
+                                    <div>© {{ current_year }} Reyes&Friends</div>
+                                    <div>Reyes&Friends SpA</div>
+                                    <div>Todos los derechos reservados.</div>
+                                </div>
+                            </div>
+
+                            <div class="nano_divider"></div>
+
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </body>
-</html>
+
 </html>

@@ -27,13 +27,13 @@ const PhaseFour: React.FC<PhaseFourProps> = ({ values, errors, handleChange, val
                         name="hostingService"
                         value={values.hostingService}
                         onChange={handleChange}
-                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                     >
                         <option value="" disabled>Selecciona una opción</option>
                         <option value="yes">Sí</option>
                         <option value="no">No</option>
                     </select>
-                    {errors.hostingService && <p className="text-red-500 text-sm mt-1">{errors.hostingService}</p>}
+                    {errors.hostingService && <p className="text-reyes-light text-sm mt-1">{errors.hostingService}</p>}
                     {values.hostingService === "yes" && (
                         <p className="mt-2 text-sm text-green-400">
                             ¡Excelente elección! Nuestro servicio de hosting se encargará de todo el mantenimiento y la seguridad de tu proyecto, tu solo recibirás los beneficios.
@@ -55,14 +55,14 @@ const PhaseFour: React.FC<PhaseFourProps> = ({ values, errors, handleChange, val
                         name="hasDomain"
                         value={values.hasDomain}
                         onChange={handleChange}
-                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                        className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                     >
                         <option value="" disabled>Selecciona una opción</option>
                         <option value="yes">Sí, utilizaré mi dominio en este proyecto</option>
                         <option value="no">No, voy a necesitar un dominio</option>
                         <option value="notSure">No estoy seguro</option>
                     </select>
-                    {errors.hasDomain && <p className="text-red-500 text-sm mt-1">{errors.hasDomain}</p>}
+                    {errors.hasDomain && <p className="text-reyes-light text-sm mt-1">{errors.hasDomain}</p>}
                 </div>
 
                 {values.hasDomain === "yes" && (
@@ -77,9 +77,9 @@ const PhaseFour: React.FC<PhaseFourProps> = ({ values, errors, handleChange, val
                             value={values.domainName}
                             onChange={handleChange}
                             placeholder="Ejemplo: www.miempresa.com"
-                            className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                            className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                         />
-                        {errors.domainName && <p className="text-red-500 text-sm mt-1">{errors.domainName}</p>}
+                        {errors.domainName && <p className="text-reyes-light text-sm mt-1">{errors.domainName}</p>}
                     </div>
                 )}
 
@@ -95,9 +95,9 @@ const PhaseFour: React.FC<PhaseFourProps> = ({ values, errors, handleChange, val
                             value={values.domainSuggestion}
                             onChange={handleChange}
                             placeholder="Ejemplo: www.miempresa.com"
-                            className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+                            className="w-full p-3 rounded-sm bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-reyes"
                         />
-                        {errors.domainSuggestion && <p className="text-red-500 text-sm mt-1">{errors.domainSuggestion}</p>}
+                        {errors.domainSuggestion && <p className="text-reyes-light text-sm mt-1">{errors.domainSuggestion}</p>}
                     </div>
                 )}
 
