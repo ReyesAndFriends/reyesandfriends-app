@@ -1,6 +1,8 @@
 import os
 from flask import request, abort
 from functools import wraps
+from app.models import NotAllowedIpRecord
+from app import db
 
 try:
     allowed_ips_env = os.getenv("ALLOWED_IPS", "")
@@ -36,13 +38,20 @@ def check_ip_allowed(f):
         
         client_ip = get_client_ip()
         if client_ip not in allowed_ips:
+
+            # Register Not authorized IP access attempt
+            not_allowed_ip_record = NotAllowedIpRecord(
+                ip_address=client_ip,
+                url_accessed=request.url
+            )
+
+            db.session.add(not_allowed_ip_record)
+            db.session.commit()
+
             abort(
                 403,
                 description=(
-                    f"Lo sentimos, su dirección IP ({client_ip}) no está autorizada "
-                    "para acceder a este recurso. Regrese a la página anterior o vaya "
-                    "a ver cualquier otra cosa, si vos sabes que no deberías estar viendo esto! =)"
-                )
+                    f"Lo sentimos, su dirección IP ({client_ip}) no está autorizada para acceder a este recurso. Por favor, regrese a la página anterior.")
             )
         return f(*args, **kwargs)
     return decorated_function

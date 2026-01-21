@@ -374,3 +374,10 @@ class BannedRut(db.Model):
             'rut': self.rut,
             'created_at': self.created_at.isoformat() if self.created_at else None
         }
+
+class NotAllowedIpRecord(db.Model):
+    __tablename__ = 'not_allowed_ip_records'
+    id = db.Column(db.Integer, primary_key=True)
+    ip_address = db.Column(db.String(45), nullable=False)
+    url_accessed = db.Column(db.String(200), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
