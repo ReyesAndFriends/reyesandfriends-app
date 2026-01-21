@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from app.models import WebPlanList, WebPlanRequest
+from app.models import WebPlanRequest
 from . import webPlans
 from app.utils.middleware.check_ip_allowed import check_ip_allowed
 

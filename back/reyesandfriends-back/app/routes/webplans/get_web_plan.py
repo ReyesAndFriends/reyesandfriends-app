@@ -3,8 +3,6 @@ from app.models import WebPlanRequest
 from app.utils.middleware.check_ip_allowed import check_ip_allowed
 from . import webPlans
 
-get_webPlan_bp = Blueprint('get_webPlan', __name__)
-
 @webPlans.route('/<int:plan_id>', methods=['GET'])
 @check_ip_allowed
 def get_web_plan(plan_id):
