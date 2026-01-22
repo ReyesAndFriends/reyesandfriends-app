@@ -9,7 +9,8 @@ def get_web_planes():
         result = []
         for plan in web_plans:
             plan_dict = plan.to_dict()
-            images = WebPlanImage.query.filter_by(id=plan.id).all()
+
+            images = WebPlanImage.query.filter_by(webplan_id=plan.id).limit(1).all()
             plan_dict['images'] = [image.to_dict() for image in images]
             result.append(plan_dict)
         

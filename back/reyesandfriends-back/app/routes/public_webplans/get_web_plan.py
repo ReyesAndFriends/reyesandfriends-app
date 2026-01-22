@@ -13,7 +13,8 @@ def get_web_plan_by_slug(slug):
             }), 404
         
         plan_dict = plan.to_dict()
-        images = WebPlanImage.query.filter_by(id=plan.id).all()
+
+        images = WebPlanImage.query.filter_by(webplan_id=plan.id).all()
         plan_dict['images'] = [image.to_dict() for image in images]
         
         return jsonify({

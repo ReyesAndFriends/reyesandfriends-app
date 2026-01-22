@@ -172,17 +172,19 @@ def init_database():
         # Web Plan images and data
         web_plans_data = [
             {
-                "name": "Lorem Ipsum Web Plan",
-                "slug": "lorem-ipsum",
-                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                "demo_url": "https://lorem.ipsum.demo/",
-                "price_clp": 123456,
-                "number_of_months": 12,
-                "final_price_clp": None,
-                "images": [
-                    "https://lorem.ipsum.demo/img1.jpg",
-                    "https://lorem.ipsum.demo/img2.jpg"
-                ]
+            "name": "Landing Pro 2026",
+            "slug": "landing-pro-2026",
+            "description": "Página web tipo landing page profesional, ideal para presentar servicios, personas, tu negocio o productos de manera efectiva y atractiva. Incluye diseño responsivo, optimización SEO básica y formularios de contacto.",
+            "demo_url": "https://demo.reyesandfriends.cl/landing-pro-2026",
+            "price_clp": 10000,
+            "number_of_months": 12,
+            "final_price_clp": 10000 * 12,
+            "images": [
+                "https://reyesandfriends.s3.us-east-2.amazonaws.com/landing-pro/landing-pro-home.png",
+                "https://reyesandfriends.s3.us-east-2.amazonaws.com/landing-pro/about-section.png",
+                "https://reyesandfriends.s3.us-east-2.amazonaws.com/landing-pro/clients-section.png",
+                "https://reyesandfriends.s3.us-east-2.amazonaws.com/landing-pro/contact-section.png",
+            ]
             },
         ]
 
