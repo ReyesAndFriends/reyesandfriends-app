@@ -14,7 +14,7 @@ sys.path.insert(0, project_root)
 
 from app import create_app
 from app.models import db, ContactCategory, ContactStatus, ProjectQuoteStatus, ProjectQuoteCategory, WebPlanList
-from app.models import BannedRut
+from app.models import BannedRut, WebPlanImage
 
 def populate_fake_ruts():
     """
@@ -38,6 +38,42 @@ def populate_fake_ruts():
             print(f"Fake RUT inserted: {rut}")
         else:
             print(f"Fake RUT already exists: {rut}")
+
+def insert_web_plans_with_images(web_plans_data):
+    """
+    Insert web plans and their images from a JSON-like structure.
+    """
+    from app.models import WebPlanList, WebPlanImage
+
+    print("Inserting web plan list data with images...")
+    for plan_data in web_plans_data:
+        existing_plan = WebPlanList.query.filter_by(slug=plan_data["slug"]).first()
+        if not existing_plan:
+            plan = WebPlanList(
+                name=plan_data["name"],
+                slug=plan_data["slug"],
+                description=plan_data.get("description"),
+                demo_url=plan_data.get("demo_url"),
+                price_clp=plan_data.get("price_clp"),
+                number_of_months=plan_data.get("number_of_months", 12),
+                final_price_clp=plan_data.get("final_price_clp"),
+            )
+            db.session.add(plan)
+            db.session.flush()  # Get plan.id before commit
+
+            print(f"Web plan inserted: {plan_data['name']}")
+
+            # Insert images if present
+            images = plan_data.get("images", [])
+            for img_url in images:
+                img = WebPlanImage(
+                    webplan_id=plan.id,
+                    image_url=img_url
+                )
+                db.session.add(img)
+                print(f"  Image inserted: {img_url}")
+        else:
+            print(f"Web plan already exists: {plan_data['name']}")
 
 def init_database():
     """Initialize the database by creating tables and initial data."""
@@ -133,31 +169,24 @@ def init_database():
             else:
                 print(f"Project quote category already exists: {category_data['name']}")
 
-        web_plan_list_data = [
+        # Web Plan images and data
+        web_plans_data = [
             {
-                "name": "Proyecto LandingPro",
-                "slug": "landingpro",
-                "description": "Página web tipo landing page profesional, ideal para presentar servicios, personas, tu negocio o productos de manera efectiva y atractiva.",
-                "demo_url": "https://demo.landingpro.reyesandfriends.cl/",
-                "price_clp": 99990,
+                "name": "Lorem Ipsum Web Plan",
+                "slug": "lorem-ipsum",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "demo_url": "https://lorem.ipsum.demo/",
+                "price_clp": 123456,
+                "number_of_months": 12,
+                "final_price_clp": None,
+                "images": [
+                    "https://lorem.ipsum.demo/img1.jpg",
+                    "https://lorem.ipsum.demo/img2.jpg"
+                ]
             },
         ]
 
-        print("Inserting web plan list data...")
-        for plan_data in web_plan_list_data:
-            existing_plan = WebPlanList.query.filter_by(slug=plan_data["slug"]).first()
-            if not existing_plan:
-                plan = WebPlanList(
-                    name=plan_data["name"],
-                    slug=plan_data["slug"],
-                    description=plan_data["description"],
-                    demo_url=plan_data["demo_url"],
-                    price_clp=plan_data["price_clp"]
-                )
-                db.session.add(plan)
-                print(f"Web plan inserted: {plan_data['name']}")
-            else:
-                print(f"Web plan already exists: {plan_data['name']}")
+        insert_web_plans_with_images(web_plans_data)
 
         # Save changes
         db.session.commit()

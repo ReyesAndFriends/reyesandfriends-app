@@ -302,6 +302,8 @@ class WebPlanList(db.Model):
     description = db.Column(db.Text, nullable=True)
     demo_url = db.Column(db.String(200), nullable=True)
     price_clp = db.Column(db.Float, nullable=False)
+    number_of_months = db.Column(db.Integer, nullable=False, default=12)
+    final_price_clp = db.Column(db.Float, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def to_dict(self):
@@ -311,6 +313,24 @@ class WebPlanList(db.Model):
             'slug': self.slug,
             'description': self.description,
             'price_clp': self.price_clp,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
+    
+class WebPlanImage(db.Model):
+    __tablename__ = 'web_plan_images'
+
+    id = db.Column(db.Integer, primary_key=True)
+    webplan_id = db.Column(db.Integer, db.ForeignKey('web_plan_lists.id'), nullable=False)
+    image_url = db.Column(db.String(200), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    webplan = db.relationship('WebPlanList', backref='images', lazy=True)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'webplan_id': self.webplan_id,
+            'image_url': self.image_url,
             'created_at': self.created_at.isoformat() if self.created_at else None
         }
 
