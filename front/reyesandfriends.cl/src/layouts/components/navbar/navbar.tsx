@@ -9,6 +9,25 @@ import { motion, AnimatePresence } from "framer-motion"
 
 import ChristmasLights from "../christmas-lights/ChristmasLights"
 
+const animationVariants = {
+    closed: {
+        opacity: 0,
+        y: -30,
+        transition: {
+            duration: 0.28,
+            ease: [0.4, 0.0, 0.2, 1]
+        }
+    },
+    open: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.32,
+            ease: [0.4, 0.0, 0.2, 1]
+        }
+    }
+}
+
 const Navbar: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const { isDropdownOpen, toggleDropdown, closeDropdown, dropdownOptions } = useNavOptions()
@@ -88,7 +107,146 @@ const Navbar: React.FC = () => {
                         <img src="/img/logo/logo_white_2.svg" className="h-12 mb-2 pointer-events-none" alt="Reyes&Friends" />
                     </Link>
                     
-                    <ul className={`md:flex space-x-0 md:space-x-8 text-base ${isMenuOpen ? "flex flex-col space-y-4 absolute top-full left-0 w-full bg-black p-4 z-50" : "hidden"} md:static md:flex-row md:space-y-0`}>
+                    <AnimatePresence>
+                    {isMenuOpen && (
+                        <motion.ul
+                            key="mobile-menu"
+                            initial="closed"
+                            animate="open"
+                            exit="closed"
+                            variants={animationVariants}
+                            className="md:hidden flex flex-col space-y-4 absolute top-full left-0 w-full bg-black p-4 z-50"
+                            style={{ originY: 0 }}
+                        >
+                            <li>
+                                <Link
+                                    className="block font-medium hover:underline transition-all duration-200"
+                                    to="/web-planes"
+                                >
+                                    Planes Web
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    className="block font-medium hover:underline transition-all duration-200"
+                                    to="/quote-project"
+                                >
+                                    Cotizar Proyecto
+                                </Link>
+                            </li>
+                            <li className="relative" ref={dropdownRef}>
+                                <button
+                                    onClick={handleDropdownToggle}
+                                    className="hover:underline focus:outline-none flex items-center font-medium transition-all duration-200"
+                                >
+                                    Nuestros Servicios <ChevronDown className="ml-1" size={14} />
+                                </button>
+                                <AnimatePresence>
+                                {isDropdownOpen && (
+                                    <motion.ul
+                                        key="services-dropdown"
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -10 }}
+                                        transition={{ duration: 0.18 }}
+                                        className={`bg-white text-black mt-2 shadow-xl rounded-lg border z-50 ${isMenuOpen ? "w-full mt-2 py-3" : "md:absolute md:mt-2 md:py-4 md:w-56"}`}
+                                    >
+                                        {serviceList.map(option => (
+                                            <li key={option.path}>
+                                                <Link
+                                                    className="block w-full px-3 py-2.5 hover:bg-gray-100 text-left text-sm font-medium transition-colors duration-200 flex items-center gap-2"
+                                                    to={option.path}
+                                                    onClick={closeDropdown}
+                                                >
+                                                    {option.icon}
+                                                    {option.name}
+                                                </Link>
+                                            </li>
+                                        ))}
+                                        <li>
+                                            <Link
+                                                className="block w-full px-3 py-2.5 hover:bg-gray-100 text-left text-sm font-medium transition-colors duration-200 flex items-center gap-2"
+                                                to="/services"
+                                                onClick={closeDropdown}
+                                            >
+                                                <Menu size={16} className="inline mr-2" />
+                                                Lista completa
+                                            </Link>
+                                        </li>
+                                    </motion.ul>
+                                )}
+                                </AnimatePresence>
+                            </li>
+                            <li className="relative" ref={helpDropdownRef}>
+                                <button
+                                    onClick={() => setIsHelpDropdownOpen(!isHelpDropdownOpen)}
+                                    className="hover:underline focus:outline-none flex items-center font-medium transition-all duration-200"
+                                >
+                                    Nosotros <ChevronDown className="ml-1" size={14} />
+                                </button>
+                                <AnimatePresence>
+                                {isHelpDropdownOpen && (
+                                    <motion.ul
+                                        key="help-dropdown"
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -10 }}
+                                        transition={{ duration: 0.18 }}
+                                        className={`bg-white text-black mt-2 shadow-xl rounded-lg border z-50 ${isMenuOpen ? "w-full mt-2 py-3" : "md:absolute md:mt-2 md:py-4 md:w-52"}`}
+                                    >
+                                        <li>
+                                            <Link
+                                                className="block w-full px-3 py-2.5 hover:bg-gray-100 text-left text-sm font-medium transition-colors duration-200 flex items-center gap-2"
+                                                to="/social-media"
+                                                onClick={() => setIsHelpDropdownOpen(false)}
+                                            >
+                                                <HandHeart size={16} className="mr-2" />
+                                                Redes Sociales
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link
+                                                className="block w-full px-3 py-2.5 hover:bg-gray-100 text-left text-sm font-medium transition-colors duration-200 flex items-center gap-2"
+                                                to="/about"
+                                                onClick={() => setIsHelpDropdownOpen(false)}
+                                            >
+                                                <Info size={16} className="mr-2" />
+                                                Sobre nosotros
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link
+                                                className="block w-full px-3 py-2.5 hover:bg-gray-100 text-left text-sm font-medium transition-colors duration-200 flex items-center gap-2"
+                                                to="/contact"
+                                                onClick={() => setIsHelpDropdownOpen(false)}
+                                            >
+                                                <Mail size={16} className="mr-2" />
+                                                Contáctanos
+                                            </Link>
+                                        </li>
+                                    </motion.ul>
+                                )}
+                                </AnimatePresence>
+                            </li>
+                            
+                            {productionMode && clientsPortalUrl && (
+                                <li className="md:hidden">
+                                    <a
+                                        href={clientsPortalUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-2 px-4 py-2 bg-reyes hover:bg-reyes-dark text-white font-medium rounded transition-colors duration-200"
+                                    >
+                                        <LogIn size={16} />
+                                        Área clientes
+                                    </a>
+                                </li>
+                            )}
+                        </motion.ul>
+                    )}
+                    </AnimatePresence>
+
+                    <ul className={`md:flex space-x-0 md:space-x-8 text-base hidden md:static md:flex-row md:space-y-0`}>
                         <li>
                             <Link
                                 className="block font-medium hover:underline transition-all duration-200"
