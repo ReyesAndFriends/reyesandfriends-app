@@ -29,7 +29,7 @@ function WebPlanesQuote() {
     const [cellphone, setCellphone] = useState("");
     const [address, setAddress] = useState("");
     const [regionId, setRegionId] = useState<number | "">("");
-    const [comunaId, setComunaId] = useState<number | "">("");
+    const [communeId, setCommuneId] = useState<number | "">("");
 
     const [regions, setRegions] = useState<{ id: number; name: string }[]>([]);
     const [communes, setCommunes] = useState<{ id: number; name: string }[]>([]);
@@ -44,13 +44,13 @@ function WebPlanesQuote() {
 
     useEffect(() => {
         if (regionId) {
-            setComunaId(""); // reset commune
+            setCommuneId(""); // reset commune
             axios.get(`${API_URL}/utils/communes/${regionId}`)
                 .then(res => setCommunes(res.data))
                 .catch(() => setCommunes([]));
         } else {
             setCommunes([]);
-            setComunaId("");
+            setCommuneId("");
         }
     }, [regionId]);
 
@@ -71,7 +71,7 @@ function WebPlanesQuote() {
 
         if (!address.trim()) errors.address = "Dirección requerida";
         if (!regionId) errors.region = "Región requerida";
-        if (!comunaId) errors.comuna = "Comuna requerida";
+        if (!communeId) errors.commune = "Comuna requerida";
 
         return errors;
     };
@@ -85,7 +85,7 @@ function WebPlanesQuote() {
         /^\d{9}$/.test(cellphone) &&
         address.trim() &&
         regionId &&
-        comunaId;
+        communeId;
 
     const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFirstName(capitalizeWords(e.target.value).slice(0, MAX_FIRST_NAME_LEN));
@@ -113,9 +113,9 @@ function WebPlanesQuote() {
         setRegionId(value);
         setFormErrors({});
     };
-    const handleComunaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleCommuneChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value ? Number(e.target.value) : "";
-        setComunaId(value);
+        setCommuneId(value);
         setFormErrors({});
     };
 
@@ -124,6 +124,27 @@ function WebPlanesQuote() {
         const errors = validateFields();
         setFormErrors(errors);
         if (Object.keys(errors).length > 0) return;
+    };
+
+    // Build the JSON object from form state
+    const buildFormJson = () => ({
+        first_name: firstName.trim(),
+        last_name: lastName.trim(),
+        email: email.trim(),
+        cellphone: cellphone.trim() ? `+56${cellphone.trim()}` : "",
+        address: address.trim(),
+        region_id: regionId,
+        commune_id: communeId,
+        plan_slug: slug,
+    });
+
+    // Print the JSON to the console on submit
+    const handleFormSubmit = () => {
+        const errors = validateFields();
+        setFormErrors(errors);
+        if (Object.keys(errors).length > 0) return;
+        const json = buildFormJson();
+        console.log("Form JSON:", json);
     };
 
     return (
@@ -155,78 +176,91 @@ function WebPlanesQuote() {
                             <div className="lg:col-span-2">
                                 <form onSubmit={handleSubmit} noValidate>
                                     <div>
-                                        <h2 className="text-xl text-white font-semibold mb-6">Detalles de Entrega</h2>
+                                        <h2 className="text-xl text-white font-semibold mb-6">Formulario de Información</h2>
+                                        <p className="text-white mb-6">Con esta información podremos contactarte y procesar tu solicitud de manera eficiente.</p>
                                         <div className="grid lg:grid-cols-2 gap-y-6 gap-x-4">
-                                            <div>
-                                                <label className="text-sm text-white font-medium block mb-2">Nombre (Requerido)</label>
+                                            <div className="col-span-1">
+                                                <label htmlFor="first_name" className="block text-gray-300 font-bold mb-2">Nombre (requerido)</label>
                                                 <input
                                                     type="text"
-                                                    placeholder="Ingrese su nombre"
-                                                    className={`px-4 p-3 rounded-sm bg-zinc-800 border ${formErrors.first_name ? "border-red-500" : "border-zinc-700"} text-white w-full text-sm focus:ring-2 focus:ring-reyes`}
+                                                    id="first_name"
+                                                    name="first_name"
+                                                    maxLength={MAX_FIRST_NAME_LEN}
+                                                    className={`w-full p-3 rounded-sm bg-zinc-800 text-white border ${formErrors.first_name ? "border-red-500" : "border-zinc-700"} focus:outline-none focus:ring-2 focus:ring-reyes`}
+                                                    placeholder="Ingresa tu nombre"
                                                     value={firstName}
                                                     onChange={handleFirstNameChange}
-                                                    maxLength={MAX_FIRST_NAME_LEN}
                                                 />
-                                                {formErrors.first_name && <p className="text-red-400 text-xs mt-1">{formErrors.first_name}</p>}
+                                                {formErrors.first_name && <p className="text-red-400 text-sm">{formErrors.first_name}</p>}
                                             </div>
-                                            <div>
-                                                <label className="text-sm text-white font-medium block mb-2">Apellido (Requerido)</label>
+                                            <div className="col-span-1">
+                                                <label htmlFor="last_name" className="block text-gray-300 font-bold mb-2">Apellido (requerido)</label>
                                                 <input
                                                     type="text"
-                                                    placeholder="Ingrese su apellido"
-                                                    className={`px-4 p-3 rounded-sm bg-zinc-800 border ${formErrors.last_name ? "border-red-500" : "border-zinc-700"} text-white w-full text-sm focus:ring-2 focus:ring-reyes`}
+                                                    id="last_name"
+                                                    name="last_name"
+                                                    maxLength={MAX_LAST_NAME_LEN}
+                                                    className={`w-full p-3 rounded-sm bg-zinc-800 text-white border ${formErrors.last_name ? "border-red-500" : "border-zinc-700"} focus:outline-none focus:ring-2 focus:ring-reyes`}
+                                                    placeholder="Ingresa tu apellido"
                                                     value={lastName}
                                                     onChange={handleLastNameChange}
-                                                    maxLength={MAX_LAST_NAME_LEN}
                                                 />
-                                                {formErrors.last_name && <p className="text-red-400 text-xs mt-1">{formErrors.last_name}</p>}
+                                                {formErrors.last_name && <p className="text-red-400 text-sm">{formErrors.last_name}</p>}
                                             </div>
-                                            <div>
-                                                <label className="text-sm text-white font-medium block mb-2">Correo electrónico (Requerido)</label>
+                                            <div className="col-span-1">
+                                                <label htmlFor="email" className="block text-gray-300 font-bold mb-2">Correo electrónico (requerido)</label>
                                                 <input
                                                     type="email"
-                                                    placeholder="Ingrese su correo electrónico"
-                                                    className={`px-4 p-3 rounded-sm bg-zinc-800 border ${formErrors.email ? "border-red-500" : "border-zinc-700"} text-white w-full text-sm focus:ring-2 focus:ring-reyes`}
+                                                    id="email"
+                                                    name="email"
+                                                    maxLength={MAX_EMAIL_LEN}
+                                                    className={`w-full p-3 rounded-sm bg-zinc-800 text-white border ${formErrors.email ? "border-red-500" : "border-zinc-700"} focus:outline-none focus:ring-2 focus:ring-reyes`}
+                                                    placeholder="Ingresa tu correo electrónico"
                                                     value={email}
                                                     onChange={handleEmailChange}
-                                                    maxLength={MAX_EMAIL_LEN}
                                                 />
-                                                {formErrors.email && <p className="text-red-400 text-xs mt-1">{formErrors.email}</p>}
+                                                {formErrors.email && <p className="text-red-400 text-sm">{formErrors.email}</p>}
                                             </div>
-                                            <div>
-                                                <label className="text-sm text-white font-medium block mb-2">Teléfono (Requerido)</label>
+                                            <div className="col-span-1">
+                                                <label htmlFor="cellphone" className="block text-gray-300 font-bold mb-2">Número de Teléfono (requerido)</label>
                                                 <div className="flex">
-                                                    <span className="inline-flex items-center px-3 rounded-l-md bg-zinc-800 text-white border border-r-0 border-zinc-700 select-none">
+                                                    <span className="inline-flex items-center px-3 rounded-l-sm bg-zinc-800 text-white border border-r-0 border-zinc-700 select-none">
                                                         +56
                                                     </span>
                                                     <input
                                                         type="tel"
-                                                        placeholder="912345678"
-                                                        className={`px-4 p-3 rounded-sm bg-zinc-800 border ${formErrors.cellphone ? "border-red-500" : "border-zinc-700"} border-l-0 text-white w-full text-sm focus:ring-2 focus:ring-reyes`}
-                                                        value={cellphone}
-                                                        onChange={handleCellphoneChange}
+                                                        id="cellphone"
+                                                        name="cellphone"
                                                         maxLength={9}
+                                                        className={`w-full p-3 rounded-r-sm bg-zinc-800 text-white border ${formErrors.cellphone ? "border-red-500" : "border-zinc-700"} border-l-0 focus:outline-none focus:ring-2 focus:ring-reyes text-sm`}
+                                                        placeholder="912345678"
                                                         pattern="[0-9]{9}"
                                                         inputMode="numeric"
+                                                        value={cellphone}
+                                                        onChange={handleCellphoneChange}
                                                     />
                                                 </div>
-                                                {formErrors.cellphone && <p className="text-red-400 text-xs mt-1">{formErrors.cellphone}</p>}
+                                                {formErrors.cellphone && <p className="text-red-400 text-sm">{formErrors.cellphone}</p>}
                                             </div>
-                                            <div>
-                                                <label className="text-sm text-white font-medium block mb-2">Dirección (Requerido)</label>
+                                            <div className="col-span-1">
+                                                <label htmlFor="address" className="block text-gray-300 font-bold mb-2">Dirección (requerido)</label>
                                                 <input
                                                     type="text"
-                                                    placeholder="Ingrese su dirección"
-                                                    className={`px-4 p-3 rounded-sm bg-zinc-800 border ${formErrors.address ? "border-red-500" : "border-zinc-700"} text-white w-full text-sm focus:ring-2 focus:ring-reyes`}
+                                                    id="address"
+                                                    name="address"
+                                                    className={`w-full p-3 rounded-sm bg-zinc-800 text-white border ${formErrors.address ? "border-red-500" : "border-zinc-700"} focus:outline-none focus:ring-2 focus:ring-reyes`}
+                                                    placeholder="Ingresa tu dirección"
                                                     value={address}
                                                     onChange={handleAddressChange}
                                                 />
-                                                {formErrors.address && <p className="text-red-400 text-xs mt-1">{formErrors.address}</p>}
+                                                {formErrors.address && <p className="text-red-400 text-sm">{formErrors.address}</p>}
                                             </div>
-                                            <div>
-                                                <label className="text-sm text-white font-medium block mb-2">Región (Requerido)</label>
+                                            <div className="col-span-1">
+                                                <label htmlFor="region" className="block text-gray-300 font-bold mb-2">Región (requerido)</label>
                                                 <select
-                                                    className={`px-4 p-3 rounded-sm bg-zinc-800 border ${formErrors.region ? "border-red-500" : "border-zinc-700"} text-white w-full text-sm focus:ring-2 focus:ring-reyes`}
+                                                    id="region"
+                                                    name="region"
+                                                    className={`w-full p-3 h-[48px] rounded-sm bg-zinc-800 text-white border ${formErrors.region ? "border-red-500" : "border-zinc-700"} focus:outline-none focus:ring-2 focus:ring-reyes`}
                                                     value={regionId}
                                                     onChange={handleRegionChange}
                                                 >
@@ -235,14 +269,16 @@ function WebPlanesQuote() {
                                                         <option key={region.id} value={region.id}>{region.name}</option>
                                                     ))}
                                                 </select>
-                                                {formErrors.region && <p className="text-red-400 text-xs mt-1">{formErrors.region}</p>}
+                                                {formErrors.region && <p className="text-red-400 text-sm">{formErrors.region}</p>}
                                             </div>
-                                            <div>
-                                                <label className="text-sm text-white font-medium block mb-2">Comuna (Requerido)</label>
+                                            <div className="col-span-1">
+                                                <label htmlFor="commune" className="block text-gray-300 font-bold mb-2">Comuna (requerido)</label>
                                                 <select
-                                                    className={`px-4 p-3 rounded-sm bg-zinc-800 border ${formErrors.comuna ? "border-red-500" : "border-zinc-700"} text-white w-full text-sm focus:ring-2 focus:ring-reyes`}
-                                                    value={comunaId}
-                                                    onChange={handleComunaChange}
+                                                    id="commune"
+                                                    name="commune"
+                                                    className={`w-full p-3 h-[48px] rounded-sm bg-zinc-800 text-white border ${formErrors.commune ? "border-red-500" : "border-zinc-700"} focus:outline-none focus:ring-2 focus:ring-reyes`}
+                                                    value={communeId}
+                                                    onChange={handleCommuneChange}
                                                     disabled={!regionId || communes.length === 0}
                                                 >
                                                     {(!regionId || communes.length === 0) ? (
@@ -250,11 +286,11 @@ function WebPlanesQuote() {
                                                     ) : (
                                                         <option value="">Seleccione una comuna</option>
                                                     )}
-                                                    {communes.map(comuna => (
-                                                        <option key={comuna.id} value={comuna.id}>{comuna.name}</option>
+                                                    {communes.map(commune => (
+                                                        <option key={commune.id} value={commune.id}>{commune.name}</option>
                                                     ))}
                                                 </select>
-                                                {formErrors.comuna && <p className="text-red-400 text-xs mt-1">{formErrors.comuna}</p>}
+                                                {formErrors.commune && <p className="text-red-400 text-sm">{formErrors.commune}</p>}
                                             </div>
                                         </div>
                                     </div>
@@ -297,7 +333,7 @@ function WebPlanesQuote() {
                                         type="button"
                                         className={`w-full bg-reyes text-white font-bold py-3 rounded-sm transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed${isFormValid ? " hover:bg-reyes-dark" : ""}`}
                                         disabled={!isFormValid}
-                                        // onClick= Logic here
+                                        onClick={handleFormSubmit}
                                     >
                                         Solicitar Plan Web
                                     </button>
