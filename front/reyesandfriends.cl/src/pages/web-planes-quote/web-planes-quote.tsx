@@ -36,6 +36,10 @@ function WebPlanesQuote() {
 
     const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
 
+    const [submitLoading, setSubmitLoading] = useState(false);
+    const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
+    const [submitError, setSubmitError] = useState<string | null>(null);
+
     useEffect(() => {
         axios.get(`${API_URL}/utils/regions`)
             .then(res => setRegions(res.data))
@@ -123,6 +127,8 @@ function WebPlanesQuote() {
         e.preventDefault();
         const errors = validateFields();
         setFormErrors(errors);
+        setSubmitError(null);
+        setSubmitSuccess(null);
         if (Object.keys(errors).length > 0) return;
     };
 
@@ -139,12 +145,34 @@ function WebPlanesQuote() {
     });
 
     // Print the JSON to the console on submit
-    const handleFormSubmit = () => {
+    const handleFormSubmit = async () => {
         const errors = validateFields();
         setFormErrors(errors);
+        setSubmitError(null);
+        setSubmitSuccess(null);
         if (Object.keys(errors).length > 0) return;
         const json = buildFormJson();
-        console.log("Form JSON:", json);
+        setSubmitLoading(true);
+        try {
+            const res = await axios.post(`${API_URL}/web_planes/request`, json);
+            setSubmitSuccess("¡Solicitud enviada con éxito! Pronto te contactaremos.");
+            setFirstName("");
+            setLastName("");
+            setEmail("");
+            setCellphone("");
+            setAddress("");
+            setRegionId("");
+            setCommuneId("");
+            setFormErrors({});
+        } catch (err: any) {
+            if (err.response?.data?.error) {
+                setSubmitError(err.response.data.error);
+            } else {
+                setSubmitError("Ocurrió un error al enviar la solicitud.");
+            }
+        } finally {
+            setSubmitLoading(false);
+        }
     };
 
     return (
@@ -329,13 +357,19 @@ function WebPlanesQuote() {
                                     </>
                                 )}
                                 <div className="space-y-4 mt-8">
+                                    {submitSuccess && (
+                                        <div className="bg-green-700 text-white text-center py-2 rounded">{submitSuccess}</div>
+                                    )}
+                                    {submitError && (
+                                        <div className="bg-red-700 text-white text-center py-2 rounded">{submitError}</div>
+                                    )}
                                     <button
                                         type="button"
                                         className={`w-full bg-reyes text-white font-bold py-3 rounded-sm transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed${isFormValid ? " hover:bg-reyes-dark" : ""}`}
-                                        disabled={!isFormValid}
+                                        disabled={!isFormValid || submitLoading}
                                         onClick={handleFormSubmit}
                                     >
-                                        Solicitar Plan Web
+                                        {submitLoading ? "Enviando..." : "Solicitar Plan Web"}
                                     </button>
                                     <button
                                         type="button"

@@ -379,11 +379,12 @@ class WebPlanRequest(db.Model):
     request_number = db.Column(db.String(20), unique=True, nullable=False)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
-    user_email = db.Column(db.String(120), nullable=False)
-    rut = db.Column(db.String(20), nullable=False)
+    email = db.Column(db.String(120), nullable=False)
     webplan_id = db.Column(db.Integer, db.ForeignKey('web_plan_lists.id'), nullable=True)
+    region = db.Column(db.String(100), nullable=True)
+    commune = db.Column(db.String(100), nullable=True)
     cellphone = db.Column(db.String(20), nullable=False)
-    whatsapp_response = db.Column(db.Boolean, nullable=False, default=True)
+    address = db.Column(db.String(255), nullable=False)  # <-- Nuevo campo
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def to_dict(self):
@@ -392,11 +393,12 @@ class WebPlanRequest(db.Model):
             'request_number': self.request_number,
             'first_name': self.first_name,
             'last_name': self.last_name,
-            'user_email': self.user_email,
-            'rut': self.rut,
+            'email': self.email,
             'webplan_id': self.webplan_id,
+            'region': self.region,
+            'commune': self.commune,
             'cellphone': self.cellphone,
-            'whatsapp_response': self.whatsapp_response,
+            'address': self.address,  # <-- Nuevo campo en dict
             'created_at': self.created_at.isoformat() if self.created_at else None
         }
 
