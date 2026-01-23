@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useGetWebPlanDetail } from "./hooks/useGetWebPlanDetail";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Info } from "lucide-react";
 
 const WebPlanesDetail = () => {
     const { slug } = useParams<{ slug: string }>();
@@ -32,18 +32,25 @@ const WebPlanesDetail = () => {
                 <div className="p-4 lg:max-w-7xl max-w-4xl mx-auto">
 
                     {loading && (
-                        <div className="text-center py-12 text-xl font-semibold text-white">Cargando...</div>
+                        <div className="min-h-screen flex items-center justify-center bg-black py-12 rounded-lg">
+                            <div className="flex flex-col items-center">
+                                <div className="text-gray-400 text-xl font-semibold">Cargando...</div>
+                            </div>
+                        </div>
                     )}
 
                     {error && (
-                        <div className="text-center py-12">
-                            <div className="text-red-400 mb-4">{error}</div>
-                            <button
-                                onClick={retry}
-                                className="bg-reyes hover:bg-reyes-dark text-white px-6 py-3 rounded font-semibold transition-all"
-                            >
-                                Reintentar
-                            </button>
+                        <div className="min-h-screen flex items-center justify-center bg-black py-12 rounded-lg">
+                            <div className="flex flex-col items-center">
+                                <h1 className="text-2xl md:text-4xl font-bold text-white mb-4">Error</h1>
+                                <div className="text-reyes-light mb-4 font-semibold">{error}</div>
+                                <button
+                                    onClick={retry}
+                                    className="bg-reyes hover:bg-reyes-dark text-white px-6 py-3 rounded font-semibold transition-all"
+                                >
+                                    Reintentar
+                                </button>
+                            </div>
                         </div>
                     )}
 
@@ -72,8 +79,8 @@ const WebPlanesDetail = () => {
                                                     key={img.id}
                                                     onClick={() => setSelectedIndex(idx)}
                                                     className={`w-32 aspect-[16/9] flex items-center justify-center rounded-sm p-0 shadow-md cursor-pointer transition-all ${selectedIndex === idx
-                                                            ? "ring-2 ring-reyes"
-                                                            : "hover:ring-2 hover:ring-reyes-light"
+                                                        ? "ring-2 ring-reyes"
+                                                        : "hover:ring-2 hover:ring-reyes-light"
                                                         } bg-transparent overflow-hidden`}
                                                 >
                                                     <img
@@ -97,7 +104,22 @@ const WebPlanesDetail = () => {
                                             {data.price_clp?.toLocaleString("es-CL")}/mes
                                         </p>
                                     </div>
-                                    <p className="text-base text-gray-300 mt-6">{data.description}</p>
+                                    <p className="text-base text-gray-300 mt-6 mb-6">{data.description}</p>
+
+                                    <div className="flex flex-col md:flex-row md:items-center md:gap-4">
+                                        <div className="flex items-center gap-4 p-4 relative rounded-md max-w-4xl mx-auto shadow-[0_2px_16px_-3px_rgba(144,144,144,0.4)] bg-white" role="alert">
+                                            <span className="block absolute w-1 rounded-full h-[80%] my-auto top-0 bottom-0 left-2 bg-blue-500"></span>
+                                            <div className="flex sm:items-center gap-4 ml-3 max-sm:flex-col">
+                                                <Info className="shrink-0 w-6 h-6 text-blue-500" strokeWidth={2} />
+                                                <div>
+                                                    <h6 className="text-slate-900 text-base font-medium">Llegar y usar? Sin complicaciones.</h6>
+                                                    <p className="text-slate-500 text-[13px] mt-1">
+                                                        Este proyecto incluye <strong>actualizaciones y mejoras continuas</strong>, <strong>dominio.cl, alojamiento</strong> y <strong>certificado SSL</strong>, todo gestionado por nosotros para que no tengas que preocuparte de nada.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <Link
                                         to={`/web-planes/${data.slug}/quote`}
