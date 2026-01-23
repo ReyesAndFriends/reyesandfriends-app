@@ -264,7 +264,7 @@ function WebPlanesQuote() {
                                             <div className="col-span-1">
                                                 <label htmlFor="cellphone" className="block text-gray-300 font-bold mb-2">Número de Teléfono (requerido)</label>
                                                 <div className="flex">
-                                                    <span className="inline-flex items-center px-3 rounded-l-sm bg-zinc-800 text-white border border-r-0 border-zinc-700 select-none">
+                                                    <span className="inline-flex items-center px-3 rounded-l-sm bg-zinc-700 text-white border border-r-0 border-zinc-700 select-none">
                                                         +56
                                                     </span>
                                                     <input

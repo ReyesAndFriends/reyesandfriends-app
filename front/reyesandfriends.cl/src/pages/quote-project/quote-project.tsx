@@ -251,7 +251,7 @@ const QuoteProject: React.FC = () => {
             }}
             onError={() => setTurnstileError("Error al cargar el captcha.")}
             onExpire={() => setTurnstileToken(null)}
-            theme="dark"
+            theme="light"
           />
         </div>
         {turnstileError && (
