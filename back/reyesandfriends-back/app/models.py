@@ -312,6 +312,7 @@ class WebPlanList(db.Model):
             'name': self.name,
             'slug': self.slug,
             'description': self.description,
+            'demo_url': self.demo_url,
             'price_clp': self.price_clp,
             'created_at': self.created_at.isoformat() if self.created_at else None
         }
