@@ -15,18 +15,18 @@ const WebPlanesDetail = () => {
     return (
         <>
             <Helmet>
-                <title>Planes Web | Reyes&Friends</title>
+                <title>{`Detalles del Plan Web | ${data?.name || "Reyes&Friends"}`}</title>
                 <meta
                     name="description"
-                    content="Conoce nuestros planes web fijos para facilitar tu presencia online. Elige el plan que más se adapte a tu negocio."
+                    content={`${data?.description || "Planes web para emprendedores, pymes y empresas. Elige el tuyo y potencia tu negocio online."}`}
                 />
-                <meta property="og:title" content="Planes Web | Reyes&Friends" />
-                <meta property="og:description" content="Planes web para emprendedores, pymes y empresas. Elige el tuyo y potencia tu negocio online." />
-                <meta property="og:image" content="/img/open-graph-images/web-plans.png" />
+                <meta property="og:title" content={`Detalles del Plan Web | ${data?.name || "Reyes&Friends"}`} />
+                <meta property="og:description" content={`${data?.description || "Planes web para emprendedores, pymes y empresas. Elige el tuyo y potencia tu negocio online."}`} />
+                <meta property="og:image" content={`${data?.images?.[0] || "/img/open-graph-images/web-plans.png"}`} />
                 <meta property="og:type" content="website" />
-                <meta name="twitter:title" content="Planes Web | Reyes&Friends" />
-                <meta name="twitter:description" content="Planes web fijos y accesibles para tu negocio. Descubre nuestras opciones." />
-                <meta name="twitter:image" content="/img/open-graph-images/web-plans.png" />
+                <meta name="twitter:title" content={`Detalles del Plan Web | ${data?.name || "Reyes&Friends"}`} />
+                <meta name="twitter:description" content={`${data?.description || "Planes web para emprendedores, pymes y empresas. Elige el tuyo y potencia tu negocio online."}`} />
+                <meta name="twitter:image" content={`${data?.images?.[0] || "/img/open-graph-images/web-plans.png"}`} />
             </Helmet>
 
             <motion.div
