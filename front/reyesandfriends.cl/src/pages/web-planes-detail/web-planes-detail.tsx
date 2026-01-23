@@ -5,6 +5,7 @@ import { useGetWebPlanDetail } from "./hooks/useGetWebPlanDetail";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRight, Info } from "lucide-react";
+import { motion } from "framer-motion";
 
 const WebPlanesDetail = () => {
     const { slug } = useParams<{ slug: string }>();
@@ -28,8 +29,18 @@ const WebPlanesDetail = () => {
                 <meta name="twitter:image" content="/img/open-graph-images/web-plans.png" />
             </Helmet>
 
-            <div className="bg-zinc-900 min-h-screen pt-16">
+            <motion.div
+                className="bg-zinc-900 min-h-screen pt-16"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+            >
                 <div className="p-4 lg:max-w-7xl max-w-4xl mx-auto">
+
+                    <h2 className="text-3xl mt-12 mb-12 text-center relative">
+                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Detalles del Plan Web</span>
+                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-reyes-dark -z-0"></div>
+                    </h2>
 
                     {loading && (
                         <div className="min-h-screen flex items-center justify-center bg-black py-12 rounded-lg">
@@ -56,18 +67,28 @@ const WebPlanesDetail = () => {
 
                     {!loading && !error && data && (
                         <>
-                            <div className="grid items-start grid-cols-1 lg:grid-cols-5 gap-12 shadow-[0_2px_10px_-3px_rgba(39,39,42,0.8)] p-6 rounded-sm bg-zinc-800">
-
+                            <motion.div
+                                className="grid items-start grid-cols-1 lg:grid-cols-5 gap-12 shadow-[0_2px_10px_-3px_rgba(39,39,42,0.8)] p-6 rounded-sm bg-zinc-800"
+                                initial={{ opacity: 0, scale: 0.98 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.5, delay: 0.1 }}
+                            >
                                 <div className="lg:col-span-3 w-full lg:sticky top-0 text-center">
                                     <div className="px-0 py-10 rounded-sm relative bg-transparent">
                                         {data.images && data.images.length > 0 ? (
-                                            <div className="w-full max-w-3xl mx-auto aspect-[16/9] relative">
+                                            <motion.div
+                                                className="w-full max-w-3xl mx-auto aspect-[16/9] relative"
+                                                key={selectedIndex}
+                                                initial={{ opacity: 0, scale: 0.96 }}
+                                                animate={{ opacity: 1, scale: 1 }}
+                                                transition={{ duration: 0.4 }}
+                                            >
                                                 <img
                                                     src={data.images[selectedIndex].image_url}
                                                     alt={`Imagen ${selectedIndex + 1}`}
                                                     className="absolute inset-0 w-full h-full object-cover rounded-sm pointer-events-none"
                                                 />
-                                            </div>
+                                            </motion.div>
                                         ) : (
                                             <div className="text-gray-400">No hay imágenes disponibles.</div>
                                         )}
@@ -75,20 +96,23 @@ const WebPlanesDetail = () => {
                                     {data.images && data.images.length > 1 && (
                                         <div className="mt-4 flex flex-wrap justify-center gap-4 mx-auto">
                                             {data.images.map((img, idx) => (
-                                                <button
+                                                <motion.button
                                                     key={img.id}
                                                     onClick={() => setSelectedIndex(idx)}
                                                     className={`w-32 aspect-[16/9] flex items-center justify-center rounded-sm p-0 shadow-md cursor-pointer transition-all ${selectedIndex === idx
                                                         ? "ring-2 ring-reyes"
                                                         : "hover:ring-2 hover:ring-reyes-light"
                                                         } bg-transparent overflow-hidden`}
+                                                    whileHover={{ scale: 1.06 }}
+                                                    whileTap={{ scale: 0.97 }}
+                                                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
                                                 >
                                                     <img
                                                         src={img.image_url}
                                                         alt={`Miniatura ${idx + 1}`}
                                                         className="w-full h-full object-cover object-top rounded-sm pointer-events-none"
                                                     />
-                                                </button>
+                                                </motion.button>
                                             ))}
                                         </div>
                                     )}
@@ -110,7 +134,7 @@ const WebPlanesDetail = () => {
                                         <div className="flex items-center gap-4 p-4 relative rounded-md max-w-4xl mx-auto shadow-[0_2px_16px_-3px_rgba(144,144,144,0.4)] bg-white" role="alert">
                                             <span className="block absolute w-1 rounded-full h-[80%] my-auto top-0 bottom-0 left-2 bg-blue-500"></span>
                                             <div className="flex sm:items-center gap-4 ml-3 max-sm:flex-col">
-                                                <Info className="shrink-0 w-6 h-6 text-blue-500" strokeWidth={2} />
+                                                <Info className="shrink-0 w-6 h-6 text-blue-500 hidden md:block" strokeWidth={2} />
                                                 <div>
                                                     <h6 className="text-slate-900 text-base font-medium">Llegar y usar? Sin complicaciones.</h6>
                                                     <p className="text-slate-500 text-[13px] mt-1">
@@ -140,9 +164,13 @@ const WebPlanesDetail = () => {
                                         </a>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div className="mt-12 shadow-[0_2px_10px_-3px_rgba(39,39,42,0.8)] p-6 bg-zinc-800 rounded-sm">
+                            </motion.div>
+                            <motion.div
+                                className="mt-12 shadow-[0_2px_10px_-3px_rgba(39,39,42,0.8)] p-6 bg-zinc-800 rounded-sm"
+                                initial={{ opacity: 0, y: 24 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: 0.2 }}
+                            >
                                 <h3 className="text-xl font-semibold text-white mb-6">Información del producto</h3>
                                 <div className="grid md:grid-cols-2 gap-8">
                                     <div>
@@ -162,11 +190,11 @@ const WebPlanesDetail = () => {
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
                         </>
                     )}
                 </div>
-            </div>
+            </motion.div>
         </>
     );
 };

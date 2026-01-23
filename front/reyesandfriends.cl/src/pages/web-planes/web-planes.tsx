@@ -3,6 +3,7 @@ import { ChevronRight, DollarSign } from "lucide-react";
 import { Link } from "react-router";
 import HeroSection from "../../layouts/components/hero-section/hero-section";
 import { useGetWebPlanes } from "./hooks/useGetWebPlanes";
+import { motion } from "framer-motion";
 
 const WebPlanes = () => {
     const { data, loading, error, retry } = useGetWebPlanes();
@@ -31,7 +32,12 @@ const WebPlanes = () => {
                 subtitle="¡Lleva tu presencia online al siguiente nivel con nuestros planes web por suscripción mensual! Personaliza el diseño, agrega contenido nuevo cada mes y olvídate de lo técnico: nosotros nos encargamos del hosting, mantenimiento y soporte. Tú solo enfócate en crecer, nosotros hacemos el resto."
             />
 
-            <section className="py-16 bg-zinc-900 text-white">
+            <motion.section
+                className="py-16 bg-zinc-900 text-white"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+            >
                 <div className="container mx-auto px-4 max-w-7xl">
                     <h2 className="text-3xl mb-8 text-center relative">
                         <span className="bg-zinc-900 px-4 relative z-10 text-white">Planes Web Disponibles</span>
@@ -58,14 +64,22 @@ const WebPlanes = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12 p-12 items-start">
                             <div className="flex flex-col justify-center">
                                 {data.images && data.images.length > 0 && (
-                                    <img
+                                    <motion.img
                                         src={data.images[0].image_url}
                                         alt={`Mockup del proyecto ${data.name}`}
                                         className="rounded shadow-xl w-full max-w-2xl aspect-[16/9] object-cover pointer-events-none mb-6"
+                                        initial={{ opacity: 0, scale: 0.96 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ duration: 0.5 }}
                                     />
                                 )}
                             </div>
-                            <div className="flex flex-col justify-center">
+                            <motion.div
+                                className="flex flex-col justify-center"
+                                initial={{ opacity: 0, x: 32 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.5, delay: 0.1 }}
+                            >
                                 <h3 className="text-3xl md:text-5xl text-white mb-4 flex flex-wrap items-center gap-2 md:gap-3 font-bold">
                                     Proyecto <span className="text-reyes-light">{data.name}</span>
                                 </h3>
@@ -83,12 +97,17 @@ const WebPlanes = () => {
                                     Ver Detalles
                                     <ChevronRight className="h-6 sm:h-7 w-6 sm:w-7" />
                                 </Link>
-                            </div>
+                            </motion.div>
                         </div>
                     )}
 
                     {!loading && !error && data && (
-                        <div className="mt-12 shadow-[0_2px_10px_-3px_rgba(39,39,42,0.8)] p-6 bg-zinc-800 rounded-sm">
+                        <motion.div
+                            className="mt-12 shadow-[0_2px_10px_-3px_rgba(39,39,42,0.8)] p-6 bg-zinc-800 rounded-sm"
+                            initial={{ opacity: 0, y: 24 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                        >
                             <div className="grid md:grid-cols-2 gap-8">
                                 <div>
                                     <h4 className="text-lg font-semibold text-white mb-2">Características</h4>
@@ -107,10 +126,10 @@ const WebPlanes = () => {
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     )}
                 </div>
-            </section>
+            </motion.section>
         </>
     );
 };

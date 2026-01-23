@@ -1,10 +1,16 @@
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function WebPlanesQuote() {
     const navigate = useNavigate();
 
     return (
-        <div className="container mx-auto px-4 max-w-7xl">
+        <motion.div
+            className="container mx-auto px-4 max-w-7xl"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+        >
             <div className="sm:px-8 py-6 mt-24">
                 <h2 className="text-3xl mb-12 text-center relative">
                     <span className="bg-zinc-900 px-4 relative z-10 text-white">Adquirir Plan Web</span>
@@ -153,9 +159,7 @@ function WebPlanesQuote() {
                     </div>
                 </div>
             </div>
-
-
-        </div>
+        </motion.div>
     );
 }
 
