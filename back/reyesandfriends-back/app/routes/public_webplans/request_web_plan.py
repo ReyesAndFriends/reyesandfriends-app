@@ -1,15 +1,23 @@
 from flask import jsonify, request
+import os
+import requests
 from app.models import db, WebPlanList, Region, Commune, WebPlanRequest
 from . import web_planes
+from dotenv import load_dotenv
 from sqlalchemy import func
 from datetime import datetime
+
+load_dotenv()
+TURNSTILE_SECRET_KEY = os.getenv("TURNSTILE_SECRET_KEY")
+if not TURNSTILE_SECRET_KEY:
+    raise RuntimeError("TURNSTILE_SECRET_KEY is not set in the environment variables.")
 
 @web_planes.route('/request', methods=['POST'])
 def request_web_plan():
     data = request.get_json()
     required_fields = [
         "first_name", "last_name", "email", "cellphone",
-        "address", "region_id", "commune_id", "plan_slug"
+        "address", "region_id", "commune_id", "plan_slug", "turnstile_token"
     ]
     # Validate required fields
     missing_fields = [field for field in required_fields if not data.get(field)]
@@ -18,6 +26,21 @@ def request_web_plan():
             "error": "Faltan campos obligatorios",
             "missing_fields": missing_fields
         }), 422
+
+    # Validate Turnstile token
+    turnstile_token = data["turnstile_token"]
+    remoteip = request.remote_addr
+    verify_resp = requests.post(
+        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+        data={
+            "secret": TURNSTILE_SECRET_KEY,
+            "response": turnstile_token,
+            "remoteip": remoteip
+        }
+    )
+    verify_data = verify_resp.json()
+    if not verify_data.get("success"):
+        return jsonify({"error": "No se pudo verificar el captcha. Intenta nuevamente."}), 400
 
     # Validate length and format
     if len(data["email"]) > 255:

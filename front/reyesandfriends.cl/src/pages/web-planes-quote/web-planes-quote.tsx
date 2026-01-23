@@ -1,10 +1,12 @@
 import { useNavigate, useParams } from "react-router-dom";
+import Turnstile from "react-turnstile";
 import { motion } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import { useGetWebPlanDetail } from "../web-planes-detail/hooks/useGetWebPlanDetail";
 
 import axios from "axios";
 const API_URL = import.meta.env.VITE_API_URL;
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || "";
 
 function capitalizeWords(str: string) {
     return str.replace(/\b\w/g, char => char.toUpperCase()).replace(/\B\w/g, char => char.toLowerCase());
@@ -35,6 +37,8 @@ function WebPlanesQuote() {
     const [communes, setCommunes] = useState<{ id: number; name: string }[]>([]);
 
     const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
+    const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+    const [turnstileError, setTurnstileError] = useState<string | null>(null);
 
     const [submitLoading, setSubmitLoading] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
@@ -76,6 +80,8 @@ function WebPlanesQuote() {
         if (!address.trim()) errors.address = "Dirección requerida";
         if (!regionId) errors.region = "Región requerida";
         if (!communeId) errors.commune = "Comuna requerida";
+
+        if (!turnstileToken) errors.turnstile = "Debes completar el captcha.";
 
         return errors;
     };
@@ -142,6 +148,7 @@ function WebPlanesQuote() {
         region_id: regionId,
         commune_id: communeId,
         plan_slug: slug,
+        turnstile_token: turnstileToken,
     });
 
     // Print the JSON to the console on submit
@@ -150,7 +157,11 @@ function WebPlanesQuote() {
         setFormErrors(errors);
         setSubmitError(null);
         setSubmitSuccess(null);
-        if (Object.keys(errors).length > 0) return;
+        if (Object.keys(errors).length > 0) {
+            if (errors.turnstile) setTurnstileError(errors.turnstile);
+            return;
+        }
+        setTurnstileError(null);
         const json = buildFormJson();
         setSubmitLoading(true);
         try {
@@ -164,6 +175,7 @@ function WebPlanesQuote() {
             setRegionId("");
             setCommuneId("");
             setFormErrors({});
+            setTurnstileToken(null);
         } catch (err: any) {
             if (err.response?.data?.error) {
                 setSubmitError(err.response.data.error);
@@ -363,6 +375,19 @@ function WebPlanesQuote() {
                                     {submitError && (
                                         <div className="bg-red-700 text-white text-center py-2 rounded">{submitError}</div>
                                     )}
+                                    <div className="flex flex-col items-center">
+                                        <Turnstile
+                                            sitekey={TURNSTILE_SITE_KEY}
+                                            onSuccess={token => {
+                                                setTurnstileToken(token);
+                                                setTurnstileError(null);
+                                            }}
+                                            onError={() => setTurnstileError("Error al cargar el captcha.")}
+                                            onExpire={() => setTurnstileToken(null)}
+                                            theme="light"
+                                        />
+                                        {turnstileError && <span className="text-red-400 text-sm mt-2">{turnstileError}</span>}
+                                    </div>
                                     <button
                                         type="button"
                                         className={`w-full bg-reyes text-white font-bold py-3 rounded-sm transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed${isFormValid ? " hover:bg-reyes-dark" : ""}`}
