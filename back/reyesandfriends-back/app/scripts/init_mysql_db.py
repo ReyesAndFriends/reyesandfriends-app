@@ -202,9 +202,9 @@ def init_database():
                     "Este proyecto está diseñado para captar la atención de tus visitantes y convertirlos en clientes potenciales. Rapido, eficiente y atractivo."
                 ),
                 "demo_url": "https://demo.reyesandfriends.cl/basico-2026",
-                "price_clp": 99990,
+                "price_clp": 19990,
                 "number_of_months": 12,
-                "final_price_clp": 99990 * 12,
+                "final_price_clp": 19990 * 12,
                 "images": [
                     "https://axm3vdh15xem.objectstorage.sa-valparaiso-1.oci.customer-oci.com/n/axm3vdh15xem/b/reyesandfriends-chile/o/demo_images%2Fbasico_2026%2Fhome.png",
                     "https://axm3vdh15xem.objectstorage.sa-valparaiso-1.oci.customer-oci.com/n/axm3vdh15xem/b/reyesandfriends-chile/o/demo_images%2Fbasico_2026%2Fabout-section.png",
