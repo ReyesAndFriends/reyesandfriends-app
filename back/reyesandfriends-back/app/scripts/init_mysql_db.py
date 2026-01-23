@@ -206,10 +206,10 @@ def init_database():
                 "number_of_months": 12,
                 "final_price_clp": 99990 * 12,
                 "images": [
-                    "https://reyesandfriends.s3.us-east-2.amazonaws.com/proyectos_web/basico_2026/home.png",
-                    "https://reyesandfriends.s3.us-east-2.amazonaws.com/proyectos_web/basico_2026/about-section.png",
-                    "https://reyesandfriends.s3.us-east-2.amazonaws.com/proyectos_web/basico_2026/clients-section.png",
-                    "https://reyesandfriends.s3.us-east-2.amazonaws.com/proyectos_web/basico_2026/contact-section.png",
+                    "https://axm3vdh15xem.objectstorage.sa-valparaiso-1.oci.customer-oci.com/n/axm3vdh15xem/b/reyesandfriends-chile/o/demo_images%2Fbasico_2026%2Fhome.png",
+                    "https://axm3vdh15xem.objectstorage.sa-valparaiso-1.oci.customer-oci.com/n/axm3vdh15xem/b/reyesandfriends-chile/o/demo_images%2Fbasico_2026%2Fabout-section.png",
+                    "https://axm3vdh15xem.objectstorage.sa-valparaiso-1.oci.customer-oci.com/n/axm3vdh15xem/b/reyesandfriends-chile/o/demo_images%2Fbasico_2026%2Fclients-section.png",
+                    "https://axm3vdh15xem.objectstorage.sa-valparaiso-1.oci.customer-oci.com/n/axm3vdh15xem/b/reyesandfriends-chile/o/demo_images%2Fbasico_2026%2Fcontact-section.png",
                 ],
                 "features": [
                     "Diseño moderno y atractivo",
