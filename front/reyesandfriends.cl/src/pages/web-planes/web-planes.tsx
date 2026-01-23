@@ -77,10 +77,10 @@ const WebPlanes = () => {
                                     {data.description}
                                 </p>
                                 <Link
-                                    to={`/web-planes/quote/${data.slug}`}
+                                    to={`/web-planes/${data.slug}`}
                                     className="flex-1 bg-reyes hover:bg-reyes-dark text-white px-6 sm:px-8 py-3 sm:py-4 rounded transition-all duration-300 flex items-center gap-3 font-semibold hover:scale-105 text-base sm:text-lg justify-center min-w-[140px] sm:min-w-[180px] md:mr-2"
                                 >
-                                    Cotizar este plan
+                                    Ver Detalles
                                     <ChevronRight className="h-6 sm:h-7 w-6 sm:w-7" />
                                 </Link>
                             </div>
@@ -88,34 +88,24 @@ const WebPlanes = () => {
                     )}
 
                     {!loading && !error && data && (
-                        <div className="text-center">
-                            <div className="flex justify-center w-full">
-                                <table className="w-full max-w-5xl bg-reyes rounded-lg shadow-lg text-left text-gray-200 overflow-hidden">
-                                    <thead className="bg-reyes-dark">
-                                        <tr>
-                                            <th className="px-6 py-4 text-lg font-semibold text-center text-white">Características</th>
-                                            <th className="px-6 py-4 text-lg font-semibold text-center text-white">Usos prácticos</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td className="px-6 py-4 align-top">
-                                                <ul className="list-disc list-inside space-y-2 font-semibold">
-                                                    {data.features.map((f) => (
-                                                        <li key={f.id}>{f.feature_description}</li>
-                                                    ))}
-                                                </ul>
-                                            </td>
-                                            <td className="px-6 py-4 align-top">
-                                                <ul className="list-disc list-inside space-y-2 font-semibold">
-                                                    {data.usages.map((u) => (
-                                                        <li key={u.id}>{u.usage_description}</li>
-                                                    ))}
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <div className="mt-12 shadow-[0_2px_10px_-3px_rgba(39,39,42,0.8)] p-6 bg-zinc-800 rounded-sm">
+                            <div className="grid md:grid-cols-2 gap-8">
+                                <div>
+                                    <h4 className="text-lg font-semibold text-white mb-2">Características</h4>
+                                    <ul className="list-disc list-inside space-y-2 text-gray-200 font-semibold">
+                                        {data.features.map((f) => (
+                                            <li key={f.id}>{f.feature_description}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 className="text-lg font-semibold text-white mb-2">Usos prácticos</h4>
+                                    <ul className="list-disc list-inside space-y-2 text-gray-200 font-semibold">
+                                        {data.usages.map((u) => (
+                                            <li key={u.id}>{u.usage_description}</li>
+                                        ))}
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     )}

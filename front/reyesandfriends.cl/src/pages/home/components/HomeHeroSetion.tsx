@@ -118,15 +118,15 @@ const HomeHeroSection: React.FC<HomeHeroSectionProps> = ({
                 </div>
                 <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col md:flex-row items-center justify-center text-center md:text-left flex-1">
                     <div className="flex-1 flex flex-col items-center md:items-start justify-center max-w-2xl mx-auto">
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-2 text-white drop-shadow-lg tracking-tight font-semibold">
+                        <h1 className="text-3xl sm:text-2xl md:text-5xl lg:text-6xl mb-2 text-white drop-shadow-lg tracking-tight font-semibold">
                             {title}
                         </h1>
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-6 inline-block text-white drop-shadow font-semibold">
+                        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-4 inline-block text-white drop-shadow font-semibold">
                             <span className="text-reyes">
                                 {displayedText}
                                 <span className="typewriter-cursor">&nbsp;</span>
                             </span>
-                        </h1>
+                        </h2>
                         <div className="mb-8 w-full flex flex-col items-center">
                             <p className="text-lg sm:text-xl md:text-2xl text-white drop-shadow-sm">
                                 {description.split('\n').map((line, index) => (
