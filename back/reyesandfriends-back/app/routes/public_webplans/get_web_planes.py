@@ -13,12 +13,6 @@ def get_web_planes():
             images = WebPlanImage.query.filter_by(webplan_id=plan.id).limit(1).all()
             plan_dict['images'] = [image.to_dict() for image in images]
 
-            features = WebPlanFeature.query.filter_by(webplan_id=plan.id).all()
-            plan_dict['features'] = [feature.to_dict() for feature in features]
-
-            usages = WebPlanUsage.query.filter_by(webplan_id=plan.id).all()
-            plan_dict['usages'] = [usage.to_dict() for usage in usages]
-
             result.append(plan_dict)
         
         return jsonify({

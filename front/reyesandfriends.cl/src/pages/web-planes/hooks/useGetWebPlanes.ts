@@ -4,16 +4,6 @@ import axios from "axios";
 const API_URL = import.meta.env.VITE_API_URL;
 const webPlanesUrl = `${API_URL}/web_planes`;
 
-export interface WebPlanFeature {
-  id: number;
-  feature_description: string;
-}
-
-export interface WebPlanUsage {
-  id: number;
-  usage_description: string;
-}
-
 export interface WebPlanImage {
   id: number;
   image_url: string;
@@ -25,8 +15,6 @@ export interface WebPlan {
   slug: string;
   description: string;
   price_clp: number;
-  features: WebPlanFeature[];
-  usages: WebPlanUsage[];
   images: WebPlanImage[];
 }
 

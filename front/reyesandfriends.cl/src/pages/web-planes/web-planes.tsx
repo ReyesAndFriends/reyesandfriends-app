@@ -100,34 +100,6 @@ const WebPlanes = () => {
                             </motion.div>
                         </div>
                     )}
-
-                    {!loading && !error && data && (
-                        <motion.div
-                            className="mt-12 shadow-[0_2px_10px_-3px_rgba(39,39,42,0.8)] p-6 bg-zinc-800 rounded-sm"
-                            initial={{ opacity: 0, y: 24 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.2 }}
-                        >
-                            <div className="grid md:grid-cols-2 gap-8">
-                                <div>
-                                    <h4 className="text-lg font-semibold text-white mb-2">Características</h4>
-                                    <ul className="list-disc list-inside space-y-2 text-gray-200 font-semibold">
-                                        {data.features.map((f) => (
-                                            <li key={f.id}>{f.feature_description}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 className="text-lg font-semibold text-white mb-2">Usos prácticos</h4>
-                                    <ul className="list-disc list-inside space-y-2 text-gray-200 font-semibold">
-                                        {data.usages.map((u) => (
-                                            <li key={u.id}>{u.usage_description}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-                        </motion.div>
-                    )}
                 </div>
             </motion.section>
         </>
