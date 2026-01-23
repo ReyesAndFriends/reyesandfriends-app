@@ -22,7 +22,6 @@ import Entertainment from "../pages/services/Entertainment/entertainment";
 import MinecraftHosting from "../pages/services/MinecraftHosting/minecraft-hosting";
 
 import WebPlanes from "../pages/web-planes/web-planes";
-import WebPlanesOrder from "../pages/web-planes-order/web-planes-order";
 
 // Error handler
 import Error from "../pages/error/error";
@@ -60,7 +59,6 @@ const AnimatedRoutes: React.FC = () => {
                 <Route path="/contact" element={<motion.div {...pageTransition}><Contact /></motion.div>} />
                 <Route path="/quote-project" element={<motion.div {...pageTransition}><QuotePage /></motion.div>} />
                 <Route path="/web-planes" element={<motion.div {...pageTransition}><WebPlanes /></motion.div>} />
-                <Route path="/web-planes/:slug/order" element={<motion.div {...pageTransition}><WebPlanesOrder /></motion.div>} />
                 <Route path="/social-media" element={<motion.div {...pageTransition}><SocialMedia /></motion.div>} />
                 <Route path="*" element={<motion.div {...pageTransition}><Error /></motion.div>} />
             </Routes>
