@@ -59,4 +59,7 @@ def create_app():
     from .routes.visitors import visitors as visitors_bp
     app.register_blueprint(visitors_bp, url_prefix='/visitors')
 
+    from .routes.utils import utils as utils_bp
+    app.register_blueprint(utils_bp, url_prefix='/utils')
+
     return app

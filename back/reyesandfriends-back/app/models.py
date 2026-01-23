@@ -438,3 +438,31 @@ class NotAllowedIpRecord(db.Model):
     ip_address = db.Column(db.String(45), nullable=False)
     url_accessed = db.Column(db.String(200), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+class Region(db.Model):
+    __tablename__ = 'regions'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    
+    communes = db.relationship('Commune', backref='region', lazy=True)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+        }
+    
+class Commune(db.Model):
+    __tablename__ = 'communes'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    region_id = db.Column(db.Integer, db.ForeignKey('regions.id'), nullable=False)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'region_id': self.region_id,
+        }

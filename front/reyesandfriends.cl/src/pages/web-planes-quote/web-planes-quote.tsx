@@ -1,7 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useGetWebPlanDetail } from "../web-planes-detail/hooks/useGetWebPlanDetail";
+
+import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function capitalizeWords(str: string) {
     return str.replace(/\b\w/g, char => char.toUpperCase()).replace(/\B\w/g, char => char.toLowerCase());
@@ -25,9 +28,31 @@ function WebPlanesQuote() {
     const [email, setEmail] = useState("");
     const [cellphone, setCellphone] = useState("");
     const [address, setAddress] = useState("");
-    const [region, setRegion] = useState("");
-    const [comuna, setComuna] = useState("");
+    const [regionId, setRegionId] = useState<number | "">("");
+    const [comunaId, setComunaId] = useState<number | "">("");
+
+    const [regions, setRegions] = useState<{ id: number; name: string }[]>([]);
+    const [communes, setCommunes] = useState<{ id: number; name: string }[]>([]);
+
     const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
+
+    useEffect(() => {
+        axios.get(`${API_URL}/utils/regions`)
+            .then(res => setRegions(res.data))
+            .catch(() => setRegions([]));
+    }, []);
+
+    useEffect(() => {
+        if (regionId) {
+            setComunaId(""); // reset commune
+            axios.get(`${API_URL}/utils/communes/${regionId}`)
+                .then(res => setCommunes(res.data))
+                .catch(() => setCommunes([]));
+        } else {
+            setCommunes([]);
+            setComunaId("");
+        }
+    }, [regionId]);
 
     const validateFields = () => {
         const errors: { [key: string]: string } = {};
@@ -45,8 +70,8 @@ function WebPlanesQuote() {
         else if (!/^\d{9}$/.test(cellphone)) errors.cellphone = "Debe tener 9 dígitos";
 
         if (!address.trim()) errors.address = "Dirección requerida";
-        if (!region.trim()) errors.region = "Región requerida";
-        if (!comuna.trim()) errors.comuna = "Comuna requerida";
+        if (!regionId) errors.region = "Región requerida";
+        if (!comunaId) errors.comuna = "Comuna requerida";
 
         return errors;
     };
@@ -59,8 +84,8 @@ function WebPlanesQuote() {
         cellphone.trim() &&
         /^\d{9}$/.test(cellphone) &&
         address.trim() &&
-        region.trim() &&
-        comuna.trim();
+        regionId &&
+        comunaId;
 
     const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFirstName(capitalizeWords(e.target.value).slice(0, MAX_FIRST_NAME_LEN));
@@ -83,12 +108,14 @@ function WebPlanesQuote() {
         setAddress(e.target.value);
         setFormErrors({});
     };
-    const handleRegionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setRegion(e.target.value);
+    const handleRegionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value ? Number(e.target.value) : "";
+        setRegionId(value);
         setFormErrors({});
     };
-    const handleComunaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setComuna(e.target.value);
+    const handleComunaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value ? Number(e.target.value) : "";
+        setComunaId(value);
         setFormErrors({});
     };
 
@@ -198,24 +225,35 @@ function WebPlanesQuote() {
                                             </div>
                                             <div>
                                                 <label className="text-sm text-white font-medium block mb-2">Región (Requerido)</label>
-                                                <input
-                                                    type="text"
-                                                    placeholder="Ingrese su región"
+                                                <select
                                                     className={`px-4 p-3 rounded-sm bg-zinc-800 border ${formErrors.region ? "border-red-500" : "border-zinc-700"} text-white w-full text-sm focus:ring-2 focus:ring-reyes`}
-                                                    value={region}
+                                                    value={regionId}
                                                     onChange={handleRegionChange}
-                                                />
+                                                >
+                                                    <option value="">Seleccione una región</option>
+                                                    {regions.map(region => (
+                                                        <option key={region.id} value={region.id}>{region.name}</option>
+                                                    ))}
+                                                </select>
                                                 {formErrors.region && <p className="text-red-400 text-xs mt-1">{formErrors.region}</p>}
                                             </div>
                                             <div>
                                                 <label className="text-sm text-white font-medium block mb-2">Comuna (Requerido)</label>
-                                                <input
-                                                    type="text"
-                                                    placeholder="Ingrese su comuna"
+                                                <select
                                                     className={`px-4 p-3 rounded-sm bg-zinc-800 border ${formErrors.comuna ? "border-red-500" : "border-zinc-700"} text-white w-full text-sm focus:ring-2 focus:ring-reyes`}
-                                                    value={comuna}
+                                                    value={comunaId}
                                                     onChange={handleComunaChange}
-                                                />
+                                                    disabled={!regionId || communes.length === 0}
+                                                >
+                                                    {(!regionId || communes.length === 0) ? (
+                                                        <option value="">Primero seleccione una región</option>
+                                                    ) : (
+                                                        <option value="">Seleccione una comuna</option>
+                                                    )}
+                                                    {communes.map(comuna => (
+                                                        <option key={comuna.id} value={comuna.id}>{comuna.name}</option>
+                                                    ))}
+                                                </select>
                                                 {formErrors.comuna && <p className="text-red-400 text-xs mt-1">{formErrors.comuna}</p>}
                                             </div>
                                         </div>
