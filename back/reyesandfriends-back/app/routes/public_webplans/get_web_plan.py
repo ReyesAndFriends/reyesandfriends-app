@@ -1,5 +1,5 @@
 from flask import jsonify
-from app.models import WebPlanList, WebPlanImage
+from app.models import WebPlanList, WebPlanImage, WebPlanFeature, WebPlanUsage
 from . import web_planes
 
 @web_planes.route('/<string:slug>', methods=['GET'])
@@ -16,6 +16,14 @@ def get_web_plan_by_slug(slug):
 
         images = WebPlanImage.query.filter_by(webplan_id=plan.id).all()
         plan_dict['images'] = [image.to_dict() for image in images]
+
+        # Add features
+        features = WebPlanFeature.query.filter_by(webplan_id=plan.id).all()
+        plan_dict['features'] = [feature.to_dict() for feature in features]
+
+        # Add usages
+        usages = WebPlanUsage.query.filter_by(webplan_id=plan.id).all()
+        plan_dict['usages'] = [usage.to_dict() for usage in usages]
         
         return jsonify({
             'success': True,

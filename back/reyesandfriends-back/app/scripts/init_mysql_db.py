@@ -15,6 +15,8 @@ sys.path.insert(0, project_root)
 from app import create_app
 from app.models import db, ContactCategory, ContactStatus, ProjectQuoteStatus, ProjectQuoteCategory, WebPlanList
 from app.models import BannedRut, WebPlanImage
+# Agregar las nuevas clases
+from app.models import WebPlanFeature, WebPlanUsage
 
 def populate_fake_ruts():
     """
@@ -41,11 +43,11 @@ def populate_fake_ruts():
 
 def insert_web_plans_with_images(web_plans_data):
     """
-    Insert web plans and their images from a JSON-like structure.
+    Insert web plans and their images, features, and usages from a JSON-like structure.
     """
-    from app.models import WebPlanList, WebPlanImage
+    from app.models import WebPlanList, WebPlanImage, WebPlanFeature, WebPlanUsage
 
-    print("Inserting web plan list data with images...")
+    print("Inserting web plan list data with images, features, and usages...")
     for plan_data in web_plans_data:
         existing_plan = WebPlanList.query.filter_by(slug=plan_data["slug"]).first()
         if not existing_plan:
@@ -72,6 +74,27 @@ def insert_web_plans_with_images(web_plans_data):
                 )
                 db.session.add(img)
                 print(f"  Image inserted: {img_url}")
+
+            # Insert features if present
+            features = plan_data.get("features", [])
+            for feature_desc in features:
+                feature = WebPlanFeature(
+                    webplan_id=plan.id,
+                    feature_description=feature_desc
+                )
+                db.session.add(feature)
+                print(f"  Feature inserted: {feature_desc}")
+
+            # Insert usages if present
+            usages = plan_data.get("usages", [])
+            for usage_desc in usages:
+                usage = WebPlanUsage(
+                    webplan_id=plan.id,
+                    usage_description=usage_desc
+                )
+                db.session.add(usage)
+                print(f"  Usage inserted: {usage_desc}")
+
         else:
             print(f"Web plan already exists: {plan_data['name']}")
 
@@ -172,19 +195,35 @@ def init_database():
         # Web Plan images and data
         web_plans_data = [
             {
-            "name": "Landing Pro 2026",
-            "slug": "landing-pro-2026",
-            "description": "Página web tipo landing page profesional, ideal para presentar servicios, personas, tu negocio o productos de manera efectiva y atractiva. Incluye diseño responsivo, optimización SEO básica y formularios de contacto.",
-            "demo_url": "https://demo.reyesandfriends.cl/landing-pro-2026",
-            "price_clp": 10000,
-            "number_of_months": 12,
-            "final_price_clp": 10000 * 12,
-            "images": [
-                "https://reyesandfriends.s3.us-east-2.amazonaws.com/landing-pro/landing-pro-home.png",
-                "https://reyesandfriends.s3.us-east-2.amazonaws.com/landing-pro/about-section.png",
-                "https://reyesandfriends.s3.us-east-2.amazonaws.com/landing-pro/clients-section.png",
-                "https://reyesandfriends.s3.us-east-2.amazonaws.com/landing-pro/contact-section.png",
-            ]
+                "name": "Basico 2026",
+                "slug": "basico-2026",
+                "description": (
+                    "Para pequeñas empresas o profesionales que desean una presencia en línea efectiva y asequible."
+                    "Este proyecto está diseñado para captar la atención de tus visitantes y convertirlos en clientes potenciales. Rapido, eficiente y atractivo."
+                ),
+                "demo_url": "https://demo.reyesandfriends.cl/basico-2026",
+                "price_clp": 99990,
+                "number_of_months": 12,
+                "final_price_clp": 99990 * 12,
+                "images": [
+                    "https://reyesandfriends.s3.us-east-2.amazonaws.com/proyectos_web/basico_2026/home.png",
+                    "https://reyesandfriends.s3.us-east-2.amazonaws.com/proyectos_web/basico_2026/about-section.png",
+                    "https://reyesandfriends.s3.us-east-2.amazonaws.com/proyectos_web/basico_2026/clients-section.png",
+                    "https://reyesandfriends.s3.us-east-2.amazonaws.com/proyectos_web/basico_2026/contact-section.png",
+                ],
+                "features": [
+                    "Diseño moderno y atractivo",
+                    "Optimización SEO básica, posicionamiento en buscadores",
+                    "Formulario de contacto con validación y respuesta de correo electrónico automática",
+                    "Integración con Google Maps (direcciones y ubicación)",
+                    "Adaptabilidad a dispositivos móviles y tabletas (responsive design)"
+                ],
+                "usages": [
+                    "Presentación de servicios o productos",
+                    "Captación de clientes potenciales",
+                    "Portafolio profesional",
+                    "Promoción de eventos o lanzamientos"
+                ]
             },
         ]
 

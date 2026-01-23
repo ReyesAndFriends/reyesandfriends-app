@@ -30,7 +30,7 @@ const HomeHeroSection: React.FC<HomeHeroSectionProps> = ({
     ],
 
     description = "¡Transforma tu negocio con tecnología a tu medida!\nCreamos sitios web, plataformas y soluciones digitales innovadoras para que tu empresa crezca y destaque en el mundo digital.",
-    ctaText = "Cotiza tu plan",
+    ctaText = "Cotiza tu plan web",
     ctaLink = "/web-planes",
     backgroundImage = "/img/background/background-web.jpg",
     backgroundAlt = "Ilustración de fondo - Edificios",

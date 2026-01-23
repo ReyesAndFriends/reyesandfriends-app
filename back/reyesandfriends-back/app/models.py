@@ -333,6 +333,42 @@ class WebPlanImage(db.Model):
             'image_url': self.image_url,
             'created_at': self.created_at.isoformat() if self.created_at else None
         }
+    
+class WebPlanFeature(db.Model):
+    __tablename__ = 'web_plan_features'
+
+    id = db.Column(db.Integer, primary_key=True)
+    webplan_id = db.Column(db.Integer, db.ForeignKey('web_plan_lists.id'), nullable=False)
+    feature_description = db.Column(db.String(200), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    webplan = db.relationship('WebPlanList', backref='features', lazy=True)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'webplan_id': self.webplan_id,
+            'feature_description': self.feature_description,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
+    
+class WebPlanUsage(db.Model):
+    __tablename__ = 'web_plan_usages'
+
+    id = db.Column(db.Integer, primary_key=True)
+    webplan_id = db.Column(db.Integer, db.ForeignKey('web_plan_lists.id'), nullable=False)
+    usage_description = db.Column(db.String(200), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    webplan = db.relationship('WebPlanList', backref='usages', lazy=True)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'webplan_id': self.webplan_id,
+            'usage_description': self.usage_description,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
 
 
 class WebPlanRequest(db.Model):
