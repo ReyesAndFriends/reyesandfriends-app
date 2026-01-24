@@ -1,4 +1,4 @@
-from flask import jsonify, request
+from flask import jsonify, request, render_template, current_app
 import os
 import requests
 from app.models import db, WebPlanList, Region, Commune, WebPlanRequest
@@ -6,6 +6,8 @@ from . import web_planes
 from dotenv import load_dotenv
 from sqlalchemy import func
 from datetime import datetime
+from app import mail
+from flask_mail import Message
 
 load_dotenv()
 TURNSTILE_SECRET_KEY = os.getenv("TURNSTILE_SECRET_KEY")
@@ -85,5 +87,24 @@ def request_web_plan():
     )
     db.session.add(new_request)
     db.session.commit()
+
+    email_html = render_template(
+        'emails/web_plan_request.html',
+        user_name=f"{data['first_name']} {data['last_name']}",
+        request_number=request_number,
+        plan_name=plan.name,
+        region_name=region.name,
+        commune_name=commune.name,
+        address=data["address"],
+        current_year=current_year
+    )
+
+    msg = Message(
+        subject="Confirmación de Solicitud de Plan Web",
+        sender=current_app.config['MAIL_USERNAME'],
+        recipients=[data['email']],
+        html=email_html
+    )
+    mail.send(msg)
 
     return jsonify(new_request.to_dict()), 201
