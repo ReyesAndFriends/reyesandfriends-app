@@ -52,6 +52,9 @@ def create_app():
     from .routes.public_webplans import web_planes as web_planes_bp
     app.register_blueprint(web_planes_bp, url_prefix='/web_planes')
 
+    from .routes.private_webplans import private_web_planes as private_web_planes_bp
+    app.register_blueprint(private_web_planes_bp, url_prefix='/private_web_planes')
+
     from .routes.visitors import visitors as visitors_bp
     app.register_blueprint(visitors_bp, url_prefix='/visitors')
 
