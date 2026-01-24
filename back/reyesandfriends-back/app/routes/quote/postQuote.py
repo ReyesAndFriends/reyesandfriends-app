@@ -1,4 +1,4 @@
-from flask import request, jsonify, render_template
+from flask import request, jsonify, render_template, current_app
 from flask_mail import Message
 from app.models import db, ProjectQuote, ProjectQuoteCategory
 from app import mail
@@ -9,10 +9,7 @@ import requests
 from . import quote
 
 load_dotenv()
-mail_username = os.getenv("MAIL_USERNAME")
 TURNSTILE_SECRET_KEY = os.getenv("TURNSTILE_SECRET_KEY")
-if not mail_username:
-    raise RuntimeError("MAIL_USERNAME is not set in the environment variables.")
 if not TURNSTILE_SECRET_KEY:
     raise RuntimeError("TURNSTILE_SECRET_KEY is not set in the environment variables.")
 
@@ -389,7 +386,7 @@ def send_quote_confirmation_email(quote):
         
         msg = Message(
             subject='Cotización de Software recibida - Reyes&Friends',
-            sender=mail_username,
+            sender=current_app.config['MAIL_USERNAME'],
             recipients=[quote.email],
             html=email_html
         )
