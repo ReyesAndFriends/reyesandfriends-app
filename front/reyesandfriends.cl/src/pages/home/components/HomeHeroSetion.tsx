@@ -16,25 +16,21 @@ interface HomeHeroSectionProps {
 }
 
 const HomeHeroSection: React.FC<HomeHeroSectionProps> = ({
-    title = "Impulsamos",
+    title = "Desarrollamos",
+
     subtitles = [
-        "tu crecimiento digital",
-        "tu éxito en línea",
-        "tu presencia web",
-        "tu transformación digital",
-        "tu innovación tecnológica",
-        "tu futuro digital",
-        "tu negocio en la nube",
-        "tu solución tecnológica",
-        "tu plataforma digital",
-        "tu estrategia en línea",
-        "tu imperio digital",
-        "tu marca en línea",
-        "tu proyecto web",
-        "tu sueño digital",
+        "tu sitio web ideal",
+        "tu plataforma personalizada",
+        "tu solución digital innovadora",
+        "tu presencia en línea",
+        "tu negocio digital exitoso",
+        "tu futuro tecnológico",
+        "lo que tu empresa necesita",
+        "tu crecimiento en línea"
     ],
+
     description = "¡Transforma tu negocio con tecnología a tu medida!\nCreamos sitios web, plataformas y soluciones digitales innovadoras para que tu empresa crezca y destaque en el mundo digital.",
-    ctaText = "Compra tu Página Web",
+    ctaText = "Cotiza tu plan web",
     ctaLink = "/web-planes",
     backgroundImage = "/img/background/background-web.jpg",
     backgroundAlt = "Ilustración de fondo - Edificios",
@@ -122,15 +118,15 @@ const HomeHeroSection: React.FC<HomeHeroSectionProps> = ({
                 </div>
                 <div className="container mx-auto px-4 py-24 relative z-10 flex flex-col md:flex-row items-center justify-center text-center md:text-left flex-1">
                     <div className="flex-1 flex flex-col items-center md:items-start justify-center max-w-2xl mx-auto">
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-2 text-white drop-shadow-lg tracking-tight font-semibold">
+                        <h1 className="text-3xl sm:text-2xl md:text-5xl lg:text-6xl mb-2 text-white drop-shadow-lg tracking-tight font-semibold">
                             {title}
                         </h1>
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-6 inline-block text-white drop-shadow font-semibold">
+                        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-4 inline-block text-white drop-shadow font-semibold">
                             <span className="text-reyes">
                                 {displayedText}
                                 <span className="typewriter-cursor">&nbsp;</span>
                             </span>
-                        </h1>
+                        </h2>
                         <div className="mb-8 w-full flex flex-col items-center">
                             <p className="text-lg sm:text-xl md:text-2xl text-white drop-shadow-sm">
                                 {description.split('\n').map((line, index) => (
@@ -141,7 +137,10 @@ const HomeHeroSection: React.FC<HomeHeroSectionProps> = ({
                                 ))}
                             </p>
                             <div className="text-base sm:text-lg md:text-xl text-gray-200 text-center md:text-left w-full mt-6">
-                                Planes web desde <span className="font-semibold text-white text-xl sm:text-2xl md:text-3xl"><p className="text-3xl sm:text-4xl md:text-5xl">$99.990</p></span>
+                                Planes web desde{" "}
+                                <span className="font-semibold text-white text-xl sm:text-2xl md:text-3xl">
+                                    <p className="text-3xl sm:text-4xl md:text-5xl">$19.990 al mes</p>
+                                </span>
                             </div>
                         </div>
                         <div className="flex flex-col md:flex-row gap-3 justify-center md:justify-start w-full">
@@ -152,14 +151,6 @@ const HomeHeroSection: React.FC<HomeHeroSectionProps> = ({
                                     style={{ minWidth: "140px" }}
                                 >
                                     {ctaText}
-                                    <ChevronRight className="h-6 sm:h-7 w-6 sm:w-7" />
-                                </Link>
-                                <Link
-                                    to="/quote-project"
-                                    className="flex-1 bg-transparent border-2 border-white outline-none text-white px-6 sm:px-8 py-3 sm:py-4 rounded transition-all duration-300 flex items-center gap-3 font-semibold hover:scale-105 hover:bg-white hover:text-reyes text-base sm:text-lg justify-center min-w-[140px] sm:min-w-[180px]"
-                                    style={{ minWidth: "140px" }}
-                                >
-                                    Cotizar proyecto
                                     <ChevronRight className="h-6 sm:h-7 w-6 sm:w-7" />
                                 </Link>
                             </div>

@@ -302,6 +302,8 @@ class WebPlanList(db.Model):
     description = db.Column(db.Text, nullable=True)
     demo_url = db.Column(db.String(200), nullable=True)
     price_clp = db.Column(db.Float, nullable=False)
+    number_of_months = db.Column(db.Integer, nullable=False, default=12)
+    final_price_clp = db.Column(db.Float, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def to_dict(self):
@@ -310,7 +312,62 @@ class WebPlanList(db.Model):
             'name': self.name,
             'slug': self.slug,
             'description': self.description,
+            'demo_url': self.demo_url,
             'price_clp': self.price_clp,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
+    
+class WebPlanImage(db.Model):
+    __tablename__ = 'web_plan_images'
+
+    id = db.Column(db.Integer, primary_key=True)
+    webplan_id = db.Column(db.Integer, db.ForeignKey('web_plan_lists.id'), nullable=False)
+    image_url = db.Column(db.String(200), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    webplan = db.relationship('WebPlanList', backref='images', lazy=True)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'webplan_id': self.webplan_id,
+            'image_url': self.image_url,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
+    
+class WebPlanFeature(db.Model):
+    __tablename__ = 'web_plan_features'
+
+    id = db.Column(db.Integer, primary_key=True)
+    webplan_id = db.Column(db.Integer, db.ForeignKey('web_plan_lists.id'), nullable=False)
+    feature_description = db.Column(db.String(200), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    webplan = db.relationship('WebPlanList', backref='features', lazy=True)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'webplan_id': self.webplan_id,
+            'feature_description': self.feature_description,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
+    
+class WebPlanUsage(db.Model):
+    __tablename__ = 'web_plan_usages'
+
+    id = db.Column(db.Integer, primary_key=True)
+    webplan_id = db.Column(db.Integer, db.ForeignKey('web_plan_lists.id'), nullable=False)
+    usage_description = db.Column(db.String(200), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    webplan = db.relationship('WebPlanList', backref='usages', lazy=True)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'webplan_id': self.webplan_id,
+            'usage_description': self.usage_description,
             'created_at': self.created_at.isoformat() if self.created_at else None
         }
 
@@ -322,11 +379,12 @@ class WebPlanRequest(db.Model):
     request_number = db.Column(db.String(20), unique=True, nullable=False)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
-    user_email = db.Column(db.String(120), nullable=False)
-    rut = db.Column(db.String(20), nullable=False)
+    email = db.Column(db.String(120), nullable=False)
     webplan_id = db.Column(db.Integer, db.ForeignKey('web_plan_lists.id'), nullable=True)
+    region = db.Column(db.String(100), nullable=True)
+    commune = db.Column(db.String(100), nullable=True)
     cellphone = db.Column(db.String(20), nullable=False)
-    whatsapp_response = db.Column(db.Boolean, nullable=False, default=True)
+    address = db.Column(db.String(255), nullable=False)  # <-- Nuevo campo
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def to_dict(self):
@@ -335,11 +393,12 @@ class WebPlanRequest(db.Model):
             'request_number': self.request_number,
             'first_name': self.first_name,
             'last_name': self.last_name,
-            'user_email': self.user_email,
-            'rut': self.rut,
+            'email': self.email,
             'webplan_id': self.webplan_id,
+            'region': self.region,
+            'commune': self.commune,
             'cellphone': self.cellphone,
-            'whatsapp_response': self.whatsapp_response,
+            'address': self.address,  # <-- Nuevo campo en dict
             'created_at': self.created_at.isoformat() if self.created_at else None
         }
 
@@ -373,4 +432,39 @@ class BannedRut(db.Model):
             'id': self.id,
             'rut': self.rut,
             'created_at': self.created_at.isoformat() if self.created_at else None
+        }
+
+class NotAllowedIpRecord(db.Model):
+    __tablename__ = 'not_allowed_ip_records'
+    id = db.Column(db.Integer, primary_key=True)
+    ip_address = db.Column(db.String(45), nullable=False)
+    url_accessed = db.Column(db.String(200), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+class Region(db.Model):
+    __tablename__ = 'regions'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    
+    communes = db.relationship('Commune', backref='region', lazy=True)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+        }
+    
+class Commune(db.Model):
+    __tablename__ = 'communes'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    region_id = db.Column(db.Integer, db.ForeignKey('regions.id'), nullable=False)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'region_id': self.region_id,
         }

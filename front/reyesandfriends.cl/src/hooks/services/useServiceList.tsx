@@ -11,11 +11,11 @@ export interface ServiceOption {
 
 const serviceList: ServiceOption[] = [
     { 
-        name: "Programación Web", 
+        name: "Paginas Web", 
         path: "/services/web-development", 
         value: "web-development", 
         image: "/img/services/FullList/web-programming.jpeg", 
-        description: "Desarrollamos software web innovador y adaptable para cualquier dispositivo.",
+        description: "Desarrollamos páginas web personalizadas y optimizadas para tu negocio, utilizando las últimas tecnologías y tendencias de diseño.",
         icon: (() => <Globe size={18} className="inline mr-2" />)()
     },
     {
@@ -35,7 +35,7 @@ const serviceList: ServiceOption[] = [
         icon: (() => <Smartphone size={18} className="inline mr-2" />)()
     },
     {
-        name: "E-commerce",
+        name: "E-commerce (Tiendas Online)",
         path: "/services/e-commerce",
         value: "e-commerce",
         image: "/img/services/FullList/e-commerce.webp",
@@ -51,7 +51,7 @@ const serviceList: ServiceOption[] = [
         icon: (() => <Joystick size={18} className="inline mr-2" />)()
     },
     {
-        name: "Hosting Minecraft",
+        name: "Hosting Minecraft (Servidores Minecraft)",
         path: "/services/minecraft-hosting",
         value: "minecraft-hosting",
         image: "/img/services/FullList/hosting-minecraft.jpg",

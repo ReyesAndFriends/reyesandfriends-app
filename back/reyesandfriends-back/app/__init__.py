@@ -26,21 +26,21 @@ def create_app():
         index_html = """
                 <html>
                 <head>
-                    <meta http-equiv="refresh" content="2;url=https://reyesandfriends.cl">
                     <link rel="icon" href="https://reyesandfriends.cl/img/logo/crown_red.svg" type="image/x-icon">
-                    <title>Redirigiendo...</title>
-                        <script type="text/javascript">
-                            setTimeout(function(){
-                                window.location.href = "https://reyesandfriends.cl";
-                            }, 2000);
-                        </script>
+                    <title>API Reyes&Friends</title>
                 </head>
                     <body>
-                        <p>Bienvenido a la API de Reyes&Friends, serás redirigido a la página principal.</p>
+                       <h1>API Reyes&Friends</h1>
+                        <p>Este recurso es usado solamente como servicio trasero de Reyes&Friends, no como una página web pública.</p>
+                        <p>Visita <a href="https://www.reyesandfriends.cl">www.reyesandfriends.cl</a> para más información.</p>
                     </body>
                 </html>
             """
         return render_template_string(index_html)
+    
+    @app.errorhandler(404)
+    def not_found(error):
+        return render_template_string("<h1>404 No Encontrado</h1><p>El recurso solicitado no pudo ser encontrado.</p>"), 404
 
     # Blueprint routes registration
     from .routes.contact import contact as contact_bp
@@ -49,10 +49,16 @@ def create_app():
     from .routes.quote import quote as quote_bp
     app.register_blueprint(quote_bp, url_prefix='/quotes')
 
-    from .routes.webplans import webPlans as webplans_bp
-    app.register_blueprint(webplans_bp, url_prefix='/webplans')
+    from .routes.public_webplans import web_planes as web_planes_bp
+    app.register_blueprint(web_planes_bp, url_prefix='/web_planes')
+
+    from .routes.private_webplans import private_web_planes as private_web_planes_bp
+    app.register_blueprint(private_web_planes_bp, url_prefix='/private_web_planes')
 
     from .routes.visitors import visitors as visitors_bp
     app.register_blueprint(visitors_bp, url_prefix='/visitors')
+
+    from .routes.utils import utils as utils_bp
+    app.register_blueprint(utils_bp, url_prefix='/utils')
 
     return app

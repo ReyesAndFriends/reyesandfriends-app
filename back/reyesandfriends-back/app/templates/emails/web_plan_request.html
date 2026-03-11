@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="pl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Plan Web Fijo - Reyes&Friends</title>
+    <title>Email Template</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet" />
 
     <style>
         .nano_body {
@@ -145,25 +147,7 @@
             background: #5a1616 !important;
         }
 
-        .nano_demo_button {
-            display: inline-block;
-            font-weight: bold;
-            font-size: 16px;
-            margin: 10px 0px;
-            padding: 12px 40px;
-            box-sizing: border-box;
-            color: #fff !important;
-            background: #6a23ac !important;
-            border-radius: 6px;
-            text-decoration: none;
-            outline: none;
-            border: none;
-        }
-
-        .nano_demo_button:hover {
-            background: #521b86 !important;
-            color: #fff !important;
-        }
+        /* Overvrite style */
 
         .nano_margin {
             float: left;
@@ -255,6 +239,7 @@
             padding: 15px;
             box-sizing: border-box;
             border-radius: 6px;
+            border: 1px dashed #8B0000aa;
             background: #8B000011;
             color: #8B0000;
             font-weight: 700;
@@ -269,10 +254,12 @@
             box-sizing: border-box;
             min-width: 30px;
             border-radius: 6px;
+            border: 1px dashed #8B0000aa;
             background: #fff;
             color: #3c4043;
             font-weight: 700;
             font-size: 21px;
+            list-style: none;
         }
 
         .nano_divider {
@@ -302,17 +289,6 @@
             margin: 5px;
         }
 
-        .nano_details {
-            float: left;
-            width: 100%;
-            overflow: hidden;
-            margin: 20px 0px;
-            padding: 15px;
-            box-sizing: border-box;
-            border-radius: 6px;
-            background: #f8f9fa;
-            border-left: 3px solid #8B0000;
-        }
 
         .nano_rights {
             color: #706d6b;
@@ -397,73 +373,47 @@
                     <td>
                         <div class="nano_padding">
 
-                            <div>
+                            <div class="nano_img">
                                 <a href="https://www.reyesandfriends.cl" target="_blank">
                                     <img src="https://cdn.reyesandfriends.cl/assets/emails/banner.png" alt="image">
                                 </a>
                             </div>
 
-                            <div class="nano_h1">Solicitud de Plan Web Fijo</div>
-                            
+                            <div class="nano_h1">¡Solicitud de Plan Web Recibida!</div>
                             <div class="nano_p">
-                                Estimado/a <strong>{{ user_name }}</strong>,
+                                Hola <strong>{{ user_name }}</strong>,<br>
+                                Hemos recibido tu solicitud para el siguiente plan:
                             </div>
-                            
+                            <div class="nano_code">
+                                <ul>
+                                    <li><strong>N° Solicitud:</strong> {{ request_number }}</li>
+                                    <li><strong>Plan:</strong> {{ plan_name }}</li>
+                                    <li><strong>Región:</strong> {{ region_name }}</li>
+                                    <li><strong>Comuna:</strong> {{ commune_name }}</li>
+                                    <li><strong>Dirección:</strong> {{ address }}</li>
+                                </ul>
+                            </div>
                             <div class="nano_p">
-                                Gracias por solicitar un Plan Web Fijo con Reyes&Friends. Hemos recibido tu solicitud exitosamente y nuestro equipo se encuentra revisándola.
-                            </div>
-
-                            <div class="nano_h4">Detalles de tu solicitud:</div>
-                            
-                            <div class="nano_details">
-                                <strong>Código de Solicitud:</strong> {{ request_number }}<br>
-                                <strong>RUT:</strong> {{ rut }}<br>
-                                <strong>Celular:</strong> +56 {{ cellphone }}
-                            </div>
-                            
-                            <div class="nano_h4">Plan Web Seleccionado:</div>
-                            <div class="nano_details">
-                                <strong>Nombre:</strong> {{ webplan_name }}<br>
-                                <strong>Descripción:</strong> {{ webplan_description }}<br>
-                                <strong>Precio:</strong> ${{ "{:,.0f}".format(webplan_price) }} CLP<br>
-                                {% if webplan_demo_url %}
-                                    <a href="{{ webplan_demo_url }}" class="nano_demo_button" target="_blank">Visitar Demo</a>
-                                {% endif %}
-                            </div>
-                            
-                            <div class="nano_p">
-                                Nuestro equipo técnico revisará tu solicitud y te contactaremos dentro de las próximas 24-48 horas para coordinar los siguientes pasos del proceso de solicitud.
-                            </div>
-                            
-                            <div class="nano_p">
-                                Recuerda que esta solicitud es flexible y puede ajustarse según tus necesidades. Si deseas modificar algún detalle o agregar información, no dudes en comunicarlo. Nuestro objetivo es que la solicitud se adapte perfectamente a tus expectativas.
-                            </div>
-                            
-                            <div>
-                                <div class="nano_p" style="margin-bottom: 10px !important;">
-                                    <strong>¿Necesitas contactarnos directamente?</strong><br>
-                                    Si tienes alguna consulta urgente o adicional, puedes escribirnos a: 
-                                    <a href="mailto:contacto@reyesandfriends.cl">contacto@reyesandfriends.cl</a>
-                                </div>
+                                Pronto nos pondremos en contacto contigo para continuar con el proceso.<br>
+                                Si tienes dudas, puedes responder este correo o visitar nuestra página web.
                             </div>
 
                             <div class="nano_flex">
-                                <a href="https://www.reyesandfriends.cl" class="nano_button" target="_blank">Descubre más en nuestro sitio web</a>
-                            </div>
-                            
-                            <div class="nano_p">
-                                <strong>Nota:</strong> Este email es generado automáticamente por el sistema. Por favor no responder.
+                                <a href="https://www.reyesandfriends.cl" class="nano_button" target="_blank">Visitar
+                                    página web</a>
                             </div>
                         </div>
                     </td>
                 </tr>
 
+
+
                 <tr>
                     <td>
                         <div class="nano_padding">
                             <div class="nano_regards">
-                                <div class="nano_regards-text">Atentamente,</div>
-                                <div>El equipo de Reyes&Friends</div>
+                                <div class="nano_regards-text">Saludos cordiales,</div>
+                                <div class="nano_regards-name">El equipo de Reyes&Friends</div>
                             </div>
 
                             <div class="nano_divider"></div>
@@ -473,13 +423,15 @@
                                     <img src="https://cdn.reyesandfriends.cl/assets/emails/instagram.webp" alt="logo">
                                 </a>
 
-                                <a href="https://www.facebook.com/people/ReyesFriends/61580531925223/" class="nano_icon" target="_blank">
+                                <a href="https://www.facebook.com/people/ReyesFriends/61580531925223/" class="nano_icon"
+                                    target="_blank">
                                     <img src="https://cdn.reyesandfriends.cl/assets/emails/facebook.png" alt="logo">
                                 </a>
 
                                 <a href="https://github.com/reyesandfriends" class="nano_icon" target="_blank">
                                     <img src="https://cdn.reyesandfriends.cl/assets/emails/github-mark.png" alt="logo">
                                 </a>
+
                             </div>
 
                         </div>
@@ -489,11 +441,11 @@
                 <tr>
                     <td>
                         <div class="nano_padding nano_bg nano_rights nano_rights-font">
-                            <div>
-                                <div>
-                                    <div>© {{ current_year }} Reyes&Friends</div>
-                                    <div>Reyes&Friends SpA</div>
-                                    <div>Todos los derechos reservados.</div>
+                            <div class="nano_company">
+                                <div class="nano_address">
+                                    <div class="nano_address-line">© {{ current_year }} Reyes&Friends</div>
+                                    <div class="nano_address-line">Reyes&Friends SpA</div>
+                                    <div class="nano_address-line">Todos los derechos reservados.</div>
                                 </div>
                             </div>
 

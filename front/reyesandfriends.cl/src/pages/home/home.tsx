@@ -1,13 +1,16 @@
 import React from "react";
-import { ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import TerminalMessage from "./components/TerminalMessage";
-import MethodologySteps from "./components/MethodologySteps";
 import WhyChooseReyesAndFriends from "./components/WhyChooseReyesAndFriends";
 import HomeHeroSection from "./components/HomeHeroSetion";
 import { Helmet } from "react-helmet-async";
+import { useServiceList } from "../../hooks/services/useServiceList";
+import PortfolioCarousel from "./components/PortfolioCarousel";
+import { motion } from "framer-motion";
+import ContactForm from "../contact/components/ContactForm";
 
 const Home: React.FC = () => {
+    const serviceList = useServiceList();
+
     return (
         <>
             <Helmet>
@@ -28,58 +31,83 @@ const Home: React.FC = () => {
             
             <HomeHeroSection />
 
-            <section className="py-16 bg-zinc-900 text-white">
+            <motion.section
+                className="py-16 bg-zinc-900 text-white"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+            >
                 <div className="container mx-auto px-4 max-w-7xl">
                     <h2 className="text-3xl mb-12 text-center relative">
-                        <span className="bg-zinc-900 px-4 relative z-10 text-white">¿Qué hacemos?</span>
+                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Nuestros Servicios</span>
                         <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-reyes-dark -z-0"></div>
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                        <div>
-                            <h4 className="text-lg text-reyes-light mb-2">Un negocio informático a tu medida</h4>
-                            <h2 className="text-4xl mb-4 text-white">Soluciones digitales personalizadas</h2>
-                            <p className="text-gray-300 text-lg">
-                                Somos un negocio informático con múltiples aptitudes. Nos especializamos en el desarrollo de soluciones digitales personalizadas, abarcando desde sitios web hasta software empresarial y servicios tecnológicos adaptados a las necesidades de cada cliente.
-                            </p>
-                            <p className="text-gray-300 text-lg mt-4">
-                                Haz frente a tu negocio con nuestra experiencia y dedicación. Nos enfocamos en ofrecer soluciones innovadoras que impulsen tu crecimiento digital y mejoren la eficiencia de tus operaciones.
-                            </p>
-                        </div>
-                        <div className="flex justify-center items-center min-h-[200px]">
-                            <TerminalMessage />
-                        </div>
-                    </div>
-                    <div className="text-left mt-8">
-                        <Link
-                            to="/services"
-                            className="text-reyes-light hover:underline font-semibold inline-flex items-center gap-1 transition-colors"
-                        >
-                            Conoce todos nuestros servicios
-                            <ChevronRight className="h-4 w-4" />
-                        </Link>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                        {serviceList.map((service, idx) => (
+                            <div
+                                key={idx}
+                                className="bg-zinc-850 rounded shadow-lg p-6 flex flex-row items-center border border-zinc-700 hover:border-reyes-light transition-all duration-200"
+                            >
+                                <div className="text-reyes-light flex-shrink-0 mr-6 flex items-center justify-center">
+                                    {service.icon}
+                                </div>
+                                <div className="flex flex-col flex-1">
+                                    <h3 className="text-xl font-semibold mb-2">{service.name}</h3>
+                                    <p className="text-gray-300 mb-4">{service.description}</p>
+                                    <Link
+                                        to={service.path}
+                                        className="text-reyes-light hover:underline font-semibold text-sm mt-auto"
+                                    >
+                                        Más información
+                                    </Link>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
-            </section>
+            </motion.section>
 
-            <section className="py-16 bg-zinc-900 text-white">
+            <motion.section
+                className="py-16 text-white"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
+            >
                 <div className="container mx-auto px-4 max-w-7xl">
                     <h2 className="text-3xl mb-12 text-center relative">
-                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Nuestra metodología</span>
+                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Portafolio</span>
                         <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-reyes-dark -z-0"></div>
                     </h2>
-
-                    <div className="text-center mt-8 mb-12">
-                        <p className="text-lg text-gray-300 mb-4">
-                            Para garantizar una experiencia de trabajo fluida y satisfactoria, seguimos una metodología ágil que nos permite adaptarnos a tus necesidades y ofrecer resultados de alta calidad. Nuestro proceso se basa en los siguientes pasos:
-                        </p>
-                    </div>
-
-                    <MethodologySteps />
-
+                    <PortfolioCarousel />
                 </div>
-            </section>
+            </motion.section>
 
-            <WhyChooseReyesAndFriends />
+            <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
+            >
+                <WhyChooseReyesAndFriends />
+            </motion.div>
+
+            <motion.section
+                className="py-16 bg-zinc-900 text-white"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
+            >
+                <div className="container mx-auto px-4 max-w-7xl">
+                    <h2 className="text-3xl mb-8 text-center relative">
+                        <span className="bg-zinc-900 px-4 relative z-10 text-white">Contáctanos</span>
+                        <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-reyes-dark -z-0"></div>
+                    </h2>
+                    <ContactForm />
+                </div>
+            </motion.section>
         </>
     );
 };

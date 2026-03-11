@@ -1,4 +1,4 @@
-from flask import jsonify, request, render_template
+from flask import jsonify, request, render_template, current_app
 import os
 from datetime import datetime
 from dotenv import load_dotenv
@@ -11,11 +11,7 @@ import requests
 
 load_dotenv()
 
-mail_username = os.getenv("MAIL_USERNAME")
 TURNSTILE_SECRET_KEY = os.getenv("TURNSTILE_SECRET_KEY")
-
-if not mail_username:
-    raise RuntimeError("MAIL_USERNAME is not set in the environment variables.")
 if not TURNSTILE_SECRET_KEY:
     raise RuntimeError("TURNSTILE_SECRET_KEY is not set in the environment variables.")
 
@@ -114,7 +110,7 @@ def postContact():
 
         msg = Message(
             subject="Solicitud de contacto recibida - Reyes&Friends",
-            sender=mail_username,
+            sender=current_app.config['MAIL_USERNAME'],
             recipients=[data['email']],
             html=email_html
         )

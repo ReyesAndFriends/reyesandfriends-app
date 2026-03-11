@@ -1,51 +1,10 @@
-import { useState } from "react";
-
-const features = [
-    {
-        key: "unique",
-        title: "Cada proyecto es único",
-        subtitle: "Soluciones digitales personalizadas",
-        description: (
-            <>
-                <p className="text-gray-300 text-lg">
-                    Nos enfocamos en entender tus necesidades y crear soluciones digitales que se adapten a tus objetivos. Personalización y atención al detalle en cada etapa.
-                </p>
-            </>
-        ),
-        image: `/img/home/unique.png`,
-    },
-    {
-        key: "speed",
-        title: "Velocidad en desarrollo y producción",
-        subtitle: "Entrega rápida y eficiente",
-        description: (
-            <>
-                <p className="text-gray-300 text-lg">
-                    Entregamos tus proyectos rápido y sin perder calidad. Usamos metodologías ágiles y optimizamos el rendimiento para una mejor experiencia de usuario.
-                </p>
-            </>
-        ),
-        image: "/img/home/speed.png",
-    },
-    {
-        key: "security",
-        title: "Seguridad ante todo",
-        subtitle: "Protegemos tus datos",
-        description: (
-            <>
-                <p className="text-gray-300 text-lg">
-                    Aplicamos buenas prácticas para proteger tu información y mantener tus datos seguros frente a amenazas digitales.
-                </p>
-            </>
-        ),
-        image: "/img/home/security.png",
-    },
-];
+import { Link } from "react-router";
+import { ChevronRight } from "lucide-react";
 
 const WhyChooseReyesAndFriends = () => {
-    const [selected, setSelected] = useState(features[0].key);
 
-    const currentFeature = features.find(f => f.key === selected);
+    const ctaLink = "/web-planes";
+    const ctaText = "Cotiza tu plan";
 
     return (
         <section className="py-16 text-white">
@@ -55,43 +14,26 @@ const WhyChooseReyesAndFriends = () => {
                     <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-reyes-dark -z-0"></div>
                 </h2>
 
-                <p className="text-white text-lg text-center mb-8">
-                    Cuéntanos lo que necesitas y lo hacemos realidad, fácil y rápido.
-                </p>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                    {features.map(f => (
-                        <button
-                            key={f.key}
-                            onClick={() => setSelected(f.key)}
-                            className={`w-full px-6 py-2 rounded font-semibold transition-all
-                                ${selected === f.key ? "bg-reyes text-white shadow-lg" : "bg-zinc-800 hover:bg-reyes-dark hover:text-white"}
-                            `}
-                        >
-                            {f.title}
-                        </button>
-                    ))}
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-8">
-                    <div className="md:col-span-2 order-2 md:order-1">
-                        <h4 className="text-lg text-reyes-light mb-2">{currentFeature?.title}</h4>
-                        <h2 className="text-2xl md:text-4xl mb-4 text-white">{currentFeature?.subtitle}</h2>
-                        {currentFeature?.description}
-                    </div>
-                    <div className="flex justify-center items-center md:col-span-1 order-1 md:order-2 mb-6 md:mb-0">
-                        <div className="flex items-center justify-center w-full h-full select-none" style={{ minHeight: 160 }}>
-                            <img
-                                src={currentFeature?.image}
-                                alt="reyes&friends"
-                                draggable={false}
-                                className="object-contain max-h-40 max-w-xs md:max-w-md w-auto h-auto select-none pointer-events-none"
-                                onContextMenu={e => e.preventDefault()}
-                            />
-                        </div>
-                    </div>
+                <div className="bg-gradient-to-r from-red-900 via-red-800 to-red-700 rounded p-8 font-medium shadow-lg text-center mb-8">
+                    Hoy en dia, todo se hace por internet, por mas que se ignore, hasta ir a comprar el pan, el pago se realiza a travez de una plataforma digital. <br /> En <strong>Reyes&Friends</strong>, entendemos la importancia de tener una presencia digital solida y efectiva para cualquier negocio o proyecto personal. <br /><br /> Nuestro equipo de expertos esta comprometido en brindar soluciones digitales personalizadas que se adapten a las necesidades y objetivos de cada cliente. Ya sea que necesites una pagina web, una aplicacion movil, un software empresarial o cualquier otro servicio relacionado con el mundo digital, estamos aqui para ayudarte a alcanzar el exito en el mundo digital. <br /> Podemos ayudarte con cualquier pieza digital que necesites para tu negocio o proyecto personal.
                 </div>
             </div>
+
+            <div className="font-medium text-center mb-8">
+                No lo dudes, <strong>Reyes&Friends</strong> es tu mejor aliado en soluciones digitales personalizadas.
+            </div>
+
+            <div className="flex flex-col md:flex-row gap-3 max-w-xl mx-auto px-4 mt-8 justify-center md:justify-center">
+                <Link
+                    to={ctaLink}
+                    className="flex-1 bg-reyes hover:bg-reyes-dark text-white px-6 sm:px-8 py-3 sm:py-4 rounded transition-all duration-300 flex items-center gap-3 font-semibold hover:scale-105 text-base sm:text-lg justify-center min-w-[140px] sm:min-w-[180px] md:mr-2"
+                    style={{ minWidth: "140px" }}
+                >
+                    {ctaText}
+                    <ChevronRight className="h-6 sm:h-7 w-6 sm:w-7" />
+                </Link>
+            </div>
+
         </section>
     );
 };
